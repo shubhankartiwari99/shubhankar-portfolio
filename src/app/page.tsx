@@ -64,17 +64,18 @@ export default function Page() {
       <BackgroundCanvas />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-20">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-20 bg-black/60 backdrop-blur">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {/* Identity */}
           <div>
             <div className="font-semibold">Shubhankar Tiwari</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-gray-500 dark:text-gray-400 leading-tight">
               Backend Engineer · FinTech · Applied AI
             </div>
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 flex-wrap">
             <button
               onClick={() => setRecruiterMode((v) => !v)}
               aria-pressed={recruiterMode}
@@ -87,21 +88,23 @@ export default function Page() {
               Recruiter mode
             </button>
 
-            {/* LinkedIn */}
+            {/* Desktop-only links */}
             <a
               href="https://www.linkedin.com/in/shubhankar-tiwari-514040165/"
               target="_blank"
               rel="noopener noreferrer"
-              <a className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400">
-                 LinkedIn
+              className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400"
+            >
+              LinkedIn
             </a>
 
-            {/* Resume */}
             <a
               href="/Shubhankar_Tiwari_Resume.pdf"
               target="_blank"
-              <a className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400">
-                 Resume
+              rel="noopener noreferrer"
+              className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400"
+            >
+              Resume
             </a>
 
             {/* Dark mode toggle */}
@@ -110,7 +113,7 @@ export default function Page() {
                 onClick={() => setDark((d) => !d)}
                 aria-pressed={dark}
                 aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-                className="relative inline-flex items-center h-8 w-14 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="relative inline-flex items-center h-8 w-14 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <span
                   aria-hidden
@@ -131,7 +134,7 @@ export default function Page() {
       </header>
 
       {/* Hero */}
-      <section className="min-h-screen flex flex-col justify-center max-w-5xl mx-auto pt-24">
+      <section className="min-h-screen flex flex-col justify-center max-w-5xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
           Hi, I’m <span className="text-indigo-500">Shubhankar</span>.
         </h1>
@@ -155,7 +158,7 @@ export default function Page() {
 
         <div
           onClick={() => setExpOpen((v) => !v)}
-          className="cursor-pointer rounded-2xl border border-gray-200 dark:border-gray-700 p-6 transition hover:border-indigo-400 dark:hover:border-indigo-500"
+          className="cursor-pointer rounded-2xl border border-gray-200 dark:border-gray-700 p-6 transition hover:border-indigo-400"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -178,23 +181,18 @@ export default function Page() {
                 <ul className="list-disc pl-5 space-y-2">
                   <li>Backend Java services for corporate banking workflows</li>
                   <li>API development, redesigns, and production support</li>
-                  <li>Stability, performance tuning, incident resolution</li>
+                  <li>Performance tuning and incident resolution</li>
                   <li>Cross-team engineering collaboration</li>
                 </ul>
               ) : (
-                <div className="leading-relaxed space-y-3">
+                <div className="space-y-3 leading-relaxed">
                   <p>
-                    Working on large-scale Java backend systems used across
-                    corporate banking workflows, with a focus on reliability,
-                    correctness, and long-term maintainability.
+                    Working on large-scale Java backend systems with a focus on
+                    reliability and long-term maintainability.
                   </p>
                   <p>
                     Involved in API development, system redesigns, production
                     debugging, and cross-team collaboration.
-                  </p>
-                  <p>
-                    Regularly handle live issues, performance improvements, and
-                    platform stability initiatives.
                   </p>
                 </div>
               )}
@@ -210,87 +208,34 @@ export default function Page() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-            <h3 className="font-semibold mb-2">Backend Systems</h3>
-            {recruiterMode ? (
-              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
-                <li>Java backend services</li>
-                <li>Spring Framework</li>
-                <li>REST APIs</li>
-                <li>System design & refactoring</li>
-              </ul>
-            ) : (
+          {[
+            {
+              title: "Backend Systems",
+              body: "Java, Spring Framework, REST APIs, system design, refactoring legacy services.",
+            },
+            {
+              title: "Data & Persistence",
+              body: "Oracle SQL, TOAD, data modeling, query optimization.",
+            },
+            {
+              title: "Platform & DevOps",
+              body: "CI/CD pipelines, containerized deployments, environment configuration.",
+            },
+            {
+              title: "Reliability & Delivery",
+              body: "Production debugging, performance tuning, incident resolution, collaboration.",
+            },
+          ].map((s) => (
+            <div
+              key={s.title}
+              className="rounded-xl border border-gray-200 dark:border-gray-700 p-5"
+            >
+              <h3 className="font-semibold mb-2">{s.title}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Java, Spring Framework, REST APIs, system design, refactoring
-                legacy services.
+                {s.body}
               </p>
-            )}
-          </div>
-
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-            <h3 className="font-semibold mb-2">Data & Persistence</h3>
-            {recruiterMode ? (
-              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
-                <li>Oracle SQL</li>
-                <li>TOAD</li>
-                <li>Data modeling</li>
-                <li>Query optimization</li>
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Oracle SQL, TOAD, data modeling, query optimization.
-              </p>
-            )}
-          </div>
-
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-            <h3 className="font-semibold mb-2">Platform & DevOps</h3>
-            {recruiterMode ? (
-              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
-                <li>CI/CD pipelines</li>
-                <li>Containerized deployments</li>
-                <li>Environment configuration</li>
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                CI/CD pipelines, containerized deployments, environment
-                configuration.
-              </p>
-            )}
-          </div>
-
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-            <h3 className="font-semibold mb-2">Reliability & Delivery</h3>
-            {recruiterMode ? (
-              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
-                <li>Production debugging</li>
-                <li>Performance tuning</li>
-                <li>Incident resolution</li>
-                <li>Cross-team collaboration</li>
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Production debugging, performance tuning, incident resolution,
-                cross-team collaboration.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Education */}
-      <section className="mt-24 max-w-5xl mx-auto mb-24">
-        <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4">
-          Education
-        </h2>
-
-        <div className="text-sm text-gray-700 dark:text-gray-300">
-          <p className="font-medium">
-            B.Tech, Computer Science and Engineering
-          </p>
-          <p className="text-gray-500 dark:text-gray-400">
-            SRM Institute of Science and Technology, Chennai · 2018 – 2022
-          </p>
+            </div>
+          ))}
         </div>
       </section>
     </main>
