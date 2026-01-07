@@ -60,7 +60,15 @@ export default function Page() {
   }, [dark, mounted]);
 
   return (
-    <main className="relative min-h-screen px-6 pt-28 sm:pt-24 bg-transparent text-gray-900 dark:text-gray-100">
+    <main
+      className="
+        relative min-h-screen px-6
+        pt-[calc(env(safe-area-inset-top)+7rem)]
+        sm:pt-24
+        bg-transparent
+        text-gray-900 dark:text-gray-100
+      "
+    >
       <BackgroundCanvas />
 
       {/* Header */}
@@ -148,6 +156,22 @@ export default function Page() {
           <p>Owned and shipped.</p>
           <p>Scales simply.</p>
         </div>
+
+        {/* Mobile-only links */}
+        <div className="mt-6 flex gap-4 sm:hidden">
+          <a
+            href="https://www.linkedin.com/in/shubhankar-tiwari-514040165/"
+            className="text-sm px-4 py-2 rounded-full border border-gray-600"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="/Shubhankar_Tiwari_Resume.pdf"
+            className="text-sm px-4 py-2 rounded-full bg-indigo-600 text-white"
+          >
+            Resume
+          </a>
+        </div>
       </section>
 
       {/* Experience */}
@@ -172,7 +196,9 @@ export default function Page() {
                 Production systems supporting corporate banking clients.
               </p>
             </div>
-            <div className="text-gray-400 text-xl">{expOpen ? "−" : "+"}</div>
+            <div className="text-gray-400 text-xl">
+              {expOpen ? "−" : "+"}
+            </div>
           </div>
 
           {expOpen && (
@@ -213,6 +239,7 @@ export default function Page() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Backend Systems */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Backend Systems</h3>
             {recruiterMode ? (
@@ -230,6 +257,7 @@ export default function Page() {
             )}
           </div>
 
+          {/* Data & Persistence */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Data & Persistence</h3>
             {recruiterMode ? (
@@ -246,6 +274,7 @@ export default function Page() {
             )}
           </div>
 
+          {/* Platform & DevOps */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Platform & DevOps</h3>
             {recruiterMode ? (
@@ -262,6 +291,7 @@ export default function Page() {
             )}
           </div>
 
+          {/* Reliability */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Reliability & Delivery</h3>
             {recruiterMode ? (
