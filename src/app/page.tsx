@@ -10,9 +10,6 @@ const BackgroundCanvas = dynamic(
 );
 
 export default function Page() {
-  // -----------------------------
-  // Theme & UI state
-  // -----------------------------
   const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [recruiterMode, setRecruiterMode] = useState(false);
@@ -24,20 +21,11 @@ export default function Page() {
 
     try {
       const stored = localStorage.getItem("theme");
-      if (stored === "dark") {
-        setDark(true);
-        return;
-      }
-      if (stored === "light") {
-        setDark(false);
-        return;
-      }
+      if (stored === "dark") return setDark(true);
+      if (stored === "light") return setDark(false);
     } catch {}
 
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setDark(true);
     }
   }, []);
@@ -46,13 +34,8 @@ export default function Page() {
   useEffect(() => {
     if (!mounted) return;
 
-    if (dark) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.style.colorScheme = "dark";
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.style.colorScheme = "light";
-    }
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.style.colorScheme = dark ? "dark" : "light";
 
     try {
       localStorage.setItem("theme", dark ? "dark" : "light");
@@ -81,7 +64,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Controls */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setRecruiterMode((v) => !v)}
@@ -95,7 +77,6 @@ export default function Page() {
               Recruiter mode
             </button>
 
-            {/* LinkedIn */}
             <a
               href="https://www.linkedin.com/in/shubhankar-tiwari-514040165/"
               target="_blank"
@@ -105,7 +86,6 @@ export default function Page() {
               LinkedIn
             </a>
 
-            {/* Resume */}
             <a
               href="/Shubhankar_Tiwari_Resume.pdf"
               target="_blank"
@@ -115,7 +95,6 @@ export default function Page() {
               Resume
             </a>
 
-            {/* Dark mode toggle */}
             {mounted && (
               <button
                 onClick={() => setDark((d) => !d)}
@@ -157,7 +136,6 @@ export default function Page() {
           <p>Scales simply.</p>
         </div>
 
-        {/* Mobile-only links */}
         <div className="mt-6 flex gap-4 sm:hidden">
           <a
             href="https://www.linkedin.com/in/shubhankar-tiwari-514040165/"
@@ -175,7 +153,15 @@ export default function Page() {
       </section>
 
       {/* Experience */}
-      <section className="mt-24 max-w-5xl mx-auto">
+      <section
+        className="
+          mt-24 max-w-5xl mx-auto
+          relative rounded-3xl
+          bg-black/40 backdrop-blur-xl
+          ring-1 ring-white/10
+          px-6 py-8
+        "
+      >
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-6">
           Experience
         </h2>
@@ -233,13 +219,20 @@ export default function Page() {
       </section>
 
       {/* Skills */}
-      <section className="mt-24 max-w-5xl mx-auto">
+      <section
+        className="
+          mt-24 max-w-5xl mx-auto
+          relative rounded-3xl
+          bg-black/40 backdrop-blur-xl
+          ring-1 ring-white/10
+          px-6 py-8
+        "
+      >
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-8">
           Skills & Capabilities
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Backend Systems */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Backend Systems</h3>
             {recruiterMode ? (
@@ -257,7 +250,6 @@ export default function Page() {
             )}
           </div>
 
-          {/* Data & Persistence */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Data & Persistence</h3>
             {recruiterMode ? (
@@ -274,7 +266,6 @@ export default function Page() {
             )}
           </div>
 
-          {/* Platform & DevOps */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Platform & DevOps</h3>
             {recruiterMode ? (
@@ -291,7 +282,6 @@ export default function Page() {
             )}
           </div>
 
-          {/* Reliability */}
           <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
             <h3 className="font-semibold mb-2">Reliability & Delivery</h3>
             {recruiterMode ? (
@@ -312,7 +302,15 @@ export default function Page() {
       </section>
 
       {/* Education */}
-      <section className="mt-24 max-w-5xl mx-auto mb-24">
+      <section
+        className="
+          mt-24 max-w-5xl mx-auto mb-24
+          relative rounded-3xl
+          bg-black/40 backdrop-blur-xl
+          ring-1 ring-white/10
+          px-6 py-8
+        "
+      >
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4">
           Education
         </h2>
