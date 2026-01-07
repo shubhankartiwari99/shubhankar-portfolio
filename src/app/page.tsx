@@ -213,7 +213,71 @@ export default function Page() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* (unchanged skills blocks) */}
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <h3 className="font-semibold mb-2">Backend Systems</h3>
+            {recruiterMode ? (
+              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                <li>Java backend services</li>
+                <li>Spring Framework</li>
+                <li>REST APIs</li>
+                <li>System design & refactoring</li>
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Java, Spring Framework, REST APIs, system design, refactoring
+                legacy services.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <h3 className="font-semibold mb-2">Data & Persistence</h3>
+            {recruiterMode ? (
+              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                <li>Oracle SQL</li>
+                <li>TOAD</li>
+                <li>Data modeling</li>
+                <li>Query optimization</li>
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Oracle SQL, TOAD, data modeling, query optimization.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <h3 className="font-semibold mb-2">Platform & DevOps</h3>
+            {recruiterMode ? (
+              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                <li>CI/CD pipelines</li>
+                <li>Containerized deployments</li>
+                <li>Environment configuration</li>
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                CI/CD pipelines, containerized deployments, environment
+                configuration.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <h3 className="font-semibold mb-2">Reliability & Delivery</h3>
+            {recruiterMode ? (
+              <ul className="list-disc pl-5 text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                <li>Production debugging</li>
+                <li>Performance tuning</li>
+                <li>Incident resolution</li>
+                <li>Cross-team collaboration</li>
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Production debugging, performance tuning, incident resolution,
+                cross-team collaboration.
+              </p>
+            )}
+          </div>
         </div>
       </section>
 
