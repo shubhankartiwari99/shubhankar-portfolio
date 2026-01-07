@@ -12,10 +12,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Shubhankar Tiwari",
-  description: "Shubhankar Tiwari — Backend Engineer working on FinTech platforms, scalable systems, and production-grade Java services.",
+export const metadata = {
+  title: "Shubhankar Tiwari | Backend Engineer",
+  description:
+    "Backend Engineer working on FinTech platforms, scalable systems, and production-grade Java services, passionate about Applied AI.",
+  openGraph: {
+    title: "Shubhankar Tiwari",
+    description:
+      "Backend Engineer specialized in FinTech, passionate about Applied AI.",
+    url: "https://shubhankartiwari.vercel.app",
+    siteName: "Shubhankar Tiwari",
+    images: [
+      {
+        url: "/og_final.png",
+        width: 1200,
+        height: 630,
+        alt: "Shubhankar Tiwari — Backend Engineer · FinTech · Applied AI",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shubhankar Tiwari",
+    description:
+      "Backend Engineer specialized in FinTech, passionate about Applied AI.",
+    images: ["/og_final.png"],
+  },
 };
+
 
 export default function RootLayout({
   children,
