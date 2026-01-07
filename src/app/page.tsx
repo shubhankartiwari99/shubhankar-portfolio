@@ -14,6 +14,7 @@ export default function Page() {
   const [mounted, setMounted] = useState(false);
   const [recruiterMode, setRecruiterMode] = useState(false);
   const [expOpen, setExpOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Initialize theme AFTER mount
   useEffect(() => {
@@ -42,6 +43,18 @@ export default function Page() {
     } catch {}
   }, [dark, mounted]);
 
+  // Header scroll effect
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <main
       className="
@@ -55,7 +68,13 @@ export default function Page() {
       <BackgroundCanvas />
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-20">
+      <header
+        className={`fixed top-0 left-0 right-0 z-20 transition-all duration-300 ${
+          scrolled
+            ? "bg-black/60 backdrop-blur-xl border-b border-white/10"
+            : "bg-transparent"
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
           <div>
             <div className="font-semibold">Shubhankar Tiwari</div>
@@ -153,15 +172,7 @@ export default function Page() {
       </section>
 
       {/* Experience */}
-      <section
-        className="
-          mt-24 max-w-5xl mx-auto
-          relative rounded-3xl
-          bg-black/40 backdrop-blur-xl
-          ring-1 ring-white/10
-          px-6 py-8
-        "
-      >
+      <section className="mt-24 max-w-5xl mx-auto">
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-6">
           Experience
         </h2>
@@ -219,15 +230,7 @@ export default function Page() {
       </section>
 
       {/* Skills */}
-      <section
-        className="
-          mt-24 max-w-5xl mx-auto
-          relative rounded-3xl
-          bg-black/40 backdrop-blur-xl
-          ring-1 ring-white/10
-          px-6 py-8
-        "
-      >
+      <section className="mt-24 max-w-5xl mx-auto">
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-8">
           Skills & Capabilities
         </h2>
@@ -302,15 +305,7 @@ export default function Page() {
       </section>
 
       {/* Education */}
-      <section
-        className="
-          mt-24 max-w-5xl mx-auto mb-24
-          relative rounded-3xl
-          bg-black/40 backdrop-blur-xl
-          ring-1 ring-white/10
-          px-6 py-8
-        "
-      >
+      <section className="mt-24 max-w-5xl mx-auto mb-24">
         <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4">
           Education
         </h2>
