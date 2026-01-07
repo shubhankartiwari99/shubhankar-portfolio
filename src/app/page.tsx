@@ -60,7 +60,7 @@ export default function Page() {
   }, [dark, mounted]);
 
   return (
-    <main className="relative min-h-screen px-6 bg-transparent text-gray-900 dark:text-gray-100">
+    <main className="relative min-h-screen px-6 pt-28 sm:pt-24 bg-transparent text-gray-900 dark:text-gray-100">
       <BackgroundCanvas />
 
       {/* Header */}
@@ -92,18 +92,16 @@ export default function Page() {
               href="https://www.linkedin.com/in/shubhankar-tiwari-514040165/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition"
-            >
-              LinkedIn
+              <a className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400">
+                 LinkedIn
             </a>
 
             {/* Resume */}
             <a
               href="/Shubhankar_Tiwari_Resume.pdf"
               target="_blank"
-              className="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition"
-            >
-              Resume
+              <a className="hidden sm:inline text-sm text-gray-500 hover:text-indigo-400">
+                 Resume
             </a>
 
             {/* Dark mode toggle */}
