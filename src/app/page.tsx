@@ -79,7 +79,7 @@ export default function Page() {
           <div>
             <div className="font-semibold">Shubhankar Tiwari</div>
             <div className="text-xs text-gray-500 dark:text-gray-400">
-              Backend Engineer · FinTech · Applied AI
+              Software Engineer · Distributed Systems · FinTech Infrastructure
             </div>
           </div>
 
@@ -144,9 +144,9 @@ export default function Page() {
         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
           Hi, I’m <span className="text-indigo-500">Shubhankar</span>.
         </h1>
-
+        
         <p className="mt-6 text-xl md:text-2xl text-gray-600 dark:text-gray-300">
-          Backend Engineer · FinTech · Applied AI
+          Backend Systems · Production Engineering · Applied AI
         </p>
 
         <div className="mt-10 space-y-3 text-2xl md:text-3xl font-medium">
@@ -168,6 +168,25 @@ export default function Page() {
           >
             Resume
           </a>
+        </div>
+      </section>
+      
+      {/* About */}
+      <section className="mt-24 max-w-5xl mx-auto">
+        <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-6">
+          About
+        </h2>
+        
+        <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
+          <p>
+            I build backend systems that survive production. My work spans API design,
+            CI/CD pipelines, containerized deployments, and production incident triage
+            in enterprise fintech environments.
+          </p>
+          <p>
+            I focus on reliability, observability, and long-term maintainability,
+            ensuring systems remain stable under scale and operational stress.
+          </p>
         </div>
       </section>
 
@@ -201,32 +220,52 @@ export default function Page() {
           {expOpen && (
             <div className="mt-6 text-sm text-gray-700 dark:text-gray-300">
               {recruiterMode ? (
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>Backend Java services for corporate banking workflows</li>
-                  <li>API development, redesigns, and production support</li>
-                  <li>Stability, performance tuning, incident resolution</li>
-                  <li>Cross-team engineering collaboration</li>
-                </ul>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Design and maintain Java backend services for corporate banking workflows</li>
+                <li>Own CI/CD deployments and OpenShift production releases</li>
+                <li>Lead incident triage across SSL, database, and pipeline failures</li>
+                <li>Drive system stabilization and performance improvements</li>
+              </ul>
               ) : (
                 <div className="leading-relaxed space-y-3">
                   <p>
-                    Working on large-scale Java backend systems used across
-                    corporate banking workflows, with a focus on reliability,
-                    correctness, and long-term maintainability.
+                    Building and stabilizing large-scale Java backend systems used in
+                    corporate banking workflows, with emphasis on correctness and resilience.
                   </p>
                   <p>
-                    Involved in API development, system redesigns, production
-                    debugging, and cross-team collaboration.
+                    Involved in production debugging, release validation, and cross-team
+                    coordination during live incidents and high-risk deployments.
                   </p>
                   <p>
-                    Regularly handle live issues, performance improvements, and
-                    platform stability initiatives.
+                    Focused on long-term maintainability and reliability in high-availability environments.
                   </p>
                 </div>
               )}
             </div>
           )}
         </div>
+      </section>
+      
+      {/* Selected Engineering Work */}
+      <section className="mt-24 max-w-5xl mx-auto">
+        <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-6">
+          Selected Engineering Work
+        </h2>
+        
+        <ul className="list-disc pl-5 text-sm space-y-3 text-gray-700 dark:text-gray-300">
+          <li>
+            Led production triage for deployment and SSL failures, coordinating multi-team resolution under release pressure.
+          </li>
+          <li>
+            Onboarded new services to OpenShift production environments including certificate management and release validation.
+          </li>
+          <li>
+            Diagnosed and resolved database connectivity and service dependency disruptions.
+          </li>
+          <li>
+            Supported load testing and stability improvements in high-availability systems.
+          </li>
+        </ul>
       </section>
 
       {/* Skills */}
@@ -302,6 +341,20 @@ export default function Page() {
             )}
           </div>
         </div>
+      </section>
+
+      {/* Engineering Principles */}
+      <section className="mt-24 max-w-5xl mx-auto">
+        <h2 className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-6">
+          Engineering Principles
+        </h2>
+        
+        <ul className="list-disc pl-5 text-sm space-y-3 text-gray-700 dark:text-gray-300">
+          <li>Reliability over hype</li>
+          <li>Deterministic systems over black-box magic</li>
+          <li>Production readiness over prototype excitement</li>
+          <li>Root-cause analysis over surface patching</li>
+        </ul>
       </section>
 
       {/* Education */}
