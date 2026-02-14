@@ -36,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Shubhankar Tiwari",
     description:
-      "Backend Engineer specialized in FinTech, passionate about Applied AI.",
+      "Software Engineer building scalable backend systems and production-grade fintech infrastructure, exploring applied AI and distributed systems.",
     images: ["/og_final.png"],
   },
 };
