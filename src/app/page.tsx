@@ -151,8 +151,8 @@ export default function Page() {
 
         <div className="mt-10 space-y-3 text-2xl md:text-3xl font-medium">
           <p>Reliable systems.</p>
-          <p>Owned and shipped.</p>
-          <p>Scales simply.</p>
+          <p>Designed and stabilized.</p>
+          <p>Built to scale.</p>
         </div>
 
         <div className="mt-6 flex gap-4 sm:hidden">
@@ -209,7 +209,7 @@ export default function Page() {
                 2022 – Present · Backend / Platform Engineering
               </p>
               <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
-                Production systems supporting corporate banking clients.
+                Production-grade backend systems powering corporate banking workflows.
               </p>
             </div>
             <div className="text-gray-400 text-xl">
@@ -229,15 +229,17 @@ export default function Page() {
               ) : (
                 <div className="leading-relaxed space-y-3">
                   <p>
-                    Building and stabilizing large-scale Java backend systems used in
-                    corporate banking workflows, with emphasis on correctness and resilience.
+                    Building and stabilizing large-scale Java backend systems powering
+                    corporate banking workflows, with emphasis on correctness, resilience,
+                    and production reliability.
                   </p>
                   <p>
-                    Involved in production debugging, release validation, and cross-team
-                    coordination during live incidents and high-risk deployments.
+                    Drive production debugging, release validation, and cross-team coordination
+                    during live incidents and high-risk deployments.
                   </p>
                   <p>
-                    Focused on long-term maintainability and reliability in high-availability environments.
+                    Design and evolve services with long-term maintainability in
+                    high-availability environments.
                   </p>
                 </div>
               )}
