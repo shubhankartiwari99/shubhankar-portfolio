@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Shubhankar Tiwari | Backend Engineer",
+  title: "Shubhankar Tiwari | Software Engineer – Backend & Distributed Systems",
   description:
-    "Backend Engineer working on FinTech platforms, scalable systems, and production-grade Java services, passionate about Applied AI.",
+    "Software Engineer building production fintech systems, distributed backend services, and reliability-focused infrastructure, with growing focus on applied AI systems.",
   openGraph: {
     title: "Shubhankar Tiwari",
     description:
-      "Backend Engineer specialized in FinTech, passionate about Applied AI.",
+      "Software Engineer building scalable backend systems and production-grade fintech infrastructure, exploring applied AI and distributed systems.",
     url: "https://shubhankartiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
     images: [
