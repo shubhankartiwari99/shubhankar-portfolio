@@ -70,11 +70,12 @@ export default function Projects() {
               data-testid={`project-card-${i}`}
             >
               <div className={`relative overflow-hidden ${project.featured ? "h-48" : "h-36"}`}>
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-300"
+                  fill
+                  sizes={project.featured ? "(max-width: 768px) 100vw, 896px" : "(max-width: 768px) 100vw, 448px"}
+                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-300"
                 />
                 <div
                   className="absolute inset-0"
