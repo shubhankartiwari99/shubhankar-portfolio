@@ -29,24 +29,48 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
   const isHome = pathname === "/";
 
   useEffect(() => {
+    let ticking = false;
+    
     const fn = () => {
-      setScrolled(window.scrollY > 32);
-      if (!isHome) return;
-      const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
-      let current = "";
-      for (const el of sectionEls) {
-        if (el.getBoundingClientRect().top <= 120) current = el.id;
-      }
-      setActiveSection(current);
+      if (ticking) return;
+      ticking = true;
+      
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 32);
+        
+        if (isHome) {
+          const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
+          let current = "";
+          
+          for (const el of sectionEls) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 140) current = el.id;
+          }
+          
+          setActiveSection(current);
+        }
+        
+        ticking = false;
+      });
     };
+    
     window.addEventListener("scroll", fn, { passive: true });
     fn();
     return () => window.removeEventListener("scroll", fn);
   }, [isHome]);
 
-  const handleSectionClick = useCallback((id: string) => {
+  const handleSectionClick = useCallback((e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    
     if (isHome) {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      const element = document.getElementById(id);
+      if (element) {
+        const offsetTop = element.offsetTop - 96;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth"
+        });
+      }
     } else {
       window.location.href = `/#${id}`;
     }
@@ -55,11 +79,11 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
   return (
     <header
       data-testid="navigation"
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? `color-mix(in srgb, var(--bg) 80%, transparent)` : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+        background: scrolled ? `color-mix(in srgb, var(--bg) 85%, transparent)` : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
       }}
     >
@@ -67,9 +91,12 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
         <a
           href="#"
           data-testid="nav-logo"
-          className="font-mono text-sm tracking-tight transition-colors duration-300"
+          className="font-mono text-sm tracking-tight transition-colors duration-200"
           style={{ color: "var(--muted)" }}
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          onClick={(e) => { 
+            e.preventDefault(); 
+            window.scrollTo({ top: 0, behavior: "smooth" }); 
+          }}
         >
           st<span style={{ color: "var(--accent)" }}>.</span>
         </a>
@@ -79,8 +106,8 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
             <button
               key={s.id}
               data-testid={`nav-link-${s.id}`}
-              onClick={() => handleSectionClick(s.id)}
-              className="px-2.5 py-1 text-xs font-mono rounded-md transition-all duration-300 cursor-pointer"
+              onClick={(e) => handleSectionClick(e, s.id)}
+              className="px-2.5 py-1 text-xs font-mono rounded-md transition-colors duration-200 cursor-pointer"
               style={{
                 color: activeSection === s.id ? "var(--accent)" : "var(--muted-fg)",
               }}
@@ -91,7 +118,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           <Link
             href="/blog"
             data-testid="nav-link-blog"
-            className="px-2.5 py-1 text-xs font-mono rounded-md transition-all duration-300 flex items-center gap-1"
+            className="px-2.5 py-1 text-xs font-mono rounded-md transition-colors duration-200 flex items-center gap-1"
             style={{
               color: pathname.startsWith("/blog") ? "var(--accent)" : "var(--muted-fg)",
             }}
@@ -105,7 +132,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           <button
             data-testid="recruiter-mode-toggle"
             onClick={() => setRecruiterMode(!recruiterMode)}
-            className="px-3 py-1.5 text-xs font-mono rounded-full border transition-all duration-300 cursor-pointer"
+            className="px-3 py-1.5 text-xs font-mono rounded-full border transition-colors duration-200 cursor-pointer"
             style={{
               background: recruiterMode ? "var(--accent)" : "transparent",
               color: recruiterMode ? "var(--bg)" : "var(--muted)",
@@ -120,7 +147,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
             target="_blank"
             rel="noopener noreferrer"
             data-testid="resume-link"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-full border transition-all duration-300"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-full border transition-colors duration-200"
             style={{ color: "var(--muted)", borderColor: "var(--border)" }}
           >
             <FileText size={12} />
@@ -131,7 +158,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
             <button
               data-testid="theme-toggle"
               onClick={() => setDark(!dark)}
-              className="p-2 transition-colors duration-300 cursor-pointer rounded-lg"
+              className="p-2 transition-colors duration-200 cursor-pointer rounded-lg"
               style={{ color: "var(--muted)" }}
               aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
             >
