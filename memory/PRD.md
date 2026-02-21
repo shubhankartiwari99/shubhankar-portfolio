@@ -50,5 +50,5 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 
 ## Prioritized Backlog
 ### P1 - (Completed) Performance audit and bundle size optimization
-### P2 - RSS feed for blog, custom 404 page
+### P2 - (Completed) RSS feed for blog, custom 404 page
 ### P3 - CMS for dynamic blog content, project detail pages, i18n support
