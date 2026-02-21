@@ -137,8 +137,8 @@ export default function Skills() {
                 initial={reveal.initial}
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
-                transition={{ ...reveal.transition, delay: i * 0.08 }}
-                className="rounded-xl border p-5 font-mono text-sm transition-all duration-300"
+                transition={reveal.transition}
+                className="rounded-xl border p-5 font-mono text-sm"
                 style={{ color: "var(--muted)", borderColor: "var(--border)" }}
                 data-testid={`principle-${i}`}
               >
