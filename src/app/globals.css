@@ -66,3 +66,7 @@ body {
 .glow-accent {
   background: radial-gradient(ellipse 600px 300px at 50% 0%, var(--accent-dim), transparent);
 }
+
+section[id] {
+  scroll-margin-top: 80px;
+}

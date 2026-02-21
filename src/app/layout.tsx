@@ -36,9 +36,43 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Shubhankar Tiwari",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Bank of America",
+  },
+  url: "https://shubhankartiwari.vercel.app",
+  sameAs: [
+    "https://github.com/shubhankartiwari99",
+    "https://www.linkedin.com/in/shubhankar-tiwari-514040165/",
+    "https://www.kaggle.com/shubhankartiwari",
+    "https://twitter.com/Shubhankar2911",
+  ],
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "SRM Institute of Science and Technology",
+  },
+  knowsAbout: [
+    "Java", "Spring Boot", "Microservices", "REST APIs", "OpenShift",
+    "CI/CD", "Machine Learning", "Deep Learning", "Python", "SQL",
+  ],
+  description:
+    "Software Engineer with 3+ years of experience building production-grade backend systems for enterprise fintech. Kaggle Notebooks Expert.",
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>

@@ -1,7 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Sun, Moon, FileText } from "lucide-react";
+
+const sections = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Work" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "terminal", label: "Terminal" },
+  { id: "contact", label: "Contact" },
+];
 
 interface Props {
   dark: boolean;
@@ -13,12 +22,25 @@ interface Props {
 
 export default function Navigation({ dark, setDark, recruiterMode, setRecruiterMode, mounted }: Props) {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 32);
+    const fn = () => {
+      setScrolled(window.scrollY > 32);
+      const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
+      let current = "";
+      for (const el of sectionEls) {
+        if (el.getBoundingClientRect().top <= 120) current = el.id;
+      }
+      setActiveSection(current);
+    };
     window.addEventListener("scroll", fn, { passive: true });
     fn();
     return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  const scrollTo = useCallback((id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   return (
@@ -38,9 +60,26 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           data-testid="nav-logo"
           className="font-mono text-sm tracking-tight transition-colors duration-300"
           style={{ color: "var(--muted)" }}
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
         >
           st<span style={{ color: "var(--accent)" }}>.</span>
         </a>
+
+        <div className="hidden md:flex items-center gap-1">
+          {sections.map((s) => (
+            <button
+              key={s.id}
+              data-testid={`nav-link-${s.id}`}
+              onClick={() => scrollTo(s.id)}
+              className="px-2.5 py-1 text-xs font-mono rounded-md transition-all duration-300 cursor-pointer"
+              style={{
+                color: activeSection === s.id ? "var(--accent)" : "var(--muted-fg)",
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <button
