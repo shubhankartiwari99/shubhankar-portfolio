@@ -105,7 +105,7 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
                   className="mt-6 pt-6"
                   style={{ borderTop: "1px solid var(--border)" }}
                 >
