@@ -33,7 +33,15 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 - Vercel Analytics + Speed Insights
 - Production build verified clean (next build succeeds)
 
+### Session 4 - UI Polish (Feb 2026)
+- **Dark Mode Default**: Added inline script in layout.tsx to prevent light mode flash on initial load
+- **Improved Scroll Navigation**: Updated scroll-padding-top to 96px, implemented manual scroll offset calculation
+- **Smoother Animations**: Reduced animation durations from 0.6s to 0.4s, simplified easing to "easeOut"
+- **Removed Stagger Delays**: Eliminated per-item delays in lists for snappier feel
+- **Optimized Scroll Detection**: Added requestAnimationFrame throttling for active section detection
+- **Reduced Transition Durations**: Changed from 300ms to 200ms for hover effects across all components
+
 ## Prioritized Backlog
-### P1 - RSS feed for blog, custom 404 page
-### P2 - CMS for dynamic blog content, project detail pages
-### P3 - i18n support, animated page transitions
+### P1 - Performance audit and bundle size optimization
+### P2 - RSS feed for blog, custom 404 page
+### P3 - CMS for dynamic blog content, project detail pages, i18n support
