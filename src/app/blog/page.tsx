@@ -1,10 +1,7 @@
+"use client";
+
 import Link from "next/link";
 import { getAllPosts } from "@/data/posts";
-
-export const metadata = {
-  title: "Blog | Shubhankar Tiwari",
-  description: "Thoughts on backend systems, production engineering, applied AI, and lessons from Kaggle.",
-};
 
 export default function BlogPage() {
   const posts = getAllPosts();
