@@ -39,7 +39,7 @@ const reveal = {
   initial: { opacity: 0, y: 16 } as const,
   whileInView: { opacity: 1, y: 0 } as const,
   viewport: { once: true, margin: "-60px" } as const,
-  transition: { duration: 0.4, ease: "easeOut" },
+  transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
 };
 
 export default function Projects() {
