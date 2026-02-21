@@ -18,7 +18,7 @@ const reveal = {
 
 export default function About({ recruiterMode }: { recruiterMode: boolean }) {
   return (
-    <section data-testid="about-section" className="py-32 px-6">
+    <section data-testid="about-section" id="about" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
           <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>

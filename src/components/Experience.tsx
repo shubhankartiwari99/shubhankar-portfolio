@@ -54,7 +54,7 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section data-testid="experience-section" className="py-32 px-6">
+    <section data-testid="experience-section" id="experience" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
           <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
