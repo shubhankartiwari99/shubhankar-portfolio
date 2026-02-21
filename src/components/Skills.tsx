@@ -65,8 +65,8 @@ export default function Skills() {
                 initial={reveal.initial}
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
-                transition={{ ...reveal.transition, delay: i * 0.08 }}
-                className="rounded-2xl border p-5 transition-all duration-300"
+                transition={reveal.transition}
+                className="rounded-2xl border p-5"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
                 data-testid={`skill-group-${i}`}
               >
