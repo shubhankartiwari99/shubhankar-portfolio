@@ -31,7 +31,6 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
 
   useEffect(() => {
     let ticking = false;
-    let scrollTimeout: NodeJS.Timeout;
     
     const fn = () => {
       if (ticking || isScrolling) return;
@@ -65,7 +64,6 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
     fn();
     return () => {
       window.removeEventListener("scroll", fn);
-      clearTimeout(scrollTimeout);
     };
   }, [isHome, isScrolling]);
 
