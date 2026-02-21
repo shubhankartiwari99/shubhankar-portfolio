@@ -59,8 +59,8 @@ export default function Projects() {
               initial={reveal.initial}
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
-              transition={{ ...reveal.transition, delay: i * 0.1 }}
-              className={`group relative rounded-2xl border overflow-hidden transition-all duration-500 ${
+              transition={reveal.transition}
+              className={`group relative rounded-2xl border overflow-hidden transition-colors duration-200 ${
                 project.featured ? "md:col-span-2" : ""
               }`}
               style={{ borderColor: "var(--border)", background: "var(--surface)" }}
