@@ -25,26 +25,33 @@ interface Props {
 export default function Navigation({ dark, setDark, recruiterMode, setRecruiterMode, mounted }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [isScrolling, setIsScrolling] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
 
   useEffect(() => {
     let ticking = false;
+    let scrollTimeout: NodeJS.Timeout;
     
     const fn = () => {
-      if (ticking) return;
+      if (ticking || isScrolling) return;
       ticking = true;
       
       requestAnimationFrame(() => {
         setScrolled(window.scrollY > 32);
         
-        if (isHome) {
+        if (isHome && !isScrolling) {
           const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
           let current = "";
           
+          // Find the section that's currently in view
+          // A section is considered active when its top is within the upper portion of the viewport
           for (const el of sectionEls) {
             const rect = el.getBoundingClientRect();
-            if (rect.top <= 140) current = el.id;
+            // Section is active if its top is at or above 200px from viewport top
+            if (rect.top <= 200) {
+              current = el.id;
+            }
           }
           
           setActiveSection(current);
@@ -56,8 +63,11 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
     
     window.addEventListener("scroll", fn, { passive: true });
     fn();
-    return () => window.removeEventListener("scroll", fn);
-  }, [isHome]);
+    return () => {
+      window.removeEventListener("scroll", fn);
+      clearTimeout(scrollTimeout);
+    };
+  }, [isHome, isScrolling]);
 
   const handleSectionClick = useCallback((e: React.MouseEvent, id: string) => {
     e.preventDefault();
@@ -65,11 +75,20 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
     if (isHome) {
       const element = document.getElementById(id);
       if (element) {
-        const offsetTop = element.offsetTop - 96;
+        // Immediately set this section as active
+        setActiveSection(id);
+        setIsScrolling(true);
+        
+        const offsetTop = element.offsetTop - 80;
         window.scrollTo({
           top: offsetTop,
           behavior: "smooth"
         });
+        
+        // Re-enable scroll detection after animation completes
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 800);
       }
     } else {
       window.location.href = `/#${id}`;
@@ -94,7 +113,8 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           className="font-mono text-sm tracking-tight transition-colors duration-200"
           style={{ color: "var(--muted)" }}
           onClick={(e) => { 
-            e.preventDefault(); 
+            e.preventDefault();
+            setActiveSection("");
             window.scrollTo({ top: 0, behavior: "smooth" }); 
           }}
         >
