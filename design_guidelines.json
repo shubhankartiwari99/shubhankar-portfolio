@@ -1,0 +1,117 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "Shubhankar Tiwari",
+      "role": "Systems Engineer & AI Specialist",
+      "aesthetic": "Linear-style, Production-Grade Engineering, Dark-First",
+      "emotional_tone": "Reliable, Technical, Innovative, Precise"
+    },
+    "typography": {
+      "primary_font": "Inter, sans-serif",
+      "secondary_font": "JetBrains Mono, monospace",
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-bold tracking-tight",
+        "h2": "text-3xl md:text-4xl font-semibold tracking-tight",
+        "h3": "text-xl font-medium",
+        "body": "text-base text-zinc-400 leading-relaxed",
+        "mono": "text-sm font-mono tracking-wide"
+      }
+    },
+    "colors": {
+      "base": {
+        "background": "bg-zinc-950",
+        "foreground": "text-zinc-50",
+        "surface": "bg-zinc-900/50",
+        "border": "border-zinc-800"
+      },
+      "accents": {
+        "primary": "text-indigo-500",
+        "secondary": "text-emerald-500",
+        "alert": "text-rose-500"
+      },
+      "gradients": {
+        "hero_text": "bg-gradient-to-b from-zinc-200 to-zinc-500 bg-clip-text text-transparent",
+        "card_hover": "hover:bg-zinc-800/50 transition-colors duration-300"
+      }
+    },
+    "layout": {
+      "container": "max-w-5xl mx-auto px-6",
+      "spacing": {
+        "section_gap": "mt-32",
+        "item_gap": "gap-8"
+      },
+      "grid_strategy": "Bento Grid (Grid-cols-1 md:grid-cols-3 lg:grid-cols-4)"
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "category": "Project - LLM",
+        "url": "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Abstract neural network visualization for Indian Desi Multilingual LLM",
+        "usage": "Cover image for LLM project card"
+      },
+      {
+        "category": "Project - Song Recommender",
+        "url": "https://images.unsplash.com/photo-1714779573250-36242918e044?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHwzfHxzb3VuZCUyMHdhdmUlMjB2aXN1YWxpemF0aW9uJTIwYWJzdHJhY3QlMjBkYXJrfGVufDB8fHx8MTc3MTY4NjI3OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Sound wave visualization for Song Recommender System",
+        "usage": "Cover image for Song Recommender project card"
+      },
+      {
+        "category": "Project - Kaggle",
+        "url": "https://images.unsplash.com/photo-1753998943228-73470750c597?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHw0fHxjb2RpbmclMjBzZXR1cCUyMGRhcmslMjBtb2RlJTIwbW9uaXRvcnxlbnwwfHx8fDE3NzE2ODYyODF8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Coding screen for Kaggle Portfolio",
+        "usage": "Cover image for Kaggle portfolio card"
+      }
+    ],
+    "icons_library": "lucide-react"
+  },
+  "components_architecture": {
+    "Hero": {
+      "path": "/app/src/components/Hero.tsx",
+      "specs": "Full height, animated text entrance, recruiter mode toggle clearly visible. Background: subtle WebGL or particle effect (keep BackgroundCanvas but make it subtle).",
+      "content": "Shubhankar Tiwari. Systems Engineer. Bank of America. Kaggle Expert."
+    },
+    "BentoGrid": {
+      "path": "/app/src/components/BentoGrid.tsx",
+      "specs": "Grid layout for Projects and Skills. Cards should have hover effects (border glow).",
+      "items": [
+        "Project: Indian Desi Multilingual LLM (Large Card)",
+        "Project: Song Recommender (Medium Card)",
+        "Project: Kaggle Portfolio (Medium Card)",
+        "Skills: Visual badges (Small Cards)"
+      ]
+    },
+    "ExperienceTimeline": {
+      "path": "/app/src/components/ExperienceTimeline.tsx",
+      "specs": "Vertical line with nodes. Left: Date. Right: Content. Expandable details.",
+      "data": [
+        "Bank of America (2022-Present): Backend Systems, Incident Triage",
+        "HighRadius (2021-2022): Internship/Prior Role"
+      ]
+    },
+    "Footer": {
+      "path": "/app/src/components/Footer.tsx",
+      "specs": "Simple, centered. Social links with icons. 'Built with Next.js 16'."
+    }
+  },
+  "universal_guidelines": {
+    "rules": [
+      "Use 'zinc' palette for neutrals. zinc-950 for bg, zinc-900 for cards, zinc-800 for borders.",
+      "Typography: Use standard Tailwind fonts but enforce hierarchy.",
+      "Animations: Use framer-motion for smooth entry and hover states. 'transition-all duration-300' for CSS transitions.",
+      "Accessibility: Ensure contrast ratios. Use semantic HTML.",
+      "Recruiter Mode: Toggle should simplify technical jargon to business impact.",
+      "Dark Mode: Default to dark. Light mode should use zinc-50 bg and zinc-900 text."
+    ],
+    "forbidden": [
+      "No purple gradients.",
+      "No centered text for long paragraphs (use left align).",
+      "No generic 'AI robot' emojis."
+    ],
+    "installation_steps": [
+      "npm install lucide-react framer-motion clsx tailwind-merge"
+    ]
+  },
+  "instructions_to_main_agent": "1. Install dependencies: lucide-react, framer-motion, clsx, tailwind-merge. 2. Create the components in /app/src/components/. 3. Update /app/src/app/page.tsx to assemble the components. 4. Update globals.css to set the base zinc theme. 5. Ensure the 'Recruiter Mode' logic is passed down to components."
+}
