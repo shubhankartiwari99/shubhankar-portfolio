@@ -35,10 +35,10 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 
 ### Session 4 - UI Polish (Feb 2026)
 - **Dark Mode Default**: Added inline script in layout.tsx to prevent light mode flash on initial load
-- **Improved Scroll Navigation**: Updated scroll-padding-top to 96px, implemented manual scroll offset calculation
-- **Smoother Animations**: Reduced animation durations from 0.6s to 0.4s, simplified easing to "easeOut"
+- **Fixed Navigation Active State**: When clicking a nav link, that section now immediately highlights (fixed off-by-one issue where previous section was highlighted)
+- **Improved Scroll Detection**: Added `isScrolling` flag to block scroll detection during smooth scroll animation, preventing conflicts. Increased threshold from 140px to 200px
+- **Smoother Animations**: Reduced animation durations from 0.6s to 0.4s, easing curve `[0.25, 0.1, 0.25, 1]`
 - **Removed Stagger Delays**: Eliminated per-item delays in lists for snappier feel
-- **Optimized Scroll Detection**: Added requestAnimationFrame throttling for active section detection
 - **Reduced Transition Durations**: Changed from 300ms to 200ms for hover effects across all components
 
 ## Prioritized Backlog
