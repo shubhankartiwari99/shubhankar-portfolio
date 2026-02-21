@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description:
     "Software Engineer at Bank of America building production fintech systems. Kaggle Notebooks Expert. Exploring applied AI and distributed systems.",
   metadataBase: new URL("https://shubhankartiwari.vercel.app"),
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
   openGraph: {
     title: "Shubhankar Tiwari - Systems Engineer",
     description:
