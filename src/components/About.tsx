@@ -13,7 +13,7 @@ const reveal = {
   initial: { opacity: 0, y: 24 } as const,
   whileInView: { opacity: 1, y: 0 } as const,
   viewport: { once: true, margin: "-80px" } as const,
-  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
 };
 
 export default function About({ recruiterMode }: { recruiterMode: boolean }) {
