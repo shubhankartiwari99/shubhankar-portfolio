@@ -28,7 +28,7 @@ export default function Footer() {
           </p>
           <a
             href="mailto:tiwarishubhankar@gmail.com"
-            className="font-mono text-xs mt-1 block transition-colors duration-300"
+            className="font-mono text-xs mt-1 block transition-colors duration-200"
             style={{ color: "var(--muted-fg)" }}
             data-testid="footer-email"
           >
@@ -44,7 +44,7 @@ export default function Footer() {
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
               data-testid={`footer-${link.label.toLowerCase()}`}
-              className="p-2 rounded-lg transition-colors duration-300"
+              className="p-2 rounded-lg transition-colors duration-200"
               style={{ color: "var(--muted)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--accent)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "var(--muted)"; }}
