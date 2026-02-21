@@ -56,6 +56,13 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 - **Sitemap.xml** - Dynamic sitemap with all pages and blog posts, proper lastmod dates and priorities
 - **Robots.txt** - Search engine guidance with sitemap reference
 
+### Session 7 - Project Detail Pages (Feb 2026)
+- **Project Data Layer** - Created `/src/data/projects.ts` with rich project schema (highlights, tech stack, challenges, learnings)
+- **Project Detail Pages** - Individual pages at `/projects/[slug]` with hero images, status badges, tech stack cards
+- **Linked Project Cards** - Homepage project cards now link to detail pages with "View details →" on hover
+- **Tag Truncation** - Shows first 3 tags with "+N" indicator for additional tags
+- **Sitemap Update** - Added project pages to sitemap.xml for SEO
+
 ## Prioritized Backlog
 ### P1 - (Completed) Performance audit and bundle size optimization
 ### P2 - (Completed) RSS feed for blog, custom 404 page
