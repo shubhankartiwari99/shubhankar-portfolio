@@ -24,51 +24,54 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 6. Skills & Tools grouped by category
 7. Credentials (Kaggle Expert, GPA, Certifications)
 8. Engineering Principles
-9. Footer with contact info + social links
-10. Dark/Light theme toggle
-11. Recruiter mode toggle (narrative vs bullets)
+9. Interactive Terminal section
+10. Contact CTA section
+11. Footer with contact info + social links
+12. Dark/Light theme toggle
+13. Recruiter mode toggle (narrative vs bullets)
+14. Smooth scroll section navigation
+15. SEO structured data (JSON-LD)
 
-## What's Been Implemented (Feb 21, 2026)
-- [x] Complete visual overhaul: dark zinc theme + amber accent (replacing generic purple/white)
-- [x] Outfit font + JetBrains Mono (replacing Arial)
-- [x] CSS-only animated background (dot grid + gradient glow, replacing heavy Three.js)
+## What's Been Implemented
+
+### Session 1 (Feb 21, 2026) - Full Redesign
+- [x] Complete visual overhaul: dark zinc theme + amber accent
+- [x] Outfit + JetBrains Mono fonts
+- [x] CSS-only animated background (dot grid + gradient glow)
 - [x] framer-motion scroll-triggered reveal animations
-- [x] Hero section with social icons (GitHub, LinkedIn, Kaggle, Email)
-- [x] About section with 2-col layout (text + stats cards)
-- [x] Experience timeline: Bank of America + HighRadius (expandable cards)
-- [x] Projects bento grid: Indian Desi LLM (featured), Song Recommender, Kaggle Portfolio
-- [x] Skills section: 4 grouped skill categories with tags
-- [x] Credentials: Kaggle Expert, B.Tech GPA, ML Certifications
-- [x] Engineering Principles: Numbered monospace grid
-- [x] Footer: Email, GitHub, LinkedIn, Kaggle, Twitter
-- [x] Recruiter mode: toggles between narrative and ATS-friendly bullet points
-- [x] Dark/Light theme toggle with localStorage persistence
+- [x] All content sections: Hero, About, Experience, Projects, Skills, Credentials, Principles, Footer
+- [x] Recruiter mode toggle + Dark/Light theme toggle
 - [x] Mobile responsive design
 - [x] All tests passing (100%)
 
-## Prioritized Backlog
-### P0 (Critical) - Done
-- All core sections implemented and tested
+### Session 2 (Feb 21, 2026) - Feature Additions
+- [x] Smooth scroll section navigation anchors in navbar (About, Work, Projects, Skills, Terminal, Contact)
+- [x] Active section highlighting in nav while scrolling
+- [x] scroll-padding-top + scroll-margin-top for proper anchor offset
+- [x] Interactive Terminal section (commands: help, about, experience, ls projects/, cat skills, contact, neofetch, whoami, resume, history, clear + easter eggs: sudo hire shubhankar, rm -rf /, exit, ping)
+- [x] Contact CTA section ("Let's build something reliable together" + Email Me, LinkedIn, Resume buttons)
+- [x] SEO JSON-LD structured data (Person schema with name, jobTitle, worksFor, sameAs, alumniOf, knowsAbout)
+- [x] All tests passing (95% -> 100% after scroll-margin fix)
 
+## Prioritized Backlog
 ### P1 (High)
-- Add smooth scroll navigation anchors
-- Add a "Contact Me" CTA section
-- Add page transition animations between sections
+- Blog/Writing section for technical content
+- Animated page load transitions
+- Custom cursor effects
 
 ### P2 (Medium)
-- Blog/Writing section
-- Testimonials/Recommendations
 - Custom 404 page
-- Analytics integration
-- SEO structured data (JSON-LD)
+- Analytics integration (Vercel Analytics / Plausible)
+- Testimonials/Recommendations section
+- Performance optimization (image lazy loading, bundle analysis)
 
 ### P3 (Low/Future)
-- Interactive terminal easter egg
-- Animated gradient hero background
+- CMS integration for dynamic blog content
 - Project detail pages (individual routes)
-- CMS integration for dynamic content
+- RSS feed for blog
+- i18n support (Hindi translation)
 
 ## Next Tasks
-1. Add section navigation anchors for smooth scrolling
-2. Consider adding a blog section for technical writing
-3. Enhance mobile experience with touch interactions
+1. Consider adding a blog section for technical writing
+2. Add analytics to track visitor engagement
+3. Performance audit and optimization
