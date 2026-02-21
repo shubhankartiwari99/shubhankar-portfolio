@@ -25,10 +25,13 @@ interface Props {
 export default function Navigation({ dark, setDark, recruiterMode, setRecruiterMode, mounted }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const fn = () => {
       setScrolled(window.scrollY > 32);
+      if (!isHome) return;
       const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
       let current = "";
       for (const el of sectionEls) {
@@ -39,11 +42,15 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
     window.addEventListener("scroll", fn, { passive: true });
     fn();
     return () => window.removeEventListener("scroll", fn);
-  }, []);
+  }, [isHome]);
 
-  const scrollTo = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  const handleSectionClick = useCallback((id: string) => {
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/#${id}`;
+    }
+  }, [isHome]);
 
   return (
     <header
@@ -72,7 +79,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
             <button
               key={s.id}
               data-testid={`nav-link-${s.id}`}
-              onClick={() => scrollTo(s.id)}
+              onClick={() => handleSectionClick(s.id)}
               className="px-2.5 py-1 text-xs font-mono rounded-md transition-all duration-300 cursor-pointer"
               style={{
                 color: activeSection === s.id ? "var(--accent)" : "var(--muted-fg)",
@@ -81,6 +88,17 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
               {s.label}
             </button>
           ))}
+          <Link
+            href="/blog"
+            data-testid="nav-link-blog"
+            className="px-2.5 py-1 text-xs font-mono rounded-md transition-all duration-300 flex items-center gap-1"
+            style={{
+              color: pathname.startsWith("/blog") ? "var(--accent)" : "var(--muted-fg)",
+            }}
+          >
+            <PenLine size={12} />
+            Blog
+          </Link>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
