@@ -53,6 +53,8 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 - **RSS Metadata** - Added alternate link in site metadata for RSS autodiscovery
 - **RSS Button** - Added RSS link button on blog listing page
 - **Custom 404 Page** - Terminal-style error page with animated 404, "Go Home" and "Go Back" buttons
+- **Sitemap.xml** - Dynamic sitemap with all pages and blog posts, proper lastmod dates and priorities
+- **Robots.txt** - Search engine guidance with sitemap reference
 
 ## Prioritized Backlog
 ### P1 - (Completed) Performance audit and bundle size optimization
