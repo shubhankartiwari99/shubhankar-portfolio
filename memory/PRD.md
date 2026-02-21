@@ -41,6 +41,13 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 - **Removed Stagger Delays**: Eliminated per-item delays in lists for snappier feel
 - **Reduced Transition Durations**: Changed from 300ms to 200ms for hover effects across all components
 
+### Session 5 - Performance Optimization (Feb 2026)
+- **Removed unused Three.js** - Eliminated unused dependency (~150KB), build directory reduced from 223MB to 9.8MB (95% reduction)
+- **Deleted BackgroundCanvas** - Removed unused Three.js component
+- **Next.js Image Optimization** - Converted project images to use Next.js `<Image>` with automatic AVIF/WebP formats and proper sizing
+- **Image Remote Patterns** - Configured next.config.ts for Unsplash and Pexels domains
+- **Enabled Compression** - Added `compress: true` to Next.js config
+
 ## Prioritized Backlog
 ### P1 - Performance audit and bundle size optimization
 ### P2 - RSS feed for blog, custom 404 page
