@@ -18,8 +18,6 @@ const socials = [
   { href: "mailto:tiwarishubhankar@gmail.com", icon: <Mail size={18} />, label: "Email" },
 ];
 
-const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
-
 export default function Hero() {
   return (
     <section data-testid="hero-section" className="min-h-screen flex flex-col justify-center relative px-6">
@@ -34,9 +32,9 @@ export default function Hero() {
 
       <div className="max-w-5xl mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <p className="font-mono text-sm mb-6" style={{ color: "var(--accent)" }}>
             Software Engineer @ Bank of America
@@ -49,9 +47,9 @@ export default function Hero() {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.7, ease }}
+          transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
           className="mt-8 text-lg max-w-xl leading-relaxed"
           style={{ color: "var(--muted)" }}
         >
@@ -63,7 +61,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           className="mt-10 flex flex-wrap items-center gap-3"
         >
           {socials.map((link) => (
@@ -73,7 +71,7 @@ export default function Hero() {
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
               data-testid={`social-${link.label.toLowerCase()}`}
-              className="p-2.5 rounded-lg border transition-all duration-300"
+              className="p-2.5 rounded-lg border transition-colors duration-200"
               style={{ color: "var(--muted)", borderColor: "var(--border)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--accent)";
@@ -91,7 +89,7 @@ export default function Hero() {
           <a
             href="/Shubhankar_Tiwari_Resume.pdf"
             target="_blank"
-            className="sm:hidden ml-1 px-4 py-2 text-sm font-mono rounded-full border transition-all"
+            className="sm:hidden ml-1 px-4 py-2 text-sm font-mono rounded-full border transition-colors duration-200"
             style={{ color: "var(--muted)", borderColor: "var(--border)" }}
           >
             resume.pdf
@@ -102,7 +100,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <ArrowDown size={16} className="animate-bounce" style={{ color: "var(--muted-fg)" }} />
