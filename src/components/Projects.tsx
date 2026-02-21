@@ -1,40 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import Image from "next/image";
-
-const projects = [
-  {
-    title: "Indian Desi Multilingual LLM",
-    description:
-      "Inference and application layer for a multilingual LLM with persona safety CI, emotional invariants, and deterministic model fingerprinting.",
-    tags: ["Python", "LLM", "NLP", "CI/CD", "Transformers"],
-    github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
-    featured: true,
-    image:
-      "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    title: "Song Recommender System",
-    description:
-      "ML recommender generating adaptive playlists based on heart rate (BPM) with real-time feature handling and model evaluation.",
-    tags: ["Python", "ML", "Signal Processing"],
-    featured: false,
-    image:
-      "https://images.unsplash.com/photo-1714779573250-36242918e044?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHwzfHxzb3VuZCUyMHdhdmUlMjB2aXN1YWxpemF0aW9uJTIwYWJzdHJhY3QlMjBkYXJrfGVufDB8fHx8MTc3MTY4NjI3OXww&ixlib=rb-4.1.0&q=85",
-  },
-  {
-    title: "Kaggle Portfolio",
-    description:
-      "33 notebooks, 10 datasets, 3 models. Notebooks Expert rank 2,913 / 59,240 with 9 bronze medals across ML, DL, and Computer Vision.",
-    tags: ["Data Science", "ML", "Deep Learning", "CV"],
-    link: "https://www.kaggle.com/shubhankartiwari",
-    featured: false,
-    image:
-      "https://images.unsplash.com/photo-1753998943228-73470750c597?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHw0fHxjb2RpbmclMjBzZXR1cCUyMGRhcmslMjBtb2RlJTIwbW9uaXRvcnxlbnwwfHx8fDE3NzE2ODYyODF8MA&ixlib=rb-4.1.0&q=85",
-  },
-];
+import Link from "next/link";
+import { getAllProjects } from "@/data/projects";
 
 const reveal = {
   initial: { opacity: 0, y: 16 } as const,
@@ -44,6 +14,8 @@ const reveal = {
 };
 
 export default function Projects() {
+  const projects = getAllProjects();
+
   return (
     <section data-testid="projects-section" id="projects" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -56,7 +28,7 @@ export default function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {projects.map((project, i) => (
             <motion.div
-              key={i}
+              key={project.slug}
               initial={reveal.initial}
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
@@ -69,71 +41,91 @@ export default function Projects() {
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
               data-testid={`project-card-${i}`}
             >
-              <div className={`relative overflow-hidden ${project.featured ? "h-48" : "h-36"}`}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes={project.featured ? "(max-width: 768px) 100vw, 896px" : "(max-width: 768px) 100vw, 448px"}
-                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-300"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, var(--surface) 10%, transparent 100%)",
-                  }}
-                />
-              </div>
+              <Link href={`/projects/${project.slug}`} className="block">
+                <div className={`relative overflow-hidden ${project.featured ? "h-48" : "h-36"}`}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes={project.featured ? "(max-width: 768px) 100vw, 896px" : "(max-width: 768px) 100vw, 448px"}
+                    className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-300"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(to top, var(--surface) 10%, transparent 100%)",
+                    }}
+                  />
+                </div>
 
-              <div className="p-6 -mt-8 relative">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold transition-colors duration-300" style={{ color: "var(--fg)" }}>
-                    {project.title}
-                  </h3>
-                  <div className="flex gap-2 flex-shrink-0">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`project-github-${i}`}
-                        className="p-1.5 rounded-md border transition-all duration-300"
-                        style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Github size={14} />
-                      </a>
-                    )}
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`project-link-${i}`}
-                        className="p-1.5 rounded-md border transition-all duration-300"
-                        style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
+                <div className="p-6 -mt-8 relative">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-[var(--accent)]" style={{ color: "var(--fg)" }}>
+                      {project.title}
+                    </h3>
+                    <div className="flex gap-2 flex-shrink-0">
+                      {project.github && (
+                        <span
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(project.github, "_blank");
+                          }}
+                          data-testid={`project-github-${i}`}
+                          className="p-1.5 rounded-md border transition-all duration-300 cursor-pointer hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                          style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+                        >
+                          <Github size={14} />
+                        </span>
+                      )}
+                      {project.link && (
+                        <span
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(project.link, "_blank");
+                          }}
+                          data-testid={`project-link-${i}`}
+                          className="p-1.5 rounded-md border transition-all duration-300 cursor-pointer hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                          style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+                        >
+                          <ExternalLink size={14} />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-sm mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {project.shortDescription}
+                  </p>
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-mono text-xs px-2 py-0.5 rounded-md"
+                          style={{ color: "var(--accent)", background: "var(--accent-dim)" }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <span
+                          className="font-mono text-xs px-2 py-0.5 rounded-md"
+                          style={{ color: "var(--muted-fg)" }}
+                        >
+                          +{project.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+                    <span
+                      className="text-xs font-mono flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      style={{ color: "var(--accent)" }}
+                    >
+                      View details <ArrowRight size={12} />
+                    </span>
                   </div>
                 </div>
-                <p className="text-sm mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-mono text-xs px-2 py-0.5 rounded-md"
-                      style={{ color: "var(--accent)", background: "var(--accent-dim)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
