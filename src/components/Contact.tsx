@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, ArrowUpRight } from "lucide-react";
 
 const reveal = {
-  initial: { opacity: 0, y: 24 } as const,
+  initial: { opacity: 0, y: 16 } as const,
   whileInView: { opacity: 1, y: 0 } as const,
-  viewport: { once: true, margin: "-80px" } as const,
-  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+  viewport: { once: true, margin: "-60px" } as const,
+  transition: { duration: 0.4, ease: "easeOut" },
 };
 
 const actions = [
