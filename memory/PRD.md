@@ -63,6 +63,11 @@ User asked to review their existing portfolio website (Next.js 16) and suggest/i
 - **Tag Truncation** - Shows first 3 tags with "+N" indicator for additional tags
 - **Sitemap Update** - Added project pages to sitemap.xml for SEO
 
+### Session 8 - Developer Polish (Feb 2026)
+- **Content Guide** - Created `CONTENT.md` with instructions for adding blog posts and projects
+- **Improved Code Blocks** - Language label in top-right corner, better styling with Catppuccin-inspired colors
+- **Inline Code** - Better styling for inline code snippets
+
 ## Prioritized Backlog
 ### P1 - (Completed) Performance audit and bundle size optimization
 ### P2 - (Completed) RSS feed for blog, custom 404 page
