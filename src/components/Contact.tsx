@@ -62,7 +62,7 @@ export default function Contact() {
                 target={action.href.startsWith("mailto") || action.href.startsWith("/") ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 data-testid={`contact-${action.label.toLowerCase().replace(/\s/g, "-")}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono rounded-full border transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono rounded-full border transition-colors duration-200"
                 style={{
                   background: action.primary ? "var(--accent)" : "transparent",
                   color: action.primary ? "var(--bg)" : "var(--muted)",
