@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { getAllPosts } from "@/data/posts";
+import { Rss } from "lucide-react";
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -19,10 +20,26 @@ export default function BlogPage() {
           &larr; back to portfolio
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Blog</h1>
-        <p className="mt-4 text-lg" style={{ color: "var(--muted)" }}>
-          Thoughts on backend systems, production engineering, and applied AI.
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Blog</h1>
+            <p className="mt-4 text-lg" style={{ color: "var(--muted)" }}>
+              Thoughts on backend systems, production engineering, and applied AI.
+            </p>
+          </div>
+          <a
+            href="/feed.xml"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="rss-feed-link"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-full border transition-colors duration-200 flex-shrink-0 mt-2"
+            style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+            title="RSS Feed"
+          >
+            <Rss size={12} />
+            RSS
+          </a>
+        </div>
       </header>
 
       {/* Posts */}
