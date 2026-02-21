@@ -1,57 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
-export const metadata = {
-  title: "Shubhankar Tiwari | Software Engineer – Backend & Distributed Systems",
+export const metadata: Metadata = {
+  title: "Shubhankar Tiwari | Software Engineer - Backend Systems & Applied AI",
   description:
-    "Software Engineer building production fintech systems, distributed backend services, and reliability-focused infrastructure, with growing focus on applied AI systems.",
+    "Software Engineer at Bank of America building production fintech systems. Kaggle Notebooks Expert. Exploring applied AI and distributed systems.",
+  metadataBase: new URL("https://shubhankartiwari.vercel.app"),
   openGraph: {
-    title: "Shubhankar Tiwari",
+    title: "Shubhankar Tiwari - Systems Engineer",
     description:
-      "Software Engineer building scalable backend systems and production-grade fintech infrastructure, exploring applied AI and distributed systems.",
+      "Backend systems engineer at Bank of America. Kaggle Notebooks Expert. Building production-grade fintech infrastructure.",
     url: "https://shubhankartiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
-    images: [
-      {
-        url: "/og_final.png",
-        width: 1200,
-        height: 630,
-        alt: "Shubhankar Tiwari — Backend Engineer · FinTech · Applied AI",
-      },
-    ],
+    images: [{ url: "/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Shubhankar Tiwari",
-    description:
-      "Software Engineer building scalable backend systems and production-grade fintech infrastructure, exploring applied AI and distributed systems.",
+    description: "Backend systems engineer. Kaggle Expert. Applied AI.",
     images: ["/og_final.png"],
   },
 };
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
     </html>

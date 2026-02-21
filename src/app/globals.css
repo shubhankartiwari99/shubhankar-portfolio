@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #09090b;
+  --fg: #fafafa;
+  --surface: #18181b;
+  --surface-hover: #27272a;
+  --border: #27272a;
+  --muted: #a1a1aa;
+  --muted-fg: #71717a;
+  --accent: #f59e0b;
+  --accent-hover: #fbbf24;
+  --accent-dim: rgba(245, 158, 11, 0.1);
+}
+
+html.light {
+  --bg: #fafafa;
+  --fg: #18181b;
+  --surface: #ffffff;
+  --surface-hover: #f4f4f5;
+  --border: #e4e4e7;
+  --muted: #52525b;
+  --muted-fg: #a1a1aa;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+  --accent-dim: rgba(217, 119, 6, 0.06);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glow-accent {
+  background: radial-gradient(ellipse 600px 300px at 50% 0%, var(--accent-dim), transparent);
 }

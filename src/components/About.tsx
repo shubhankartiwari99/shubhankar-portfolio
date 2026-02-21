@@ -1,0 +1,72 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const stats = [
+  { value: "3+", label: "Years Experience" },
+  { value: "#2,913", label: "Kaggle Rank / 59K" },
+  { value: "94.4%", label: "B.Tech GPA" },
+  { value: "33", label: "Kaggle Notebooks" },
+];
+
+const reveal = {
+  initial: { opacity: 0, y: 24 } as const,
+  whileInView: { opacity: 1, y: 0 } as const,
+  viewport: { once: true, margin: "-80px" } as const,
+  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+};
+
+export default function About({ recruiterMode }: { recruiterMode: boolean }) {
+  return (
+    <section data-testid="about-section" className="py-32 px-6">
+      <div className="max-w-5xl mx-auto">
+        <motion.div {...reveal}>
+          <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+            About
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <motion.div {...reveal} className="md:col-span-2 space-y-5">
+            {recruiterMode ? (
+              <ul className="list-disc pl-5 space-y-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                <li>3+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
+                <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
+                <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
+                <li>Kaggle Notebooks Expert (Rank 2,913 / 59,240) with certifications in ML, Deep Learning & Computer Vision</li>
+                <li>Active in applied AI &mdash; building an Indian Multilingual LLM inference system</li>
+              </ul>
+            ) : (
+              <>
+                <p className="text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                  I build backend systems that survive production. My work at Bank of America spans
+                  API design, CI/CD pipelines, containerized deployments, and production incident triage
+                  in enterprise fintech environments.
+                </p>
+                <p className="text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                  Outside of work, I&apos;m deep into machine learning and AI systems &mdash; ranked in the
+                  top 5% on Kaggle as a Notebooks Expert, and currently building an Indian multilingual
+                  LLM. I care about systems that are reliable, observable, and built to last.
+                </p>
+              </>
+            )}
+          </motion.div>
+
+          <motion.div {...reveal} className="grid grid-cols-2 gap-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                data-testid={`stat-${s.label.replace(/\s+/g, "-").toLowerCase()}`}
+                className="rounded-xl p-4 border transition-colors duration-300"
+                style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+              >
+                <div className="text-2xl font-bold" style={{ color: "var(--accent)" }}>{s.value}</div>
+                <div className="text-[11px] mt-1.5 font-mono leading-tight" style={{ color: "var(--muted-fg)" }}>{s.label}</div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
