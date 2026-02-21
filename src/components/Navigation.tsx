@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Sun, Moon, FileText } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Sun, Moon, FileText, PenLine } from "lucide-react";
+import Link from "next/link";
 
 const sections = [
   { id: "about", label: "About" },
