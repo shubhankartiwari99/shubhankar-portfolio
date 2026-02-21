@@ -69,8 +69,8 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
               initial={reveal.initial}
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
-              transition={{ ...reveal.transition, delay: i * 0.1 }}
-              className="rounded-2xl border p-6 cursor-pointer transition-all duration-300 group"
+              transition={reveal.transition}
+              className="rounded-2xl border p-6 cursor-pointer transition-colors duration-200 group"
               style={{ borderColor: "var(--border)", background: "var(--surface)" }}
               onClick={() => setExpanded(expanded === i ? null : i)}
               data-testid={`experience-card-${i}`}
