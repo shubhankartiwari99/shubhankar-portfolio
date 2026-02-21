@@ -41,6 +41,8 @@ html {
 section[id] {
   scroll-margin-top: 80px;
 }
+
+body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
