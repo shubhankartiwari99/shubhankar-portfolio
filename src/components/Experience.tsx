@@ -95,16 +95,17 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
                 </div>
                 <ChevronDown
                   size={18}
-                  className={`transition-transform duration-300 flex-shrink-0 mt-1 ${expanded === i ? "rotate-180" : ""}`}
+                  className={`transition-transform duration-200 flex-shrink-0 mt-1 ${expanded === i ? "rotate-180" : ""}`}
                   style={{ color: "var(--muted-fg)" }}
                 />
               </div>
 
               {expanded === i && (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
                   className="mt-6 pt-6"
                   style={{ borderTop: "1px solid var(--border)" }}
                 >
