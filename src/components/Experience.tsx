@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useRecruiterMode } from "./Providers";
 
 const experiences = [
   {
@@ -50,34 +51,40 @@ const reveal = {
   transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
 };
 
-export default function Experience({ recruiterMode }: { recruiterMode: boolean }) {
+export default function Experience() {
+  const recruiterMode = useRecruiterMode();
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section data-testid="experience-section" id="experience" className="py-32 px-6">
+    <section data-testid="experience-section" id="experience" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
-          <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Experience
-          </p>
+          </h2>
         </motion.div>
 
         <div className="space-y-4">
           {experiences.map((exp, i) => (
             <motion.div
-              key={i}
+              key={`${exp.company}-${exp.period}`}
               initial={reveal.initial}
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
               transition={reveal.transition}
-              className="rounded-2xl border p-6 cursor-pointer transition-colors duration-200 group"
+              className="rounded-2xl border p-4 sm:p-6 transition-colors duration-200 group"
               style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-              onClick={() => setExpanded(expanded === i ? null : i)}
               data-testid={`experience-card-${i}`}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
             >
-              <div className="flex items-start justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                aria-expanded={expanded === i}
+                aria-controls={`experience-details-${i}`}
+                className="w-full flex items-start justify-between gap-4 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-lg"
+              >
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                     <h3 className="text-lg font-semibold">{exp.title}</h3>
@@ -98,10 +105,11 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
                   className={`transition-transform duration-200 flex-shrink-0 mt-1 ${expanded === i ? "rotate-180" : ""}`}
                   style={{ color: "var(--muted-fg)" }}
                 />
-              </div>
+              </button>
 
               {expanded === i && (
                 <motion.div
+                  id={`experience-details-${i}`}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
@@ -111,11 +119,11 @@ export default function Experience({ recruiterMode }: { recruiterMode: boolean }
                 >
                   {recruiterMode ? (
                     <ul className="list-disc pl-5 space-y-2 text-sm" style={{ color: "var(--muted)" }}>
-                      {exp.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                      {exp.bullets.map((b) => <li key={b}>{b}</li>)}
                     </ul>
                   ) : (
                     <div className="space-y-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                      {exp.narrative.map((p, j) => <p key={j}>{p}</p>)}
+                      {exp.narrative.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                     </div>
                   )}
                   <div className="flex flex-wrap gap-2 mt-5">

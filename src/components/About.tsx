@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRecruiterMode } from "./Providers";
 
 const stats = [
   { value: "3+", label: "Years Experience" },
@@ -16,17 +17,19 @@ const reveal = {
   transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
 };
 
-export default function About({ recruiterMode }: { recruiterMode: boolean }) {
+export default function About() {
+  const recruiterMode = useRecruiterMode();
+
   return (
-    <section data-testid="about-section" id="about" className="py-32 px-6">
+    <section data-testid="about-section" id="about" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
-          <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             About
-          </p>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
           <motion.div {...reveal} className="md:col-span-2 space-y-5">
             {recruiterMode ? (
               <ul className="list-disc pl-5 space-y-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
@@ -38,12 +41,12 @@ export default function About({ recruiterMode }: { recruiterMode: boolean }) {
               </ul>
             ) : (
               <>
-                <p className="text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
                   I build backend systems that survive production. My work at Bank of America spans
                   API design, CI/CD pipelines, containerized deployments, and production incident triage
                   in enterprise fintech environments.
                 </p>
-                <p className="text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
                   Outside of work, I&apos;m deep into machine learning and AI systems &mdash; ranked in the
                   top 5% on Kaggle as a Notebooks Expert, and currently building an Indian multilingual
                   LLM. I care about systems that are reliable, observable, and built to last.

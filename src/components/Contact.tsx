@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, ArrowUpRight } from "lucide-react";
 
 const reveal = {
   initial: { opacity: 0, y: 16 } as const,
@@ -33,28 +33,28 @@ const actions = [
 
 export default function Contact() {
   return (
-    <section data-testid="contact-section" id="contact" className="py-32 px-6">
+    <section data-testid="contact-section" id="contact" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
-          <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Get In Touch
-          </p>
+          </h2>
         </motion.div>
 
         <motion.div {...reveal} className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-tight">
             Let&apos;s build something
             <br />
             <span style={{ color: "var(--accent)" }}>reliable</span> together.
-          </h2>
+          </h3>
 
-          <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+          <p className="mt-5 sm:mt-6 text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
             I&apos;m open to opportunities in backend systems, platform engineering, and applied AI.
             Whether it&apos;s a role, collaboration, or just a conversation about systems design &mdash;
             I&apos;d love to hear from you.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-8 sm:mt-10 flex flex-wrap gap-2.5 sm:gap-3">
             {actions.map((action) => (
               <a
                 key={action.label}

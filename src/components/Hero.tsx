@@ -20,7 +20,7 @@ const socials = [
 
 export default function Hero() {
   return (
-    <section data-testid="hero-section" className="min-h-screen flex flex-col justify-center relative px-6">
+    <section data-testid="hero-section" className="min-h-screen flex flex-col justify-center relative px-5 sm:px-6">
       <div
         className="absolute inset-0 -z-10 dot-grid opacity-40"
         style={{
@@ -36,10 +36,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <p className="font-mono text-sm mb-6" style={{ color: "var(--accent)" }}>
+          <p className="font-mono text-xs sm:text-sm mb-5 sm:mb-6" style={{ color: "var(--accent)" }}>
             Software Engineer @ Bank of America
           </p>
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-[0.95]">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-[0.95]">
             Shubhankar
             <br />
             <span style={{ color: "var(--muted)" }}>Tiwari</span>
@@ -50,7 +50,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
-          className="mt-8 text-lg max-w-xl leading-relaxed"
+          className="mt-7 sm:mt-8 text-base sm:text-lg max-w-xl leading-relaxed"
           style={{ color: "var(--muted)" }}
         >
           I build backend systems that survive production.
@@ -62,7 +62,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="mt-10 flex flex-wrap items-center gap-3"
+          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-2.5 sm:gap-3"
         >
           {socials.map((link) => (
             <a
@@ -70,6 +70,7 @@ export default function Hero() {
               href={link.href}
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
+              aria-label={link.label}
               data-testid={`social-${link.label.toLowerCase()}`}
               className="p-2.5 rounded-lg border transition-colors duration-200"
               style={{ color: "var(--muted)", borderColor: "var(--border)" }}
@@ -89,7 +90,8 @@ export default function Hero() {
           <a
             href="/Shubhankar_Tiwari_Resume.pdf"
             target="_blank"
-            className="sm:hidden ml-1 px-4 py-2 text-sm font-mono rounded-full border transition-colors duration-200"
+            rel="noopener noreferrer"
+            className="sm:hidden ml-1 px-3.5 py-2 text-xs font-mono rounded-full border transition-colors duration-200"
             style={{ color: "var(--muted)", borderColor: "var(--border)" }}
           >
             resume.pdf

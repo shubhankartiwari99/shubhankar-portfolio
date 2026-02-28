@@ -20,7 +20,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer data-testid="footer" className="py-16 px-6 border-t" style={{ borderColor: "var(--border)" }}>
+    <footer data-testid="footer" className="py-12 sm:py-14 md:py-16 px-5 sm:px-6 border-t" style={{ borderColor: "var(--border)" }}>
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="text-center sm:text-left">
           <p className="font-mono text-xs" style={{ color: "var(--muted-fg)" }}>
@@ -43,6 +43,7 @@ export default function Footer() {
               href={link.href}
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
+              aria-label={link.label}
               data-testid={`footer-${link.label.toLowerCase()}`}
               className="p-2 rounded-lg transition-colors duration-200"
               style={{ color: "var(--muted)" }}

@@ -7,25 +7,22 @@ const RecruiterContext = createContext(false);
 export const useRecruiterMode = () => useContext(RecruiterContext);
 
 export default function Providers({ children }: { children: ReactNode }) {
-  const [dark, setDark] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [dark, setDark] = useState(() => {
+    if (typeof window === "undefined") return true;
+    try {
+      return localStorage.getItem("theme") !== "light";
+    } catch {
+      return true;
+    }
+  });
   const [recruiterMode, setRecruiterMode] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    try {
-      const stored = localStorage.getItem("theme");
-      if (stored === "light") setDark(false);
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
     document.documentElement.classList.toggle("light", !dark);
     try {
       localStorage.setItem("theme", dark ? "dark" : "light");
     } catch {}
-  }, [dark, mounted]);
+  }, [dark]);
 
   return (
     <RecruiterContext.Provider value={recruiterMode}>
@@ -34,7 +31,6 @@ export default function Providers({ children }: { children: ReactNode }) {
         setDark={setDark}
         recruiterMode={recruiterMode}
         setRecruiterMode={setRecruiterMode}
-        mounted={mounted}
       />
       {children}
     </RecruiterContext.Provider>

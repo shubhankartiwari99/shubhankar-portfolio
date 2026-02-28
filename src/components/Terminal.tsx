@@ -9,7 +9,7 @@ interface Line {
   text: string;
 }
 
-const COMMANDS: Record<string, string | ((arg?: string) => string)> = {
+const COMMANDS: Record<string, string | (() => string)> = {
   help: `Available commands:
   about          Who is Shubhankar?
   experience     Work history
@@ -53,7 +53,7 @@ const COMMANDS: Record<string, string | ((arg?: string) => string)> = {
   Kaggle:   kaggle.com/shubhankartiwari
   Twitter:  @Shubhankar2911`,
 
-  whoami: (arg?: string) => `  visitor@shubhankartiwari.dev — thanks for stopping by!`,
+  whoami: () => `  visitor@shubhankartiwari.dev — thanks for stopping by!`,
 };
 
 const EASTER_EGGS: Record<string, string> = {
@@ -165,12 +165,12 @@ export default function Terminal() {
   };
 
   return (
-    <section data-testid="terminal-section" id="terminal" className="py-32 px-6">
+    <section data-testid="terminal-section" id="terminal" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div {...reveal}>
-          <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Interactive Terminal
-          </p>
+          </h2>
         </motion.div>
 
         <motion.div
@@ -200,7 +200,7 @@ export default function Terminal() {
           <div
             ref={scrollRef}
             data-testid="terminal-output"
-            className="p-4 font-mono text-sm h-80 overflow-y-auto cursor-text"
+            className="p-4 font-mono text-xs sm:text-sm h-72 sm:h-80 overflow-y-auto cursor-text"
             style={{ background: "#0c0c0e", color: "#a1a1aa" }}
             onClick={() => inputRef.current?.focus()}
           >
@@ -237,7 +237,7 @@ export default function Terminal() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none font-mono text-sm caret-amber-400"
+                className="flex-1 bg-transparent outline-none font-mono text-xs sm:text-sm caret-amber-400"
                 style={{ color: "#e4e4e7" }}
                 autoComplete="off"
                 spellCheck={false}

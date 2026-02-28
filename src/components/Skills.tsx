@@ -50,25 +50,25 @@ export default function Skills() {
   return (
     <>
       {/* Skills */}
-      <section data-testid="skills-section" id="skills" className="py-32 px-6">
+      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div {...reveal}>
-            <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Skills & Tools
-            </p>
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {skillGroups.map((group, i) => (
+            {skillGroups.map((group) => (
               <motion.div
-                key={i}
+                key={group.title}
                 initial={reveal.initial}
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
                 className="rounded-2xl border p-5"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-                data-testid={`skill-group-${i}`}
+                data-testid={`skill-group-${group.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span style={{ color: "var(--accent)" }}>{group.icon}</span>
@@ -92,25 +92,25 @@ export default function Skills() {
       </section>
 
       {/* Credentials */}
-      <section data-testid="credentials-section" className="pb-32 px-6">
+      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div {...reveal}>
-            <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Credentials
-            </p>
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {credentials.map((cred, i) => (
+            {credentials.map((cred) => (
               <motion.div
-                key={i}
+                key={cred.title}
                 initial={reveal.initial}
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
                 className="rounded-2xl border p-5"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-                data-testid={`credential-${i}`}
+                data-testid={`credential-${cred.title.toLowerCase().replace(/[^\w]+/g, "-")}`}
               >
                 <span style={{ color: "var(--accent)" }}>{cred.icon}</span>
                 <h3 className="font-semibold text-sm mt-3">{cred.title}</h3>
@@ -122,18 +122,18 @@ export default function Skills() {
       </section>
 
       {/* Principles */}
-      <section data-testid="principles-section" className="pb-32 px-6">
+      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div {...reveal}>
-            <p className="font-mono text-xs tracking-widest uppercase mb-10" style={{ color: "var(--accent)" }}>
+            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Engineering Principles
-            </p>
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {principles.map((p, i) => (
               <motion.div
-                key={i}
+                key={p}
                 initial={reveal.initial}
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}

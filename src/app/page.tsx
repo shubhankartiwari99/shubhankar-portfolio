@@ -1,6 +1,3 @@
-"use client";
-
-import { useRecruiterMode } from "@/components/Providers";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
@@ -11,13 +8,11 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Page() {
-  const recruiterMode = useRecruiterMode();
-
   return (
     <main>
       <Hero />
-      <About recruiterMode={recruiterMode} />
-      <Experience recruiterMode={recruiterMode} />
+      <About />
+      <Experience />
       <Projects />
       <Skills />
       <Terminal />

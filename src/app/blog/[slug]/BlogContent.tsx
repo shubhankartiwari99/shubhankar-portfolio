@@ -85,17 +85,22 @@ export default function BlogContent({ content }: { content: string }) {
               {children}
             </blockquote>
           ),
-          a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 transition-colors duration-200"
-              style={{ color: "var(--accent)" }}
-            >
-              {children}
-            </a>
-          ),
+          a: ({ href, children }) => {
+            const safeHref = href ?? "";
+            const isExternal = /^https?:\/\//i.test(safeHref);
+
+            return (
+              <a
+                href={safeHref}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                className="underline underline-offset-2 transition-colors duration-200"
+                style={{ color: "var(--accent)" }}
+              >
+                {children}
+              </a>
+            );
+          },
           hr: () => (
             <hr className="my-8 border-0 h-px" style={{ background: "var(--border)" }} />
           ),
