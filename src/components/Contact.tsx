@@ -33,22 +33,22 @@ const actions = [
 
 export default function Contact() {
   return (
-    <section data-testid="contact-section" id="contact" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+    <section data-testid="contact-section" id="contact" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Get In Touch
           </h2>
         </motion.div>
 
-        <motion.div {...reveal} className="max-w-2xl">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+        <motion.div {...reveal} className="max-w-3xl">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
             Let&apos;s build something
             <br />
             <span style={{ color: "var(--accent)" }}>reliable</span> together.
           </h3>
 
-          <p className="mt-5 sm:mt-6 text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+          <p className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl leading-relaxed" style={{ color: "var(--muted)" }}>
             I&apos;m open to opportunities in backend systems, platform engineering, and applied AI.
             Whether it&apos;s a role, collaboration, or just a conversation about systems design &mdash;
             I&apos;d love to hear from you.
@@ -62,7 +62,7 @@ export default function Contact() {
                 target={action.href.startsWith("mailto") || action.href.startsWith("/") ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 data-testid={`contact-${action.label.toLowerCase().replace(/\s/g, "-")}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono rounded-full border transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm lg:text-base font-mono rounded-full border transition-colors duration-200"
                 style={{
                   background: action.primary ? "var(--accent)" : "transparent",
                   color: action.primary ? "var(--bg)" : "var(--muted)",

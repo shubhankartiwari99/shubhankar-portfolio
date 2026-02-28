@@ -17,8 +17,8 @@ export default function Projects() {
   const projects = getAllProjects();
 
   return (
-    <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+    <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Projects
@@ -41,7 +41,7 @@ export default function Projects() {
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
               data-testid={`project-card-${i}`}
             >
-              <div className={`relative overflow-hidden ${project.featured ? "h-48" : "h-36"}`}>
+              <div className={`relative overflow-hidden ${project.featured ? "h-48 lg:h-56" : "h-36 lg:h-40"}`}>
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -57,9 +57,9 @@ export default function Projects() {
                 />
               </div>
 
-              <div className="p-4 sm:p-6 -mt-8 relative">
+              <div className="p-4 sm:p-6 lg:p-7 -mt-8 relative">
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                  <h3 className="text-lg md:text-xl font-semibold" style={{ color: "var(--fg)" }}>
                     <Link
                       href={`/projects/${project.slug}`}
                       className="transition-colors duration-300 group-hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
@@ -96,7 +96,7 @@ export default function Projects() {
                     )}
                   </div>
                 </div>
-                <p className="text-sm mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p className="text-sm md:text-[15px] lg:text-base mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
                   {project.shortDescription}
                 </p>
                 <div className="flex items-center justify-between mt-4">
@@ -121,7 +121,7 @@ export default function Projects() {
                   </div>
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-xs font-mono flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
+                    className="text-xs lg:text-sm font-mono flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
                     style={{ color: "var(--accent)" }}
                   >
                     View details <ArrowRight size={12} />

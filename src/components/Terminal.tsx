@@ -165,8 +165,8 @@ export default function Terminal() {
   };
 
   return (
-    <section data-testid="terminal-section" id="terminal" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+    <section data-testid="terminal-section" id="terminal" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Interactive Terminal
@@ -200,7 +200,7 @@ export default function Terminal() {
           <div
             ref={scrollRef}
             data-testid="terminal-output"
-            className="p-4 font-mono text-xs sm:text-sm h-72 sm:h-80 overflow-y-auto cursor-text"
+            className="p-4 font-mono text-xs sm:text-sm lg:text-[15px] h-72 sm:h-80 lg:h-84 overflow-y-auto cursor-text"
             style={{ background: "#0c0c0e", color: "#a1a1aa" }}
             onClick={() => inputRef.current?.focus()}
           >
@@ -237,7 +237,7 @@ export default function Terminal() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none font-mono text-xs sm:text-sm caret-amber-400"
+                className="flex-1 bg-transparent outline-none font-mono text-xs sm:text-sm lg:text-[15px] caret-amber-400"
                 style={{ color: "#e4e4e7" }}
                 autoComplete="off"
                 spellCheck={false}
@@ -247,7 +247,7 @@ export default function Terminal() {
           </div>
         </motion.div>
 
-        <p className="font-mono text-xs mt-4 text-center" style={{ color: "var(--muted-fg)" }}>
+        <p className="font-mono text-xs lg:text-sm mt-4 text-center" style={{ color: "var(--muted-fg)" }}>
           Try: help, about, ls projects/, cat skills, neofetch
         </p>
       </div>

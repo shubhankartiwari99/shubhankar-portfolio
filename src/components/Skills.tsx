@@ -50,8 +50,8 @@ export default function Skills() {
   return (
     <>
       {/* Skills */}
-      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-        <div className="max-w-5xl mx-auto">
+      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+        <div className="max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Skills & Tools
@@ -66,13 +66,13 @@ export default function Skills() {
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
-                className="rounded-2xl border p-5"
+                className="rounded-2xl border p-5 lg:p-6"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
                 data-testid={`skill-group-${group.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span style={{ color: "var(--accent)" }}>{group.icon}</span>
-                  <h3 className="font-semibold text-sm">{group.title}</h3>
+                  <h3 className="font-semibold text-sm lg:text-base">{group.title}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
@@ -92,8 +92,8 @@ export default function Skills() {
       </section>
 
       {/* Credentials */}
-      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
-        <div className="max-w-5xl mx-auto">
+      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 xl:pb-36 px-5 sm:px-6">
+        <div className="max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Credentials
@@ -108,13 +108,13 @@ export default function Skills() {
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
-                className="rounded-2xl border p-5"
+                className="rounded-2xl border p-5 lg:p-6"
                 style={{ borderColor: "var(--border)", background: "var(--surface)" }}
                 data-testid={`credential-${cred.title.toLowerCase().replace(/[^\w]+/g, "-")}`}
               >
                 <span style={{ color: "var(--accent)" }}>{cred.icon}</span>
-                <h3 className="font-semibold text-sm mt-3">{cred.title}</h3>
-                <p className="text-xs font-mono mt-1" style={{ color: "var(--muted-fg)" }}>{cred.detail}</p>
+                <h3 className="font-semibold text-sm lg:text-base mt-3">{cred.title}</h3>
+                <p className="text-xs lg:text-sm font-mono mt-1" style={{ color: "var(--muted-fg)" }}>{cred.detail}</p>
               </motion.div>
             ))}
           </div>
@@ -122,8 +122,8 @@ export default function Skills() {
       </section>
 
       {/* Principles */}
-      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
-        <div className="max-w-5xl mx-auto">
+      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 xl:pb-36 px-5 sm:px-6">
+        <div className="max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Engineering Principles
@@ -138,7 +138,7 @@ export default function Skills() {
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
-                className="rounded-xl border p-5 font-mono text-sm"
+                className="rounded-xl border p-5 lg:p-6 font-mono text-sm lg:text-base"
                 style={{ color: "var(--muted)", borderColor: "var(--border)" }}
                 data-testid={`principle-${i}`}
               >

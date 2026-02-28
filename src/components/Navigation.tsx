@@ -133,7 +133,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
         borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
       }}
     >
-      <nav className="max-w-5xl mx-auto px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
+      <nav className="max-w-6xl mx-auto px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
         <Link
           href="/"
           data-testid="nav-logo"
@@ -150,7 +150,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
               key={s.id}
               data-testid={`nav-link-${s.id}`}
               onClick={() => navigateToSection(s.id)}
-              className="px-2.5 py-1 text-xs font-mono rounded-md transition-colors duration-200 cursor-pointer"
+              className="px-2.5 lg:px-3 py-1 text-xs lg:text-sm font-mono rounded-md transition-colors duration-200 cursor-pointer"
               style={{
                 color: activeSection === s.id ? "var(--accent)" : "var(--muted-fg)",
               }}
@@ -161,7 +161,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           <Link
             href="/blog"
             data-testid="nav-link-blog"
-            className="px-2.5 py-1 text-xs font-mono rounded-md transition-colors duration-200 flex items-center gap-1"
+            className="px-2.5 lg:px-3 py-1 text-xs lg:text-sm font-mono rounded-md transition-colors duration-200 flex items-center gap-1"
             style={{
               color: pathname.startsWith("/blog") ? "var(--accent)" : "var(--muted-fg)",
             }}
@@ -187,7 +187,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           <button
             data-testid="recruiter-mode-toggle"
             onClick={() => setRecruiterMode(!recruiterMode)}
-            className="hidden sm:inline-flex px-3 py-1.5 text-xs font-mono rounded-full border transition-colors duration-200 cursor-pointer"
+            className="hidden sm:inline-flex px-3 lg:px-3.5 py-1.5 text-xs lg:text-sm font-mono rounded-full border transition-colors duration-200 cursor-pointer"
             style={{
               background: recruiterMode ? "var(--accent)" : "transparent",
               color: recruiterMode ? "var(--bg)" : "var(--muted)",
@@ -202,7 +202,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
             target="_blank"
             rel="noopener noreferrer"
             data-testid="resume-link"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-full border transition-colors duration-200"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 text-xs lg:text-sm font-mono rounded-full border transition-colors duration-200"
             style={{ color: "var(--muted)", borderColor: "var(--border)" }}
           >
             <FileText size={12} />
@@ -248,7 +248,7 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <div className="max-w-5xl mx-auto flex flex-col gap-1">
+              <div className="max-w-6xl mx-auto flex flex-col gap-1">
                 {sections.map((s) => (
                   <button
                     key={`mobile-${s.id}`}

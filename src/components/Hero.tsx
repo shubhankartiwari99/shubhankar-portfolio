@@ -30,7 +30,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 -z-10 glow-accent" />
 
-      <div className="max-w-5xl mx-auto w-full">
+      <div className="max-w-6xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
-          className="mt-7 sm:mt-8 text-base sm:text-lg max-w-xl leading-relaxed"
+          className="mt-7 sm:mt-8 text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed"
           style={{ color: "var(--muted)" }}
         >
           I build backend systems that survive production.

@@ -21,8 +21,8 @@ export default function About() {
   const recruiterMode = useRecruiterMode();
 
   return (
-    <section data-testid="about-section" id="about" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+    <section data-testid="about-section" id="about" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             About
@@ -32,7 +32,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
           <motion.div {...reveal} className="md:col-span-2 space-y-5">
             {recruiterMode ? (
-              <ul className="list-disc pl-5 space-y-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+              <ul className="list-disc pl-5 space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
                 <li>3+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                 <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
                 <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
@@ -41,12 +41,12 @@ export default function About() {
               </ul>
             ) : (
               <>
-                <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed" style={{ color: "var(--muted)" }}>
                   I build backend systems that survive production. My work at Bank of America spans
                   API design, CI/CD pipelines, containerized deployments, and production incident triage
                   in enterprise fintech environments.
                 </p>
-                <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed" style={{ color: "var(--muted)" }}>
                   Outside of work, I&apos;m deep into machine learning and AI systems &mdash; ranked in the
                   top 5% on Kaggle as a Notebooks Expert, and currently building an Indian multilingual
                   LLM. I care about systems that are reliable, observable, and built to last.
@@ -63,7 +63,7 @@ export default function About() {
                 className="rounded-xl p-4 border transition-colors duration-300"
                 style={{ background: "var(--surface)", borderColor: "var(--border)" }}
               >
-                <div className="text-2xl font-bold" style={{ color: "var(--accent)" }}>{s.value}</div>
+                <div className="text-2xl lg:text-3xl font-bold" style={{ color: "var(--accent)" }}>{s.value}</div>
                 <div className="text-[11px] mt-1.5 font-mono leading-tight" style={{ color: "var(--muted-fg)" }}>{s.label}</div>
               </div>
             ))}

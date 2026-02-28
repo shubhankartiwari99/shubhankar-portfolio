@@ -56,8 +56,8 @@ export default function Experience() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section data-testid="experience-section" id="experience" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+    <section data-testid="experience-section" id="experience" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Experience
@@ -87,7 +87,7 @@ export default function Experience() {
               >
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold">{exp.title}</h3>
+                    <h3 className="text-lg md:text-xl font-semibold">{exp.title}</h3>
                     <span
                       className="font-mono text-xs px-2.5 py-0.5 rounded-full"
                       style={{ color: "var(--accent)", background: "var(--accent-dim)" }}
@@ -98,7 +98,7 @@ export default function Experience() {
                   <p className="text-sm mt-1 font-mono" style={{ color: "var(--muted-fg)" }}>
                     {exp.period} &middot; {exp.type}
                   </p>
-                  <p className="text-sm mt-3" style={{ color: "var(--muted)" }}>{exp.summary}</p>
+                  <p className="text-sm lg:text-base mt-3" style={{ color: "var(--muted)" }}>{exp.summary}</p>
                 </div>
                 <ChevronDown
                   size={18}
@@ -118,11 +118,11 @@ export default function Experience() {
                   style={{ borderTop: "1px solid var(--border)" }}
                 >
                   {recruiterMode ? (
-                    <ul className="list-disc pl-5 space-y-2 text-sm" style={{ color: "var(--muted)" }}>
+                    <ul className="list-disc pl-5 space-y-2 text-sm lg:text-base" style={{ color: "var(--muted)" }}>
                       {exp.bullets.map((b) => <li key={b}>{b}</li>)}
                     </ul>
                   ) : (
-                    <div className="space-y-3 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    <div className="space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
                       {exp.narrative.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                     </div>
                   )}
