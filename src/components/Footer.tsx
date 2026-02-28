@@ -21,7 +21,7 @@ const links = [
 export default function Footer() {
   return (
     <footer data-testid="footer" className="py-12 sm:py-14 md:py-16 px-5 sm:px-6 border-t" style={{ borderColor: "var(--border)" }}>
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="text-center sm:text-left">
           <p className="font-mono text-xs lg:text-sm" style={{ color: "var(--muted-fg)" }}>
             Shubhankar Tiwari &middot; {new Date().getFullYear()}

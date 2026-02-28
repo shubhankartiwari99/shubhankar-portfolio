@@ -17,8 +17,8 @@ export default function Projects() {
   const projects = getAllProjects();
 
   return (
-    <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
+      <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
             Projects

@@ -50,8 +50,8 @@ export default function Skills() {
   return (
     <>
       {/* Skills */}
-      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 xl:py-36 px-5 sm:px-6">
-        <div className="max-w-6xl mx-auto">
+      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Skills & Tools
@@ -92,8 +92,8 @@ export default function Skills() {
       </section>
 
       {/* Credentials */}
-      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 xl:pb-36 px-5 sm:px-6">
-        <div className="max-w-6xl mx-auto">
+      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Credentials
@@ -122,8 +122,8 @@ export default function Skills() {
       </section>
 
       {/* Principles */}
-      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 xl:pb-36 px-5 sm:px-6">
-        <div className="max-w-6xl mx-auto">
+      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
             <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
               Engineering Principles
