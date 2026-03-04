@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
-import { TerminalSquare } from "lucide-react";
+import { SquareTerminal as TerminalSquare } from "lucide-react";
 
 interface Line {
   type: "input" | "output" | "error" | "system";
