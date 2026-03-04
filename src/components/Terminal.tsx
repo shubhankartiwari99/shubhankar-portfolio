@@ -168,9 +168,7 @@ export default function Terminal() {
     <section data-testid="terminal-section" id="terminal" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <motion.div {...reveal}>
-          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-            Interactive Terminal
-          </h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-12">Interactive Terminal</h2>
         </motion.div>
 
         <motion.div

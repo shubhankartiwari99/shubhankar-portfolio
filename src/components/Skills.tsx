@@ -53,9 +53,7 @@ export default function Skills() {
       <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
         <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
-            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-              Skills & Tools
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12">Technical Arsenal</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -95,9 +93,7 @@ export default function Skills() {
       <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
         <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
-            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-              Credentials
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8">Credentials</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -125,9 +121,7 @@ export default function Skills() {
       <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
         <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
-            <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-              Engineering Principles
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8">Engineering Principles</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -3,29 +3,31 @@
 :root {
   --font-outfit: "Outfit", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-jetbrains-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bg: #09090b;
-  --fg: #fafafa;
-  --surface: #18181b;
-  --surface-hover: #27272a;
-  --border: #27272a;
-  --muted: #a1a1aa;
-  --muted-fg: #71717a;
-  --accent: #f59e0b;
-  --accent-hover: #fbbf24;
-  --accent-dim: rgba(245, 158, 11, 0.1);
+  --bg: #0a0e27;
+  --fg: #ffffff;
+  --surface: #131b3a;
+  --surface-hover: #1a2449;
+  --border: #1e2951;
+  --muted: #94a3b8;
+  --muted-fg: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-dim: rgba(59, 130, 246, 0.1);
+  --accent-glow: rgba(59, 130, 246, 0.3);
 }
 
 html.light {
-  --bg: #fafafa;
-  --fg: #18181b;
-  --surface: #ffffff;
-  --surface-hover: #f4f4f5;
-  --border: #e4e4e7;
-  --muted: #52525b;
-  --muted-fg: #a1a1aa;
-  --accent: #d97706;
-  --accent-hover: #b45309;
-  --accent-dim: rgba(217, 119, 6, 0.06);
+  --bg: #ffffff;
+  --fg: #0a0e27;
+  --surface: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --muted: #475569;
+  --muted-fg: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-dim: rgba(59, 130, 246, 0.06);
+  --accent-glow: rgba(59, 130, 246, 0.2);
 }
 
 @theme inline {
@@ -69,7 +71,7 @@ body {
 }
 
 ::selection {
-  background: rgba(245, 158, 11, 0.3);
+  background: rgba(59, 130, 246, 0.3);
 }
 
 ::-webkit-scrollbar {

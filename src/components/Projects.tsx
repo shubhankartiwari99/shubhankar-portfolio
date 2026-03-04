@@ -19,10 +19,21 @@ export default function Projects() {
   return (
     <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
-        <motion.div {...reveal}>
-          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-            Projects
-          </h2>
+        <motion.div {...reveal} className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Featured Work</h2>
+            <p className="text-base" style={{ color: "var(--muted)" }}>
+              Selected projects and experiments
+            </p>
+          </div>
+          <Link
+            href="/#projects"
+            className="text-sm font-medium hidden sm:flex items-center gap-1.5 transition-colors duration-200"
+            style={{ color: "var(--accent)" }}
+          >
+            View All Projects
+            <ArrowRight size={14} />
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

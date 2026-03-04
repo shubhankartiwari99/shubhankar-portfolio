@@ -8,7 +8,6 @@ import Link from "next/link";
 
 const sections = [
   { id: "about", label: "About" },
-  { id: "experience", label: "Work" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "terminal", label: "Terminal" },

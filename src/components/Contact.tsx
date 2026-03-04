@@ -33,61 +33,66 @@ const actions = [
 
 export default function Contact() {
   return (
-    <section data-testid="contact-section" id="contact" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
+    <section data-testid="contact-section" id="contact" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 text-center">
+      <div className="max-w-4xl mx-auto">
         <motion.div {...reveal}>
-          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
-            Get In Touch
-          </h2>
-        </motion.div>
-
-        <motion.div {...reveal} className="max-w-3xl">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight leading-tight mb-6">
             Let&apos;s build something
             <br />
-            <span style={{ color: "var(--accent)" }}>reliable</span> together.
-          </h3>
+            <span style={{ color: "var(--accent)" }}>reliable</span> together
+          </h2>
 
-          <p className="mt-5 sm:mt-6 text-base sm:text-lg xl:text-xl leading-relaxed" style={{ color: "var(--muted)" }}>
+          <p className="mt-6 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "var(--muted)" }}>
             I&apos;m open to opportunities in backend systems, platform engineering, and applied AI.
-            Whether it&apos;s a role, collaboration, or just a conversation about systems design &mdash;
-            I&apos;d love to hear from you.
+            Whether it&apos;s a role or collaboration — I&apos;d love to connect.
           </p>
 
-          <div className="mt-8 sm:mt-10 flex flex-wrap gap-2.5 sm:gap-3">
-            {actions.map((action) => (
-              <a
-                key={action.label}
-                href={action.href}
-                target={action.href.startsWith("mailto") || action.href.startsWith("/") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                data-testid={`contact-${action.label.toLowerCase().replace(/\s/g, "-")}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono rounded-full border transition-colors duration-200"
-                style={{
-                  background: action.primary ? "var(--accent)" : "transparent",
-                  color: action.primary ? "var(--bg)" : "var(--muted)",
-                  borderColor: action.primary ? "var(--accent)" : "var(--border)",
-                }}
-                onMouseEnter={(e) => {
-                  if (!action.primary) {
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!action.primary) {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.color = "var(--muted)";
-                  }
-                }}
-              >
-                {action.icon}
-                {action.label}
-              </a>
-            ))}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <a
+              href="mailto:tiwarishubhankar@gmail.com"
+              data-testid="contact-email-me"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300"
+              style={{
+                background: "var(--accent)",
+                color: "var(--bg)",
+                boxShadow: "0 0 20px var(--accent-glow)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 30px var(--accent-glow)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 20px var(--accent-glow)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Get in touch
+            </a>
+
+            <a
+              href="/Shubhankar_Tiwari_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="contact-resume"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg border transition-all duration-300"
+              style={{
+                borderColor: "var(--border)",
+                color: "var(--fg)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--accent)";
+                e.currentTarget.style.color = "var(--accent)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.color = "var(--fg)";
+              }}
+            >
+              Download Resume
+            </a>
           </div>
 
-          <p className="mt-8 font-mono text-sm" style={{ color: "var(--muted-fg)" }}>
+          <p className="mt-10 font-mono text-sm" style={{ color: "var(--muted-fg)" }}>
             tiwarishubhankar@gmail.com
           </p>
         </motion.div>
