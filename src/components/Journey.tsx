@@ -28,8 +28,8 @@ const milestones = [
   {
     icon: <Trophy size={20} />,
     title: "Kaggle Expert",
-    subtitle: "Top 5% Globally",
-    description: "Notebooks Expert ranked #2,913 out of 59,240. Published 33 notebooks on ML, Deep Learning, and Computer Vision. 9 bronze medals.",
+    subtitle: "Top 4.1% Globally",
+    description: "Notebooks Expert ranked #2,442 out of 59,657. Published 33 notebooks on ML, Deep Learning, and Computer Vision. 9 bronze medals.",
     year: "2022-Present",
   },
 ];
@@ -117,7 +117,7 @@ export default function Journey() {
               <h3 className="font-semibold">Competitive ML</h3>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              Outside of work, I sharpen my skills through Kaggle. Ranked in the top 5% globally,
+              Outside of work, I sharpen my skills through Kaggle. Ranked in the top 4.1% globally,
               I explore ML, deep learning, and computer vision through hands-on projects.
             </p>
           </motion.div>

@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { useRecruiterMode } from "./Providers";
 
 const stats = [
-  { value: "3+", label: "Years Experience" },
-  { value: "#2,913", label: "Kaggle Rank / 59K" },
+  { value: "4+", label: "Years Experience" },
+  { value: "#2,442", label: "Kaggle Rank / 59.7K" },
   { value: "94.4%", label: "B.Tech GPA" },
   { value: "33", label: "Kaggle Notebooks" },
 ];
@@ -33,11 +33,11 @@ export default function About() {
           <motion.div {...reveal} className="md:col-span-2 space-y-5">
             {recruiterMode ? (
               <ul className="list-disc pl-5 space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
-                <li>3+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
+                <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                 <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
                 <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
-                <li>Kaggle Notebooks Expert (Rank 2,913 / 59,240) with certifications in ML, Deep Learning & Computer Vision</li>
-                <li>Active in applied AI &mdash; building an Indian Multilingual LLM inference system</li>
+                <li>Kaggle Notebooks Expert (Rank #2,442 / 59,657) with certifications in ML, Deep Learning & Computer Vision</li>
+                <li>Active in applied AI &mdash; researching LLM behavioral reliability</li>
               </ul>
             ) : (
               <>
@@ -47,9 +47,10 @@ export default function About() {
                   in enterprise fintech environments.
                 </p>
                 <p className="text-base sm:text-lg xl:text-xl leading-relaxed" style={{ color: "var(--muted)" }}>
-                  Outside of work, I&apos;m deep into machine learning and AI systems &mdash; ranked in the
-                  top 5% on Kaggle as a Notebooks Expert, and currently building an Indian multilingual
-                  LLM. I care about systems that are reliable, observable, and built to last.
+                  Outside of work, I'm deep into machine learning and AI systems — ranked in the top 4.1%
+ on Kaggle as a Notebooks Expert, and currently researching LLM behavioral reliability:
+ building evaluation infrastructure that measures whether a model is trustworthy enough
+ to deploy, not just whether it can get the right answer once.
                 </p>
               </>
             )}

@@ -11,7 +11,7 @@ const reveal = {
 };
 
 const stats = [
-  { value: "3+ Years", label: "Production Experience" },
+  { value: "4+ Years", label: "Production Experience" },
   { value: "Kaggle", label: "Notebooks Expert" },
 ];
 

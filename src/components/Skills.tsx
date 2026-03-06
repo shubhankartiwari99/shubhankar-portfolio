@@ -27,7 +27,7 @@ const skillGroups = [
 ];
 
 const credentials = [
-  { icon: <Award size={16} />, title: "Kaggle Notebooks Expert", detail: "Rank 2,913 / 59,240 \u00B7 9 Bronze Medals" },
+  { icon: <Award size={16} />, title: "Kaggle Notebooks Expert", detail: "Rank 2,442 / 59,657 \u00B7 9 Bronze Medals" },
   { icon: <GraduationCap size={16} />, title: "B.Tech CSE \u2014 SRM IST", detail: "94.4% GPA \u00B7 2018\u20132022" },
   { icon: <Award size={16} />, title: "ML, Deep Learning, CV", detail: "Kaggle Certified \u00B7 2025" },
 ];

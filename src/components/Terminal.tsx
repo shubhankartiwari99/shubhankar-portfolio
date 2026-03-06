@@ -24,9 +24,9 @@ const COMMANDS: Record<string, string | (() => string)> = {
   about: `> Shubhankar Tiwari
   Software Engineer I A @ Bank of America (2022-Present)
   Building production-grade backend systems for enterprise fintech.
-  Kaggle Notebooks Expert (Rank #2,913 / 59,240)
+  Kaggle Notebooks Expert (Rank #2,442 / 59,657)
   B.Tech CSE, SRM IST, Chennai (94.4% GPA)
-  Exploring applied AI & building Indian Multilingual LLM.`,
+  Researching LLM behavioral reliability & evaluation infrastructure.`,
 
   experience: `  [1] Software Engineer I A -- Bank of America
       Apr 2022 - Present | Backend / Platform Engineering
@@ -36,15 +36,17 @@ const COMMANDS: Record<string, string | (() => string)> = {
       Aug 2021 - Mar 2022 | Full-Stack Development
       Java, JavaScript, Python, Agile`,
 
-  "ls projects/": `  drwxr-xr-x  indian-desi-llm/       Multilingual LLM inference + persona safety CI
-  drwxr-xr-x  song-recommender/      ML playlist gen based on heart rate (BPM)
-  drwxr-xr-x  kaggle-portfolio/      33 notebooks | 10 datasets | 3 models`,
+  "ls projects/": `  drwxr-xr-x  llm-reliability-platform/  Monte Carlo LLM eval — 310 inferences, Qwen 2.5-7B
+  drwxr-xr-x  indian-desi-llm/           Multilingual LLM training pipeline (6 notebooks)
+  drwxr-xr-x  song-recommender/          ML playlist gen via BPM + VADER sentiment
+  drwxr-xr-x  kaggle-portfolio/          33 notebooks | #2,442 rank | 9 bronze medals`,
 
   "cat skills": `{
   "backend":  ["Java", "Spring Boot", "Microservices", "REST APIs", "System Design"],
   "data":     ["Oracle SQL", "TOAD", "Data Modeling", "Query Optimization"],
   "devops":   ["OpenShift", "Jenkins", "CI/CD", "Containerization"],
-  "ml_ai":    ["Python", "ML", "Deep Learning", "Computer Vision", "NLP", "LLMs"]
+  "ml_ai":    ["Python", "ML", "Deep Learning", "CV", "NLP", "LLMs", "LoRA", "HuggingFace"],
+  "llm_eval": ["Monte Carlo Sampling", "sentence-transformers", "DBSCAN", "FastAPI", "Next.js"]
 }`,
 
   contact: `  Email:    tiwarishubhankar@gmail.com

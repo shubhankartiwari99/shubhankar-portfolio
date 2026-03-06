@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Shubhankar Tiwari | Software Engineer - Backend Systems & Applied AI",
   description:
-    "Software Engineer at Bank of America building production fintech systems. Kaggle Notebooks Expert. Exploring applied AI and distributed systems.",
+    "Software Engineer at Bank of America building production fintech systems. Kaggle Notebooks Expert (#2,442). Researching LLM behavioral reliability and evaluation infrastructure.",
   metadataBase: new URL("https://shubhankartiwari.vercel.app"),
   alternates: {
     types: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shubhankar Tiwari - Systems Engineer",
     description:
-      "Backend systems engineer at Bank of America. Kaggle Notebooks Expert. Building production-grade fintech infrastructure.",
+      "Backend systems engineer at Bank of America. Kaggle Notebooks Expert (#2,442). Researching LLM behavioral reliability evaluation.",
     url: "https://shubhankartiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
     images: [{ url: "/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari" }],
@@ -69,7 +69,7 @@ const jsonLd = {
     "CI/CD", "Machine Learning", "Deep Learning", "Python", "SQL",
   ],
   description:
-    "Software Engineer with 3+ years of experience building production-grade backend systems for enterprise fintech. Kaggle Notebooks Expert.",
+    "Software Engineer with 4+ years of experience building production-grade backend systems for enterprise fintech. Kaggle Notebooks Expert (#2,442 / 59,657).",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
