@@ -110,6 +110,33 @@ export default function Projects() {
                 <p className="text-sm md:text-[15px] lg:text-base mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
                   {project.shortDescription}
                 </p>
+
+                {project.featured && project.slug === "llm-reliability-evaluation-platform" && (
+                  <div
+                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
+                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
+                  >
+                    {[
+                      { label: "Temp. effect", value: "≈ 0.000", color: "var(--accent)" },
+                      { label: "Null gen. rate", value: "11.8%", color: "#f87171" },
+                      { label: "Coding instability", value: "0.293", color: "#f87171" },
+                      { label: "Escalation rate", value: "84.7%", color: "var(--amber, #f59e0b)" },
+                    ].map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="px-3 py-2.5"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
+                          {stat.value}
+                        </div>
+                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex flex-wrap gap-2">
                     {project.tags.slice(0, 3).map((tag) => (

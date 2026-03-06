@@ -7,13 +7,15 @@ export default function Hero() {
   return (
     <section data-testid="hero-section" className="min-h-screen flex flex-col justify-center relative px-5 sm:px-6 overflow-hidden">
       <div
-        className="absolute inset-0 -z-10 dot-grid opacity-20"
+        className="absolute inset-0 -z-10 opacity-[0.07]"
         style={{
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 70%)",
+          backgroundImage:
+            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 20%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, black 20%, transparent 75%)",
         }}
       />
-
       <div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] -z-10"
         style={{

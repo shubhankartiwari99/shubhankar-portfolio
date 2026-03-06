@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Outfit, JetBrains_Mono } from "next/font/google";
+import { Syne, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -95,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${syne.variable} ${jetbrainsMono.variable} antialiased`}>
         <Providers>
           {children}
         </Providers>
