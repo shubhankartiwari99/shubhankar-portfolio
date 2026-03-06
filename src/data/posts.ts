@@ -255,7 +255,7 @@ If you're working on multilingual AI systems, I'd love to connect. Reach out at 
   },
   {
     slug: "top-5-percent-kaggle-lessons",
-    title: "Top 5% on Kaggle: Lessons That Transferred to Production",
+    title: "Top 4.1% on Kaggle: Lessons That Transferred to Production",
     date: "2025-10-08",
     tags: ["ML", "Kaggle", "Data Science"],
     excerpt:

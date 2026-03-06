@@ -29,7 +29,7 @@ const milestones = [
     icon: <Trophy size={20} />,
     title: "Kaggle Expert",
     subtitle: "Top 4.1% Globally",
-    description: "Notebooks Expert ranked #2,442 out of 59,657. Published 33 notebooks on ML, Deep Learning, and Computer Vision. 9 bronze medals.",
+    description: "Notebooks Expert ranked #2,441 out of 59,663. Published 34 notebooks on ML, Deep Learning, and Computer Vision. 10 bronze medals.",
     year: "2022-Present",
   },
 ];

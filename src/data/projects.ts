@@ -154,10 +154,10 @@ Billboard Top 100 lyrics were extracted via the Genius API, sentiment scores com
     slug: "kaggle-portfolio",
     title: "Kaggle Portfolio",
     shortDescription:
-      "Notebooks Expert rank #2,442 / 59,657 — personal best #707. 33 notebooks, 10 datasets, 9 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
+      "Notebooks Expert rank #2,441 / 59,663 — personal best #707. 34 notebooks, 11 datasets, 3 models, 1 competition entry. 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
     fullDescription: `My Kaggle journey spanning machine learning, deep learning, NLP, and computer vision. Achieved Notebooks Expert status through consistent contributions and community engagement.
 
-Early in my career I pushed notebooks consistently across domains — regression, classification, NLP, CV — and reached a personal best rank of #707. After joining Bank of America in 2022 I shifted focus to production engineering. Returning to active Kaggle work in 2025 alongside the Indian multilingual LLM research, current rank is #2,442 out of 59,657.
+Early in my career I pushed notebooks consistently across domains — regression, classification, NLP, CV — and reached a personal best rank of #707. After joining Bank of America in 2022 I shifted focus to production engineering. Returning to active Kaggle work in 2025 alongside the Indian multilingual LLM research, current rank is #2,441 out of 59,663.
 
 The portfolio includes exploratory data analysis, model implementations, and educational notebooks across the full ML stack. The LLM reliability benchmark research is the most recent published work.`,
     tags: ["Data Science", "ML", "Deep Learning", "NLP", "CV"],
@@ -167,9 +167,11 @@ The portfolio includes exploratory data analysis, model implementations, and edu
     status: "Active",
     year: "2020-Present",
     highlights: [
-      "Notebooks Expert — current rank #2,442 / 59,657 | personal best #707",
-      "33 published notebooks with 9 bronze medals",
-      "10 datasets contributed to the community",
+      "Notebooks Expert — current rank #2,441 / 59,663 | personal best #707",
+      "34 published notebooks with 10 bronze medals",
+      "11 datasets contributed to the community",
+      "1 competition entry",
+      "3 models published",
       "Most recent: Qwen 2.5-7B reliability benchmark research report (2026)",
       "6-notebook Indian multilingual LLM training pipeline (2025)",
       "Certified in ML, Deep Learning, and Computer Vision",

@@ -5,9 +5,9 @@ import { useRecruiterMode } from "./Providers";
 
 const stats = [
   { value: "4+", label: "Years Experience" },
-  { value: "#2,442", label: "Kaggle Rank / 59.7K" },
+  { value: "#2,441", label: "Kaggle Rank / 59.7K" },
   { value: "94.4%", label: "B.Tech GPA" },
-  { value: "33", label: "Kaggle Notebooks" },
+  { value: "34", label: "Kaggle Notebooks" },
 ];
 
 const reveal = {
@@ -36,7 +36,7 @@ export default function About() {
                 <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                 <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
                 <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
-                <li>Kaggle Notebooks Expert (Rank #2,442 / 59,657) with certifications in ML, Deep Learning & Computer Vision</li>
+                <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning & Computer Vision</li>
                 <li>Active in applied AI &mdash; researching LLM behavioral reliability</li>
               </ul>
             ) : (

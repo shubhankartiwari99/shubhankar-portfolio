@@ -24,7 +24,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
   about: `> Shubhankar Tiwari
   Software Engineer I A @ Bank of America (2022-Present)
   Building production-grade backend systems for enterprise fintech.
-  Kaggle Notebooks Expert (Rank #2,442 / 59,657)
+  Kaggle Notebooks Expert (Rank #2,441 / 59,663)
   B.Tech CSE, SRM IST, Chennai (94.4% GPA)
   Researching LLM behavioral reliability & evaluation infrastructure.`,
 
@@ -39,7 +39,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
   "ls projects/": `  drwxr-xr-x  llm-reliability-platform/  Monte Carlo LLM eval — 310 inferences, Qwen 2.5-7B
   drwxr-xr-x  indian-desi-llm/           Multilingual LLM training pipeline (6 notebooks)
   drwxr-xr-x  song-recommender/          ML playlist gen via BPM + VADER sentiment
-  drwxr-xr-x  kaggle-portfolio/          33 notebooks | #2,442 rank | 9 bronze medals`,
+  drwxr-xr-x  kaggle-portfolio/          34 notebooks | #2,441 rank | 10 bronze medals`,
 
   "cat skills": `{
   "backend":  ["Java", "Spring Boot", "Microservices", "REST APIs", "System Design"],
