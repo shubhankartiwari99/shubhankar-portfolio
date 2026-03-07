@@ -37,7 +37,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl max-w-2xl leading-relaxed mb-10" style={{ color: "var(--muted)" }}>
-            I architect and build backend systems that scale without friction
+            I build backend systems that hold in production — and evaluate whether AI ones will too.
           </p>
         </motion.div>
 
