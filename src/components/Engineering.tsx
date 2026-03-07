@@ -23,15 +23,15 @@ export default function Engineering() {
           <motion.div {...reveal}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">Engineering at Scale</h2>
             <p className="text-base leading-relaxed mb-8" style={{ color: "var(--muted)" }}>
-              Currently at Bank of America, I design and maintain critical
-              backend infrastructure that processes millions of transactions. My work centers
-              on building systems that are observable, resilient, and maintainable — because
-              production incidents don't wait for business hours.
+              At Bank of America I work on backend systems that process real financial
+              transactions. My job isn't just writing code — it's release validation,
+              production triage, and being accountable when a deployment goes wrong at
+              an inconvenient hour.
             </p>
             <p className="text-base leading-relaxed mb-10" style={{ color: "var(--muted)" }}>
-              Beyond just writing code, I drive release validation, lead production triage,
-              and ensure that our microservices architecture can withstand the unpredictability
-              of real-world usage at enterprise scale.
+              I've been doing this for four years. The thing that changes is your relationship
+              with failure. You stop being surprised by it and start building systems that
+              tell you clearly when and why they're failing.
             </p>
 
             <div className="grid grid-cols-2 gap-4">

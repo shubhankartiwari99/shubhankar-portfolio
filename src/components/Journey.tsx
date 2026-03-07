@@ -22,7 +22,7 @@ const milestones = [
     icon: <Briefcase size={20} />,
     title: "Software Engineer",
     subtitle: "Bank of America",
-    description: "Building production-grade backend systems for enterprise fintech. Owning microservices from design to deployment. Leading incident response and ensuring system reliability.",
+    description: "Building and maintaining Java backend systems for corporate banking. I own the full lifecycle — design, CI/CD, deployments, and being on-call when something breaks. Four years of that teaches you things about software that writing code in isolation doesn't.",
     year: "2022-Present",
   },
   {
@@ -41,10 +41,10 @@ export default function Journey() {
         <motion.div {...reveal}>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">My Journey</h2>
           <p className="text-lg max-w-3xl leading-relaxed" style={{ color: "var(--muted)" }}>
-            I started as a curious undergrad and have evolved into a backend systems engineer.
-            My career has been defined by a relentless focus on building reliable systems,
-            owning production incidents, and constantly learning through challenging problems —
-            both at work and through competitive machine learning.
+            I went from curious undergrad to backend engineer at Bank of America. The path
+            wasn't linear — four years of production systems, a Kaggle Expert rank, and now
+            building evaluation infrastructure for LLMs. Each of those things informed the
+            others more than I expected.
           </p>
         </motion.div>
 

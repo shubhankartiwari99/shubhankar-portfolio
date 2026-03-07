@@ -11,112 +11,86 @@ export interface Post {
 export const posts: Post[] = [
 {
   slug: "why-i-stopped-building-an-llm-and-started-evaluating-one",
-  title: "Why I Stopped Building an Indian Multilingual LLM and Started Evaluating One Instead",
+  title: "I built the wrong thing. Here's what I found instead.",
   date: "2026-03-01",
   tags: ["AI", "LLM", "Reliability", "Python", "Research"],
   excerpt:
     "I built the full training pipeline. Then Sarvam AI happened. Here's why I pivoted toward behavioral reliability evaluation — and what I found when I ran 310 inferences through Qwen 2.5-7B.",
   readTime: "9 min read",
   content: `
-A few months ago — late December 2025 — I started building what I thought would be a meaningful project: a multilingual LLM fine-tuned specifically for Indian conversational patterns — Hindi, English, and the code-switched hybrid that most Indians actually speak in.
+Late December 2025, I started building what I was pretty convinced would be a genuinely useful project — a multilingual LLM fine-tuned for Indian conversational patterns. Hindi, English, and the code-switched Hinglish hybrid that's actually how most people I know communicate.
 
-The idea made sense. Most open-source LLMs are overwhelmingly trained on English data. They handle formal Hindi reasonably well but fall apart on the kind of casual, culturally-grounded conversation that's actually representative of how 1.4 billion people communicate. There was a real gap.
+The gap was real. Most open-source models handle formal Hindi okay but fall apart on casual, culturally-grounded conversation. I'd seen it firsthand. It felt like a tractable problem with nobody squarely working on it at the open-source level.
 
-I built the full pipeline. Dataset curation from three complementary sources. Tokenisation. LoRA adapter initialisation. Fine-tuning on a Kaggle T4 GPU. Inference evaluation. Deployment packaging. Six notebooks, clean end-to-end.
+So I built the full pipeline. Dataset curation from three sources. Tokenisation. LoRA adapter init. Fine-tuning on a Kaggle T4. Inference evaluation. Deployment packaging. Six notebooks, clean end-to-end. I was proud of it.
 
-Then Sarvam AI happened.
+Then I looked up and Sarvam AI had been quietly doing the same thing — at 10x the scale, with a dedicated research team, for longer than I had. By the time my training pipeline was stable, the space had already moved.
 
-They'd been quietly working on the same problem at a much larger scale, with much more compute, and a team of researchers who'd been thinking about Indian language AI longer than I had. By the time my training pipeline was stable, the space I was entering had already been significantly advanced by people better resourced to advance it.
-
-I had a choice: continue building something that was now clearly a follower project, or find the more interesting problem hiding inside what I'd already built.
-
-## The Problem Nobody Was Solving
-
-While debugging my fine-tuned model's outputs, I kept noticing something that bothered me.
-
-The model would give a reasonable answer to a question on one run. Run the exact same prompt at the exact same temperature setting, and the answer would be subtly different — sometimes meaningfully different. Run it five times and you'd get five outputs that, while individually plausible, were semantically inconsistent with each other.
-
-This wasn't a failure mode that showed up in standard benchmarks. MMLU, HumanEval, ROUGE scores — all of these evaluate accuracy on a single inference pass. They tell you whether a model *can* produce the right answer. They don't tell you whether it *reliably* produces consistent answers.
-
-For a model going into production — particularly in a high-stakes domain like financial services or healthcare — that distinction matters enormously. A model that's right 85% of the time but inconsistent in *which* 15% it gets wrong is a fundamentally different deployment risk than one with predictable, characterisable failure modes.
-
-Nobody was measuring this. Not systematically. Not for open-source 7B-class models. Not with a tool that could give you actionable reliability signals rather than just accuracy numbers.
-
-So I built one.
-
-## What I Built
-
-The AI Reliability Evaluation Platform is a production-grade system for measuring LLM behavioral consistency — how stable a model's outputs are across independent inference runs on identical inputs.
-
-The core idea is Monte Carlo sampling. Instead of running a prompt once and checking if the answer is correct, I run it five times at identical settings and measure how different the outputs are from each other. The degree of semantic divergence across those samples is what I call *instability* — and it turns out to be a much more useful signal than single-pass accuracy for understanding how a model will behave in production.
-
-The technical stack: a Next.js dashboard for the frontend, FastAPI backend serving Qwen 2.5-7B-Instruct on a Kaggle T4 GPU, sentence-transformers for embedding-based semantic comparison, and DBSCAN clustering to group semantically similar outputs. The backend computes instability, confidence, entropy, semantic dispersion, and cluster metrics for each inference. The frontend aggregates these in real-time as batches complete, building up a live picture of model reliability across a sweep of temperature settings.
-
-I designed a benchmark dataset of 62 original prompts across five categories — factual recall, mathematical reasoning, logical reasoning, code generation, and creative writing — with three difficulty levels each. Each prompt was evaluated at five temperature settings (0.1 through 0.9), giving 310 total inference calls. The full benchmark run took about two and a half hours on a T4 GPU.
-
-## What I Found
-
-The results were more interesting than I expected.
-
-**Temperature is not a reliability control knob.**
-
-The most common advice for making LLM outputs more deterministic is to lower the temperature. Lower temperature = less randomness = more consistent outputs. That's the conventional wisdom.
-
-It's wrong for Qwen 2.5-7B, at least within the 0.1–0.9 range.
-
-Instability across temperature settings showed a variance of less than 0.001. The stability curves across all five categories were essentially flat. The model's output variance is not temperature-driven — it's prompt-complexity-driven. A hard prompt at temperature 0.1 is just as unstable as the same prompt at temperature 0.9.
-
-This has real implications for anyone deploying this model and assuming temperature is a lever for reliability. It isn't.
-
-**Coding is the least reliable category.**
-
-Qwen 2.5-7B is marketed as a strong coding model. In my evaluation, coding ranked last in reliability — instability of 0.293 and confidence of 0.485, both significantly worse than factual recall (0.205 instability, 0.655 confidence) and reasoning (0.199 instability, 0.645 confidence).
-
-This doesn't necessarily mean the model produces wrong code. It means the model produces *inconsistent* code — different implementations, different variable names, different approaches across Monte Carlo samples on the same prompt. For a production coding assistant where users expect reproducible suggestions, that's a meaningful failure mode.
-
-**11.8% of inferences produced zero output tokens.**
-
-This one surprised me most. Nearly one in eight inference calls returned an empty response — the model simply failed to generate anything. This is a silent failure mode. No error, no exception, just nothing. In a deployed system, that means a user gets a blank response with no indication that something went wrong.
-
-**84.7% escalation rate overall.**
-
-The platform flags an inference as escalated when uncertainty exceeds a threshold — meaning the model's outputs across MC samples diverged enough to warrant concern. 144 out of 170 inferences triggered this flag.
-
-That sounds alarming, and in some contexts it should be. But it's also an artefact of my benchmark design — the prompts were deliberately chosen to stress-test known failure modes. The point isn't that Qwen is unreliable for all uses. The point is that the evaluation infrastructure correctly identifies and quantifies the failure modes it was designed to find.
-
-## The Harder Finding
-
-The most unstable prompt in my entire dataset was: *"Name the three primary components of a transformer neural network architecture."*
-
-This is a factual question with a definitive, well-established answer. It's not ambiguous. It doesn't require reasoning or creativity. And yet it produced instability scores of 0.614–0.654 across three different temperature settings — the highest in the dataset.
-
-What this tells you is that Qwen 2.5-7B has unreliable self-knowledge about its own architectural domain. The model that is itself a transformer architecture cannot consistently describe what a transformer is. It hallucinates, it contradicts itself across samples, it produces semantically divergent outputs on a question it should be most equipped to answer.
-
-That's not a benchmark result. That's a reliability finding with real deployment implications.
-
-## Why This Matters
-
-The standard narrative around LLM evaluation goes: run the model on a benchmark, get a score, compare scores across models. Higher score = better model.
-
-That framing is useful for research but insufficient for production. What matters in production is not whether your model can get the right answer — it's whether your model *reliably* gets the right answer, fails predictably when it doesn't, and gives you enough signal to know which situation you're in.
-
-Behavioral consistency evaluation — measuring stability across inference runs rather than accuracy on single runs — is a more deployment-relevant signal. And it's one that the field hasn't standardised around yet.
-
-That's the gap this platform addresses. Not a new model. Not a fine-tuning recipe. Infrastructure for understanding whether an existing model is trustworthy enough to deploy in the first place.
-
-## What's Next
-
-The 170-inference run used Qwen 2.5-7B exclusively. The more interesting research involves running the same benchmark across multiple models — comparing how different architectures and training regimes handle the same prompts, at the same temperature settings, on the same evaluation criteria.
-
-The entropy calculation also needs a clean rerun — a frontend mapping bug caused entropy to be zeroed out in the first dataset, which is now fixed and will be verified in the next full run.
-
-The research arc goes: build a model → recognise the evaluation gap → build the evaluation infrastructure → publish findings → apply findings to high-stakes deployment context.
-
-That's the project. It's still running.
+I had a decision to make.
 
 ---
 
-*The benchmark dataset and research analysis notebook are published on Kaggle.*
+I could keep going. Plenty of people build things that already exist and still get value from it. But I kept coming back to something I'd noticed while debugging my model's outputs — something that bothered me more than the Sarvam situation.
+
+The model would answer a question on one run. Run the same prompt at the same temperature, same everything, and the answer would be slightly different. Run it five times and you'd get five outputs that were individually plausible but semantically inconsistent with each other.
+
+None of the standard benchmarks catch this. MMLU, HumanEval, ROUGE — they all evaluate on a single inference pass. They tell you whether a model *can* produce the right answer. They say nothing about whether it does so *reliably*, or whether the wrong answers are at least predictable.
+
+That distinction doesn't matter much for research leaderboards. It matters a lot if you're deploying the thing.
+
+I couldn't find tooling that measured this systematically. Not for 7B-class models. Not with output granular enough to be actionable. So I built it instead.
+
+---
+
+The platform uses Monte Carlo sampling — run each prompt five times, measure how semantically different the outputs are from each other. That divergence score is what I'm calling instability. It's a different signal from accuracy. You can have a model that's accurate on average but wildly inconsistent in *which* prompts it handles well. That's a different kind of broken.
+
+Stack: Next.js dashboard, FastAPI backend on a Kaggle T4, sentence-transformers for semantic comparison, DBSCAN to cluster similar outputs. The benchmark was 62 prompts I wrote myself, across factual recall, math, logical reasoning, code generation, and creative writing, at three difficulty levels each. Five temperature settings per prompt. 310 inference calls total, about two and a half hours on the GPU.
+
+Here's what I found.
+
+---
+
+**Temperature is basically irrelevant to consistency.**
+
+This one surprised me because the conventional wisdom is pretty strong: lower temperature = more deterministic outputs. It's in every LLM deployment guide.
+
+For Qwen 2.5-7B, across the 0.1–0.9 range, the instability variance was less than 0.001. The curves were flat. The model is not more or less consistent at different temperatures — it's consistent or inconsistent based on the prompt itself. A hard prompt at temperature 0.1 is just as unstable as the same prompt at 0.9.
+
+If you're deploying this model and you're relying on low temperature to manage reliability, you're pulling a lever that isn't connected to anything.
+
+**Coding is the least reliable category, which is awkward given the marketing.**
+
+Qwen 2.5-7B is sold partly as a strong coding model. In my benchmark it ranked last — instability of 0.293 versus 0.205 for factual recall and 0.199 for reasoning. Confidence scores similarly worse.
+
+This doesn't necessarily mean wrong code. It means *inconsistent* code. Different implementations, different variable names, different structural approaches on the same prompt across five runs. For a coding assistant where developers expect reproducible suggestions, that's a genuine problem.
+
+**11.8% silent failures.**
+
+Nearly one in eight inference calls returned zero output tokens. No error. No exception. Just nothing. The model simply didn't generate anything.
+
+In a production system that means a blank response with no signal to the user or the application that something went wrong. Silent failures are worse than loud ones. At least loud ones are catchable.
+
+**The hardest finding wasn't in the numbers.**
+
+The single most unstable prompt in my entire dataset was: *"Name the three primary components of a transformer neural network architecture."*
+
+Definitive answer. Not ambiguous. No reasoning required. Basic factual recall about the architecture the model itself is built on.
+
+Instability scores of 0.614–0.654 across three temperature settings — highest in the dataset. The model contradicted itself across samples, produced semantically divergent outputs, struggled with a question it should be most capable of answering.
+
+That's not a benchmark quirk. That's Qwen 2.5-7B having unreliable self-knowledge about its own architectural domain. And it has real implications for anyone deploying it in contexts where consistent, factually stable outputs matter.
+
+---
+
+The 84.7% escalation rate sounds alarming and is worth explaining. The platform flags an inference when outputs across MC samples diverge beyond a threshold. 144 out of 170 inferences triggered this. But the benchmark was deliberately designed to stress-test known failure modes — the prompts weren't a random sample of real-world use. The point isn't that Qwen is broadly unreliable. The point is that the infrastructure correctly finds and quantifies the failure modes it's looking for.
+
+---
+
+I've been thinking about why behavioral consistency evaluation isn't more standard.
+
+My guess: it's expensive. Five inference calls per prompt instead of one. It's not a finished project — it's infrastructure for a longer research arc.
+
+The benchmark dataset and research analysis notebook are on Kaggle if you want to dig in.
   `,
 },
   {
@@ -124,133 +98,38 @@ That's the project. It's still running.
     title: "Why Production Debugging Is an Underrated Skill",
     date: "2025-12-15",
     tags: ["Backend", "Production", "Engineering"],
-    excerpt:
-      "Most engineers optimize for building features. The best ones optimize for keeping systems alive. Here's what 3 years of production triage taught me.",
+    excerpt: "Most engineers learn to build things. The skill that actually separates good engineers from great ones is knowing what to do when something breaks at 3 AM.",
     readTime: "6 min read",
     content: `
-Most engineering interviews test your ability to build things. But in production, the skill that separates good engineers from great ones is the ability to **debug under pressure**.
+There's a thing that happens when you've been on-call long enough. You stop reacting and start reading.
 
-## The 3 AM Deployment
+Early on, my instinct during an incident was to do something. Rollback. Restart the service. Change a config. The pressure of a production failure feels like it demands immediate action, and sitting there reading logs while something is down feels wrong.
 
-My first major production incident at Bank of America started at 3 AM. A deployment went sideways — SSL certificates had expired on a critical service, and the cascading failures took down three dependent microservices.
+It took me a while to realise that's exactly backwards.
 
-The standard playbook says: rollback. But rolling back wouldn't fix the expired certificates. We needed to triage, isolate, and fix — all while the clock was ticking.
+---
 
-## What I Learned
+My first major incident at Bank of America was a 3 AM SSL expiry that cascaded across three dependent microservices. The obvious move was to rollback the deployment that triggered the alert. But the deployment didn't cause the expiry — it just exposed it. A rollback would have gotten us back to green on the dashboard while leaving the actual problem in place to surface again, probably at a worse time.
 
-**1. Read the logs, not the dashboards.**
+The thing that actually fixed it was twenty minutes of reading logs before touching anything. Understanding the failure mode first. That twenty minutes felt expensive at 3 AM. It wasn't.
 
-Dashboards give you symptoms. Logs give you causes. When a service is throwing 500s, the dashboard tells you "something is broken." The logs tell you *why* — a missing environment variable, a malformed request, a connection timeout. I've lost count of how many issues I've resolved by simply reading the actual error message instead of guessing from metrics.
+---
 
-**2. Reproduce before you fix.**
+I've noticed most production issues are caught early by the people who've built the habit of reading the actual error message. Not the dashboard summary. Not the alert description. The log line.
 
-The instinct during an incident is to start patching immediately. Resist it. Take 5 minutes to understand the failure mode. Is it intermittent or consistent? Does it affect all users or a subset? Is it data-dependent?
+Dashboards tell you something is broken. Logs tell you what broke and usually hint at why. The number of times I've watched someone spend an hour guessing at a problem that was described in plain text in the application log is genuinely high.
 
-A systematic reproduction saves you from the worst outcome: deploying a "fix" that doesn't actually fix anything, while the real issue continues.
+The second habit that matters is reproduction before remediation. The instinct is to start patching — resist it. Five minutes spent confirming whether a failure is intermittent or consistent, whether it's affecting all users or a subset, whether it's data-dependent, changes what you do next entirely. A fix applied to the wrong failure mode makes things worse, adds noise, and delays finding the real cause.
 
-**3. Root-cause analysis is non-negotiable.**
+The third is just doing root cause analysis and actually writing it down. Not for compliance. Because surface patches compound. The timeout you increase this month is the query scan you'll be debugging six months from now. Writing it down forces the thinking and creates a paper trail that helps the next person — which is often you, eight months later, with no memory of this incident.
 
-Surface-level patches create technical debt that compounds. When a database connection starts timing out, the surface fix is to increase the timeout. The root cause might be an unindexed query that's scanning millions of rows.
+---
 
-Every incident should end with a "5 Whys" analysis. Not because it's process theater — because it prevents the same 3 AM call next month.
+The skills that make someone good at this don't come from building things. They come from being on the receiving end when things break — on-call rotations, post-mortem reviews, watching more experienced engineers work through incidents. The pattern recognition that makes you think "this timeout looks like the thing from March" only builds up through exposure.
 
-## The Underrated Part
+The other thing is staying calm, which sounds obvious but isn't. When the pager goes off and stakeholders are asking for updates every ten minutes, the pressure to do *something* visible is real. The engineers who are genuinely good at production triage are the ones who've learned to treat that pressure as noise. You read the logs. You reproduce the failure. You understand the system. Then you fix it.
 
-Production debugging requires a unique combination of skills:
-
-- **Systems thinking** — understanding how components interact across service boundaries
-- **Calm under pressure** — making clear decisions when the pager is going off
-- **Communication** — coordinating across teams while keeping stakeholders informed
-- **Pattern recognition** — recognizing that this timeout looks like the one from two months ago
-
-These skills don't come from LeetCode. They come from being on-call, from reading post-mortems, from building the habit of asking "what could go wrong?" before every deployment.
-
-## Build It Into Your Practice
-
-If you want to become a better production debugger:
-
-1. **Volunteer for on-call rotations.** Yes, they're painful. That's the point.
-2. **Read every post-mortem** your org publishes. Learn from others' incidents.
-3. **Practice reading logs** — not just grepping for ERROR, but understanding the full request lifecycle.
-4. **Build observability into your services** from day one. Structured logging, health checks, meaningful metrics.
-
-The best code is code that tells you what's wrong before the user notices. Production debugging isn't just a skill — it's a mindset.
-    `,
-  },
-  {
-    slug: "building-indian-multilingual-llm",
-    title: "Building an Indian Multilingual LLM: What I've Learned So Far",
-    date: "2026-01-20",
-    tags: ["AI", "LLM", "NLP", "Python"],
-    excerpt:
-      "Notes from building an inference layer for a multilingual LLM with persona safety, emotional invariants, and deterministic fingerprinting.",
-    readTime: "8 min read",
-    content: `
-I've been working on an Indian multilingual LLM inference system — not training a model from scratch, but building the infrastructure around it: inference pipelines, safety layers, and evaluation frameworks.
-
-## Why This Matters
-
-India has 22 official languages and hundreds of dialects. Most LLMs are heavily English-centric. Even "multilingual" models often treat Hindi or Tamil as an afterthought. The goal of this project is to build a robust inference and application layer that handles multilingual input/output with the same reliability as English.
-
-## Architecture Decisions
-
-### Persona Safety CI
-
-One of the first things I implemented was a CI pipeline for persona safety. The idea: every model checkpoint gets tested against a suite of adversarial prompts before it can be deployed.
-
-\`\`\`python
-# Simplified persona safety test
-def test_persona_boundary(model, prompt):
-    response = model.generate(prompt)
-    violations = check_boundaries(response)
-    assert len(violations) == 0, f"Persona violation: {violations}"
-\`\`\`
-
-This catches issues like:
-- The model breaking character when prompted in a different language
-- Responses that leak training data patterns
-- Inconsistent persona behavior across language switches
-
-### Emotional Invariants
-
-LLMs can be unpredictable in their emotional tone. A query about a sensitive topic in Hindi shouldn't produce a cheerful response just because the training data is skewed.
-
-I built an emotional invariant checker that validates response tone against expected emotional ranges for given input categories. It's not perfect — emotion detection is hard — but it catches the obvious failures.
-
-### Deterministic Model Fingerprinting
-
-When you're running multiple model versions in parallel (A/B testing, canary deployments), you need to know exactly which model produced which output. I implemented a fingerprinting system that tags every response with:
-
-- Model version hash
-- Inference configuration
-- Input language detected
-- Response language
-
-This makes debugging production issues significantly easier.
-
-## Challenges
-
-**1. Code-switching is hard.**
-
-Indian speakers frequently mix languages mid-sentence. "Mujhe ek coffee chahiye, but make it strong." The model needs to understand this isn't two separate languages — it's one coherent request.
-
-**2. Script diversity.**
-
-Hindi can be written in Devanagari or Roman script (Hinglish). The same sentence, same language, two completely different input formats. Tokenizers struggle with this.
-
-**3. Evaluation is subjective.**
-
-How do you evaluate if a Hindi response is "good"? BLEU scores don't capture cultural nuance. Human evaluation doesn't scale. I'm experimenting with LLM-as-judge approaches, but the judge itself has English bias.
-
-## What's Next
-
-- Building a benchmark suite specifically for Indian language code-switching
-- Implementing streaming inference with language detection at the token level
-- Open-sourcing the safety CI framework
-
-This project sits at the intersection of my backend systems experience and my ML interests. The inference layer needs to be as reliable as any production service — low latency, observable, and resilient to bad inputs.
-
-If you're working on multilingual AI systems, I'd love to connect. Reach out at tiwarishubhankar@gmail.com.
+The code that tells you what's wrong before the user notices is the best code. Writing that code requires understanding how systems fail. You only understand that by being there when they do.
     `,
   },
   {
@@ -258,62 +137,36 @@ If you're working on multilingual AI systems, I'd love to connect. Reach out at 
     title: "Top 4.1% on Kaggle: Lessons That Transferred to Production",
     date: "2025-10-08",
     tags: ["ML", "Kaggle", "Data Science"],
-    excerpt:
-      "How grinding Kaggle competitions taught me skills that directly improved my production engineering work.",
+    excerpt: "I hit Notebooks Expert ranked #2,441 — personal best #707. Here's what 34 notebooks actually taught me, and why almost none of it was about machine learning.",
     readTime: "5 min read",
     content: `
-I hit Kaggle Notebooks Expert status — ranked 2,913 out of 59,240. It took 33 notebooks, countless hours of experimentation, and a lot of failed approaches. But the biggest surprise wasn't the ranking — it was how much Kaggle improved my day job as a backend engineer.
+I hit Kaggle Notebooks Expert ranked 2,441 out of 59,663, personal best 707. 34 notebooks. I didn't expect any of it to make me a better backend engineer. It did.
 
-## The Surprising Overlap
+Not in the obvious ways. Not "ML skills transfer to AI projects at work" — I'm not doing ML at Bank of America, I'm building Java microservices for corporate banking workflows. The transfer was more fundamental than that, and honestly more useful.
 
-On the surface, Kaggle and production engineering seem like different worlds. One is about optimizing model performance on static datasets. The other is about keeping systems alive under real-world chaos.
+---
 
-But the core skills transfer directly.
+The thing Kaggle teaches you that most software jobs don't is systematic experimentation under uncertainty. You have a hypothesis, you test it, you record what happened, you update. The discipline of actually writing down your results — even when the notebook is just for you — changes how you think about problems.
 
-## 1. Systematic Experimentation
+I brought that back to production work. When I'm debugging a failure now, I write down what I think is happening before I change anything. What I expect to see if I'm right. What I'd expect to see if I'm wrong. Then I check. It sounds slow but it's faster than the alternative, which is randomly changing things and hoping.
 
-Kaggle teaches you to be methodical. You don't just throw random hyperparameters at a model — you form hypotheses, test them, record results, and iterate.
+Kaggle also taught me something uncomfortable about validation. You think your model is working. Your local scores look great. Then the leaderboard humbles you because you were overfitting to your validation set in ways you didn't notice. The lesson isn't specific to ML — it's that the environment you're testing in is never exactly the environment you're deploying to. I think about staging environments differently now because of this. "It worked in staging" is not a guarantee; it's a data point.
 
-This is exactly how production debugging works:
-- **Hypothesis:** The timeout is caused by an unindexed query
-- **Test:** Add the index, measure response time
-- **Record:** Document the before/after metrics
-- **Iterate:** Monitor for a week to confirm stability
+---
 
-## 2. Feature Engineering = API Design
+The ranking I'm most attached to isn't the current one. It's the personal best of 707.
 
-In Kaggle, the best features are the ones that capture the most signal with the least noise. In API design, the best endpoints are the ones that serve the most useful data with the least complexity.
+I hit that early, grinding notebooks across regression, classification, NLP, and computer vision before I joined Bank of America in 2022. Then I stopped — not because I lost interest but because production engineering took over. Four years of being on-call, owning incidents, and building systems that can't fail has a way of consuming your attention.
 
-Both require you to think deeply about what information actually matters and how to represent it cleanly.
+Coming back to Kaggle in 2025 alongside the LLM reliability research felt different. More purposeful. The notebooks I'm writing now are trying to answer specific questions about model behavior, not just demonstrate techniques. The work feels more connected to something I'm actually trying to understand.
 
-## 3. Validation Is Everything
+---
 
-Every Kaggler learns the hard way: your local CV score doesn't always match the leaderboard. The model that looks great on your validation set might overfit spectacularly on unseen data.
+The Expert badge is nice. It opens conversations. But the honest version of what I got from Kaggle is: a way of thinking about problems that I didn't have before, applied to a domain completely unrelated to machine learning.
 
-In production: the service that passes all unit tests might still fail under real traffic. Just like Kaggle's train/test split, you need proper staging environments, canary deployments, and production smoke tests.
+If you're a software engineer considering it — don't start with competitions. Start with the Learn courses, pick a domain you're curious about, write notebooks that explain your thinking out loud. The leaderboard stuff can come later, if at all. The real value is the habit of careful, documented experimentation.
 
-## 4. Knowing When to Stop
-
-One of the hardest Kaggle skills is knowing when further optimization isn't worth the effort. Going from 0.85 to 0.90 accuracy might take 10x the effort of going from 0.70 to 0.85.
-
-In production engineering, this translates to: not every system needs five nines of availability. Not every API needs sub-10ms latency. Engineering effort should be proportional to business impact.
-
-## The Notebooks That Taught Me Most
-
-Some of my most educational Kaggle work:
-
-- **Iris Outlier Detection** — taught me about data quality (production parallel: input validation)
-- **Diabetes Classification** — taught me about imbalanced datasets (production parallel: handling edge cases)
-- **Tesla Stock Analysis** — taught me about time-series patterns (production parallel: monitoring and alerting)
-
-## My Advice for Engineers Considering Kaggle
-
-1. **Start with the Learn courses.** Kaggle's free ML and Deep Learning courses are genuinely excellent.
-2. **Focus on notebooks, not competitions.** The learning happens when you explain your approach, not when you optimize for the leaderboard.
-3. **Apply it to your domain.** Don't just do generic tasks — try to solve problems related to your actual work.
-4. **Share your work.** Publishing notebooks forces you to think clearly and communicate effectively.
-
-The Kaggle Expert badge looks nice on a resume. But the real value is the thinking patterns it builds — patterns that make you a better engineer in any domain.
+That habit is useful everywhere.
     `,
   },
 ];

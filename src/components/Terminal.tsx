@@ -72,7 +72,7 @@ const EASTER_EGGS: Record<string, string> = {
       \\_____/  Host:   Bank of America
       |     |  Kernel: Java 17 + Spring Boot
      /|     |\\  Shell:  /bin/backend-eng
-    /_|_____|_\\ Uptime: 3+ years
+    /_|_____|_\\ Uptime: 4+ years
                Packages: Microservices (many)`,
 };
 

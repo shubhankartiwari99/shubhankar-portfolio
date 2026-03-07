@@ -27,7 +27,7 @@ export default function Projects() {
             </p>
           </div>
           <Link
-            href="/#projects"
+            href="/projects"
             className="text-sm font-medium hidden sm:flex items-center gap-1.5 transition-colors duration-200"
             style={{ color: "var(--accent)" }}
           >

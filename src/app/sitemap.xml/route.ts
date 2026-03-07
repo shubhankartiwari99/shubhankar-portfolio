@@ -9,6 +9,7 @@ export async function GET() {
   const staticPages = [
     { url: "", priority: "1.0", changefreq: "monthly" },
     { url: "/blog", priority: "0.9", changefreq: "weekly" },
+    { url: "/projects", priority: "0.9", changefreq: "monthly" },
   ];
 
   const staticEntries = staticPages.map(
