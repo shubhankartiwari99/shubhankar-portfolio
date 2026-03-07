@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Shubhankar Tiwari | Software Engineer - Backend Systems & Applied AI",
   description:
     "Software Engineer at Bank of America building production fintech systems. Kaggle Notebooks Expert (#2,441). Researching LLM behavioral reliability and evaluation infrastructure.",
-  metadataBase: new URL("https://shubhankartiwari.vercel.app"),
+  metadataBase: new URL("https://shubhankar-tiwari.vercel.app"),
   alternates: {
     types: {
       "application/rss+xml": "/feed.xml",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Shubhankar Tiwari - Systems Engineer",
     description:
       "Backend systems engineer at Bank of America. Kaggle Notebooks Expert (#2,441). Researching LLM behavioral reliability evaluation.",
-    url: "https://shubhankartiwari.vercel.app",
+    url: "https://shubhankar-tiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
     images: [{ url: "/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari" }],
     type: "website",
@@ -54,7 +54,7 @@ const jsonLd = {
     "@type": "Organization",
     name: "Bank of America",
   },
-  url: "https://shubhankartiwari.vercel.app",
+  url: "https://shubhankar-tiwari.vercel.app",
   sameAs: [
     "https://github.com/shubhankartiwari99",
     "https://www.linkedin.com/in/shubhankar-tiwari-514040165/",

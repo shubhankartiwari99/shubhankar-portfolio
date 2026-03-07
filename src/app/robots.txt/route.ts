@@ -1,5 +1,5 @@
 export async function GET() {
-  const siteUrl = "https://shubhankartiwari.vercel.app";
+  const siteUrl = "https://shubhankar-tiwari.vercel.app";
   
   const robots = `# Robots.txt for Shubhankar Tiwari Portfolio
 User-agent: *

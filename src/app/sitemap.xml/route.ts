@@ -4,7 +4,7 @@ import { getAllProjects } from "@/data/projects";
 export async function GET() {
   const posts = getAllPosts();
   const projects = getAllProjects();
-  const siteUrl = "https://shubhankartiwari.vercel.app";
+  const siteUrl = "https://shubhankar-tiwari.vercel.app";
   
   const staticPages = [
     { url: "", priority: "1.0", changefreq: "monthly" },
