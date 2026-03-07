@@ -34,14 +34,14 @@ export const metadata: Metadata = {
       "Backend systems engineer at Bank of America. Kaggle Notebooks Expert (#2,441). Researching LLM behavioral reliability evaluation.",
     url: "https://shubhankar-tiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
-    images: [{ url: "/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari" }],
+    images: [{ url: "https://shubhankar-tiwari.vercel.app/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Shubhankar Tiwari",
     description: "Backend systems engineer. Kaggle Expert. Applied AI.",
-    images: ["/og_final.png"],
+    images: ["https://shubhankar-tiwari.vercel.app/og_final.png"],
   },
 };
 
