@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Trophy } from "lucide-react";
+import { useRecruiterMode } from "./Providers";
 
 const reveal = {
   initial: { opacity: 0, y: 16 } as const,
@@ -16,6 +17,7 @@ const milestones = [
     title: "B.Tech CSE",
     subtitle: "SRM Institute of Science & Technology",
     description: "Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering.",
+    recruiterDescription: ["Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering."],
     year: "2018-2022",
   },
   {
@@ -23,6 +25,11 @@ const milestones = [
     title: "Software Engineer",
     subtitle: "Bank of America",
     description: "Building and maintaining Java backend systems for corporate banking. I own the full lifecycle — design, CI/CD, deployments, and being on-call when something breaks. Four years of that teaches you things about software that writing code in isolation doesn't.",
+    recruiterDescription: [
+      "Develop and maintain client-facing fintech microservices using Java, Spring Boot, REST APIs, SQL on OpenShift",
+      "Own backend service delivery across design, implementation, CI/CD integration, deployment validation, and production stabilization",
+      "Lead production incident triage - deployment failures, SSL misconfigurations, database connectivity, service dependency conflicts",
+    ],
     year: "2022-Present",
   },
   {
@@ -30,22 +37,37 @@ const milestones = [
     title: "Kaggle Expert",
     subtitle: "Top 4.1% Globally",
     description: "Notebooks Expert ranked #2,441 / 59,663 — personal best #707. 34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
+    recruiterDescription: [
+      "Kaggle Notebooks Expert ranked #2,441 / 59,663 globally",
+      "34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression",
+    ],
     year: "2022-Present",
   },
 ];
 
 export default function Journey() {
+  const recruiterMode = useRecruiterMode();
   return (
     <section id="about" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 relative">
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">My Journey</h2>
-          <p className="text-lg max-w-3xl leading-relaxed" style={{ color: "var(--muted)" }}>
-            I went from curious undergrad to backend engineer at Bank of America. The path
-            wasn't linear — four years of production systems, a Kaggle Expert rank, and now
-            building evaluation infrastructure for LLMs. Each of those things informed the
-            others more than I expected.
-          </p>
+          {recruiterMode ? (
+            <ul className="list-disc pl-5 space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
+              <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
+              <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
+              <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
+              <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning & Computer Vision</li>
+              <li>Active in applied AI &mdash; researching LLM behavioral reliability</li>
+            </ul>
+          ) : (
+            <p className="text-lg max-w-3xl leading-relaxed" style={{ color: "var(--muted)" }}>
+              I went from curious undergrad to backend engineer at Bank of America. The path
+              wasn't linear — four years of production systems, a Kaggle Expert rank, and now
+              building evaluation infrastructure for LLMs. Each of those things informed the
+              others more than I expected.
+            </p>
+          )}
         </motion.div>
 
         <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -83,9 +105,15 @@ export default function Journey() {
                         {milestone.year}
                       </span>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                      {milestone.description}
-                    </p>
+                    {recruiterMode ? (
+                      <ul className="list-disc pl-5 space-y-2 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                        {milestone.recruiterDescription.map((d) => <li key={d}>{d}</li>)}
+                      </ul>
+                    ) : (
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                        {milestone.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
