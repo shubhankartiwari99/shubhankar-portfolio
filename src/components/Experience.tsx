@@ -14,7 +14,7 @@ const experiences = [
     summary: "Production-grade backend systems powering corporate banking workflows.",
     narrative: [
       "Building and stabilizing large-scale Java backend systems powering corporate banking workflows, with emphasis on correctness, resilience, and production reliability.",
-      "Driving production debugging, release validation, and cross-team coordination during live incidents and high-risk deployments.",
+      "Driving production debugging, cross-functional regression testing, and release validation — coordinating across teams during live incidents and high-risk deployments. Knowing how the system breaks from the inside changes how you test it from the outside.",
       "Designing and evolving services with long-term maintainability in high-availability environments.",
     ],
     bullets: [
@@ -23,8 +23,9 @@ const experiences = [
       "Lead production incident triage - deployment failures, SSL misconfigurations, database connectivity, service dependency conflicts",
       "Improve release stability through proactive validation, pipeline debugging, load-test support, and root cause analysis",
       "Contribute to OpenShift onboarding and deployment readiness, strengthening infrastructure resilience",
+      "Perform cross-functional manual regression testing during release cycles — validating end-to-end system behaviour across service boundaries before production promotion",
     ],
-    tags: ["Java", "Spring Boot", "REST APIs", "OpenShift", "CI/CD", "SQL"],
+    tags: ["Java", "Spring Boot", "REST APIs", "OpenShift", "CI/CD", "SQL", "Regression Testing"],
   },
   {
     title: "Product Development Trainee",

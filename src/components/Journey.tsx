@@ -29,6 +29,7 @@ const milestones = [
       "Develop and maintain client-facing fintech microservices using Java, Spring Boot, REST APIs, SQL on OpenShift",
       "Own backend service delivery across design, implementation, CI/CD integration, deployment validation, and production stabilization",
       "Lead production incident triage - deployment failures, SSL misconfigurations, database connectivity, service dependency conflicts",
+      "Cross-functional manual regression testing during release cycles — validating end-to-end system behaviour before production promotion",
     ],
     year: "2022-Present",
   },
