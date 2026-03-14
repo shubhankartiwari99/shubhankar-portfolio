@@ -9,90 +9,48 @@ export interface Post {
 }
 
 export const posts: Post[] = [
-{
-  slug: "why-i-stopped-building-an-llm-and-started-evaluating-one",
-  title: "I built the wrong thing. Here's what I found instead.",
-  date: "2026-03-01",
-  tags: ["AI", "LLM", "Reliability", "Python", "Research"],
-  excerpt:
-    "I built the full training pipeline. Then Sarvam AI happened. Here's why I pivoted toward behavioral reliability evaluation — and what I found when I ran 310 inferences through Qwen 2.5-7B.",
-  readTime: "9 min read",
-  content: `
-Late December 2025, I started building what I was pretty convinced would be a genuinely useful project — a multilingual LLM fine-tuned for Indian conversational patterns. Hindi, English, and the code-switched Hinglish hybrid that's actually how most people I know communicate.
+  {
+    slug: "building-indian-multilingual-llm",
+    title: "Building an Indian Multilingual LLM: Why I Had to Solve Reliability First",
+    date: "2026-01-20",
+    tags: ["AI", "LLM", "NLP", "Python", "Research"],
+    excerpt:
+      "The goal was a multilingual LLM for Indian conversational patterns. Before I could build it properly, I had to figure out whether the model I was building on top of could be trusted at all.",
+    readTime: "7 min read",
+    content: `
+The original plan was straightforward: build a multilingual LLM fine-tuned for Indian conversational patterns — Hindi, English, and the code-switched hybrid that most Indians actually speak in.
 
-The gap was real. Most open-source models handle formal Hindi okay but fall apart on casual, culturally-grounded conversation. I'd seen it firsthand. It felt like a tractable problem with nobody squarely working on it at the open-source level.
+The gap was real. Most open-source models handle formal Hindi reasonably well. They fall apart on the casual, culturally-grounded conversation that's representative of how 1.4 billion people actually communicate. I built the full pipeline — dataset curation from three complementary sources, tokenisation, LoRA adapter initialisation, fine-tuning on a Kaggle T4 GPU, inference evaluation, deployment packaging. Six notebooks, clean end-to-end.
 
-So I built the full pipeline. Dataset curation from three sources. Tokenisation. LoRA adapter init. Fine-tuning on a Kaggle T4. Inference evaluation. Deployment packaging. Six notebooks, clean end-to-end. I was proud of it.
-
-Then I looked up and Sarvam AI had been quietly doing the same thing — at 10x the scale, with a dedicated research team, for longer than I had. By the time my training pipeline was stable, the space had already moved.
-
-I had a decision to make.
+The problem I ran into wasn't the training pipeline. It was evaluation.
 
 ---
 
-I could keep going. Plenty of people build things that already exist and still get value from it. But I kept coming back to something I'd noticed while debugging my model's outputs — something that bothered me more than the Sarvam situation.
+While debugging my fine-tuned model's outputs, I kept noticing something that bothered me. Run the same prompt at the same temperature setting and the answer would be subtly different. Sometimes meaningfully different. Run it five times and you'd get five outputs that were individually plausible but semantically inconsistent with each other.
 
-The model would answer a question on one run. Run the same prompt at the same temperature, same everything, and the answer would be slightly different. Run it five times and you'd get five outputs that were individually plausible but semantically inconsistent with each other.
+This wasn't a failure that showed up in standard benchmarks. MMLU, ROUGE scores, HumanEval — all of these evaluate accuracy on a single inference pass. They tell you whether a model *can* produce the right answer. They don't tell you whether it *reliably* produces consistent answers.
 
-None of the standard benchmarks catch this. MMLU, HumanEval, ROUGE — they all evaluate on a single inference pass. They tell you whether a model *can* produce the right answer. They say nothing about whether it does so *reliably*, or whether the wrong answers are at least predictable.
+For a multilingual model targeting real conversational deployment — where the same user asks the same kind of question repeatedly and expects stable, predictable responses — that distinction matters enormously. I couldn't in good conscience ship something as a reliable inference layer until I understood this failure mode properly.
 
-That distinction doesn't matter much for research leaderboards. It matters a lot if you're deploying the thing.
-
-I couldn't find tooling that measured this systematically. Not for 7B-class models. Not with output granular enough to be actionable. So I built it instead.
+So before continuing to fine-tune, I built the evaluation infrastructure first.
 
 ---
 
-The platform uses Monte Carlo sampling — run each prompt five times, measure how semantically different the outputs are from each other. That divergence score is what I'm calling instability. It's a different signal from accuracy. You can have a model that's accurate on average but wildly inconsistent in *which* prompts it handles well. That's a different kind of broken.
+That infrastructure became the LLM Reliability Evaluation Platform. Monte Carlo sampling across a temperature × top-p grid, semantic clustering via DBSCAN, instability and entropy metrics per prompt. 240 inference calls on Qwen 2.5-7B across two benchmark runs.
 
-Stack: Next.js dashboard, FastAPI backend on a Kaggle T4, sentence-transformers for semantic comparison, DBSCAN to cluster similar outputs. The benchmark was 62 prompts I wrote myself, across factual recall, math, logical reasoning, code generation, and creative writing, at three difficulty levels each. Five temperature settings per prompt. 310 inference calls total, about two and a half hours on the GPU.
-
-Here's what I found.
+What it found changed the direction of the multilingual work in ways I didn't expect. The v1 finding — that temperature has negligible effect on output consistency — turned out to be wrong. A full grid sweep in v2 revealed that top-p dominates reliability at 3.1× the effect magnitude of temperature. The right parameter configuration matters. And the failure modes aren't uniformly distributed — philosophical and abstract prompts produce the highest instability, which has direct implications for a conversational AI handling culturally nuanced Indian dialogue.
 
 ---
 
-**Temperature is basically irrelevant to consistency.**
+The multilingual LLM is still the goal. What's changed is the order of operations.
 
-This one surprised me because the conventional wisdom is pretty strong: lower temperature = more deterministic outputs. It's in every LLM deployment guide.
+Before fine-tuning for cultural and linguistic alignment, I need to understand the base model's behavioral surface — where it's stable, where it diverges, how parameter choices interact with prompt complexity. The reliability evaluation work is Phase 1. The alignment fine-tuning is Phase 2.
 
-For Qwen 2.5-7B, across the 0.1–0.9 range, the instability variance was less than 0.001. The curves were flat. The model is not more or less consistent at different temperatures — it's consistent or inconsistent based on the prompt itself. A hard prompt at temperature 0.1 is just as unstable as the same prompt at 0.9.
+Building safety and reliability infrastructure before scaling inference isn't a detour. It's the right order of operations. I just had to build the tools to see that clearly.
 
-If you're deploying this model and you're relying on low temperature to manage reliability, you're pulling a lever that isn't connected to anything.
-
-**Coding is the least reliable category, which is awkward given the marketing.**
-
-Qwen 2.5-7B is sold partly as a strong coding model. In my benchmark it ranked last — instability of 0.293 versus 0.205 for factual recall and 0.199 for reasoning. Confidence scores similarly worse.
-
-This doesn't necessarily mean wrong code. It means *inconsistent* code. Different implementations, different variable names, different structural approaches on the same prompt across five runs. For a coding assistant where developers expect reproducible suggestions, that's a genuine problem.
-
-**11.8% silent failures.**
-
-Nearly one in eight inference calls returned zero output tokens. No error. No exception. Just nothing. The model simply didn't generate anything.
-
-In a production system that means a blank response with no signal to the user or the application that something went wrong. Silent failures are worse than loud ones. At least loud ones are catchable.
-
-**The hardest finding wasn't in the numbers.**
-
-The single most unstable prompt in my entire dataset was: *"Name the three primary components of a transformer neural network architecture."*
-
-Definitive answer. Not ambiguous. No reasoning required. Basic factual recall about the architecture the model itself is built on.
-
-Instability scores of 0.614–0.654 across three temperature settings — highest in the dataset. The model contradicted itself across samples, produced semantically divergent outputs, struggled with a question it should be most capable of answering.
-
-That's not a benchmark quirk. That's Qwen 2.5-7B having unreliable self-knowledge about its own architectural domain. And it has real implications for anyone deploying it in contexts where consistent, factually stable outputs matter.
-
----
-
-The 84.7% escalation rate sounds alarming and is worth explaining. The platform flags an inference when outputs across MC samples diverge beyond a threshold. 144 out of 170 inferences triggered this. But the benchmark was deliberately designed to stress-test known failure modes — the prompts weren't a random sample of real-world use. The point isn't that Qwen is broadly unreliable. The point is that the infrastructure correctly finds and quantifies the failure modes it's looking for.
-
----
-
-I've been thinking about why behavioral consistency evaluation isn't more standard.
-
-My guess: it's expensive. Five inference calls per prompt instead of one. It's not a finished project — it's infrastructure for a longer research arc.
-
-The benchmark dataset and research analysis notebook are on Kaggle if you want to dig in.
-  `,
-},
+The benchmark dataset and research analysis are published on Kaggle. The multilingual pipeline notebooks are on GitHub.
+    `,
+  },
   {
     slug: "why-production-debugging-is-underrated",
     title: "Why Production Debugging Is an Underrated Skill",
