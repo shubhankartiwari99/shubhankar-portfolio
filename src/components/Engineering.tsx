@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const reveal = {
   initial: { opacity: 0, y: 16 } as const,
@@ -15,23 +14,32 @@ const stats = [
   { value: "Kaggle", label: "Notebooks Expert" },
 ];
 
+const principles = [
+  "Reliability over hype",
+  "Deterministic systems over black-box magic",
+  "Production readiness over prototype excitement",
+  "Root-cause analysis over surface patching",
+];
+
 export default function Engineering() {
   return (
     <section className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 relative overflow-hidden">
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+
+          {/* Left — text + stats */}
           <motion.div {...reveal}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">Engineering at Scale</h2>
-            <p className="text-base leading-relaxed mb-8" style={{ color: "var(--muted)" }}>
+            <p className="text-base leading-relaxed mb-6" style={{ color: "var(--muted)" }}>
               At Bank of America I work on backend systems that process real financial
-              transactions. My job isn't just writing code — it's release validation,
+              transactions. My job isn&apos;t just writing code — it&apos;s release validation,
               production triage, and being accountable when a deployment goes wrong at
               an inconvenient hour.
             </p>
             <p className="text-base leading-relaxed mb-10" style={{ color: "var(--muted)" }}>
-              I've been doing this for four years. The thing that changes is your relationship
+              I&apos;ve been doing this for four years. The thing that changes is your relationship
               with failure. You stop being surprised by it and start building systems that
-              tell you clearly when and why they're failing.
+              tell you clearly when and why they&apos;re failing.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
@@ -52,38 +60,31 @@ export default function Engineering() {
             </div>
           </motion.div>
 
-          <motion.div
-            {...reveal}
-            className="relative rounded-2xl overflow-hidden border group"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <div className="aspect-[4/3] relative">
-              <Image
-                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
-                alt="Data center servers"
-                fill
-                className="object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-500"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: "linear-gradient(to top, var(--bg) 10%, transparent 60%)",
-                }}
-              />
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div
-                className="inline-block px-3 py-1.5 rounded-lg text-xs font-mono mb-3"
-                style={{ background: "var(--accent-dim)", color: "var(--accent)" }}
-              >
-                PRODUCTION-FIRST MINDSET
-              </div>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                Building systems that are reliable, observable, and built to last
-              </p>
+          {/* Right — Engineering Principles */}
+          <motion.div {...reveal}>
+            <h3 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-6"
+              style={{ color: "var(--accent)" }}>
+              Engineering Principles
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
+              {principles.map((p, i) => (
+                <motion.div
+                  key={p}
+                  initial={reveal.initial}
+                  whileInView={reveal.whileInView}
+                  viewport={reveal.viewport}
+                  transition={{ ...reveal.transition, delay: i * 0.06 }}
+                  className="rounded-xl border p-4 lg:p-5 font-mono text-sm"
+                  style={{ color: "var(--muted)", borderColor: "var(--border)", background: "var(--surface)" }}
+                  data-testid={`principle-${i}`}
+                >
+                  <span style={{ color: "var(--accent)" }}>/{String(i + 1).padStart(2, "0")}</span>{" "}
+                  {p}
+                </motion.div>
+              ))}
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

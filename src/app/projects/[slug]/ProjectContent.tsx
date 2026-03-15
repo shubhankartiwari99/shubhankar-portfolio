@@ -40,7 +40,7 @@ export default function ProjectContent({ project }: Props) {
           transition={{ duration: 0.3 }}
         >
           <Link
-            href="/#projects"
+            href="/projects"
             data-testid="project-back-link"
             className="inline-flex items-center gap-1.5 font-mono text-sm transition-colors duration-200 mb-8"
             style={{ color: "var(--muted-fg)" }}
@@ -278,7 +278,7 @@ export default function ProjectContent({ project }: Props) {
           style={{ borderColor: "var(--border)" }}
         >
           <Link
-            href="/#projects"
+            href="/projects"
             className="inline-flex items-center gap-2 font-mono text-sm transition-colors duration-200"
             style={{ color: "var(--accent)" }}
           >

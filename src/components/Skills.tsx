@@ -27,16 +27,9 @@ const skillGroups = [
 ];
 
 const credentials = [
-  { icon: <Award size={16} />, title: "Kaggle Notebooks Expert", detail: "Rank 2,441 / 59,663 ⸱ 10 Bronze Medals" },
-  { icon: <GraduationCap size={16} />, title: "B.Tech CSE \u2014 SRM IST", detail: "94.4% GPA \u00B7 2018\u20132022" },
-  { icon: <Award size={16} />, title: "ML, Deep Learning, CV", detail: "Kaggle Certified \u00B7 2025" },
-];
-
-const principles = [
-  "Reliability over hype",
-  "Deterministic systems over black-box magic",
-  "Production readiness over prototype excitement",
-  "Root-cause analysis over surface patching",
+  { icon: <Award size={16} />, title: "Kaggle Notebooks Expert", detail: "Rank 2,441 / 59,663 · 10 Bronze Medals" },
+  { icon: <GraduationCap size={16} />, title: "B.Tech CSE — SRM IST", detail: "94.4% GPA · 2018–2022" },
+  { icon: <Award size={16} />, title: "ML, Deep Learning, CV", detail: "Kaggle Certified · 2025" },
 ];
 
 const reveal = {
@@ -111,33 +104,6 @@ export default function Skills() {
                 <span style={{ color: "var(--accent)" }}>{cred.icon}</span>
                 <h3 className="font-semibold text-sm lg:text-base mt-3">{cred.title}</h3>
                 <p className="text-xs lg:text-sm font-mono mt-1" style={{ color: "var(--muted-fg)" }}>{cred.detail}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Principles */}
-      <section data-testid="principles-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
-        <div className="max-w-5xl xl:max-w-6xl mx-auto">
-          <motion.div {...reveal}>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8">Engineering Principles</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {principles.map((p, i) => (
-              <motion.div
-                key={p}
-                initial={reveal.initial}
-                whileInView={reveal.whileInView}
-                viewport={reveal.viewport}
-                transition={reveal.transition}
-                className="rounded-xl border p-5 lg:p-6 font-mono text-sm lg:text-base"
-                style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                data-testid={`principle-${i}`}
-              >
-                <span style={{ color: "var(--accent)" }}>/{String(i + 1).padStart(2, "0")}</span>{" "}
-                {p}
               </motion.div>
             ))}
           </div>

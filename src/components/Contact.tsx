@@ -37,14 +37,12 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto">
         <motion.div {...reveal}>
           <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight leading-tight mb-6">
-            Let&apos;s build something
-            <br />
-            <span style={{ color: "var(--accent)" }}>reliable</span> together
+            Get in touch
           </h2>
 
           <p className="mt-6 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "var(--muted)" }}>
-            I&apos;m open to opportunities in backend systems, platform engineering, and applied AI.
-            Whether it&apos;s a role or collaboration — I&apos;d love to connect.
+            Open to roles in backend systems, platform engineering, and applied AI.
+            If something here resonates — I&apos;d like to hear from you.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
