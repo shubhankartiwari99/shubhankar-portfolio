@@ -24,7 +24,7 @@ export default function BlogPage() {
           <div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Blog</h1>
             <p className="mt-4 text-lg" style={{ color: "var(--muted)" }}>
-              Thoughts on backend systems, production engineering, and applied AI.
+              Writing on backend systems, LLM reliability research, and what production engineering actually teaches you.
             </p>
           </div>
           <a

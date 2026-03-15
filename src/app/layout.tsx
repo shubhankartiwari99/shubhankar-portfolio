@@ -67,7 +67,10 @@ const jsonLd = {
   },
   knowsAbout: [
     "Java", "Spring Boot", "Microservices", "REST APIs", "OpenShift",
-    "CI/CD", "Machine Learning", "Deep Learning", "Python", "SQL",
+    "CI/CD", "Python", "SQL", "Machine Learning", "Deep Learning",
+    "LLM Evaluation", "Behavioral Consistency", "Monte Carlo Sampling",
+    "HuggingFace Transformers", "ROUGE-L", "Sentence Embeddings",
+    "Regression Testing", "Production Incident Triage",
   ],
   description:
     "Software Engineer with 4+ years of experience building production-grade backend systems for enterprise fintech. Kaggle Notebooks Expert (#2,441 / 59,663).",

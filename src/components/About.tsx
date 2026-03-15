@@ -35,9 +35,9 @@ export default function About() {
               <ul className="list-disc pl-5 space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
                 <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                 <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
-                <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
+                <li>Hands-on CI/CD pipeline ownership, cross-functional regression testing, release validation, and production stability management</li>
                 <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning & Computer Vision</li>
-                <li>Active in applied AI &mdash; researching LLM behavioral reliability</li>
+                <li>Active in applied AI &mdash; researching LLM behavioral reliability and production quality-gating</li>
               </ul>
             ) : (
               <>
