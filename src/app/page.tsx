@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import FeaturedProject from "@/components/FeaturedProject";
 import Overview from "@/components/Overview";
 import Journey from "@/components/Journey";
 import Engineering from "@/components/Engineering";
@@ -12,6 +13,7 @@ export default function Page() {
   return (
     <main>
       <Hero />
+      <FeaturedProject />
       <Overview />
       <Journey />
       <Engineering />
