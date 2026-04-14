@@ -36,7 +36,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
       Aug 2021 - Mar 2022 | Full-Stack Development
       Java, JavaScript, Python, Agile`,
 
-  "ls projects/": `  drwxr-xr-x  llm-reliability-platform/  Monte Carlo LLM eval — 310 inferences, Qwen 2.5-7B [Active]
+  "ls projects/": `  drwxr-xr-x  llm-inference-eval/        Probabilistic Inference Shaping — KL Divergence, Next.js, Qwen [Active]
   drwxr-xr-x  auto-regen-policy/         AI output quality-gating — AND policy + bootstrap calibration [Completed]
   drwxr-xr-x  indian-desi-llm/           Multilingual LLM training pipeline — pivoted to reliability eval [Completed]
   drwxr-xr-x  song-recommender/          ML playlist gen via BPM + VADER sentiment [Completed]
@@ -47,7 +47,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
   "data":     ["Oracle SQL", "TOAD", "Data Modeling", "Query Optimization"],
   "devops":   ["OpenShift", "Jenkins", "CI/CD", "Containerization"],
   "ml_ai":    ["Python", "ML", "Deep Learning", "CV", "NLP", "LLMs", "LoRA", "HuggingFace"],
-  "llm_eval": ["Monte Carlo Sampling", "sentence-transformers", "DBSCAN", "FastAPI", "Next.js"]
+  "llm_eval": ["KL Divergence", "Distribution Shaping", "Visual Telemetry", "Next.js", "FastAPI"]
 }`,
 
   contact: `  Email:    tiwarishubhankar@gmail.com

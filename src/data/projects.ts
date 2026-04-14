@@ -22,54 +22,44 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "llm-reliability-evaluation-platform",
-    title: "LLM Reliability Evaluation Platform",
+    title: "LLM Inference-Time Evaluation Platform",
     shortDescription:
-      "Production-grade system for measuring LLM behavioral consistency via Monte Carlo sampling. Benchmarked Qwen 2.5-7B across 240 inference calls — v2 grid sweep found temperature IS a lever, but top-p dominates 3.1×.",
-    fullDescription: `Standard benchmarks evaluate accuracy on a single inference pass. This platform evaluates something more deployment-relevant: behavioral consistency — how stable a model's outputs are across independent inference runs on identical inputs.
+      "Production-grade probabilistic evaluation system for analyzing LLM inference-time distribution shaping. Features a Next.js visual token-diffing engine and mathematical analysis via KL Divergence and Entropy Collapse.",
+    fullDescription: `Most LLM evaluations treat model outputs as final, completely ignoring inference-time transformations like guardrails or semantic processors. This platform evaluates something more deployment-relevant: how runtime policies systematically reshape output distributions before they ever reach the user.
 
-Built after recognising that open-source LLM evaluation tooling optimises for leaderboard scores but gives almost no signal about whether a model will behave predictably in production. The gap is especially sharp for 7B-class models being deployed in high-stakes domains.
+Built after recognizing that standard leaderboards give zero signal about deployment behavior, I architected a full ML Systems pipeline that separates model generation (stochasticity) from runtime intervention (deterministic shaping). The infrastructure operates across two distinct truth modes: a resilient "Real Mode" proxying to Qwen 2.5-7B on a Kaggle T4 GPU via ngrok, and a deterministic "Mock Mode" ensuring instant demo reliability without hardware dependencies.
 
-The platform runs Monte Carlo sampling (n=5 per prompt) across a full temperature × top-p grid sweep and computes instability, confidence, semantic dispersion, and entropy for each inference. A DBSCAN clustering pass groups semantically similar outputs to identify whether a model converges or diverges on a given prompt.
-
-v2 ran 240 inference calls (48 prompts × 5 MC samples) and produced a significant revision to the v1 finding: temperature is not irrelevant — it interacts with top-p, but top-p dominates reliability at 3.1× the effect magnitude. The optimal configuration for Qwen 2.5-7B is T=0.1, top-p=0.5. v2 also achieved 0% null generation, compared to 11.8% in v1, through improved retry logic and failure classification.`,
-    tags: ["Python", "FastAPI", "Next.js", "LLM", "NLP", "Research"],
+The Next.js dashboard features a high-signal visual diffing engine that highlights token-level mutations with premium glassmorphic telemetry. Behind the scenes, the system calculates exact Kullback-Leibler (KL) Divergence and Entropy Collapse ratios for every prompt, proving mathematically whether a runtime policy achieved compression or caused severe semantic distribution drift.`,
+    tags: ["Python", "Next.js", "MLOps", "LLM", "Information Theory", "Research"],
     github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
-    link: "https://www.kaggle.com/code/shubhankartiwari/qwen-2-5-7b-reliability-benchmark-research-report",
-    featured: true,
+    link: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
+    featured: false,
     image: "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "Monte Carlo sampler: n=5 independent inference passes per prompt across full temperature × top-p grid",
-      "Semantic clustering via sentence-transformers + DBSCAN to group divergent outputs",
-      "Reliability metrics: instability, confidence, entropy, semantic dispersion, cluster dominance",
-      "v2: 240 inference calls (48 prompts × 5 MC samples) — full grid sweep across T and top-p",
-      "v2 finding: top-p dominates reliability at 3.1× the effect magnitude of temperature",
-      "v2 finding: optimal config for Qwen 2.5-7B is T=0.1, top-p=0.5 (coding instability 0.163)",
-      "v2 finding: 86.5% escalation rate — philosophical prompts show highest instability",
-      "v2 finding: 0% null generation (vs 11.8% in v1) after retry logic and failure classification",
-      "v1 finding: temperature appeared negligible — revised in v2 after full grid sweep",
-      "Live Next.js dashboard with real-time telemetry, escalation badges, and offline JSON reports",
-      "Published benchmark dataset and research analysis notebook on Kaggle (v1 + v2)",
+      "Dual inference architecture: deterministic mock mode for seamless frontend demos and stochastic real mode proxying to Kaggle T4 via ngrok",
+      "Robust backend API written in FastAPI with Pydantic validation, explicit failovers, and HTTP retry adapters",
+      "Visual token-diffing engine built in Next.js capturing and highlighting exact lexical mutations",
+      "Mathematical evaluation layer calculating KL Divergence and Entropy Collapse to quantify distributional shift",
+      "Real-time system insight generation distinguishing between 'severe entropy collapse' and 'minimal topology shift'",
+      "Separation of model behavior vs system behavior — treating runtime interventions as context-sensitive operators"
     ],
     techStack: [
-      { category: "Frontend", items: ["Next.js", "TypeScript", "Vercel"] },
-      { category: "Backend", items: ["FastAPI", "Python", "ngrok"] },
-      { category: "ML / Eval", items: ["sentence-transformers", "DBSCAN", "Qwen 2.5-7B-Instruct"] },
-      { category: "Infrastructure", items: ["Kaggle T4 GPU", "Docker"] },
+      { category: "Frontend", items: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"] },
+      { category: "Backend", items: ["FastAPI", "Python", "Pydantic", "ngrok"] },
+      { category: "ML / Eval", items: ["KL Divergence", "Information Theory", "Qwen 2.5-7B"] },
+      { category: "Infrastructure", items: ["Kaggle T4 GPU", "Make", "REST APIs"] }
     ],
     challenges: [
-      "Designing a benchmark that stress-tests failure modes without being trivially gameable",
-      "Handling 11.8% null generation silently — required retry logic and failure classification",
-      "Frontend entropy mapping bug zeroed out entropy values in first dataset — required clean rerun",
-      "Keeping the FastAPI backend alive across a 2.5-hour T4 session with retry and heartbeat logic",
+      "Decoupling stochastic infrastructure from rigorous deterministic evaluation logic",
+      "Visually representing invisible distribution shaping concepts through a compelling UI dashboard",
+      "Handling network resiliency for the Kaggle proxy route with robust retry and fallback mechanics"
     ],
     learnings: [
-      "Behavioral consistency is a more deployment-relevant signal than single-pass accuracy",
-      "Temperature and top-p interact — top-p dominates reliability at 3.1×; single-axis sweeps miss this",
-      "v1 findings can be wrong — the grid sweep in v2 meaningfully revised the temperature conclusion",
-      "Silent failure modes (null generation) are more dangerous than noisy ones — retry logic is non-optional",
-      "Evaluation infrastructure is itself a research contribution, not just scaffolding",
+      "Collapse ratio captures entropy reduction, but KL Divergence is strictly required to measure the direction of change",
+      "Mocking infrastructure is a best practice for ML systems portfolios; it guarantees instant demo reliability",
+      "Treating inference-time interventions mathematically elevates a project from 'LLM script' to 'Research System'"
     ],
   },
   {
