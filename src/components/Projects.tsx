@@ -21,7 +21,7 @@ export default function Projects() {
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <motion.div {...reveal} className="flex items-end justify-between mb-12">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Featured Work</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Projects & Experiments</h2>
             <p className="text-base" style={{ color: "var(--muted)" }}>
               Selected projects and experiments
             </p>

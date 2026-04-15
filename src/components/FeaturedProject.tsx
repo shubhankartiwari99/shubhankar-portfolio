@@ -20,7 +20,7 @@ export default function FeaturedProject() {
     <section className="py-20 px-5 sm:px-6" style={{ backgroundColor: 'var(--bg)', color: 'var(--fg)' }}>
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <div className="text-center mb-16">
-<h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Work</h2>
+<h2 className="text-3xl sm:text-4xl font-bold mb-4">Project Spotlight</h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
             {featuredProject?.shortDescription ? featuredProject.shortDescription.split('.')[0] : 'Featured project'}
           </p>
