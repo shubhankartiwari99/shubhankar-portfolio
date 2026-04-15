@@ -117,10 +117,10 @@ export default function Projects() {
                     style={{ borderColor: "var(--border)", background: "var(--border)" }}
                   >
                     {[
-                      { label: "top-p vs temp", value: "3.1×", color: "var(--accent)" },
-                      { label: "Null gen. rate", value: "0.0%", color: "var(--accent)" },
-                      { label: "Coding instability", value: "0.163", color: "#f59e0b" },
-                      { label: "Escalation rate", value: "86.5%", color: "#f87171" },
+                      { label: "P(cultural) neutral", value: "0.0%", color: "var(--accent)" },
+                      { label: "Dose gradient", value: "1.00", color: "var(--accent)" },
+                      { label: "Collapse ratio", value: "0.39", color: "#f59e0b" },
+                      { label: "Live inferences", value: "65", color: "#f87171" },
                     ].map((stat) => (
                       <div
                         key={stat.label}

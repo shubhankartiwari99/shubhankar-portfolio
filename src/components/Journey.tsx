@@ -147,8 +147,8 @@ export default function Journey() {
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
               Outside of work, I sharpen my skills through Kaggle — ranked top 4.1% globally, personal best #707. 
-              Currently researching LLM behavioral reliability and building evaluation infrastructure that 
-              measures production-readiness, not just benchmark accuracy.
+              Currently researching LLM behavioral reliability, cultural alignment, and building production safeguard 
+              systems that measure deployment-readiness, not just benchmark accuracy.
             </p>
           </motion.div>
         </div>

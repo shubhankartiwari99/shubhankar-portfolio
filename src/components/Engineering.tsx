@@ -23,7 +23,7 @@ const principles = [
 
 export default function Engineering() {
   return (
-    <section className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 relative overflow-hidden">
+    <section id="experience" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 relative overflow-hidden">
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 

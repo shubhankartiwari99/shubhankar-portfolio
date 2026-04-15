@@ -24,42 +24,43 @@ export const projects: Project[] = [
     slug: "llm-reliability-evaluation-platform",
     title: "LLM Inference-Time Evaluation Platform",
     shortDescription:
-      "Production-grade probabilistic evaluation system for analyzing LLM inference-time distribution shaping. Features a Next.js visual token-diffing engine and mathematical analysis via KL Divergence and Entropy Collapse.",
-    fullDescription: `Most LLM evaluations treat model outputs as final, completely ignoring inference-time transformations like guardrails or semantic processors. This platform evaluates something more deployment-relevant: how runtime policies systematically reshape output distributions before they ever reach the user.
+      "Production-grade probabilistic evaluation system. Features 3-tier cultural dose-response experiments, a 9-category guardrail classifier, audit-grade deployment registries, behavioral snapshots, and adaptive reliability fallbacks.",
+    fullDescription: `Most LLM evaluations treat model outputs as final, completely ignoring inference-time transformations. This platform evaluates something more deployment-relevant: how runtime policies systematically reshape output distributions before they ever reach the user.
 
-Built after recognizing that standard leaderboards give zero signal about deployment behavior, I architected a full ML Systems pipeline that separates model generation (stochasticity) from runtime intervention (deterministic shaping). The infrastructure operates across two distinct truth modes: a resilient "Real Mode" proxying to Qwen 2.5-7B on a Kaggle T4 GPU via ngrok, and a deterministic "Mock Mode" ensuring instant demo reliability without hardware dependencies.
+Built after recognizing that benchmark accuracy gives zero signal about deployment behavior, I architected a full ML Systems pipeline separating raw stochasticity from deterministic shaping. The system runs real experimental workloads (n=65 live inferences on Qwen 2.5-7B via a Kaggle T4 proxy) using a 3-tier prompt gradient to measure cultural alignment as a dose-response problem. Results demonstrate a perfect monotonic increase in cultural signaling (P=0.0 → 0.4 → 1.0) with zero false positives on neutral inputs.
 
-The Next.js dashboard features a high-signal visual diffing engine that highlights token-level mutations with premium glassmorphic telemetry. Behind the scenes, the system calculates exact Kullback-Leibler (KL) Divergence and Entropy Collapse ratios for every prompt, proving mathematically whether a runtime policy achieved compression or caused severe semantic distribution drift.`,
-    tags: ["Python", "Next.js", "MLOps", "LLM", "Information Theory", "Research"],
+The infrastructure extends far beyond evaluation into full system reliability. It features a 9-category guardrail classifier with severity scaling, an empirically derived reliability guard that triggers grid-sweep-optimized adaptive fallbacks (T=0.1, top_p=0.5) when token entropy exceeds safe thresholds, and a Pydantic-powered deployment registry enforcing Go/No-Go release gates based on "frozen behavioral DNA" snapshots. The entire pipeline is verified by a strict SHA-256 fingerprint chain and backed by 55+ test suites including replay, fuzz, and stress testing.`,
+    tags: ["Python", "MLOps", "LLM", "Information Theory", "System Design", "Research"],
     github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
     link: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
-    featured: false,
-    image: "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    featured: true,
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "Dual inference architecture: deterministic mock mode for seamless frontend demos and stochastic real mode proxying to Kaggle T4 via ngrok",
-      "Robust backend API written in FastAPI with Pydantic validation, explicit failovers, and HTTP retry adapters",
-      "Visual token-diffing engine built in Next.js capturing and highlighting exact lexical mutations",
-      "Mathematical evaluation layer calculating KL Divergence and Entropy Collapse to quantify distributional shift",
-      "Real-time system insight generation distinguishing between 'severe entropy collapse' and 'minimal topology shift'",
-      "Separation of model behavior vs system behavior — treating runtime interventions as context-sensitive operators"
+      "Cultural alignment dose-response experiments evaluating 3-tier prompt gradients across 65 live inference calls",
+      "9-category guardrail classifier with explicit severity scaling (Low → Critical) and escalation logic",
+      "Deployment registry leveraging strict Pydantic schemas for audit-grade provenance and Go/No-Go release gating",
+      "Behavioral snapshot system capturing the 'frozen DNA' and telemetry trace of every model run",
+      "Adaptive reliability guard triggering empirical grid-sweep fallbacks when inference entropy exceeds safe bounds",
+      "Runtime identity verification enforcing dependency lock via SHA-256 artifact finger-printing",
+      "Massive 55+ file test suite including systemic failure modes, contract fuzzing, and invariant validation"
     ],
     techStack: [
-      { category: "Frontend", items: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"] },
-      { category: "Backend", items: ["FastAPI", "Python", "Pydantic", "ngrok"] },
-      { category: "ML / Eval", items: ["KL Divergence", "Information Theory", "Qwen 2.5-7B"] },
-      { category: "Infrastructure", items: ["Kaggle T4 GPU", "Make", "REST APIs"] }
+      { category: "ML / Eval", items: ["Cultural Alignment", "KL Divergence", "Information Theory", "Qwen 2.5-7B"] },
+      { category: "System", items: ["Guardrails", "Behavioral Snapshots", "Pydantic", "Release Registry"] },
+      { category: "Backend", items: ["FastAPI", "Python", "pytest suite (55+ tests)"] },
+      { category: "Infrastructure", items: ["Kaggle T4 GPU", "ngrok", "SHA-256 Fingerprinting"] },
     ],
     challenges: [
-      "Decoupling stochastic infrastructure from rigorous deterministic evaluation logic",
-      "Visually representing invisible distribution shaping concepts through a compelling UI dashboard",
-      "Handling network resiliency for the Kaggle proxy route with robust retry and fallback mechanics"
+      "Designing mathematical dose-response evaluations that measure cultural alignment proportionally rather than via binary pass/fail",
+      "Ensuring audit-grade reproducibility across stochastic models using exact artifact hashing and strict release schemas",
+      "Calibrating entropy-driven reliability fallbacks that correctly intercept hallucinations without crashing throughput"
     ],
     learnings: [
-      "Collapse ratio captures entropy reduction, but KL Divergence is strictly required to measure the direction of change",
-      "Mocking infrastructure is a best practice for ML systems portfolios; it guarantees instant demo reliability",
-      "Treating inference-time interventions mathematically elevates a project from 'LLM script' to 'Research System'"
+      "Cultural alignment operates as a dose-response mechanism — runtime acts as a proportional amplifier, not a binary switch",
+      "A deterministic registry schema with explicit evaluation evidence is required for any production model rollout",
+      "Mocking infrastructure is still critical for portfolio demos, but the value lies in testing behavioral edge cases reliably"
     ],
   },
   {
@@ -71,7 +72,7 @@ The Next.js dashboard features a high-signal visual diffing engine that highligh
 
 The goal was to address a real gap: most open-source LLMs handle formal Hindi reasonably well but break down on the casual, code-switched Hindi-English that represents how most Indians actually communicate. The project focuses on building the infrastructure that makes multilingual AI reliable and safe for production.
 
-Recognised mid-project that Sarvam AI had advanced significantly in the same space with more compute and a dedicated research team. Rather than continuing a follower project, pivoted toward the more interesting problem hiding inside the work: building rigorous behavioral reliability evaluation infrastructure for open-source LLMs. That pivot became the LLM Reliability Evaluation Platform.`,
+Recognised mid-project that Sarvam AI had advanced significantly in the same space with more compute and a dedicated research team. Rather than continuing a follower project, pivoted toward the more interesting problem hiding inside the work: building rigorous behavioral reliability evaluation infrastructure for open-source LLMs. That pivot evolved into the overarching LLM Inference Systems project, moving from raw training to systemic distribution shaping, guardrails, and audit-grade performance evaluation.`,
     tags: ["Python", "LLM", "NLP", "LoRA", "HuggingFace", "Transformers"],
     github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
     link: "https://www.kaggle.com/code/shubhankartiwari/canonical-dataset-for-indian-desi-multilingual-llm",

@@ -26,7 +26,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
   Building production-grade backend systems for enterprise fintech.
   Kaggle Notebooks Expert (Rank #2,441 / 59,663)
   B.Tech CSE, SRM IST, Chennai (94.4% GPA)
-  Researching LLM behavioral reliability & evaluation infrastructure.`,
+  Researching LLM behavioral reliability, guardrails, & cultural alignment.`, 
 
   experience: `  [1] Software Engineer I A -- Bank of America
       Apr 2022 - Present | Backend / Platform Engineering
@@ -36,7 +36,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
       Aug 2021 - Mar 2022 | Full-Stack Development
       Java, JavaScript, Python, Agile`,
 
-  "ls projects/": `  drwxr-xr-x  llm-inference-eval/        Probabilistic Inference Shaping — KL Divergence, Next.js, Qwen [Active]
+  "ls projects/": `  drwxr-xr-x  llm-inference-eval/        Distribution shaping, guardrails, cultural alignment dose-response [Active]
   drwxr-xr-x  auto-regen-policy/         AI output quality-gating — AND policy + bootstrap calibration [Completed]
   drwxr-xr-x  indian-desi-llm/           Multilingual LLM training pipeline — pivoted to reliability eval [Completed]
   drwxr-xr-x  song-recommender/          ML playlist gen via BPM + VADER sentiment [Completed]
@@ -47,7 +47,7 @@ const COMMANDS: Record<string, string | (() => string)> = {
   "data":     ["Oracle SQL", "TOAD", "Data Modeling", "Query Optimization"],
   "devops":   ["OpenShift", "Jenkins", "CI/CD", "Containerization"],
   "ml_ai":    ["Python", "ML", "Deep Learning", "CV", "NLP", "LLMs", "LoRA", "HuggingFace"],
-  "llm_eval": ["KL Divergence", "Distribution Shaping", "Visual Telemetry", "Next.js", "FastAPI"]
+  "llm_eval": ["Cultural Alignment", "Guardrails", "KL Divergence", "Distribution Shaping", "Pydantic"]
 }`,
 
   contact: `  Email:    tiwarishubhankar@gmail.com

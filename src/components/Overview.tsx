@@ -29,8 +29,8 @@ const pillars = [
     icon: <FlaskConical size={20} />,
     title: "LLM Evaluation",
     description:
-      "Behavioral consistency research — measuring whether a model is trustworthy enough to deploy, not just whether it can get the right answer once.",
-    tags: ["Monte Carlo Sampling", "HuggingFace", "Qwen 2.5-7B"],
+      "Distribution shaping, cultural alignment, and guardrail research — evaluating whether a model's run-time is safe to deploy, not just whether it can benchmark well.",
+    tags: ["Cultural Alignment", "Guardrail Systems", "Qwen 2.5-7B"],
   },
   {
     icon: <BarChart2 size={20} />,

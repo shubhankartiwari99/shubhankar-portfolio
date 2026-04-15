@@ -7,7 +7,7 @@ import { getAllProjects } from '@/data/projects';
 
 export default function FeaturedProject() {
   const projects = getAllProjects();
-  const featuredProject = projects.find(p => p.featured)!;
+  const featuredProject = projects.find(p => p.featured);
 
   const stats = [
     { label: 'top-p vs temp', value: '3.1×', color: 'var(--accent)' },
@@ -20,12 +20,12 @@ export default function FeaturedProject() {
     <section className="py-20 px-5 sm:px-6" style={{ backgroundColor: 'var(--bg)', color: 'var(--fg)' }}>
       <div className="max-w-5xl xl:max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">🔥 Featured Work</h2>
+<h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Work</h2>
           <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
-            {featuredProject.shortDescription.split('.')[0]}
+            {featuredProject?.shortDescription ? featuredProject.shortDescription.split('.')[0] : 'Featured project'}
           </p>
           <p className="text-xl mt-4 max-w-3xl mx-auto" style={{ color: 'var(--muted)' }}>
-            {featuredProject.title}
+            {featuredProject?.title || 'Featured Project'}
           </p>
         </div>
 
@@ -35,8 +35,8 @@ export default function FeaturedProject() {
         >
           <div className="relative h-64 lg:h-80 overflow-hidden">
             <Image
-              src={featuredProject.image}
-              alt={featuredProject.title}
+              src={featuredProject?.image || '/og_final.png'}
+              alt={featuredProject?.title || 'Featured project'}
               fill
               className="object-cover opacity-50 group-hover:opacity-70 transition-all duration-500 group-hover:scale-105"
             />
@@ -47,11 +47,11 @@ export default function FeaturedProject() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               <div>
                 <h3 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: 'var(--fg)' }}>
-                  {featuredProject.title}
+                  {featuredProject?.title || 'Featured Project'}
                 </h3>
                 
                 <ul className="space-y-3 mb-8" style={{ color: 'var(--muted)' }}>
-                  {featuredProject.highlights.slice(0, 4).map((highlight, i) => (
+                  {(featuredProject?.highlights || []).slice(0, 4).map((highlight, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="font-mono text-sm mt-0.5 w-4 flex-shrink-0" style={{ color: 'var(--accent)' }}>•</span>
                       {highlight}
@@ -70,7 +70,7 @@ export default function FeaturedProject() {
 
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    href={featuredProject.github || '#'}
+                    href={featuredProject?.github || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl transition-all duration-300 hover:scale-105"
@@ -84,7 +84,7 @@ export default function FeaturedProject() {
                     View Repo
                   </Link>
                   <Link
-                    href={featuredProject.link || '#'}
+                    href={featuredProject?.link || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
@@ -95,9 +95,7 @@ export default function FeaturedProject() {
                   </Link>
                 </div>
 
-                <p className="text-sm mt-6 italic max-w-xl" style={{ color: 'var(--muted)' }}>
-                  {featuredProject.fullDescription.split('.')[0]}
-                </p>
+                {/* Removed awkward truncated description */}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
