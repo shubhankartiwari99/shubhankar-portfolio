@@ -42,5 +42,5 @@ A full-stack system to analyze how runtime policies reshape LLM output distribut
 
 ---
 
-[Resume (PDF)](public/Shubhankar_Tiwari_Resume.pdf) | [Portfolio Site](https://shubhankar-portfolio.vercel.app)
+[Resume (PDF)](public/Shubhankar_Tiwari_Resume.pdf) | [Portfolio Site](https://shubhankar-tiwari.vercel.app)
 
