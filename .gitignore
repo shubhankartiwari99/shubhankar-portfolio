@@ -48,6 +48,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# temporary drive folders
+.tmp.drivedownload/
+.tmp.driveupload/
 -e 
 # Environment files
 *.env
