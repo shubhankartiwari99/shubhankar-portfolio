@@ -137,6 +137,33 @@ export default function Projects() {
                     ))}
                   </div>
                 )}
+
+                {project.featured && project.slug === "credit-transaction-anomaly-detection" && (
+                  <div
+                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
+                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
+                  >
+                    {[
+                      { label: "Transactions", value: "284K", color: "var(--accent)" },
+                      { label: "Fraud rate", value: "0.17%", color: "#f87171" },
+                      { label: "Drift (PSI)", value: "< 0.2", color: "#f59e0b" },
+                      { label: "Shadow deploy", value: "Live", color: "#22c55e" },
+                    ].map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="px-3 py-2.5"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
+                          {stat.value}
+                        </div>
+                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex flex-wrap gap-2">
                     {project.tags.slice(0, 3).map((tag) => (

@@ -64,6 +64,50 @@ The infrastructure extends far beyond evaluation into full system reliability. I
     ],
   },
   {
+    slug: "credit-transaction-anomaly-detection",
+    title: "Credit Transaction Anomaly Detection System",
+    shortDescription:
+      "Production fraud ML pipeline with drift detection (KL divergence + PSI), shadow deployment, versioned model registry, and a real-time Next.js monitoring dashboard — deployed end-to-end on Render + Vercel.",
+    fullDescription: `Most ML portfolio projects stop at a Jupyter notebook. This one ships a full production loop: ingest → preprocess → train → serve → monitor → retrain → promote.
+
+The system detects anomalous credit card transactions using an Isolation Forest trained on the Kaggle Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). What makes it a systems project rather than a modeling exercise is everything around the model.
+
+A FastAPI backend serves real-time predictions while continuously computing distribution drift via KL divergence and Population Stability Index (PSI) on both transaction amounts and model confidence scores. When drift exceeds calibrated thresholds, a shadow model is retrained automatically. The shadow runs in parallel with production — every prediction is scored by both models — and promotion to production requires explicit operator action through the dashboard.
+
+The model registry tracks every version with full metadata: trigger reason, training timestamp, AUC-PR, and deployment status (production / shadow / archived). The Next.js dashboard displays live telemetry: prediction confidence trends, fraud rate, drift snapshot, shadow vs production comparison charts, and registry state.`,
+    tags: ["FastAPI", "scikit-learn", "Next.js", "MLOps", "Drift Detection", "System Design"],
+    github: "https://github.com/shubhankartiwari99/Credit-Transaction-Anomaly-Detection-System-with-Drift-Triggered-Retraining",
+    link: "https://credit-transaction-anomaly-detectio.vercel.app",
+    featured: true,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkYXRhJTIwZGFzaGJvYXJkJTIwZGFya3xlbnwwfHx8fDE3MDk2NTYwMDB8MA&ixlib=rb-4.1.0&q=85",
+    status: "Active",
+    year: "2026-Present",
+    highlights: [
+      "End-to-end production ML pipeline: training → serving → monitoring → drift-triggered retraining → shadow deployment → promotion",
+      "Real-time drift detection via KL divergence and PSI on transaction amount and model confidence distributions",
+      "Shadow deployment architecture — every prediction scored by both production and candidate models simultaneously",
+      "Versioned model registry with full provenance: trigger reason, AUC-PR, training timestamp, deployment status",
+      "Live Next.js monitoring dashboard with prediction confidence trends, fraud rate, drift snapshot, and shadow vs production comparison",
+      "FastAPI backend deployed on Render with CORS-hardened error handling; frontend on Vercel",
+    ],
+    techStack: [
+      { category: "Backend", items: ["FastAPI", "Python", "Uvicorn", "Render"] },
+      { category: "ML", items: ["scikit-learn", "Isolation Forest", "SMOTE", "Pandas", "NumPy"] },
+      { category: "Monitoring", items: ["KL Divergence", "PSI", "Drift Detection", "Shadow Deployment"] },
+      { category: "Frontend", items: ["Next.js", "Recharts", "Tailwind CSS", "Vercel"] },
+    ],
+    challenges: [
+      "Extreme class imbalance (0.17% fraud) — required careful evaluation metrics (AUC-PR over accuracy) and SMOTE-based rebalancing",
+      "Designing a shadow deployment loop that doesn't double latency — both models score every request but shadow results are non-blocking",
+      "Drift threshold calibration — PSI > 0.2 and KL > 0.1 trigger retraining without causing false alarms on normal distribution shift",
+    ],
+    learnings: [
+      "The model is the easy part — drift detection, shadow deployment, and registry governance are where production ML gets hard",
+      "PSI is more robust than KL divergence for detecting gradual distribution shift in transaction amounts",
+      "Explicit promotion gates (shadow → production) prevent silent model degradation that auto-promotion would miss",
+    ],
+  },
+  {
     slug: "indian-multilingual-llm",
     title: "Indian Desi Multilingual LLM — Training Pipeline",
     shortDescription:
