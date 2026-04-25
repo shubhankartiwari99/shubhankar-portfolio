@@ -67,14 +67,16 @@ The infrastructure extends far beyond evaluation into full system reliability. I
     slug: "credit-transaction-anomaly-detection",
     title: "Credit Transaction Anomaly Detection System",
     shortDescription:
-      "Production fraud ML pipeline with drift detection (KL divergence + PSI), shadow deployment, versioned model registry, and a real-time Next.js monitoring dashboard — deployed end-to-end on Render + Vercel.",
-    fullDescription: `Most ML portfolio projects stop at a Jupyter notebook. This one ships a full production loop: ingest → preprocess → train → serve → monitor → retrain → promote.
+      "Production ML system with real-time drift monitoring (KL divergence + PSI), automated retraining with cooldown constraints, feature shift explanation, model lifecycle management, and a live observability dashboard — deployed end-to-end on Render + Vercel.",
+    fullDescription: `Most ML portfolio projects stop at a Jupyter notebook. This one ships a complete ML system loop: ingest → preprocess → train → serve → monitor → detect drift → trigger retraining → shadow deploy → promote.
 
 The system detects anomalous credit card transactions using an Isolation Forest trained on the Kaggle Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). What makes it a systems project rather than a modeling exercise is everything around the model.
 
-A FastAPI backend serves real-time predictions while continuously computing distribution drift via KL divergence and Population Stability Index (PSI) on both transaction amounts and model confidence scores. When drift exceeds calibrated thresholds, a shadow model is retrained automatically. The shadow runs in parallel with production — every prediction is scored by both models — and promotion to production requires explicit operator action through the dashboard.
+A FastAPI backend serves real-time predictions while continuously computing distribution drift via KL divergence and Population Stability Index (PSI) on both transaction amounts and model confidence scores. The drift engine tracks a persistent timeline of divergence scores and identifies the top shifted feature driving the drift, making the system interpretable rather than just reactive.
 
-The model registry tracks every version with full metadata: trigger reason, training timestamp, AUC-PR, and deployment status (production / shadow / archived). The Next.js dashboard displays live telemetry: prediction confidence trends, fraud rate, drift snapshot, shadow vs production comparison charts, and registry state.`,
+When drift exceeds calibrated thresholds, retraining is triggered automatically — but with a cooldown constraint preventing unstable retraining loops under noisy drift signals. A shadow model is trained and deployed in parallel with production — every prediction is scored by both models simultaneously — and promotion requires explicit operator action through the dashboard.
+
+The model registry tracks every version with full metadata: trigger reason, drift score, top shifted feature, training timestamp, and deployment status (production / shadow / archived). Retraining failures are caught, persisted, and surfaced to the UI as explicit SUCCESS/FAILED states. The Next.js dashboard displays live system telemetry: drift score timeline, confidence distribution histogram, prediction confidence trends, fraud rate, system health, shadow vs production comparison, and the full retraining pipeline state.`,
     tags: ["FastAPI", "scikit-learn", "Next.js", "MLOps", "Drift Detection", "System Design"],
     github: "https://github.com/shubhankartiwari99/Credit-Transaction-Anomaly-Detection-System-with-Drift-Triggered-Retraining",
     link: "https://credit-transaction-anomaly-detectio.vercel.app",
@@ -83,27 +85,32 @@ The model registry tracks every version with full metadata: trigger reason, trai
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "End-to-end production ML pipeline: training → serving → monitoring → drift-triggered retraining → shadow deployment → promotion",
-      "Real-time drift detection via KL divergence and PSI on transaction amount and model confidence distributions",
+      "Complete ML system loop: training → serving → drift monitoring → threshold trigger → cooldown gate → retraining → shadow deployment → promotion",
+      "Real-time drift detection via KL divergence and PSI with persistent drift score timeline tracking distributional evolution over time",
+      "Feature shift explanation surfaces the top shifted feature driving drift — interpretable ML system behavior, not just a number",
+      "Retraining cooldown constraint prevents unstable loops under noisy drift signals — demonstrates real-world system constraints",
       "Shadow deployment architecture — every prediction scored by both production and candidate models simultaneously",
-      "Versioned model registry with full provenance: trigger reason, AUC-PR, training timestamp, deployment status",
-      "Live Next.js monitoring dashboard with prediction confidence trends, fraud rate, drift snapshot, and shadow vs production comparison",
-      "FastAPI backend deployed on Render with CORS-hardened error handling; frontend on Vercel",
+      "Failure-aware retraining pipeline with explicit SUCCESS/FAILED status tracking surfaced to the UI",
+      "Versioned model registry with full provenance: trigger reason, drift score, top shifted feature, training timestamp, deployment status",
+      "Live Next.js observability dashboard: drift timeline, confidence distribution histogram, prediction trends, fraud rate, system health, and shadow vs production comparison",
+      "10 API endpoints including /drift, /drift/history, /retrain/status, and /health for full system observability",
     ],
     techStack: [
       { category: "Backend", items: ["FastAPI", "Python", "Uvicorn", "Render"] },
       { category: "ML", items: ["scikit-learn", "Isolation Forest", "SMOTE", "Pandas", "NumPy"] },
-      { category: "Monitoring", items: ["KL Divergence", "PSI", "Drift Detection", "Shadow Deployment"] },
+      { category: "Monitoring", items: ["KL Divergence", "PSI", "Drift Timeline", "Feature Shift Explanation", "Cooldown Logic"] },
       { category: "Frontend", items: ["Next.js", "Recharts", "Tailwind CSS", "Vercel"] },
     ],
     challenges: [
       "Extreme class imbalance (0.17% fraud) — required careful evaluation metrics (AUC-PR over accuracy) and SMOTE-based rebalancing",
       "Designing a shadow deployment loop that doesn't double latency — both models score every request but shadow results are non-blocking",
       "Drift threshold calibration — PSI > 0.2 and KL > 0.1 trigger retraining without causing false alarms on normal distribution shift",
+      "Cooldown constraint design — preventing retraining instability under noisy drift without masking real distributional change",
     ],
     learnings: [
-      "The model is the easy part — drift detection, shadow deployment, and registry governance are where production ML gets hard",
-      "PSI is more robust than KL divergence for detecting gradual distribution shift in transaction amounts",
+      "The model is the easy part — drift detection, cooldown constraints, failure handling, and registry governance are where production ML gets hard",
+      "Feature shift explanation transforms a number into an actionable insight — interpretable drift is far more valuable than raw metrics",
+      "Cooldown mechanisms are essential in any automated trigger system — without them, noisy signals cause runaway retraining loops",
       "Explicit promotion gates (shadow → production) prevent silent model degradation that auto-promotion would miss",
     ],
   },
