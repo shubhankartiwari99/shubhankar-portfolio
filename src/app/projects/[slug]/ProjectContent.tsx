@@ -128,6 +128,62 @@ export default function ProjectContent({ project }: Props) {
           </div>
         </motion.div>
 
+        {/* Demo GIF */}
+        {project.demoGif && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="mb-12 rounded-xl overflow-hidden border"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <img 
+              src={project.demoGif} 
+              alt={`${project.title} Demo`}
+              className="w-full h-auto object-cover"
+            />
+          </motion.section>
+        )}
+
+        {/* Key Insight & Capabilities */}
+        {(project.keyInsight || project.systemCapabilities) && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.18 }}
+            className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {project.keyInsight && (
+              <div className="md:col-span-1 p-6 rounded-xl border flex flex-col justify-center" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <Lightbulb size={16} style={{ color: "var(--accent)" }} />
+                  <h3 className="font-semibold text-sm uppercase tracking-wider" style={{ color: "var(--accent)" }}>Key Insight</h3>
+                </div>
+                <p className="text-sm md:text-base leading-relaxed italic" style={{ color: "var(--fg)" }}>
+                  "{project.keyInsight}"
+                </p>
+              </div>
+            )}
+            
+            {project.systemCapabilities && (
+              <div className="md:col-span-2 p-6 rounded-xl border flex flex-col justify-center" style={{ borderColor: "var(--border)", background: "var(--bg)" }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <Zap size={16} style={{ color: "var(--accent)" }} />
+                  <h3 className="font-semibold text-sm uppercase tracking-wider" style={{ color: "var(--fg)" }}>System Capabilities</h3>
+                </div>
+                <ul className="space-y-2">
+                  {project.systemCapabilities.map((cap, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm md:text-base" style={{ color: "var(--muted)" }}>
+                      <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: "var(--accent)" }} />
+                      {cap}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </motion.section>
+        )}
+
         {/* Full Description */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}

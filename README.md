@@ -15,7 +15,7 @@ A full-stack system to analyze how runtime policies reshape LLM output distribut
 - Information-theoretic metrics (entropy, instability, semantic dispersion)
 - Real-time UI with diff + observability
 
-👉 [View Repo](https://github.com/shubhankartiwari99/indian-desi-llm-inference)  
+👉 [View Repo](https://github.com/shubhankartiwari99/llm-behavior-evaluation)  
 👉 [Kaggle Notebook](https://www.kaggle.com/code/shubhankartiwari/qwen-2-5-7b-reliability-benchmark-research-report)
 
 **Key Result:** Entropy reduced by ~50% under runtime shaping while preserving semantic coherence.

@@ -17,6 +17,9 @@ export interface Project {
   }[];
   challenges?: string[];
   learnings?: string[];
+  keyInsight?: string;
+  systemCapabilities?: string[];
+  demoGif?: string;
 }
 
 export const projects: Project[] = [
@@ -31,8 +34,8 @@ Built after recognizing that benchmark accuracy gives zero signal about deployme
 
 The infrastructure extends far beyond evaluation into full system reliability. It features a 9-category guardrail classifier with severity scaling, an empirically derived reliability guard that triggers grid-sweep-optimized adaptive fallbacks (T=0.1, top_p=0.5) when token entropy exceeds safe thresholds, and a Pydantic-powered deployment registry enforcing Go/No-Go release gates based on "frozen behavioral DNA" snapshots. The entire pipeline is verified by a strict SHA-256 fingerprint chain and backed by 55+ test suites including replay, fuzz, and stress testing.`,
     tags: ["Python", "MLOps", "LLM", "Information Theory", "System Design", "Research"],
-    github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
-    link: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
+    github: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
+    link: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
     featured: true,
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     status: "Active",
@@ -62,6 +65,13 @@ The infrastructure extends far beyond evaluation into full system reliability. I
       "A deterministic registry schema with explicit evaluation evidence is required for any production model rollout",
       "Mocking infrastructure is still critical for portfolio demos, but the value lies in testing behavioral edge cases reliably"
     ],
+    keyInsight: "Evaluation must measure how runtime policies systematically reshape output distributions before they reach the user.",
+    systemCapabilities: [
+      "9-category guardrail classifier with explicit severity scaling",
+      "Audit-grade deployment registry with Go/No-Go release gates",
+      "Adaptive fallbacks triggered by inference entropy"
+    ],
+    demoGif: "https://raw.githubusercontent.com/shubhankartiwari99/llm-behavior-evaluation/main/demo.gif"
   },
   {
     slug: "credit-transaction-anomaly-detection",
@@ -78,7 +88,7 @@ When drift exceeds calibrated thresholds, retraining is triggered automatically 
 
 The model registry tracks every version with full metadata: trigger reason, drift score, top shifted feature, training timestamp, and deployment status (production / shadow / archived). Retraining failures are caught, persisted, and surfaced to the UI as explicit SUCCESS/FAILED states. The Next.js dashboard displays live system telemetry: drift score timeline, confidence distribution histogram, prediction confidence trends, fraud rate, system health, shadow vs production comparison, and the full retraining pipeline state.`,
     tags: ["FastAPI", "scikit-learn", "Next.js", "MLOps", "Drift Detection", "System Design"],
-    github: "https://github.com/shubhankartiwari99/Credit-Transaction-Anomaly-Detection-System-with-Drift-Triggered-Retraining",
+    github: "https://github.com/shubhankartiwari99/drift-aware-fraud-detection",
     link: "https://credit-transaction-anomaly-detectio.vercel.app",
     featured: true,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkYXRhJTIwZGFzaGJvYXJkJTIwZGFya3xlbnwwfHx8fDE3MDk2NTYwMDB8MA&ixlib=rb-4.1.0&q=85",
@@ -113,6 +123,13 @@ The model registry tracks every version with full metadata: trigger reason, drif
       "Cooldown mechanisms are essential in any automated trigger system — without them, noisy signals cause runaway retraining loops",
       "Explicit promotion gates (shadow → production) prevent silent model degradation that auto-promotion would miss",
     ],
+    keyInsight: "Traditional ML systems degrade silently under data drift; this system treats drift as a first-class signal to enable proactive retraining.",
+    systemCapabilities: [
+      "Real-time drift detection (KL divergence + PSI) with timeline tracking",
+      "Automated retraining triggered by drift with cooldown constraints",
+      "Live observability dashboard with shadow vs. production comparison"
+    ],
+    demoGif: "https://raw.githubusercontent.com/shubhankartiwari99/drift-aware-fraud-detection/main/demo-fraud-ml.gif"
   },
   {
     slug: "indian-multilingual-llm",
@@ -125,7 +142,7 @@ The goal was to address a real gap: most open-source LLMs handle formal Hindi re
 
 Recognised mid-project that Sarvam AI had advanced significantly in the same space with more compute and a dedicated research team. Rather than continuing a follower project, pivoted toward the more interesting problem hiding inside the work: building rigorous behavioral reliability evaluation infrastructure for open-source LLMs. That pivot evolved into the overarching LLM Inference Systems project, moving from raw training to systemic distribution shaping, guardrails, and audit-grade performance evaluation.`,
     tags: ["Python", "LLM", "NLP", "LoRA", "HuggingFace", "Transformers"],
-    github: "https://github.com/shubhankartiwari99/indian-desi-llm-inference",
+    github: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
     link: "https://www.kaggle.com/code/shubhankartiwari/canonical-dataset-for-indian-desi-multilingual-llm",
     featured: false,
     image: "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
