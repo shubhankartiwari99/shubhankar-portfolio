@@ -70,9 +70,7 @@ export default function FeaturedProject() {
 
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    href={featuredProject?.github || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/projects/${featuredProject?.slug}`}
                     className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl transition-all duration-300 hover:scale-105"
                     style={{
                       backgroundColor: 'var(--accent)',
@@ -80,19 +78,32 @@ export default function FeaturedProject() {
                       boxShadow: '0 0 20px var(--accent-glow)'
                     }}
                   >
-                    <Github size={18} />
-                    View Repo
+                    Read Case Study
                   </Link>
-                  <Link
-                    href={featuredProject?.link || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
-                    style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}
-                  >
-                    Kaggle Notebook
-                    <ExternalLink size={18} />
-                  </Link>
+                  {featuredProject?.github && (
+                    <Link
+                      href={featuredProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
+                      style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}
+                    >
+                      <Github size={18} />
+                      View Repo
+                    </Link>
+                  )}
+                  {featuredProject?.link && featuredProject.link !== featuredProject.github && (
+                    <Link
+                      href={featuredProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
+                      style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}
+                    >
+                      Live Demo
+                      <ExternalLink size={18} />
+                    </Link>
+                  )}
                 </div>
 
                 {/* Removed awkward truncated description */}
