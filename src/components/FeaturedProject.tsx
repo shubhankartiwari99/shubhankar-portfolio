@@ -10,10 +10,10 @@ export default function FeaturedProject() {
   const featuredProject = projects.find(p => p.featured);
 
   const stats = [
-    { label: 'top-p vs temp', value: '3.1×', color: 'var(--accent)' },
-    { label: 'Null gen. rate', value: '0.0%', color: '#22c55e' },
-    { label: 'Coding instability', value: '0.163', color: '#f59e0b' },
-    { label: 'Escalation rate', value: '86.5%', color: '#f87171' },
+    { label: 'Instability Drop', value: '82%', color: 'var(--accent)' },
+    { label: 'False Positives', value: '0.0%', color: '#22c55e' },
+    { label: 'Conf. Uplift', value: '+0.07', color: '#f59e0b' },
+    { label: 'Intervention', value: '~35%', color: '#f87171' },
   ];
 
   return (
@@ -61,10 +61,10 @@ export default function FeaturedProject() {
 
                 <div className="mb-8 p-4 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
                   <p className="font-semibold text-lg mb-1" style={{ color: 'var(--accent)' }}>
-                    ↓ Entropy reduced ~50% under runtime shaping
+                    ↓ Instability reduced by 82% on degenerate prompts
                   </p>
                   <p className="text-sm" style={{ color: 'var(--muted)' }}>
-                    top-p dominates 3.1× over temperature (Qwen 2.5-7B)
+                    Adaptive control mitigates entropy collapse and repetition loops.
                   </p>
                 </div>
 

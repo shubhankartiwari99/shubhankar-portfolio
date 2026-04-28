@@ -14,7 +14,9 @@ const reveal = {
 };
 
 export default function Projects() {
-  const projects = getAllProjects();
+  const allProjects = getAllProjects();
+  const featuredProject = allProjects.find((p) => p.featured);
+  const projects = allProjects.filter((p) => p.slug !== featuredProject?.slug);
 
   return (
     <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
@@ -111,16 +113,16 @@ export default function Projects() {
                   {project.shortDescription}
                 </p>
 
-                {project.featured && project.slug === "llm-reliability-evaluation-platform" && (
+                {project.featured && project.slug === "llm-generation-control" && (
                   <div
                     className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
                     style={{ borderColor: "var(--border)", background: "var(--border)" }}
                   >
                     {[
-                      { label: "P(cultural) neutral", value: "0.0%", color: "var(--accent)" },
-                      { label: "Dose gradient", value: "1.00", color: "var(--accent)" },
-                      { label: "Collapse ratio", value: "0.39", color: "#f59e0b" },
-                      { label: "Live inferences", value: "65", color: "#f87171" },
+                      { label: "Instability Drop", value: "82%", color: "var(--accent)" },
+                      { label: "Conf. Uplift", value: "+0.07", color: "var(--accent)" },
+                      { label: "Intervention", value: "~35%", color: "#f59e0b" },
+                      { label: "Test Suites", value: "55+", color: "#f87171" },
                     ].map((stat) => (
                       <div
                         key={stat.label}
@@ -138,7 +140,7 @@ export default function Projects() {
                   </div>
                 )}
 
-                {project.featured && project.slug === "credit-transaction-anomaly-detection" && (
+                {project.featured && project.slug === "drift-aware-fraud-detection" && (
                   <div
                     className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
                     style={{ borderColor: "var(--border)", background: "var(--border)" }}

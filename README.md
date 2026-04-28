@@ -6,19 +6,19 @@ I build production-grade ML systems focused on inference-time behavior, reliabil
 
 ## 🔥 Featured Project
 
-### LLM Reliability Evaluation Platform
+### LLM Generation Control Engine
 
-A full-stack system to analyze how runtime policies reshape LLM output distributions.
+A production-grade, interactive control system for large language models to detect and mitigate instability.
 
-- Dual-mode inference (mock + Kaggle Qwen 2.5-7B)
-- Runtime vs model behavior separation  
-- Information-theoretic metrics (entropy, instability, semantic dispersion)
-- Real-time UI with diff + observability
+- Token-level observability and entropy tracking
+- Adaptive closed-loop control policy (temperature/top-p fallbacks)
+- 9-category guardrail classifier with explicit severity scaling
+- Audit-grade deployment registry with Go/No-Go release gates
 
-👉 [View Repo](https://github.com/shubhankartiwari99/llm-behavior-evaluation)  
+👉 [View Repo](https://github.com/shubhankartiwari99/llm-generation-control)  
 👉 [Kaggle Notebook](https://www.kaggle.com/code/shubhankartiwari/qwen-2-5-7b-reliability-benchmark-research-report)
 
-**Key Result:** Entropy reduced by ~50% under runtime shaping while preserving semantic coherence.
+**Key Result:** Adaptive control reduced instability events from 18 to 0 on degenerate prompts, improving average confidence by +0.10.
 
 ## ⚡ Highlights
 

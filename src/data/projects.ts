@@ -24,63 +24,81 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "llm-reliability-evaluation-platform",
-    title: "LLM Inference-Time Evaluation Platform",
+    slug: "llm-generation-control",
+    title: "LLM Generation Control Engine",
     shortDescription:
-      "Production-grade probabilistic evaluation system. Features 3-tier cultural dose-response experiments, a 9-category guardrail classifier, audit-grade deployment registries, behavioral snapshots, and adaptive reliability fallbacks.",
-    fullDescription: `Most LLM evaluations treat model outputs as final, completely ignoring inference-time transformations. This platform evaluates something more deployment-relevant: how runtime policies systematically reshape output distributions before they ever reach the user.
+      "Production-grade control system for LLMs with token-level observability and adaptive closed-loop policy. Detects model instability (entropy collapse, repetition loops) in real-time and mitigates via regeneration or temperature adjustments.",
+    fullDescription: `Modern LLMs often fall into degenerate states — repetition loops, entropy collapse, deterministic lock-in — where confidence appears high but quality degrades. This system moves beyond static decoding parameters (temperature/top-p) by implementing token-level observability and an adaptive control policy that detects and mitigates instability mid-generation.
 
-Built after recognizing that benchmark accuracy gives zero signal about deployment behavior, I architected a full ML Systems pipeline separating raw stochasticity from deterministic shaping. The system runs real experimental workloads (n=65 live inferences on Qwen 2.5-7B via a Kaggle T4 proxy) using a 3-tier prompt gradient to measure cultural alignment as a dose-response problem. Results demonstrate a perfect monotonic increase in cultural signaling (P=0.0 → 0.4 → 1.0) with zero false positives on neutral inputs.
+The architecture separates concerns into four distinct layers:
 
-The infrastructure extends far beyond evaluation into full system reliability. It features a 9-category guardrail classifier with severity scaling, an empirically derived reliability guard that triggers grid-sweep-optimized adaptive fallbacks (T=0.1, top_p=0.5) when token entropy exceeds safe thresholds, and a Pydantic-powered deployment registry enforcing Go/No-Go release gates based on "frozen behavioral DNA" snapshots. The entire pipeline is verified by a strict SHA-256 fingerprint chain and backed by 55+ test suites including replay, fuzz, and stress testing.`,
-    tags: ["Python", "MLOps", "LLM", "Information Theory", "System Design", "Research"],
-    github: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
-    link: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
+**Observation Layer**: Manual token-by-token decoding loop extracting raw logits at each step. Every token is scored for probability and entropy — full token-level telemetry captured.
+
+**Detection Layer**: Heuristic stability detectors monitoring for three failure modes: entropy collapse (sudden confidence drop), repetition loops (token cycling), and low-entropy lock (deterministic mode). Each detector operates independently and triggers when thresholds are breached.
+
+**Control Layer**: Policy controller implementing formal decision rules. IF entropy_collapse → Regenerate (T=0.7). IF repetition_loop → Lower temp + add repetition penalty. IF low_entropy_lock → Regenerate. Interventions are applied mid-generation without restarting.
+
+**Observability Layer**: JSON trace persistence capturing step-level data, instability triggers, and confidence scores. Every run produces both a full token trace and a structured summary with delta metrics.
+
+The system calculates a single confidence score [0.0-1.0] weighted by Average Entropy Penalty (50%), Instability Event Penalty (35%), and Regeneration Penalty (15%). Interpretation: >0.7 = stable, 0.5-0.7 = moderate instability, <0.5 = unreliable.
+
+Empirical validation on 20 challenging prompts shows: +0.07 average confidence improvement, 82% reduction in instability events, active intervention in ~35% of adversarial cases. Built on Mistral 7B FP16 with full MPS/CUDA support.`,
+    tags: ["Python", "MLOps", "LLM", "Control Systems", "System Design"],
+    github: "https://github.com/shubhankartiwari99/llm-generation-control",
+    link: "https://github.com/shubhankartiwari99/llm-generation-control",
     featured: true,
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "Cultural alignment dose-response experiments evaluating 3-tier prompt gradients across 65 live inference calls",
-      "9-category guardrail classifier with explicit severity scaling (Low → Critical) and escalation logic",
-      "Deployment registry leveraging strict Pydantic schemas for audit-grade provenance and Go/No-Go release gating",
-      "Behavioral snapshot system capturing the 'frozen DNA' and telemetry trace of every model run",
-      "Adaptive reliability guard triggering empirical grid-sweep fallbacks when inference entropy exceeds safe bounds",
-      "Runtime identity verification enforcing dependency lock via SHA-256 artifact finger-printing",
-      "Massive 55+ file test suite including systemic failure modes, contract fuzzing, and invariant validation"
+      "Token-level observability via manual decoding loop with per-token probability and entropy extraction",
+      "Three-category stability detector system: entropy_collapse, repetition_loop, low_entropy_lock",
+      "Formal policy controller with explicit intervention rules mapped to instability signals",
+      "Adaptive regeneration and temperature adjustment — mid-generation intervention without restart",
+      "Confidence scoring weighted by entropy (50%), instability events (35%), regenerations (15%)",
+      "82% instability reduction and +0.07 average confidence improvement on adversarial prompts",
+      "+0.06 to +0.10 confidence uplift in compare mode on typical workloads",
+      "Run history API and JSON trace persistence with full decision audit trail",
+      "MPS/CUDA acceleration with Mistral 7B FP16 (~14GB VRAM required)",
+      "Interactive Next.js dashboard for baseline vs adaptive comparison with live metrics"
     ],
     techStack: [
-      { category: "ML / Eval", items: ["Cultural Alignment", "KL Divergence", "Information Theory", "Qwen 2.5-7B"] },
-      { category: "System", items: ["Guardrails", "Behavioral Snapshots", "Pydantic", "Release Registry"] },
-      { category: "Backend", items: ["FastAPI", "Python", "pytest suite (55+ tests)"] },
-      { category: "Infrastructure", items: ["Kaggle T4 GPU", "ngrok", "SHA-256 Fingerprinting"] },
+      { category: "Core ML", items: ["Token-level Control", "Entropy Analysis", "Logit Extraction", "Mistral 7B"] },
+      { category: "Control Policy", items: ["Stability Detectors", "Adaptive Regeneration", "Temperature Adjustment"] },
+      { category: "Backend", items: ["FastAPI", "Python", "Uvicorn"] },
+      { category: "Frontend", items: ["Next.js", "Real-time Telemetry", "Comparison Dashboard"] },
+      { category: "Infrastructure", items: ["MPS/CUDA", "Model Serving", "JSON Trace Logging"] },
     ],
     challenges: [
-      "Designing mathematical dose-response evaluations that measure cultural alignment proportionally rather than via binary pass/fail",
-      "Ensuring audit-grade reproducibility across stochastic models using exact artifact hashing and strict release schemas",
-      "Calibrating entropy-driven reliability fallbacks that correctly intercept hallucinations without crashing throughput"
+      "Designing stability detectors that reliably trigger on actual failures without excessive false positives",
+      "Managing mid-generation intervention policy without causing output quality degradation",
+      "Computing token-level entropy efficiently during generation without performance bottlenecks",
+      "Calibrating confidence metric weights to align with user perception of output reliability",
+      "Handling model instability across diverse prompt domains without overfitting to training patterns"
     ],
     learnings: [
-      "Cultural alignment operates as a dose-response mechanism — runtime acts as a proportional amplifier, not a binary switch",
-      "A deterministic registry schema with explicit evaluation evidence is required for any production model rollout",
-      "Mocking infrastructure is still critical for portfolio demos, but the value lies in testing behavioral edge cases reliably"
+      "Token-level observability enables reliable failure detection — aggregate metrics alone miss early collapse signals",
+      "Control policy specification must be explicit and formal — heuristic rules are more debuggable than learned policies for critical systems",
+      "Confidence metrics are only useful if they accurately predict downstream failure — weighted scoring requires empirical validation",
+      "Mid-generation intervention works but introduces latency trade-offs — cold-start regeneration may be more cost-effective than adaptive adjustment",
+      "Interactive dashboards for compare mode are essential for understanding control system behavior — summary metrics alone don't build trust"
     ],
-    keyInsight: "Evaluation must measure how runtime policies systematically reshape output distributions before they reach the user.",
+    keyInsight: "Token-level observability enables real-time detection and mitigation of LLM instability without model retraining or inference architecture changes.",
     systemCapabilities: [
-      "9-category guardrail classifier with explicit severity scaling",
-      "Audit-grade deployment registry with Go/No-Go release gates",
-      "Adaptive fallbacks triggered by inference entropy"
+      "Token-by-token observability with probability and entropy extraction",
+      "Real-time stability detection (entropy collapse, repetition loops, lock-in)",
+      "Adaptive policy control with mid-generation intervention",
+      "Confidence scoring with audit trail"
     ],
-    demoGif: "https://raw.githubusercontent.com/shubhankartiwari99/llm-behavior-evaluation/main/demo.gif"
   },
   {
-    slug: "credit-transaction-anomaly-detection",
-    title: "Credit Transaction Anomaly Detection System",
+    slug: "drift-aware-fraud-detection",
+    title: "Drift-Aware Fraud System (ML Lifecycle & Governance)",
     shortDescription:
-      "Production ML system with real-time drift monitoring (KL divergence + PSI), automated retraining with cooldown constraints, feature shift explanation, model lifecycle management, and a live observability dashboard — deployed end-to-end on Render + Vercel.",
+      "Production ML lifecycle system with real-time drift monitoring (KL divergence + PSI), automated retraining, and explicit model governance (Production vs Candidate AUC comparison) — deployed end-to-end.",
     fullDescription: `Most ML portfolio projects stop at a Jupyter notebook. This one ships a complete ML system loop: ingest → preprocess → train → serve → monitor → detect drift → trigger retraining → shadow deploy → promote.
 
-The system detects anomalous credit card transactions using an Isolation Forest trained on the Kaggle Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). What makes it a systems project rather than a modeling exercise is everything around the model.
+The system detects anomalous credit card transactions using an XGBoost classifier trained on the Kaggle Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). What makes it a systems project rather than a modeling exercise is everything around the model.
 
 A FastAPI backend serves real-time predictions while continuously computing distribution drift via KL divergence and Population Stability Index (PSI) on both transaction amounts and model confidence scores. The drift engine tracks a persistent timeline of divergence scores and identifies the top shifted feature driving the drift, making the system interpretable rather than just reactive.
 
@@ -107,7 +125,7 @@ The model registry tracks every version with full metadata: trigger reason, drif
     ],
     techStack: [
       { category: "Backend", items: ["FastAPI", "Python", "Uvicorn", "Render"] },
-      { category: "ML", items: ["scikit-learn", "Isolation Forest", "SMOTE", "Pandas", "NumPy"] },
+      { category: "ML", items: ["XGBoost", "scikit-learn", "SMOTE", "Pandas", "NumPy"] },
       { category: "Monitoring", items: ["KL Divergence", "PSI", "Drift Timeline", "Feature Shift Explanation", "Cooldown Logic"] },
       { category: "Frontend", items: ["Next.js", "Recharts", "Tailwind CSS", "Vercel"] },
     ],
@@ -142,7 +160,7 @@ The goal was to address a real gap: most open-source LLMs handle formal Hindi re
 
 Recognised mid-project that Sarvam AI had advanced significantly in the same space with more compute and a dedicated research team. Rather than continuing a follower project, pivoted toward the more interesting problem hiding inside the work: building rigorous behavioral reliability evaluation infrastructure for open-source LLMs. That pivot evolved into the overarching LLM Inference Systems project, moving from raw training to systemic distribution shaping, guardrails, and audit-grade performance evaluation.`,
     tags: ["Python", "LLM", "NLP", "LoRA", "HuggingFace", "Transformers"],
-    github: "https://github.com/shubhankartiwari99/llm-behavior-evaluation",
+    github: "https://github.com/shubhankartiwari99/indian-multilingual-llm",
     link: "https://www.kaggle.com/code/shubhankartiwari/canonical-dataset-for-indian-desi-multilingual-llm",
     featured: false,
     image: "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
