@@ -59,14 +59,16 @@ export default function FeaturedProject() {
                   ))}
                 </ul>
 
-                <div className="mb-8 p-4 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
-                  <p className="font-semibold text-lg mb-1" style={{ color: 'var(--accent)' }}>
-                    ↓ Instability reduced by 82% on degenerate prompts
-                  </p>
-                  <p className="text-sm" style={{ color: 'var(--muted)' }}>
-                    Adaptive control mitigates entropy collapse and repetition loops.
-                  </p>
-                </div>
+                {featuredProject?.keyInsight && (
+                  <div className="mb-8 p-4 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
+                    <p className="font-mono text-sm font-semibold uppercase mb-1" style={{ color: 'var(--accent)' }}>
+                      Core Insight
+                    </p>
+                    <p className="text-base font-medium" style={{ color: 'var(--fg)' }}>
+                      {featuredProject.keyInsight}
+                    </p>
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-4">
                   <Link

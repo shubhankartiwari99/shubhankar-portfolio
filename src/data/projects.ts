@@ -25,24 +25,22 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "llm-generation-control",
-    title: "LLM Generation Control Engine",
+    title: "LLM Control System — Runtime Reliability for Generative Models",
     shortDescription:
-      "Production-grade control system for LLMs with token-level observability and adaptive closed-loop policy. Detects model instability (entropy collapse, repetition loops) in real-time and mitigates via regeneration or temperature adjustments.",
-    fullDescription: `Modern LLMs often fall into degenerate states — repetition loops, entropy collapse, deterministic lock-in — where confidence appears high but quality degrades. This system moves beyond static decoding parameters (temperature/top-p) by implementing token-level observability and an adaptive control policy that detects and mitigates instability mid-generation.
+      "Built a full-stack system to monitor and control LLM generation at the token level, with adaptive instability detection and real-time intervention.",
+    fullDescription: `Built a full-stack system to monitor and control LLM generation at the token level.
 
-The architecture separates concerns into four distinct layers:
+The system tracks entropy during decoding, detects instability patterns such as repetition loops and entropy collapse, and applies corrective actions (temperature adjustment, regeneration).
 
-**Observation Layer**: Manual token-by-token decoding loop extracting raw logits at each step. Every token is scored for probability and entropy — full token-level telemetry captured.
+Includes:
+• Adaptive control loop (signal → decision → intervention)
+• Token-level observability (entropy + instability traces)
+• Confidence scoring based on generation stability
+• FastAPI backend + interactive UI dashboard
+• Support for 7B models (Mistral / Qwen via API)
 
-**Detection Layer**: Heuristic stability detectors monitoring for three failure modes: entropy collapse (sudden confidence drop), repetition loops (token cycling), and low-entropy lock (deterministic mode). Each detector operates independently and triggers when thresholds are breached.
-
-**Control Layer**: Policy controller implementing formal decision rules. IF entropy_collapse → Regenerate (T=0.7). IF repetition_loop → Lower temp + add repetition penalty. IF low_entropy_lock → Regenerate. Interventions are applied mid-generation without restarting.
-
-**Observability Layer**: JSON trace persistence capturing step-level data, instability triggers, and confidence scores. Every run produces both a full token trace and a structured summary with delta metrics.
-
-The system calculates a single confidence score [0.0-1.0] weighted by Average Entropy Penalty (50%), Instability Event Penalty (35%), and Regeneration Penalty (15%). Interpretation: >0.7 = stable, 0.5-0.7 = moderate instability, <0.5 = unreliable.
-
-Empirical validation on 20 challenging prompts shows: +0.07 average confidence improvement, 82% reduction in instability events, active intervention in ~35% of adversarial cases. Built on Mistral 7B FP16 with full MPS/CUDA support.`,
+Result:
+Prevents degenerate outputs and improves generation stability in real time.`,
     tags: ["Python", "MLOps", "LLM", "Control Systems", "System Design"],
     github: "https://github.com/shubhankartiwari99/llm-generation-control",
     link: "https://github.com/shubhankartiwari99/llm-generation-control",
@@ -83,7 +81,7 @@ Empirical validation on 20 challenging prompts shows: +0.07 average confidence i
       "Mid-generation intervention works but introduces latency trade-offs — cold-start regeneration may be more cost-effective than adaptive adjustment",
       "Interactive dashboards for compare mode are essential for understanding control system behavior — summary metrics alone don't build trust"
     ],
-    keyInsight: "Token-level observability enables real-time detection and mitigation of LLM instability without model retraining or inference architecture changes.",
+    keyInsight: "Detect and correct unstable token generation in real time using entropy-based control.",
     systemCapabilities: [
       "Token-by-token observability with probability and entropy extraction",
       "Real-time stability detection (entropy collapse, repetition loops, lock-in)",
@@ -93,18 +91,22 @@ Empirical validation on 20 challenging prompts shows: +0.07 average confidence i
   },
   {
     slug: "drift-aware-fraud-detection",
-    title: "Drift-Aware Fraud System (ML Lifecycle & Governance)",
+    title: "Drift-Aware Fraud Detection — ML Lifecycle & Model Governance",
     shortDescription:
-      "Production ML lifecycle system with real-time drift monitoring (KL divergence + PSI), automated retraining, and explicit model governance (Production vs Candidate AUC comparison) — deployed end-to-end.",
-    fullDescription: `Most ML portfolio projects stop at a Jupyter notebook. This one ships a complete ML system loop: ingest → preprocess → train → serve → monitor → detect drift → trigger retraining → shadow deploy → promote.
+      "Built an end-to-end ML system that detects data drift, evaluates model degradation, and governs retraining decisions.",
+    fullDescription: `Built an end-to-end ML system that detects data drift, evaluates model degradation, and governs retraining decisions.
 
-The system detects anomalous credit card transactions using an XGBoost classifier trained on the Kaggle Credit Card Fraud dataset (284,807 transactions, 0.17% fraud). What makes it a systems project rather than a modeling exercise is everything around the model.
+The system continuously monitors feature distribution shifts and model performance, triggering retraining when degradation is detected. Candidate models are compared against production before deployment.
 
-A FastAPI backend serves real-time predictions while continuously computing distribution drift via KL divergence and Population Stability Index (PSI) on both transaction amounts and model confidence scores. The drift engine tracks a persistent timeline of divergence scores and identifies the top shifted feature driving the drift, making the system interpretable rather than just reactive.
+Includes:
+• Drift detection (statistical distribution monitoring)
+• Performance tracking (AUC-based evaluation)
+• Model comparison (production vs candidate)
+• Explicit decision loop (retrain / no_action)
+• CLI observability for drift history and decisions
 
-When drift exceeds calibrated thresholds, retraining is triggered automatically — but with a cooldown constraint preventing unstable retraining loops under noisy drift signals. A shadow model is trained and deployed in parallel with production — every prediction is scored by both models simultaneously — and promotion requires explicit operator action through the dashboard.
-
-The model registry tracks every version with full metadata: trigger reason, drift score, top shifted feature, training timestamp, and deployment status (production / shadow / archived). Retraining failures are caught, persisted, and surfaced to the UI as explicit SUCCESS/FAILED states. The Next.js dashboard displays live system telemetry: drift score timeline, confidence distribution histogram, prediction confidence trends, fraud rate, system health, shadow vs production comparison, and the full retraining pipeline state.`,
+Result:
+Ensures model reliability over time by linking data drift to automated lifecycle management.`,
     tags: ["FastAPI", "scikit-learn", "Next.js", "MLOps", "Drift Detection", "System Design"],
     github: "https://github.com/shubhankartiwari99/drift-aware-fraud-detection",
     link: "https://credit-transaction-anomaly-detectio.vercel.app",
@@ -141,7 +143,7 @@ The model registry tracks every version with full metadata: trigger reason, drif
       "Cooldown mechanisms are essential in any automated trigger system — without them, noisy signals cause runaway retraining loops",
       "Explicit promotion gates (shadow → production) prevent silent model degradation that auto-promotion would miss",
     ],
-    keyInsight: "Traditional ML systems degrade silently under data drift; this system treats drift as a first-class signal to enable proactive retraining.",
+    keyInsight: "Link distributional drift to model degradation and automatically recover performance via retraining.",
     systemCapabilities: [
       "Real-time drift detection (KL divergence + PSI) with timeline tracking",
       "Automated retraining triggered by drift with cooldown constraints",

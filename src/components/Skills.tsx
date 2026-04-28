@@ -5,24 +5,19 @@ import { Server, Database, GitBranch, Cpu, Award, GraduationCap } from "lucide-r
 
 const skillGroups = [
   {
-    title: "Backend Systems",
-    icon: <Server size={16} />,
-    skills: ["Java", "Spring Boot", "Microservices", "REST APIs", "System Design"],
-  },
-  {
-    title: "Data & Persistence",
-    icon: <Database size={16} />,
-    skills: ["Oracle SQL", "TOAD", "Data Modeling", "Query Optimization"],
-  },
-  {
-    title: "Platform & DevOps",
-    icon: <GitBranch size={16} />,
-    skills: ["OpenShift", "Jenkins", "CI/CD", "Containerization", "Env Config"],
-  },
-  {
-    title: "ML & AI",
+    title: "ML Systems",
     icon: <Cpu size={16} />,
-    skills: ["Python", "Machine Learning", "Deep Learning", "Computer Vision", "NLP", "LLMs"],
+    skills: ["Model evaluation", "Drift detection", "Control loops", "LLM behavior analysis", "Stability control"],
+  },
+  {
+    title: "Backend & Infrastructure",
+    icon: <Server size={16} />,
+    skills: ["Python", "FastAPI", "Distributed systems", "API design", "Observability", "System integration"],
+  },
+  {
+    title: "ML Stack",
+    icon: <Database size={16} />,
+    skills: ["PyTorch", "HuggingFace Transformers", "Statistical modeling", "AUC evaluation", "Entropy metrics"],
   },
 ];
 
@@ -46,10 +41,10 @@ export default function Skills() {
       <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
         <div className="max-w-5xl xl:max-w-6xl mx-auto">
           <motion.div {...reveal}>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12">Technical Arsenal</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12">Technical Focus</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {skillGroups.map((group) => (
               <motion.div
                 key={group.title}

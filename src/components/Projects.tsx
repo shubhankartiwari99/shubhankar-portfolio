@@ -113,6 +113,13 @@ export default function Projects() {
                   {project.shortDescription}
                 </p>
 
+                {project.keyInsight && (
+                  <div className="mt-4 p-3.5 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
+                    <p className="font-mono text-xs font-semibold uppercase mb-1" style={{ color: 'var(--accent)' }}>Core Insight</p>
+                    <p className="text-sm font-medium" style={{ color: 'var(--fg)' }}>{project.keyInsight}</p>
+                  </div>
+                )}
+
                 {project.featured && project.slug === "llm-generation-control" && (
                   <div
                     className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
@@ -198,6 +205,42 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16 p-8 sm:p-10 rounded-2xl border bg-gradient-to-br"
+          style={{ 
+            borderColor: "var(--border)", 
+            backgroundColor: "var(--surface)",
+            backgroundImage: "linear-gradient(to bottom right, var(--surface), rgba(0, 200, 150, 0.03))"
+          }}
+        >
+          <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: "var(--fg)" }}>
+            System-Level Focus
+          </h3>
+          <p className="text-base sm:text-lg mb-6" style={{ color: "var(--muted)" }}>
+            These projects represent two sides of the same problem:
+          </p>
+          <ul className="space-y-4 mb-8 text-base sm:text-lg" style={{ color: "var(--muted)" }}>
+            <li className="flex items-start gap-3">
+              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[01]</span>
+              <span><strong style={{ color: "var(--fg)" }}>LLM Control System</strong> → Runtime behavior (inference-time reliability)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[02]</span>
+              <span><strong style={{ color: "var(--fg)" }}>Fraud System</strong> → Model lifecycle (training-time reliability)</span>
+            </li>
+          </ul>
+          <div className="p-5 rounded-xl border" style={{ borderColor: "var(--accent)", backgroundColor: "var(--accent-dim)" }}>
+            <p className="text-base font-medium leading-relaxed" style={{ color: "var(--fg)" }}>
+              Together, they reflect a focus on building ML systems that are: <br className="hidden sm:block" />
+              <span style={{ color: "var(--accent)" }}>observable, controllable, and production-ready.</span>
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

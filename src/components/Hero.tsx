@@ -36,9 +36,29 @@ export default function Hero() {
             <span style={{ color: "var(--accent)" }}>Tiwari</span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl max-w-2xl leading-relaxed mb-10" style={{ color: "var(--muted)" }}>
-            I build backend systems that hold in production — and evaluate whether AI ones will too.
+          <p className="text-xl sm:text-2xl md:text-3xl font-medium max-w-3xl leading-snug mb-8" style={{ color: "var(--fg)" }}>
+            Building intelligent ML systems that observe, detect, and adapt in real time.
           </p>
+
+          <div className="mb-8">
+            <p className="text-lg font-semibold mb-4" style={{ color: "var(--fg)" }}>I focus on:</p>
+            <ul className="space-y-3 text-base md:text-lg mb-8" style={{ color: "var(--muted)" }}>
+              <li className="flex items-start gap-3">
+                <span className="font-mono text-sm mt-1 flex-shrink-0" style={{ color: "var(--accent)" }}>[01]</span> 
+                <span><strong style={{ color: "var(--fg)" }}>Runtime Intelligence</strong> — controlling and stabilizing LLM behavior during generation</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="font-mono text-sm mt-1 flex-shrink-0" style={{ color: "var(--accent)" }}>[02]</span> 
+                <span><strong style={{ color: "var(--fg)" }}>Model Lifecycle Intelligence</strong> — detecting drift and governing ML models in production</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="mb-10">
+            <span className="font-mono text-sm uppercase tracking-wider px-4 py-2 rounded-lg border" style={{ color: 'var(--accent)', borderColor: 'var(--accent-dim)', backgroundColor: 'var(--accent-dim)' }}>
+              Software Engineer (Backend Systems)
+            </span>
+          </div>
         </motion.div>
 
         <motion.div
