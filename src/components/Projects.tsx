@@ -173,6 +173,33 @@ export default function Projects() {
                     ))}
                   </div>
                 )}
+
+                {project.featured && project.slug === "ai-quality-assurance-financial-services" && (
+                  <div
+                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
+                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
+                  >
+                    {[
+                      { label: "Policy", value: "AND", color: "var(--accent)" },
+                      { label: "False Pos.", value: "0.0%", color: "#22c55e" },
+                      { label: "Auto-regen", value: "< 5%", color: "#f59e0b" },
+                      { label: "Audit", value: "Live", color: "#60a5fa" },
+                    ].map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="px-3 py-2.5"
+                        style={{ background: "var(--surface)" }}
+                      >
+                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
+                          {stat.value}
+                        </div>
+                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex flex-wrap gap-2">
                     {project.tags.slice(0, 3).map((tag) => (
@@ -222,16 +249,20 @@ export default function Projects() {
             System-Level Focus
           </h3>
           <p className="text-base sm:text-lg mb-6" style={{ color: "var(--muted)" }}>
-            These projects represent two sides of the same problem:
+            These projects represent three pillars of a coherent ML systems narrative, with decision-aware control and auditability:
           </p>
           <ul className="space-y-4 mb-8 text-base sm:text-lg" style={{ color: "var(--muted)" }}>
             <li className="flex items-start gap-3">
               <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[01]</span>
-              <span><strong style={{ color: "var(--fg)" }}>LLM Control System</strong> → Runtime behavior (inference-time reliability)</span>
+              <span><strong style={{ color: "var(--fg)" }}>Inference:</strong> LLM Control System → Runtime behavioral guardrails</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[02]</span>
-              <span><strong style={{ color: "var(--fg)" }}>Fraud System</strong> → Model lifecycle (training-time reliability)</span>
+              <span><strong style={{ color: "var(--fg)" }}>Evaluation:</strong> Fraud System → Drift detection and automated lifecycle management</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[03]</span>
+              <span><strong style={{ color: "var(--fg)" }}>Governance:</strong> LLM Output Validation System → Post-deployment validation layer for LLM outputs</span>
             </li>
           </ul>
           <div className="p-5 rounded-xl border" style={{ borderColor: "var(--accent)", backgroundColor: "var(--accent-dim)" }}>

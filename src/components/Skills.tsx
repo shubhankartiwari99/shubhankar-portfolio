@@ -7,17 +7,17 @@ const skillGroups = [
   {
     title: "ML Systems",
     icon: <Cpu size={16} />,
-    skills: ["Model evaluation", "Drift detection", "Control loops", "LLM behavior analysis", "Stability control"],
+    skills: ["Evaluation pipelines", "Control policies", "Drift detection", "Failure-mode metrics", "Shadow deployment"],
   },
   {
-    title: "Backend & Infrastructure",
-    icon: <Server size={16} />,
-    skills: ["Python", "FastAPI", "Distributed systems", "API design", "Observability", "System integration"],
-  },
-  {
-    title: "ML Stack",
+    title: "Modeling",
     icon: <Database size={16} />,
-    skills: ["PyTorch", "HuggingFace Transformers", "Statistical modeling", "AUC evaluation", "Entropy metrics"],
+    skills: ["XGBoost", "Transformers", "Probabilistic metrics", "Statistical modeling", "Entropy analysis"],
+  },
+  {
+    title: "Infrastructure",
+    icon: <Server size={16} />,
+    skills: ["FastAPI", "CI gates", "Versioned registries", "Observability", "Model serving"],
   },
 ];
 

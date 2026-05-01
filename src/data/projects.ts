@@ -33,14 +33,14 @@ export const projects: Project[] = [
 The system tracks entropy during decoding, detects instability patterns such as repetition loops and entropy collapse, and applies corrective actions (temperature adjustment, regeneration).
 
 Includes:
-• Adaptive control loop (signal → decision → intervention)
+• Adaptive control loop (Token Distribution → Entropy Analysis → Policy Gate → Temperature/Regen Action)
 • Token-level observability (entropy + instability traces)
 • Confidence scoring based on generation stability
 • FastAPI backend + interactive UI dashboard
 • Support for 7B models (Mistral / Qwen via API)
 
 Result:
-Prevents degenerate outputs and improves generation stability in real time.`,
+Prevents degeneration loops. Improves generation stability in real time by catching failure modes before they propagate.`,
     tags: ["Python", "MLOps", "LLM", "Control Systems", "System Design"],
     github: "https://github.com/shubhankartiwari99/llm-generation-control",
     link: "https://github.com/shubhankartiwari99/llm-generation-control",
@@ -101,12 +101,12 @@ The system continuously monitors feature distribution shifts and model performan
 Includes:
 • Drift detection (statistical distribution monitoring)
 • Performance tracking (AUC-based evaluation)
-• Model comparison (production vs candidate)
+• Complete ML system loop: Frozen Dataset → Failure-mode metrics (AUC degradation, PSI drift) → Δ Analysis → Policy Gate (Business Loss < 0) → CI Promotion
 • Explicit decision loop (retrain / no_action)
 • CLI observability for drift history and decisions
 
 Result:
-Ensures model reliability over time by linking data drift to automated lifecycle management.`,
+Prevents revenue loss from misclassification trade-offs. Candidate models are rejected if accuracy gains (+0.002 AUC) result in higher business loss (+7% higher false positive cost), ensuring threshold optimization always serves business objectives.`,
     tags: ["FastAPI", "scikit-learn", "Next.js", "MLOps", "Drift Detection", "System Design"],
     github: "https://github.com/shubhankartiwari99/drift-aware-fraud-detection",
     link: "https://credit-transaction-anomaly-detectio.vercel.app",
@@ -115,7 +115,7 @@ Ensures model reliability over time by linking data drift to automated lifecycle
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "Complete ML system loop: training → serving → drift monitoring → threshold trigger → cooldown gate → retraining → shadow deployment → promotion",
+      "Complete ML system loop: Frozen Dataset → Failure-mode metrics (AUC degradation, PSI drift) → Δ Analysis → Policy Gate (Business Loss < 0) → CI Promotion",
       "Real-time drift detection via KL divergence and PSI with persistent drift score timeline tracking distributional evolution over time",
       "Feature shift explanation surfaces the top shifted feature driving drift — interpretable ML system behavior, not just a number",
       "Retraining cooldown constraint prevents unstable loops under noisy drift signals — demonstrates real-world system constraints",
@@ -152,6 +152,51 @@ Ensures model reliability over time by linking data drift to automated lifecycle
     demoGif: "https://raw.githubusercontent.com/shubhankartiwari99/drift-aware-fraud-detection/main/demo-fraud-ml.gif"
   },
   {
+    slug: "ai-quality-assurance-financial-services",
+    title: "Conservative Auto-Regeneration Policy for AI-Generated Financial Narratives",
+    shortDescription:
+      "Production validation system for AI-generated outputs in financial services — threshold optimisation, conservative AND escalation policy, priority-scored human review queue, and audit-grade provenance.",
+    fullDescription: `Generative AI in financial services isn't a research problem — it's a compliance and reliability problem. The question isn't whether a model can produce a good output. The question is whether you can prove it, consistently, to an auditor.
+
+This project implements a closed-loop validation pipeline for AI-generated narratives in a financial services context. The system evaluates each generated output against two independent validation signals — embedding similarity and ROUGE-L — and applies a conservative AND policy: auto-regeneration is only triggered when both metrics fall below their calibrated thresholds simultaneously. Single-metric failure routes to human review rather than auto-regen, erring on the side of caution.
+
+Thresholds are not hand-tuned. They are computed via a bootstrap percentile sweep across a labeled validation set, optimising for precision-recall trade-offs appropriate to a regulated environment. Every artifact — thresholds, policy decisions, enriched validation data — is written with provenance metadata (timestamp, config snapshot, pipeline stage) so the full decision trail is reconstructable.
+
+The human review queue is not a flat list. Cases are ranked by a priority score derived from both metric deficits, so reviewers work the highest-risk outputs first. PII sanitization is applied before any data leaves the pipeline for external storage.
+
+Result:
+Prevents silent model degradation by guaranteeing failing narratives are caught before they reach downstream consumers.`,
+    tags: ["Python", "NLP", "FinTech", "ML", "System Design"],
+    featured: true,
+    link: "https://www.kaggle.com/code/shubhankartiwari/conservative-auto-regeneration-policy",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkYXRhJTIwZGFzaGJvYXJkJTIwZGFya3xlbnwwfHx8fDE3MDk2NTYwMDB8MA&ixlib=rb-4.1.0&q=85",
+    status: "Completed",
+    year: "2025",
+    highlights: [
+      "Conservative AND policy: auto-regen only when both embedding similarity AND ROUGE-L fall below threshold — single-metric failure routes to human review",
+      "Threshold calibration via bootstrap percentile sweep across labeled validation set",
+      "Priority-scored human review queue ranked by combined metric deficit — highest-risk cases surface first",
+      "Audit-grade provenance: every artifact written with timestamp, config snapshot, and pipeline stage metadata",
+      "PII sanitization applied before public artifact export",
+      "Full pipeline: Extracted Text → Failure-mode metrics (ROUGE drift, format violations, consistency) → Δ Analysis → Conservative AND Policy Gate → Priority-Scored Human Review",
+      "Published on Kaggle with sanitized validation dataset",
+    ],
+    techStack: [
+      { category: "Core", items: ["Python", "Pandas", "NumPy", "Scikit-learn"] },
+      { category: "NLP / Eval", items: ["ROUGE-L", "Sentence Embeddings", "Embedding Similarity"] },
+      { category: "Pipeline", items: ["Bootstrap Percentile Sweep", "Provenance Tracking", "PII Sanitization"] },
+    ],
+    challenges: [
+      "Calibrating thresholds conservative enough for a regulated environment without making auto-regen so rare it adds no value",
+      "Designing an AND policy that handles missing modalities correctly without collapsing to always-escalate",
+      "Provenance tracking that is lightweight enough not to slow the pipeline but complete enough to satisfy audit requirements",
+    ],
+    learnings: [
+      "Conservative AND policy outperforms OR policy for regulated contexts — false positives (unnecessary human review) are far cheaper than false negatives (bad output reaching downstream)",
+      "Bootstrap percentile thresholds are more robust than point estimates when labeled data is limited",
+      "Priority-scored queues change reviewer behaviour — flat queues get triaged manually and inconsistently",
+    ],
+  },  {
     slug: "indian-multilingual-llm",
     title: "Indian Desi Multilingual LLM — Training Pipeline",
     shortDescription:
@@ -277,49 +322,7 @@ The portfolio includes exploratory data analysis, model implementations, and edu
       "Production engineering and research ML reinforce each other more than they compete",
     ],
   },
-  {
-    slug: "ai-quality-assurance-financial-services",
-    title: "Conservative Auto-Regeneration Policy for AI-Generated Financial Narratives",
-    shortDescription:
-      "Production quality-gating system for AI-generated outputs in financial services — threshold optimisation, conservative AND escalation policy, priority-scored human review queue, and audit-grade provenance.",
-    fullDescription: `Generative AI in financial services isn't a research problem — it's a compliance and reliability problem. The question isn't whether a model can produce a good output. The question is whether you can prove it, consistently, to an auditor.
 
-This project implements a closed-loop quality assurance pipeline for AI-generated narratives in a financial services context. The system evaluates each generated output against two independent quality signals — embedding similarity and ROUGE-L — and applies a conservative AND policy: auto-regeneration is only triggered when both metrics fall below their calibrated thresholds simultaneously. Single-metric failure routes to human review rather than auto-regen, erring on the side of caution.
-
-Thresholds are not hand-tuned. They are computed via a bootstrap percentile sweep across a labeled validation set, optimising for precision-recall trade-offs appropriate to a regulated environment. Every artifact — thresholds, policy decisions, enriched validation data — is written with provenance metadata (timestamp, config snapshot, pipeline stage) so the full decision trail is reconstructable.
-
-The human review queue is not a flat list. Cases are ranked by a priority score derived from both metric deficits, so reviewers work the highest-risk outputs first. PII sanitization is applied before any data leaves the pipeline for external storage.`,
-    tags: ["Python", "NLP", "FinTech", "ML", "System Design"],
-    featured: false,
-    link: "https://www.kaggle.com/code/shubhankartiwari/conservative-auto-regeneration-policy",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkYXRhJTIwZGFzaGJvYXJkJTIwZGFya3xlbnwwfHx8fDE3MDk2NTYwMDB8MA&ixlib=rb-4.1.0&q=85",
-    status: "Completed",
-    year: "2025",
-    highlights: [
-      "Conservative AND policy: auto-regen only when both embedding similarity AND ROUGE-L fall below threshold — single-metric failure routes to human review",
-      "Threshold calibration via bootstrap percentile sweep across labeled validation set",
-      "Priority-scored human review queue ranked by combined metric deficit — highest-risk cases surface first",
-      "Audit-grade provenance: every artifact written with timestamp, config snapshot, and pipeline stage metadata",
-      "PII sanitization applied before public artifact export",
-      "Full pipeline: enrichment → threshold sweep → policy application → queue ranking → provenance write",
-      "Published on Kaggle with sanitized validation dataset",
-    ],
-    techStack: [
-      { category: "Core", items: ["Python", "Pandas", "NumPy", "Scikit-learn"] },
-      { category: "NLP / Eval", items: ["ROUGE-L", "Sentence Embeddings", "Embedding Similarity"] },
-      { category: "Pipeline", items: ["Bootstrap Percentile Sweep", "Provenance Tracking", "PII Sanitization"] },
-    ],
-    challenges: [
-      "Calibrating thresholds conservative enough for a regulated environment without making auto-regen so rare it adds no value",
-      "Designing an AND policy that handles missing modalities correctly without collapsing to always-escalate",
-      "Provenance tracking that is lightweight enough not to slow the pipeline but complete enough to satisfy audit requirements",
-    ],
-    learnings: [
-      "Conservative AND policy outperforms OR policy for regulated contexts — false positives (unnecessary human review) are far cheaper than false negatives (bad output reaching downstream)",
-      "Bootstrap percentile thresholds are more robust than point estimates when labeled data is limited",
-      "Priority-scored queues change reviewer behaviour — flat queues get triaged manually and inconsistently",
-    ],
-  },
 ];
 
 export function getProject(slug: string): Project | undefined {
