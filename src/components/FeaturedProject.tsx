@@ -2,132 +2,158 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Check, MemoryStick } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { getAllProjects } from '@/data/projects';
+
+const reveal = {
+  initial: { opacity: 0, y: 16 } as const,
+  whileInView: { opacity: 1, y: 0 } as const,
+  viewport: { once: true, margin: "-60px" } as const,
+  transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+};
 
 export default function FeaturedProject() {
   const projects = getAllProjects();
   const featuredProject = projects.find(p => p.featured);
 
-  const stats = [
-    { label: 'Instability Drop', value: '82%', color: 'var(--accent)' },
-    { label: 'False Positives', value: '0.0%', color: '#22c55e' },
-    { label: 'Conf. Uplift', value: '+0.07', color: '#f59e0b' },
-    { label: 'Intervention', value: '~35%', color: '#f87171' },
-  ];
-
   return (
-    <section className="py-20 px-5 sm:px-6" style={{ backgroundColor: 'var(--bg)', color: 'var(--fg)' }}>
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-<h2 className="text-3xl sm:text-4xl font-bold mb-4">Project Spotlight</h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--muted)' }}>
-            {featuredProject?.shortDescription ? featuredProject.shortDescription.split('.')[0] : 'Featured project'}
-          </p>
-          <p className="text-xl mt-4 max-w-3xl mx-auto" style={{ color: 'var(--muted)' }}>
-            {featuredProject?.title || 'Featured Project'}
-          </p>
-        </div>
+    <section className="mt-[160px] md:mt-[160px] px-5 md:px-8" id="spotlight">
+      <div className="max-w-[1280px] mx-auto">
+        {/* Section Title */}
+        <motion.div {...reveal} className="flex items-center gap-4 mb-12">
+          <MemoryStick size={28} style={{ color: "var(--primary)" }} />
+          <h2 className="font-headline-lg" style={{ color: "var(--on-surface)" }}>
+            Project Spotlight
+          </h2>
+        </motion.div>
 
-        <div 
-          className="group relative rounded-2xl border overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl" 
-          style={{ borderColor: 'var(--border)', backgroundColor: 'var(--surface)' }}
+        {/* Project Spotlight Card */}
+        <motion.div
+          {...reveal}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 p-6 md:p-12"
+          style={{
+            border: "1px solid var(--surface-stroke)",
+            background: "var(--surface-elevated)",
+          }}
         >
-          <div className="relative h-64 lg:h-80 overflow-hidden">
-            <Image
-              src={featuredProject?.image || '/og_final.png'}
-              alt={featuredProject?.title || 'Featured project'}
-              fill
-              className="object-cover opacity-50 group-hover:opacity-70 transition-all duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-          </div>
+          {/* Left: Content */}
+          <div className="md:col-span-7 flex flex-col justify-center">
+            <div
+              className="font-code-sm inline-block w-max px-2 py-1 mb-4"
+              style={{
+                color: "var(--primary)",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                border: "1px solid rgba(78, 222, 163, 0.3)",
+              }}
+            >
+              System Architecture
+            </div>
 
-          <div className="p-8 lg:p-12 relative -mt-12 lg:-mt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              <div>
-                <h3 className="text-2xl lg:text-3xl font-bold mb-6" style={{ color: 'var(--fg)' }}>
-                  {featuredProject?.title || 'Featured Project'}
-                </h3>
-                
-                <ul className="space-y-3 mb-8" style={{ color: 'var(--muted)' }}>
-                  {(featuredProject?.highlights || []).slice(0, 4).map((highlight, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="font-mono text-sm mt-0.5 w-4 flex-shrink-0" style={{ color: 'var(--accent)' }}>•</span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
+            <h3
+              className="font-headline-lg mb-4"
+              style={{
+                color: "var(--on-surface)",
+                fontSize: "clamp(24px, 4vw, 48px)",
+              }}
+            >
+              {featuredProject?.title?.split('—')[0]?.trim() || 'LLM Control System'}
+            </h3>
 
-                {featuredProject?.keyInsight && (
-                  <div className="mb-8 p-4 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
-                    <p className="font-mono text-sm font-semibold uppercase mb-1" style={{ color: 'var(--accent)' }}>
-                      Core Insight
-                    </p>
-                    <p className="text-base font-medium" style={{ color: 'var(--fg)' }}>
-                      {featuredProject.keyInsight}
-                    </p>
-                  </div>
-                )}
+            <p className="font-body-lg mb-8 max-w-xl" style={{ color: "var(--text-muted)" }}>
+              {featuredProject?.shortDescription || 'Built a full-stack system to monitor and control LLM generation at the token level.'}
+            </p>
 
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    href={`/projects/${featuredProject?.slug}`}
-                    className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl transition-all duration-300 hover:scale-105"
-                    style={{
-                      backgroundColor: 'var(--accent)',
-                      color: 'var(--bg)',
-                      boxShadow: '0 0 20px var(--accent-glow)'
-                    }}
-                  >
-                    Read Case Study
-                  </Link>
-                  {featuredProject?.github && (
-                    <Link
-                      href={featuredProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
-                      style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}
-                    >
-                      <Github size={18} />
-                      View Repo
-                    </Link>
-                  )}
-                  {featuredProject?.link && featuredProject.link !== featuredProject.github && (
-                    <Link
-                      href={featuredProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 font-medium rounded-xl border transition-all duration-300 hover:scale-105"
-                      style={{ borderColor: 'var(--border)', color: 'var(--fg)' }}
-                    >
-                      Live Demo
-                      <ExternalLink size={18} />
-                    </Link>
-                  )}
-                </div>
+            {/* Feature checklist */}
+            <ul className="font-body-md space-y-4 mb-8" style={{ color: "var(--on-surface-variant)" }}>
+              {(featuredProject?.highlights || []).slice(0, 3).map((highlight, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <Check size={18} style={{ color: "var(--primary)", marginTop: "3px", flexShrink: 0 }} />
+                  <span style={{ fontSize: "14px" }}>{highlight}</span>
+                </li>
+              ))}
+            </ul>
 
-                {/* Removed awkward truncated description */}
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, i) => (
-                  <div key={i} className="p-4 rounded-xl text-center hover:bg-white/5 transition-colors" style={{ backgroundColor: 'var(--border)' }}>
-                    <div className="font-mono text-lg font-bold mb-1" style={{ color: stat.color }}>
-                      {stat.value}
-                    </div>
-                    <div className="font-mono text-xs uppercase tracking-wide" style={{ color: 'var(--muted-fg)' }}>
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href={`/projects/${featuredProject?.slug}`}
+                className="font-code-sm px-6 py-3 rounded transition-all duration-200 hover:opacity-90"
+                style={{
+                  background: "var(--primary)",
+                  color: "var(--on-primary)",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                }}
+              >
+                Read Case Study
+              </Link>
+              {featuredProject?.github && (
+                <Link
+                  href={featuredProject.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-code-sm px-6 py-3 rounded transition-all duration-200 hover:bg-[var(--surface-bright)]"
+                  style={{
+                    border: "1px solid var(--surface-stroke)",
+                    color: "var(--on-surface)",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  View Repo
+                </Link>
+              )}
             </div>
           </div>
-        </div>
+
+          {/* Right: Image + Metrics */}
+          <div className="md:col-span-5 grid grid-cols-2 gap-4">
+            {/* Project Image */}
+            <div
+              className="col-span-2 relative overflow-hidden h-[250px]"
+              style={{ border: "1px solid var(--surface-stroke)" }}
+            >
+              <Image
+                src={featuredProject?.image || '/og_final.png'}
+                alt={featuredProject?.title || 'Featured project'}
+                fill
+                className="object-cover grayscale opacity-70"
+                style={{ mixBlendMode: "luminosity" }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ border: "1px solid rgba(78, 222, 163, 0.2)" }}
+              />
+            </div>
+
+            {/* Metric Cards */}
+            <div
+              className="p-4 flex flex-col justify-center text-center"
+              style={{
+                border: "1px solid var(--surface-stroke)",
+                background: "var(--surface)",
+              }}
+            >
+              <div className="font-metric-huge mb-2" style={{ color: "var(--primary)" }}>82%</div>
+              <div className="font-code-sm" style={{ color: "var(--text-muted)", textTransform: "uppercase" }}>Instability Drop</div>
+            </div>
+
+            <div
+              className="p-4 flex flex-col justify-center text-center"
+              style={{
+                border: "1px solid var(--surface-stroke)",
+                background: "var(--surface)",
+              }}
+            >
+              <div className="font-metric-huge mb-2" style={{ color: "var(--primary)" }}>0.0%</div>
+              <div className="font-code-sm" style={{ color: "var(--text-muted)", textTransform: "uppercase" }}>False Positives</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
-

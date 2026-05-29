@@ -57,10 +57,13 @@ export default function Experience() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section data-testid="experience-section" id="experience" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
+    <section data-testid="experience-section" id="experience" className="py-[80px] md:py-[160px] px-5 md:px-8">
+      <div className="max-w-[1280px] mx-auto">
         <motion.div {...reveal}>
-          <h2 className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-8 sm:mb-10" style={{ color: "var(--accent)" }}>
+          <h2
+            className="font-label-caps mb-8 sm:mb-10"
+            style={{ color: "var(--primary)" }}
+          >
             Experience
           </h2>
         </motion.div>
@@ -73,38 +76,39 @@ export default function Experience() {
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
               transition={reveal.transition}
-              className="rounded-2xl border p-4 sm:p-6 transition-colors duration-200 group"
-              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+              className="p-4 sm:p-6 transition-colors duration-200 group hover:border-[var(--primary)]"
+              style={{
+                border: "1px solid var(--surface-stroke)",
+                background: "var(--surface-elevated)",
+              }}
               data-testid={`experience-card-${i}`}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
             >
               <button
                 type="button"
                 onClick={() => setExpanded(expanded === i ? null : i)}
                 aria-expanded={expanded === i}
                 aria-controls={`experience-details-${i}`}
-                className="w-full flex items-start justify-between gap-4 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-lg"
+                className="w-full flex items-start justify-between gap-4 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded"
               >
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <h3 className="text-lg md:text-xl font-semibold">{exp.title}</h3>
+                    <h3 className="font-headline-md" style={{ color: "var(--on-surface)", fontSize: "18px" }}>{exp.title}</h3>
                     <span
-                      className="font-mono text-xs px-2.5 py-0.5 rounded-full"
-                      style={{ color: "var(--accent)", background: "var(--accent-dim)" }}
+                      className="font-label-caps px-2.5 py-0.5 rounded-full"
+                      style={{ color: "var(--primary)", background: "rgba(78, 222, 163, 0.1)" }}
                     >
                       {exp.company}
                     </span>
                   </div>
-                  <p className="text-sm mt-1 font-mono" style={{ color: "var(--muted-fg)" }}>
+                  <p className="font-code-sm mt-1" style={{ color: "var(--text-muted)" }}>
                     {exp.period} &middot; {exp.type}
                   </p>
-                  <p className="text-sm lg:text-base mt-3" style={{ color: "var(--muted)" }}>{exp.summary}</p>
+                  <p className="font-body-md mt-3" style={{ color: "var(--text-muted)", fontSize: "14px" }}>{exp.summary}</p>
                 </div>
                 <ChevronDown
                   size={18}
                   className={`transition-transform duration-200 flex-shrink-0 mt-1 ${expanded === i ? "rotate-180" : ""}`}
-                  style={{ color: "var(--muted-fg)" }}
+                  style={{ color: "var(--text-muted)" }}
                 />
               </button>
 
@@ -116,14 +120,14 @@ export default function Experience() {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
                   className="mt-6 pt-6"
-                  style={{ borderTop: "1px solid var(--border)" }}
+                  style={{ borderTop: "1px solid var(--surface-stroke)" }}
                 >
                   {recruiterMode ? (
-                    <ul className="list-disc pl-5 space-y-2 text-sm lg:text-base" style={{ color: "var(--muted)" }}>
+                    <ul className="list-disc pl-5 space-y-2 font-body-md" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
                       {exp.bullets.map((b) => <li key={b}>{b}</li>)}
                     </ul>
                   ) : (
-                    <div className="space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
+                    <div className="space-y-3 font-body-md" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
                       {exp.narrative.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                     </div>
                   )}
@@ -131,8 +135,12 @@ export default function Experience() {
                     {exp.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-xs px-2.5 py-1 rounded-md border"
-                        style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+                        className="font-code-sm px-2.5 py-1"
+                        style={{
+                          color: "var(--text-muted)",
+                          border: "1px solid var(--surface-stroke)",
+                          fontSize: "12px",
+                        }}
                       >
                         {tag}
                       </span>

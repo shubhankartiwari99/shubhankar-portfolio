@@ -19,256 +19,399 @@ export default function Projects() {
   const projects = allProjects.filter((p) => p.slug !== featuredProject?.slug);
 
   return (
-    <section data-testid="projects-section" id="projects" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
-        <motion.div {...reveal} className="flex items-end justify-between mb-12">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-2">Projects & Experiments</h2>
-            <p className="text-base" style={{ color: "var(--muted)" }}>
-              Selected projects and experiments
-            </p>
+    <section data-testid="projects-section" id="projects" className="py-[80px] md:py-[160px] px-5 md:px-8">
+      <div className="max-w-[1280px] mx-auto">
+        {/* Header */}
+        <motion.div {...reveal} className="mb-12 md:mb-[80px]">
+          <div className="flex items-center gap-4 mb-2">
+            <span className="w-12 h-px" style={{ background: "var(--primary)" }} />
+            <span className="font-label-caps" style={{ color: "var(--primary)" }}>
+              Portfolio Overview
+            </span>
           </div>
-          <Link
-            href="/projects"
-            className="text-sm font-medium hidden sm:flex items-center gap-1.5 transition-colors duration-200"
-            style={{ color: "var(--accent)" }}
-          >
-            View All Projects
-            <ArrowRight size={14} />
-          </Link>
+          <div className="flex items-end justify-between">
+            <div>
+              <h2 className="font-headline-lg mb-2" style={{ color: "var(--on-surface)", fontSize: "clamp(28px, 4vw, 48px)" }}>
+                Projects &amp; Experiments
+              </h2>
+              <p className="font-body-lg max-w-2xl" style={{ color: "var(--text-muted)" }}>
+                Building intelligent ML systems that observe, detect, and adapt in real time. Focus on runtime reliability, model governance, and deterministic performance.
+              </p>
+            </div>
+            <Link
+              href="/projects"
+              className="font-label-caps hidden sm:flex items-center gap-1.5 transition-colors duration-200 hover:opacity-80"
+              style={{ color: "var(--primary)" }}
+            >
+              View All <ArrowRight size={14} />
+            </Link>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={reveal.initial}
-              whileInView={reveal.whileInView}
-              viewport={reveal.viewport}
-              transition={reveal.transition}
-              className={`group relative rounded-2xl border overflow-hidden transition-colors duration-200 ${
-                project.featured ? "md:col-span-2" : ""
-              }`}
-              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
-              data-testid={`project-card-${i}`}
-            >
-              <div className={`relative overflow-hidden ${project.featured ? "h-48 lg:h-56" : "h-36 lg:h-40"}`}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes={project.featured ? "(max-width: 768px) 100vw, 896px" : "(max-width: 768px) 100vw, 448px"}
-                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-300"
-                />
-                <div
-                  className="absolute inset-0"
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {projects.map((project, i) => {
+            // First featured project: hero card (8-col)
+            if (project.featured && project.slug === "drift-aware-fraud-detection") {
+              return (
+                <motion.article
+                  key={project.slug}
+                  initial={reveal.initial}
+                  whileInView={reveal.whileInView}
+                  viewport={reveal.viewport}
+                  transition={reveal.transition}
+                  className="col-span-1 md:col-span-8 flex flex-col overflow-hidden group"
                   style={{
-                    background: "linear-gradient(to top, var(--surface) 10%, transparent 100%)",
+                    background: "var(--surface-elevated)",
+                    border: "1px solid var(--surface-stroke)",
                   }}
-                />
-              </div>
-
-              <div className="p-4 sm:p-6 lg:p-7 -mt-8 relative">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg md:text-xl font-semibold" style={{ color: "var(--fg)" }}>
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="transition-colors duration-300 group-hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
-                    >
-                      {project.title}
-                    </Link>
-                  </h3>
-                  <div className="flex gap-2 flex-shrink-0">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`project-github-${i}`}
-                        aria-label={`View ${project.title} source on GitHub`}
-                        className="p-1.5 rounded-md border transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                        style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                      >
-                        <Github size={14} />
-                      </a>
-                    )}
-                    {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`project-link-${i}`}
-                        aria-label={`Open live demo for ${project.title}`}
-                        className="p-1.5 rounded-md border transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                        style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                      >
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
+                  data-testid={`project-card-${i}`}
+                >
+                  {/* Image */}
+                  <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden" style={{ borderBottom: "1px solid var(--surface-stroke)" }}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 66vw"
+                      className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 scale-100 group-hover:scale-105"
+                      style={{ mixBlendMode: "luminosity" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface-elevated)] to-transparent" />
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="font-label-caps px-3 py-1" style={{ background: "var(--surface-container-highest)", border: "1px solid var(--surface-stroke)", color: "var(--on-surface)" }}>
+                        Live
+                      </span>
+                      <span className="font-label-caps px-3 py-1" style={{ background: "var(--surface-container-highest)", border: "1px solid var(--surface-stroke)", color: "var(--on-surface)" }}>
+                        Shadow deploy
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <p className="text-sm md:text-[15px] lg:text-base mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
+
+                  {/* Content */}
+                  <div className="p-8 flex flex-col flex-grow">
+                    <h2 className="font-headline-md mb-4" style={{ color: "var(--on-surface)", fontSize: "clamp(24px, 3vw, 32px)" }}>
+                      {project.title.split('—')[0]?.trim()}
+                    </h2>
+                    <p className="font-body-md mb-6" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+                      {project.shortDescription}
+                    </p>
+
+                    {/* Metrics */}
+                    <div className="grid grid-cols-3 gap-4 mb-6 py-4" style={{ borderTop: "1px solid var(--surface-stroke)", borderBottom: "1px solid var(--surface-stroke)" }}>
+                      <div>
+                        <div className="font-metric-huge" style={{ color: "var(--primary)", fontSize: "clamp(24px, 3vw, 40px)" }}>284K</div>
+                        <div className="font-code-sm" style={{ color: "var(--text-muted)", textTransform: "uppercase" }}>Transactions</div>
+                      </div>
+                      <div>
+                        <div className="font-metric-huge" style={{ color: "var(--on-surface)", fontSize: "clamp(24px, 3vw, 40px)" }}>0.17%</div>
+                        <div className="font-code-sm" style={{ color: "var(--text-muted)", textTransform: "uppercase" }}>Fraud rate</div>
+                      </div>
+                      <div>
+                        <div className="font-metric-huge" style={{ color: "var(--on-surface)", fontSize: "clamp(24px, 3vw, 40px)" }}>&lt;0.2</div>
+                        <div className="font-code-sm" style={{ color: "var(--text-muted)", textTransform: "uppercase" }}>Drift (PSI)</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-auto flex items-center justify-between">
+                      <div className="flex gap-2 flex-wrap">
+                        {project.tags.slice(0, 3).map((tag) => (
+                          <span key={tag} className="font-code-sm px-2 py-1 rounded" style={{ background: "#18181B", color: "var(--on-surface-variant)", fontSize: "12px" }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="font-label-caps flex items-center gap-1 transition-colors duration-200 hover:opacity-80"
+                        style={{ color: "var(--primary)" }}
+                      >
+                        View Details <ArrowRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            }
+
+            // Side compact card (4-col) for auto-regen
+            if (project.featured && project.slug === "ai-quality-assurance-financial-services") {
+              return (
+                <motion.article
+                  key={project.slug}
+                  initial={reveal.initial}
+                  whileInView={reveal.whileInView}
+                  viewport={reveal.viewport}
+                  transition={reveal.transition}
+                  className="col-span-1 md:col-span-4 flex flex-col p-8 hover:border-[rgba(78,222,163,0.5)] transition-colors duration-200"
+                  style={{
+                    background: "var(--surface-elevated)",
+                    border: "1px solid var(--surface-stroke)",
+                  }}
+                  data-testid={`project-card-${i}`}
+                >
+                  <div className="mb-auto">
+                    <div
+                      className="w-12 h-12 flex items-center justify-center mb-6 rounded"
+                      style={{ background: "var(--surface-container)", border: "1px solid var(--surface-stroke)", color: "var(--primary)" }}
+                    >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12h6M12 9v6M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 className="font-headline-md mb-4" style={{ color: "var(--on-surface)", fontSize: "20px", lineHeight: 1.3 }}>
+                      {project.title.split('for')[0]?.trim() || project.title}
+                    </h3>
+                    <p className="font-code-sm mb-6" style={{ color: "var(--text-muted)" }}>
+                      {project.shortDescription}
+                    </p>
+                  </div>
+
+                  {/* Specs */}
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-between items-end pb-2" style={{ borderBottom: "1px solid var(--surface-stroke)" }}>
+                      <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>False Pos.</span>
+                      <span className="font-label-caps" style={{ color: "var(--primary)" }}>0.0%</span>
+                    </div>
+                    <div className="flex justify-between items-end pb-2" style={{ borderBottom: "1px solid var(--surface-stroke)" }}>
+                      <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>Auto-regen</span>
+                      <span className="font-label-caps" style={{ color: "var(--on-surface)" }}>&lt;5%</span>
+                    </div>
+                    <div className="flex justify-between items-end pb-2" style={{ borderBottom: "1px solid var(--surface-stroke)" }}>
+                      <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>Policy Type</span>
+                      <span className="font-label-caps" style={{ color: "var(--on-surface)" }}>AND Escalation</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between pt-4">
+                    <div className="flex gap-2 items-center">
+                      <span className="w-2 h-2 rounded-full" style={{ background: "var(--primary)" }} />
+                      <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>Audit-grade</span>
+                    </div>
+                    <Link href={`/projects/${project.slug}`} style={{ color: "var(--on-surface-variant)" }} className="hover:text-[var(--primary)] transition-colors">
+                      <ExternalLink size={18} />
+                    </Link>
+                  </div>
+                </motion.article>
+              );
+            }
+
+            // Terminal-style card (4-col) for Indian LLM
+            if (project.slug === "indian-multilingual-llm") {
+              return (
+                <motion.article
+                  key={project.slug}
+                  initial={reveal.initial}
+                  whileInView={reveal.whileInView}
+                  viewport={reveal.viewport}
+                  transition={reveal.transition}
+                  className="col-span-1 md:col-span-4 flex flex-col overflow-hidden"
+                  style={{
+                    background: "var(--terminal-header)",
+                    border: "1px solid var(--surface-stroke)",
+                    boxShadow: "inset 0 2px 10px rgba(0,0,0,0.5)",
+                  }}
+                  data-testid={`project-card-${i}`}
+                >
+                  {/* Terminal header */}
+                  <div className="flex items-center px-4 py-2" style={{ background: "var(--surface-container)", borderBottom: "1px solid var(--surface-stroke)" }}>
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ background: "var(--surface-stroke)" }} />
+                      <div className="w-3 h-3 rounded-full" style={{ background: "var(--surface-stroke)" }} />
+                      <div className="w-3 h-3 rounded-full" style={{ background: "var(--surface-stroke)" }} />
+                    </div>
+                    <div className="mx-auto font-code-sm" style={{ color: "var(--text-muted)", fontSize: "12px" }}>train_pipeline.py</div>
+                  </div>
+
+                  <div className="p-6 flex flex-col h-full">
+                    <h3 className="font-body-md mb-3" style={{ color: "var(--on-surface)", fontSize: "20px", fontWeight: 700 }}>
+                      {project.title.split('—')[0]?.trim()}
+                    </h3>
+                    <p className="font-code-sm mb-6 flex-grow" style={{ color: "var(--text-muted)" }}>
+                      {project.shortDescription.split('.').slice(0, 2).join('.') + '.'}
+                    </p>
+
+                    <div
+                      className="font-code-sm p-4 rounded mb-6"
+                      style={{
+                        background: "rgba(19,19,20,0.5)",
+                        border: "1px solid var(--surface-stroke)",
+                        color: "var(--primary)",
+                        fontSize: "13px",
+                      }}
+                    >
+                      &gt; executing finetune --model=&quot;desi-llm&quot;<br />
+                      &gt; compiling LoRA weights... [OK]<br />
+                      &gt; deploy --target=&quot;kaggle-hub&quot;
+                    </div>
+
+                    <div className="flex items-center justify-between mt-auto">
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.slice(0, 3).map((tag) => (
+                          <span key={tag} className="font-code-sm px-2 py-1" style={{ color: "var(--on-surface)", border: "1px solid var(--surface-stroke)", fontSize: "12px" }}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="transition-colors duration-200 hover:text-[var(--primary)]"
+                        style={{ color: "var(--on-surface-variant)" }}
+                      >
+                        <ExternalLink size={18} />
+                      </Link>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            }
+
+            // Horizontal visual card (8-col) for Song Recommender
+            if (project.slug === "song-recommender-system") {
+              return (
+                <motion.article
+                  key={project.slug}
+                  initial={reveal.initial}
+                  whileInView={reveal.whileInView}
+                  viewport={reveal.viewport}
+                  transition={reveal.transition}
+                  className="col-span-1 md:col-span-8 flex flex-col md:flex-row overflow-hidden group"
+                  style={{
+                    background: "var(--surface-elevated)",
+                    border: "1px solid var(--surface-stroke)",
+                  }}
+                  data-testid={`project-card-${i}`}
+                >
+                  {/* Image */}
+                  <div className="w-full md:w-1/2 h-[250px] md:h-auto relative overflow-hidden" style={{ borderRight: "1px solid var(--surface-stroke)" }}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                      style={{ mixBlendMode: "screen" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[rgba(18,18,20,0.5)] to-transparent" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+                    <h2 className="font-headline-md mb-4" style={{ color: "var(--on-surface)", fontSize: "24px" }}>
+                      {project.title}
+                    </h2>
+                    <p className="font-body-md mb-6" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
+                      {project.shortDescription}
+                    </p>
+
+                    <div className="flex flex-col gap-3 mb-8">
+                      {["BPM Extraction & Analysis", "VADER Sentiment Scoring", "K-Means Clustering"].map((feat) => (
+                        <div key={feat} className="flex items-center gap-3">
+                          <span style={{ color: "var(--primary)", fontSize: "18px" }}>◆</span>
+                          <span className="font-code-sm" style={{ color: "var(--on-surface)" }}>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-auto flex items-center gap-4">
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="font-code-sm px-4 py-2 rounded transition-colors duration-200 hover:border-[var(--primary)]"
+                        style={{ border: "1px solid var(--surface-stroke)", color: "var(--on-surface)" }}
+                      >
+                        View Research
+                      </Link>
+                      <div className="flex gap-2">
+                        {project.tags.slice(0, 2).map((tag, j) => (
+                          <span key={tag}>
+                            <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>{tag}</span>
+                            {j === 0 && <span className="font-code-sm ml-2" style={{ color: "var(--text-muted)" }}>·</span>}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            }
+
+            // Default card for any remaining projects (e.g., Kaggle)
+            return (
+              <motion.article
+                key={project.slug}
+                initial={reveal.initial}
+                whileInView={reveal.whileInView}
+                viewport={reveal.viewport}
+                transition={reveal.transition}
+                className="col-span-1 md:col-span-4 flex flex-col p-6 hover:border-[rgba(78,222,163,0.5)] transition-colors duration-200"
+                style={{
+                  background: "var(--surface-elevated)",
+                  border: "1px solid var(--surface-stroke)",
+                }}
+                data-testid={`project-card-${i}`}
+              >
+                <h3 className="font-headline-md mb-3" style={{ color: "var(--on-surface)", fontSize: "20px" }}>
+                  {project.title}
+                </h3>
+                <p className="font-code-sm mb-6 flex-grow" style={{ color: "var(--text-muted)" }}>
                   {project.shortDescription}
                 </p>
-
-                {project.keyInsight && (
-                  <div className="mt-4 p-3.5 rounded-xl border" style={{ borderColor: 'var(--accent)', backgroundColor: 'var(--accent-dim)' }}>
-                    <p className="font-mono text-xs font-semibold uppercase mb-1" style={{ color: 'var(--accent)' }}>Core Insight</p>
-                    <p className="text-sm font-medium" style={{ color: 'var(--fg)' }}>{project.keyInsight}</p>
-                  </div>
-                )}
-
-                {project.featured && project.slug === "llm-generation-control" && (
-                  <div
-                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
-                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
-                  >
-                    {[
-                      { label: "Instability Drop", value: "82%", color: "var(--accent)" },
-                      { label: "Conf. Uplift", value: "+0.07", color: "var(--accent)" },
-                      { label: "Intervention", value: "~35%", color: "#f59e0b" },
-                      { label: "Test Suites", value: "55+", color: "#f87171" },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="px-3 py-2.5"
-                        style={{ background: "var(--surface)" }}
-                      >
-                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
-                          {stat.value}
-                        </div>
-                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {project.featured && project.slug === "drift-aware-fraud-detection" && (
-                  <div
-                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
-                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
-                  >
-                    {[
-                      { label: "Transactions", value: "284K", color: "var(--accent)" },
-                      { label: "Fraud rate", value: "0.17%", color: "#f87171" },
-                      { label: "Drift (PSI)", value: "< 0.2", color: "#f59e0b" },
-                      { label: "Shadow deploy", value: "Live", color: "#22c55e" },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="px-3 py-2.5"
-                        style={{ background: "var(--surface)" }}
-                      >
-                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
-                          {stat.value}
-                        </div>
-                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {project.featured && project.slug === "ai-quality-assurance-financial-services" && (
-                  <div
-                    className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-px border rounded-lg overflow-hidden"
-                    style={{ borderColor: "var(--border)", background: "var(--border)" }}
-                  >
-                    {[
-                      { label: "Policy", value: "AND", color: "var(--accent)" },
-                      { label: "False Pos.", value: "0.0%", color: "#22c55e" },
-                      { label: "Auto-regen", value: "< 5%", color: "#f59e0b" },
-                      { label: "Audit", value: "Live", color: "#60a5fa" },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="px-3 py-2.5"
-                        style={{ background: "var(--surface)" }}
-                      >
-                        <div className="font-mono text-xs font-semibold" style={{ color: stat.color }}>
-                          {stat.value}
-                        </div>
-                        <div className="font-mono text-[10px] mt-0.5" style={{ color: "var(--muted-fg)" }}>
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div className="flex items-center justify-between mt-4">
-                  <div className="flex flex-wrap gap-2">
+                <div className="flex items-center justify-between mt-auto pt-4" style={{ borderTop: "1px solid var(--surface-stroke)" }}>
+                  <div className="flex gap-2 flex-wrap">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-xs px-2 py-0.5 rounded-md"
-                        style={{ color: "var(--accent)", background: "var(--accent-dim)" }}
-                      >
+                      <span key={tag} className="font-code-sm px-2 py-1 rounded" style={{ background: "#18181B", color: "var(--on-surface-variant)", fontSize: "12px" }}>
                         {tag}
                       </span>
                     ))}
-                    {project.tags.length > 3 && (
-                      <span
-                        className="font-mono text-xs px-2 py-0.5 rounded-md"
-                        style={{ color: "var(--muted-fg)" }}
-                      >
-                        +{project.tags.length - 3}
-                      </span>
-                    )}
                   </div>
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-xs lg:text-sm font-mono flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
-                    style={{ color: "var(--accent)" }}
+                    className="font-label-caps flex items-center gap-1 transition-colors hover:opacity-80"
+                    style={{ color: "var(--primary)" }}
                   >
-                    View details <ArrowRight size={12} />
+                    <ArrowRight size={14} />
                   </Link>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
 
-        <motion.div 
+        {/* System-Level Focus Block */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 p-8 sm:p-10 rounded-2xl border bg-gradient-to-br"
-          style={{ 
-            borderColor: "var(--border)", 
-            backgroundColor: "var(--surface)",
-            backgroundImage: "linear-gradient(to bottom right, var(--surface), rgba(0, 200, 150, 0.03))"
+          className="mt-[80px] p-8 sm:p-10"
+          style={{
+            border: "1px solid var(--surface-stroke)",
+            background: "var(--surface-elevated)",
           }}
         >
-          <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: "var(--fg)" }}>
+          <h3 className="font-headline-md mb-6" style={{ color: "var(--on-surface)", fontSize: "24px" }}>
             System-Level Focus
           </h3>
-          <p className="text-base sm:text-lg mb-6" style={{ color: "var(--muted)" }}>
+          <p className="font-body-md mb-6" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
             These projects represent three pillars of a coherent ML systems narrative, with decision-aware control and auditability:
           </p>
-          <ul className="space-y-4 mb-8 text-base sm:text-lg" style={{ color: "var(--muted)" }}>
+          <ul className="space-y-4 mb-8 font-body-md" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
             <li className="flex items-start gap-3">
-              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[01]</span>
-              <span><strong style={{ color: "var(--fg)" }}>Inference:</strong> LLM Control System → Runtime behavioral guardrails</span>
+              <span className="font-code-sm mt-0.5" style={{ color: "var(--primary)" }}>[01]</span>
+              <span><strong style={{ color: "var(--on-surface)" }}>Inference:</strong> LLM Control System → Runtime behavioral guardrails</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[02]</span>
-              <span><strong style={{ color: "var(--fg)" }}>Evaluation:</strong> Fraud System → Drift detection and automated lifecycle management</span>
+              <span className="font-code-sm mt-0.5" style={{ color: "var(--primary)" }}>[02]</span>
+              <span><strong style={{ color: "var(--on-surface)" }}>Evaluation:</strong> Fraud System → Drift detection and automated lifecycle management</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="font-mono text-sm mt-1" style={{ color: "var(--accent)" }}>[03]</span>
-              <span><strong style={{ color: "var(--fg)" }}>Governance:</strong> LLM Output Validation System → Post-deployment validation layer for LLM outputs</span>
+              <span className="font-code-sm mt-0.5" style={{ color: "var(--primary)" }}>[03]</span>
+              <span><strong style={{ color: "var(--on-surface)" }}>Governance:</strong> LLM Output Validation System → Post-deployment validation layer for LLM outputs</span>
             </li>
           </ul>
-          <div className="p-5 rounded-xl border" style={{ borderColor: "var(--accent)", backgroundColor: "var(--accent-dim)" }}>
-            <p className="text-base font-medium leading-relaxed" style={{ color: "var(--fg)" }}>
-              Together, they reflect a focus on building ML systems that are: <br className="hidden sm:block" />
-              <span style={{ color: "var(--accent)" }}>observable, controllable, and production-ready.</span>
+          <div className="p-5" style={{ border: "1px solid var(--primary)", background: "rgba(78, 222, 163, 0.05)" }}>
+            <p className="font-body-md" style={{ color: "var(--on-surface)", fontSize: "14px" }}>
+              Together, they reflect a focus on building ML systems that are:
+              <br className="hidden sm:block" />
+              <span style={{ color: "var(--primary)" }}> observable, controllable, and production-ready.</span>
             </p>
           </div>
         </motion.div>

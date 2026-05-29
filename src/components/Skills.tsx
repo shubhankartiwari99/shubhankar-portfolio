@@ -1,22 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Server, Database, GitBranch, Cpu, Award, GraduationCap } from "lucide-react";
+import { Cpu, Database, Server, Award, GraduationCap } from "lucide-react";
 
 const skillGroups = [
   {
     title: "ML Systems",
-    icon: <Cpu size={16} />,
+    icon: <Cpu size={28} />,
     skills: ["Evaluation pipelines", "Control policies", "Drift detection", "Failure-mode metrics", "Shadow deployment"],
   },
   {
     title: "Modeling",
-    icon: <Database size={16} />,
+    icon: <Database size={28} />,
     skills: ["XGBoost", "Transformers", "Probabilistic metrics", "Statistical modeling", "Entropy analysis"],
+    hasImage: true,
   },
   {
     title: "Infrastructure",
-    icon: <Server size={16} />,
+    icon: <Server size={28} />,
     skills: ["FastAPI", "CI gates", "Versioned registries", "Observability", "Model serving"],
   },
 ];
@@ -37,14 +38,24 @@ const reveal = {
 export default function Skills() {
   return (
     <>
-      {/* Skills */}
-      <section data-testid="skills-section" id="skills" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-        <div className="max-w-5xl xl:max-w-6xl mx-auto">
+      {/* Technical Focus */}
+      <section data-testid="skills-section" id="skills" className="py-[80px] md:py-[160px] px-5 md:px-8">
+        <div className="max-w-[1280px] mx-auto">
           <motion.div {...reveal}>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12">Technical Focus</h2>
+            <h2
+              className="font-headline-lg mb-12"
+              style={{
+                color: "var(--on-surface)",
+                fontSize: "clamp(28px, 4vw, 48px)",
+                borderBottom: "1px solid var(--surface-stroke)",
+                paddingBottom: "16px",
+              }}
+            >
+              Technical Focus
+            </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {skillGroups.map((group) => (
               <motion.div
                 key={group.title}
@@ -52,20 +63,28 @@ export default function Skills() {
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
-                className="rounded-2xl border p-5 lg:p-6"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                className="p-6 flex flex-col relative overflow-hidden group"
+                style={{
+                  border: "1px solid var(--surface-stroke)",
+                  background: "var(--surface-elevated)",
+                }}
                 data-testid={`skill-group-${group.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <span style={{ color: "var(--accent)" }}>{group.icon}</span>
-                  <h3 className="font-semibold text-sm lg:text-base">{group.title}</h3>
+                <div className="mb-4" style={{ color: "var(--primary)" }}>
+                  {group.icon}
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="font-headline-md mb-4" style={{ color: "var(--on-surface)", fontSize: "20px" }}>
+                  {group.title}
+                </h3>
+                <div className="flex flex-wrap gap-2 mt-auto">
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="font-mono text-xs px-2.5 py-1 rounded-md border transition-colors duration-200"
-                      style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+                      className="font-label-caps px-3 py-1 rounded"
+                      style={{
+                        background: "#18181B",
+                        color: "var(--text-muted)",
+                      }}
                     >
                       {skill}
                     </span>
@@ -78,10 +97,12 @@ export default function Skills() {
       </section>
 
       {/* Credentials */}
-      <section data-testid="credentials-section" className="pb-20 sm:pb-24 lg:pb-32 px-5 sm:px-6">
-        <div className="max-w-5xl xl:max-w-6xl mx-auto">
+      <section data-testid="credentials-section" className="pb-[80px] md:pb-[160px] px-5 md:px-8">
+        <div className="max-w-[1280px] mx-auto">
           <motion.div {...reveal}>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8">Credentials</h2>
+            <h2 className="font-headline-md mb-8" style={{ color: "var(--on-surface)", fontSize: "clamp(24px, 3vw, 32px)" }}>
+              Credentials
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -92,13 +113,16 @@ export default function Skills() {
                 whileInView={reveal.whileInView}
                 viewport={reveal.viewport}
                 transition={reveal.transition}
-                className="rounded-2xl border p-5 lg:p-6"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                className="p-5 lg:p-6"
+                style={{
+                  border: "1px solid var(--surface-stroke)",
+                  background: "var(--surface-elevated)",
+                }}
                 data-testid={`credential-${cred.title.toLowerCase().replace(/[^\w]+/g, "-")}`}
               >
-                <span style={{ color: "var(--accent)" }}>{cred.icon}</span>
-                <h3 className="font-semibold text-sm lg:text-base mt-3">{cred.title}</h3>
-                <p className="text-xs lg:text-sm font-mono mt-1" style={{ color: "var(--muted-fg)" }}>{cred.detail}</p>
+                <span style={{ color: "var(--primary)" }}>{cred.icon}</span>
+                <h3 className="font-body-md mt-3" style={{ color: "var(--on-surface)", fontWeight: 600 }}>{cred.title}</h3>
+                <p className="font-code-sm mt-1" style={{ color: "var(--text-muted)" }}>{cred.detail}</p>
               </motion.div>
             ))}
           </div>

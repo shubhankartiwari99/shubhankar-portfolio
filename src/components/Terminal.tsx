@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
-import { SquareTerminal as TerminalSquare } from "lucide-react";
 
 interface Line {
   type: "input" | "output" | "error" | "system";
@@ -68,13 +67,13 @@ const EASTER_EGGS: Record<string, string> = {
   "exit": `  You can check out any time you like, but you can never leave.`,
   "ping": `  PONG — 0.42ms (systems are healthy)`,
   "neofetch": `       _____   Shubhankar Tiwari
-      /     \\  -------------------------
-     | () () | OS:     Production Linux
-      \\_____/  Host:   Bank of America
-      |     |  Kernel: Java 17 + Spring Boot
-     /|     |\\  Shell:  /bin/backend-eng
-    /_|_____|_\\ Uptime: 4+ years
-               Packages: Microservices (many)`,
+       /     \\  -------------------------
+      | () () | OS:     Production Linux
+       \\_____/  Host:   Bank of America
+       |     |  Kernel: Java 17 + Spring Boot
+      /|     |\\  Shell:  /bin/backend-eng
+     /_|_____|_\\ Uptime: 4+ years
+                Packages: Microservices (many)`,
 };
 
 const WELCOME = `Welcome to shubhankar.sh v1.0.0
@@ -168,30 +167,37 @@ export default function Terminal() {
   };
 
   return (
-    <section data-testid="terminal-section" id="terminal" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
+    <section data-testid="terminal-section" id="terminal" className="py-[80px] md:py-[160px] px-5 md:px-8">
+      <div className="max-w-[1280px] mx-auto">
         <motion.div {...reveal}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-12">Interactive Terminal</h2>
+          <h2 className="font-headline-lg mb-12" style={{ color: "var(--on-surface)", fontSize: "clamp(28px, 4vw, 48px)" }}>
+            Interactive Terminal
+          </h2>
         </motion.div>
 
         <motion.div
           {...reveal}
-          className="rounded-2xl border overflow-hidden"
-          style={{ borderColor: "var(--border)" }}
+          className="overflow-hidden"
+          style={{
+            border: "1px solid var(--surface-stroke)",
+            boxShadow: "inset 0 2px 10px rgba(0,0,0,0.3)",
+          }}
         >
           {/* Title bar */}
           <div
-            className="flex items-center gap-2 px-4 py-3 border-b"
-            style={{ background: "#1a1a1e", borderColor: "var(--border)" }}
+            className="flex items-center gap-2 px-4 py-3"
+            style={{
+              background: "var(--surface-container)",
+              borderBottom: "1px solid var(--surface-stroke)",
+            }}
           >
-            <div className="flex gap-1.5">
+            <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
               <div className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
-              <div className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
+              <div className="w-3 h-3 rounded-full" style={{ background: "var(--primary)" }} />
             </div>
             <div className="flex-1 text-center">
-              <span className="font-mono text-xs" style={{ color: "#71717a" }}>
-                <TerminalSquare size={12} className="inline mr-1.5 -mt-0.5" />
+              <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>
                 shubhankar.sh
               </span>
             </div>
@@ -201,24 +207,24 @@ export default function Terminal() {
           <div
             ref={scrollRef}
             data-testid="terminal-output"
-            className="p-4 font-mono text-xs sm:text-sm lg:text-[15px] h-72 sm:h-80 lg:h-84 overflow-y-auto cursor-text"
-            style={{ background: "#0c0c0e", color: "#a1a1aa" }}
+            className="p-4 font-code-sm h-72 sm:h-80 lg:h-84 overflow-y-auto cursor-text"
+            style={{ background: "var(--terminal-header)", color: "var(--on-surface-variant)" }}
             onClick={() => inputRef.current?.focus()}
           >
             {lines.map((line, i) => (
               <div key={i} className="whitespace-pre-wrap mb-1">
                 {line.type === "input" ? (
                   <span>
-                    <span style={{ color: "#34d399" }}>visitor</span>
-                    <span style={{ color: "#71717a" }}>@</span>
+                    <span style={{ color: "var(--primary)" }}>visitor</span>
+                    <span style={{ color: "var(--text-muted)" }}>@</span>
                     <span style={{ color: "#f59e0b" }}>portfolio</span>
-                    <span style={{ color: "#71717a" }}> $ </span>
-                    <span style={{ color: "#e4e4e7" }}>{line.text}</span>
+                    <span style={{ color: "var(--text-muted)" }}> $ </span>
+                    <span style={{ color: "var(--on-surface)" }}>{line.text}</span>
                   </span>
                 ) : line.type === "error" ? (
-                  <span style={{ color: "#f87171" }}>{line.text}</span>
+                  <span style={{ color: "var(--error)" }}>{line.text}</span>
                 ) : line.type === "system" ? (
-                  <span style={{ color: "#71717a" }}>{line.text}</span>
+                  <span style={{ color: "var(--text-muted)" }}>{line.text}</span>
                 ) : (
                   <span>{line.text}</span>
                 )}
@@ -227,10 +233,10 @@ export default function Terminal() {
 
             {/* Input line */}
             <div className="flex items-center">
-              <span style={{ color: "#34d399" }}>visitor</span>
-              <span style={{ color: "#71717a" }}>@</span>
+              <span style={{ color: "var(--primary)" }}>visitor</span>
+              <span style={{ color: "var(--text-muted)" }}>@</span>
               <span style={{ color: "#f59e0b" }}>portfolio</span>
-              <span style={{ color: "#71717a" }}> $ </span>
+              <span style={{ color: "var(--text-muted)" }}> $ </span>
               <input
                 ref={inputRef}
                 data-testid="terminal-input"
@@ -238,8 +244,8 @@ export default function Terminal() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none font-mono text-xs sm:text-sm lg:text-[15px] caret-amber-400"
-                style={{ color: "#e4e4e7" }}
+                className="flex-1 bg-transparent outline-none font-code-sm caret-amber-400"
+                style={{ color: "var(--on-surface)" }}
                 autoComplete="off"
                 spellCheck={false}
                 aria-label="Terminal input"
@@ -248,7 +254,7 @@ export default function Terminal() {
           </div>
         </motion.div>
 
-        <p className="font-mono text-xs lg:text-sm mt-4 text-center" style={{ color: "var(--muted-fg)" }}>
+        <p className="font-code-sm mt-4 text-center" style={{ color: "var(--text-muted)" }}>
           Try: help, about, ls projects/, cat skills, neofetch
         </p>
       </div>

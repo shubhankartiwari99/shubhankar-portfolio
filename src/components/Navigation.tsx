@@ -2,27 +2,23 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Sun, Moon, FileText, PenLine, Menu, X } from "lucide-react";
+import { FileText, PenLine, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
 const sections = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" },
-  { id: "terminal", label: "Terminal" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "JOURNEY" },
+  { id: "experience", label: "STACK" },
+  { id: "projects", label: "PROJECTS" },
+  { id: "terminal", label: "TERMINAL" },
 ];
 
 interface Props {
-  dark: boolean;
-  setDark: (v: boolean) => void;
   recruiterMode: boolean;
   setRecruiterMode: (v: boolean) => void;
 }
 
-export default function Navigation({ dark, setDark, recruiterMode, setRecruiterMode }: Props) {
+export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isScrolling, setIsScrolling] = useState(false);
@@ -45,11 +41,8 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           const sectionEls = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
           let current = "";
           
-          // Find the section that's currently in view
-          // A section is considered active when its top is within the upper portion of the viewport
           for (const el of sectionEls) {
             const rect = el.getBoundingClientRect();
-            // Section is active if its top is at or above 200px from viewport top
             if (rect.top <= 200) {
               current = el.id;
             }
@@ -93,7 +86,6 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
     if (isHome) {
       const element = document.getElementById(id);
       if (element) {
-        // Immediately set this section as active
         setActiveSection(id);
         setIsScrolling(true);
         
@@ -103,7 +95,6 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           behavior: "smooth"
         });
         
-        // Re-enable scroll detection after animation completes
         setTimeout(() => {
           setIsScrolling(false);
         }, 800);
@@ -127,32 +118,47 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
       data-testid="navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? `color-mix(in srgb, var(--bg) 85%, transparent)` : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        background: scrolled ? "rgba(19, 19, 20, 0.80)" : "rgba(19, 19, 20, 0.80)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: "1px solid var(--surface-stroke)",
       }}
     >
-      <nav className="max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
+      <nav className="max-w-[1280px] mx-auto px-5 md:px-8 py-3.5 sm:py-4 flex items-center justify-between">
+        {/* Logo */}
         <Link
           href="/"
           data-testid="nav-logo"
-          className="font-mono text-sm tracking-tight transition-colors duration-200"
-          style={{ color: "var(--muted)" }}
+          className="font-display-xl transition-colors duration-300 hover:text-[var(--primary)] cursor-pointer"
+          style={{
+            fontFamily: "var(--font-syne)",
+            fontSize: "clamp(18px, 2vw, 24px)",
+            fontWeight: 800,
+            color: "var(--on-surface)",
+            letterSpacing: "-0.02em",
+          }}
           onClick={handleLogoClick}
         >
-          st<span style={{ color: "var(--accent)" }}>.</span>
+          SHUBHANKAR_TIWARI
         </Link>
 
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {sections.map((s) => (
             <button
               key={s.id}
               data-testid={`nav-link-${s.id}`}
               onClick={() => navigateToSection(s.id)}
-              className="px-2.5 lg:px-3 py-1 text-sm font-mono rounded-md transition-colors duration-200 cursor-pointer"
+              className="font-body-md transition-all duration-300 cursor-pointer"
               style={{
-                color: activeSection === s.id ? "var(--accent)" : "var(--muted-fg)",
+                fontFamily: "var(--font-jetbrains)",
+                fontSize: "13px",
+                fontWeight: activeSection === s.id ? 700 : 400,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase" as const,
+                color: activeSection === s.id ? "var(--primary)" : "var(--on-surface-variant)",
+                borderBottom: activeSection === s.id ? "2px solid var(--primary)" : "2px solid transparent",
+                paddingBottom: "2px",
               }}
             >
               {s.label}
@@ -161,73 +167,94 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
           <Link
             href="/blog"
             data-testid="nav-link-blog"
-            className="px-2.5 lg:px-3 py-1 text-sm font-mono rounded-md transition-colors duration-200 flex items-center gap-1"
+            className="transition-all duration-300 flex items-center gap-1"
             style={{
-              color: pathname.startsWith("/blog") ? "var(--accent)" : "var(--muted-fg)",
+              fontFamily: "var(--font-jetbrains)",
+              fontSize: "13px",
+              fontWeight: pathname.startsWith("/blog") ? 700 : 400,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase" as const,
+              color: pathname.startsWith("/blog") ? "var(--primary)" : "var(--on-surface-variant)",
+              borderBottom: pathname.startsWith("/blog") ? "2px solid var(--primary)" : "2px solid transparent",
+              paddingBottom: "2px",
             }}
           >
             <PenLine size={12} />
-            Blog
+            BLOG
           </Link>
         </div>
 
+        {/* Right Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Mobile menu button */}
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="md:hidden p-2 transition-colors duration-200 cursor-pointer rounded-lg"
-            style={{ color: "var(--muted)" }}
+            className="md:hidden p-2 transition-colors duration-200 cursor-pointer rounded"
+            style={{ color: "var(--on-surface)" }}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-menu"
           >
-            {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
 
+          {/* Recruiter toggle */}
           <button
             data-testid="recruiter-mode-toggle"
             onClick={() => setRecruiterMode(!recruiterMode)}
-            className="hidden sm:inline-flex px-3 lg:px-3.5 py-1.5 text-xs lg:text-sm font-mono rounded-full border transition-colors duration-200 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded transition-colors duration-200 cursor-pointer"
             style={{
-              background: recruiterMode ? "var(--accent)" : "transparent",
-              color: recruiterMode ? "var(--bg)" : "var(--muted)",
-              borderColor: recruiterMode ? "var(--accent)" : "var(--border)",
+              fontFamily: "var(--font-jetbrains)",
+              fontSize: "12px",
+              border: "1px solid var(--surface-stroke)",
+              background: "var(--surface-elevated)",
+              color: "var(--text-muted)",
             }}
           >
-            {recruiterMode ? "recruiter: on" : "recruiter: off"}
+            <span style={{ color: "var(--text-muted)" }}>recruiter:</span>
+            <div
+              className="w-8 h-4 rounded-full relative transition-colors duration-200"
+              style={{
+                background: recruiterMode ? "var(--primary-container)" : "var(--surface-stroke)",
+              }}
+            >
+              <div
+                className="w-4 h-4 rounded-full absolute top-0 transition-all duration-200"
+                style={{
+                  background: recruiterMode ? "var(--on-primary)" : "var(--text-muted)",
+                  left: recruiterMode ? "16px" : "0px",
+                }}
+              />
+            </div>
           </button>
 
+          {/* CTA Button */}
           <a
-            href="/Shubhankar_Tiwari_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="resume-link"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 text-xs lg:text-sm font-mono rounded-full border transition-colors duration-200"
-            style={{ color: "var(--muted)", borderColor: "var(--border)" }}
+            href="mailto:tiwarishubhankar@gmail.com"
+            className="hidden md:inline-flex items-center gap-1 px-5 py-2 rounded transition-all duration-200 hover:opacity-90"
+            style={{
+              fontFamily: "var(--font-jetbrains)",
+              fontSize: "12px",
+              fontWeight: 700,
+              letterSpacing: "0.05em",
+              background: "var(--primary)",
+              color: "var(--on-primary)",
+            }}
           >
-            <FileText size={12} />
-            resume
+            GET_IN_TOUCH
           </a>
-
-          <button
-            data-testid="theme-toggle"
-            onClick={() => setDark(!dark)}
-            className="p-2 transition-colors duration-200 cursor-pointer rounded-lg"
-            style={{ color: "var(--muted)" }}
-            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {dark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
         </div>
       </nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <>
             <motion.button
               type="button"
               className="md:hidden fixed inset-0 z-40"
-              style={{ background: "rgba(0, 0, 0, 0.35)" }}
+              style={{ background: "rgba(0, 0, 0, 0.5)" }}
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu overlay"
               initial={{ opacity: 0 }}
@@ -238,9 +265,9 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
 
             <motion.div
               id="mobile-nav-menu"
-              className="md:hidden absolute top-full left-0 right-0 z-50 border-t px-5 sm:px-6 pb-4 pt-3 shadow-xl"
+              className="md:hidden absolute top-full left-0 right-0 z-50 px-5 pb-6 pt-4 shadow-xl"
               style={{
-                borderColor: "var(--border)",
+                borderTop: "1px solid var(--surface-stroke)",
                 background: "var(--bg)",
               }}
               initial={{ opacity: 0, y: -16 }}
@@ -248,15 +275,18 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col gap-1">
+              <div className="max-w-[1280px] mx-auto flex flex-col gap-1">
                 {sections.map((s) => (
                   <button
                     key={`mobile-${s.id}`}
                     type="button"
                     onClick={() => navigateToSection(s.id)}
-                    className="w-full text-left px-2.5 py-2 text-sm font-mono rounded-md transition-colors duration-200"
+                    className="w-full text-left px-3 py-2.5 rounded transition-colors duration-200"
                     style={{
-                      color: activeSection === s.id && isHome ? "var(--accent)" : "var(--muted-fg)",
+                      fontFamily: "var(--font-jetbrains)",
+                      fontSize: "14px",
+                      letterSpacing: "0.15em",
+                      color: activeSection === s.id && isHome ? "var(--primary)" : "var(--on-surface-variant)",
                     }}
                   >
                     {s.label}
@@ -266,38 +296,50 @@ export default function Navigation({ dark, setDark, recruiterMode, setRecruiterM
                 <Link
                   href="/blog"
                   onClick={() => setMobileOpen(false)}
-                  className="px-2.5 py-2 text-sm font-mono rounded-md transition-colors duration-200 flex items-center gap-1.5"
+                  className="px-3 py-2.5 rounded transition-colors duration-200 flex items-center gap-1.5"
                   style={{
-                    color: pathname.startsWith("/blog") ? "var(--accent)" : "var(--muted-fg)",
+                    fontFamily: "var(--font-jetbrains)",
+                    fontSize: "14px",
+                    letterSpacing: "0.15em",
+                    color: pathname.startsWith("/blog") ? "var(--primary)" : "var(--on-surface-variant)",
                   }}
                 >
                   <PenLine size={12} />
-                  Blog
+                  BLOG
                 </Link>
 
-                <button
-                  type="button"
-                  onClick={() => setRecruiterMode(!recruiterMode)}
-                  className="mt-2 inline-flex items-center justify-center px-3 py-2 text-xs font-mono rounded-full border transition-colors duration-200"
-                  style={{
-                    background: recruiterMode ? "var(--accent)" : "transparent",
-                    color: recruiterMode ? "var(--bg)" : "var(--muted)",
-                    borderColor: recruiterMode ? "var(--accent)" : "var(--border)",
-                  }}
-                >
-                  {recruiterMode ? "recruiter: on" : "recruiter: off"}
-                </button>
+                <div className="flex items-center gap-3 mt-3 pt-3" style={{ borderTop: "1px solid var(--surface-stroke)" }}>
+                  <button
+                    type="button"
+                    onClick={() => setRecruiterMode(!recruiterMode)}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded transition-colors duration-200"
+                    style={{
+                      fontFamily: "var(--font-jetbrains)",
+                      fontSize: "12px",
+                      border: "1px solid var(--surface-stroke)",
+                      background: recruiterMode ? "var(--primary)" : "transparent",
+                      color: recruiterMode ? "var(--on-primary)" : "var(--text-muted)",
+                    }}
+                  >
+                    {recruiterMode ? "recruiter: on" : "recruiter: off"}
+                  </button>
 
-                <a
-                  href="/Shubhankar_Tiwari_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-mono rounded-full border transition-colors duration-200"
-                  style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                >
-                  <FileText size={12} />
-                  resume
-                </a>
+                  <a
+                    href="/Shubhankar_Tiwari_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded transition-colors duration-200"
+                    style={{
+                      fontFamily: "var(--font-jetbrains)",
+                      fontSize: "12px",
+                      border: "1px solid var(--surface-stroke)",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    <FileText size={12} />
+                    RESUME
+                  </a>
+                </div>
               </div>
             </motion.div>
           </>

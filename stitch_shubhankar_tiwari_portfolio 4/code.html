@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shubhankar Tiwari | Deterministic Systems</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Outfit:wght@400;700;800&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#003731",
+                      "surface": "#131314",
+                      "secondary": "#c0c1ff",
+                      "outline": "#86948a",
+                      "outline-variant": "#3c4a42",
+                      "primary-fixed": "#6ffbbe",
+                      "primary": "#4edea3",
+                      "surface-elevated": "#121214",
+                      "on-primary-fixed-variant": "#005236",
+                      "surface-container-low": "#1c1b1c",
+                      "primary-container": "#10b981",
+                      "background": "#131314",
+                      "secondary-fixed": "#e1e0ff",
+                      "secondary-container": "#3131c0",
+                      "surface-bright": "#3a393a",
+                      "tertiary-container": "#00b7a4",
+                      "tertiary": "#3cddc7",
+                      "text-muted": "#A1A1AA",
+                      "surface-container-highest": "#353436",
+                      "inverse-on-surface": "#313031",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "surface-container": "#201f20",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "on-tertiary-container": "#00413a",
+                      "on-surface-variant": "#bbcabf",
+                      "on-secondary-fixed-variant": "#2f2ebe",
+                      "on-secondary-container": "#b0b2ff",
+                      "on-primary-container": "#00422b",
+                      "terminal-header": "#18181B",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#353436",
+                      "on-primary": "#003824",
+                      "on-background": "#e5e2e3",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-fixed": "#07006c",
+                      "on-error": "#690005",
+                      "on-surface": "#e5e2e3",
+                      "inverse-surface": "#e5e2e3",
+                      "surface-tint": "#4edea3",
+                      "on-tertiary-fixed": "#00201c",
+                      "surface-container-high": "#2a2a2b",
+                      "tertiary-fixed": "#62fae3",
+                      "secondary-fixed-dim": "#c0c1ff",
+                      "surface-stroke": "#27272A",
+                      "on-secondary": "#1000a9",
+                      "on-primary-fixed": "#002113",
+                      "primary-fixed-dim": "#4edea3",
+                      "surface-dim": "#131314",
+                      "surface-container-lowest": "#0e0e0f",
+                      "inverse-primary": "#006c49",
+                      "error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-loose": "48px",
+                      "section-gap": "160px",
+                      "gutter": "32px",
+                      "container-max": "1280px",
+                      "margin-mobile": "20px",
+                      "component-gap": "24px",
+                      "stack-tight": "8px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Outfit"],
+                      "display-xl": ["Syne"],
+                      "headline-lg-mobile": ["Syne"],
+                      "headline-lg": ["Syne"],
+                      "code-sm": ["JetBrains Mono"],
+                      "headline-md": ["Syne"],
+                      "metric-huge": ["Outfit"],
+                      "body-md": ["JetBrains Mono"],
+                      "body-lg": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                      "display-xl": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                      "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                      "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "code-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                      "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                      "metric-huge": ["40px", { "lineHeight": "1.0", "fontWeight": "800" }],
+                      "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                      "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "450" }]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .bg-grid-pattern {
+              background-image: linear-gradient(to right, #27272A 1px, transparent 1px),
+                                linear-gradient(to bottom, #27272A 1px, transparent 1px);
+              background-size: 40px 40px;
+          }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter py-4 backdrop-blur-md max-w-container-max mx-auto border-b border-surface-stroke bg-background/80 dark:bg-background/80">
+<div class="font-display-xl text-headline-md font-extrabold text-on-surface dark:text-on-surface scale-95 active:scale-90 transition-transform cursor-pointer">SYSTEMS_ENG_V1.0</div>
+<div class="hidden md:flex gap-component-gap">
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors hover:text-primary transition-all duration-300" href="#journey">JOURNEY</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors hover:text-primary transition-all duration-300" href="#stack">STACK</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors hover:text-primary transition-all duration-300" href="#projects">PROJECTS</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors hover:text-primary transition-all duration-300" href="#terminal">TERMINAL</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 border border-surface-stroke px-3 py-1 rounded bg-surface-elevated font-code-sm text-code-sm">
+<span class="text-text-muted">recruiter:</span>
+<div class="w-8 h-4 rounded-full bg-surface-stroke relative cursor-pointer" onclick="this.classList.toggle('bg-primary-container'); this.children[0].classList.toggle('translate-x-4'); this.children[0].classList.toggle('bg-on-primary');">
+<div class="w-4 h-4 rounded-full bg-text-muted absolute top-0 left-0 transition-transform duration-200"></div>
+</div>
+</div>
+<a class="hidden md:flex bg-primary text-on-primary font-body-md text-code-sm px-6 py-2 rounded uppercase tracking-widest hover:opacity-90 transition-opacity" href="#">GET_IN_TOUCH</a>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-[120px] pb-section-gap">
+<!-- Hero Section -->
+<section class="min-h-[80vh] flex flex-col justify-center relative bg-grid-pattern border-x border-b border-surface-stroke">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background pointer-events-none"></div>
+<div class="relative z-10 p-gutter md:p-stack-loose">
+<h1 class="font-display-xl text-display-xl md:text-[120px] text-on-surface tracking-tighter mb-component-gap max-w-4xl leading-none">
+                    Shubhankar<br/>Tiwari
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-stack-loose border-l-2 border-primary pl-4">
+                    Building intelligent ML systems that observe, detect, and adapt in real time.
+                </p>
+<div class="flex flex-col md:flex-row gap-component-gap">
+<div class="border border-surface-stroke p-component-gap bg-surface-elevated max-w-sm">
+<div class="font-code-sm text-code-sm text-primary mb-2">[01]</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-2">Runtime Intelligence</h3>
+<p class="font-body-md text-body-md text-text-muted">Controlling and stabilizing LLM behavior during generation</p>
+</div>
+<div class="border border-surface-stroke p-component-gap bg-surface-elevated max-w-sm">
+<div class="font-code-sm text-code-sm text-primary mb-2">[02]</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-2">Model Lifecycle Intelligence</h3>
+<p class="font-body-md text-body-md text-text-muted">Detecting drift and governing ML models in production</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Spotlight -->
+<section class="mt-section-gap" id="projects">
+<div class="flex items-center gap-4 mb-stack-loose">
+<span class="material-symbols-outlined text-primary text-3xl">memory</span>
+<h2 class="font-headline-lg text-headline-lg md:text-display-xl text-on-surface">Project Spotlight</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-component-gap border border-surface-stroke bg-surface-elevated p-component-gap md:p-stack-loose">
+<div class="md:col-span-7 flex flex-col justify-center">
+<div class="font-code-sm text-code-sm text-primary mb-4 uppercase tracking-widest border border-primary/30 inline-block px-2 py-1 w-max">System Architecture</div>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">LLM Control System</h3>
+<p class="font-body-lg text-body-lg text-text-muted mb-8 max-w-xl">
+                        Built a full-stack system to monitor and control LLM generation at the token level, with adaptive instability detection and real-time intervention.
+                    </p>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-4 mb-8">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-xl">check</span>
+                            Token-level observability via manual decoding loop
+                        </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-xl">check</span>
+                            Three-category stability detector system
+                        </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-xl">check</span>
+                            Formal policy controller with explicit intervention rules
+                        </li>
+</ul>
+<div class="flex gap-4">
+<a class="bg-primary text-on-primary font-code-sm text-code-sm px-6 py-3 rounded uppercase tracking-widest hover:opacity-90 transition-opacity text-center flex-1 md:flex-none" href="#">Read Case Study</a>
+<a class="border border-surface-stroke text-on-surface font-code-sm text-code-sm px-6 py-3 rounded uppercase tracking-widest hover:bg-surface-bright transition-colors text-center flex-1 md:flex-none" href="#">View Repo</a>
+</div>
+</div>
+<div class="md:col-span-5 grid grid-cols-2 gap-4">
+<div class="col-span-2 border border-surface-stroke overflow-hidden h-[250px] relative">
+<img alt="Robot sitting on a bench" class="w-full h-full object-cover grayscale opacity-70 mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida/ADBb0ujwNR51PqBJjvKgnoZxT4LWW3Qtqt3ZDDpL1xg-03Cq57EJU6xMYIe5SdoRmW0JWhqXRkaGqJEPzHpETy9GpsuaDCOZLizhIyP_IljP8Cjt_GnLiCxX3Ym19p1O1BhD9qSexqm3qRMVHEEURObMj-Q0-WJ5Jfo_K6wU7oXQWNqTa-9FUBj1i0zt_H729_UbKaIGap3zGbvQWuKE2BtWXpJ5f6FgvSR4Pq7Z8ZLN-HdNh46qiLfw4bDN8V0"/>
+<div class="absolute inset-0 border border-primary/20 pointer-events-none"></div>
+</div>
+<div class="border border-surface-stroke p-4 bg-surface text-center flex flex-col justify-center">
+<div class="font-metric-huge text-metric-huge text-primary mb-2">82%</div>
+<div class="font-code-sm text-code-sm text-text-muted uppercase">Instability Drop</div>
+</div>
+<div class="border border-surface-stroke p-4 bg-surface text-center flex flex-col justify-center">
+<div class="font-metric-huge text-metric-huge text-primary mb-2">0.0%</div>
+<div class="font-code-sm text-code-sm text-text-muted uppercase">False Positives</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Focus (Bento Grid) -->
+<section class="mt-section-gap" id="stack">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-loose border-b border-surface-stroke pb-4">Technical Focus</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-component-gap">
+<!-- Card 1 -->
+<div class="border border-surface-stroke bg-surface-elevated p-component-gap flex flex-col">
+<div class="material-symbols-outlined text-primary text-4xl mb-4">account_tree</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-4">ML Systems</h3>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">Evaluation pipelines</span>
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">Control policies</span>
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">Drift detection</span>
+</div>
+</div>
+<!-- Card 2 with Image -->
+<div class="border border-surface-stroke bg-surface-elevated flex flex-col overflow-hidden relative group">
+<img alt="Abstract glass spheres connected by lines" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-500 mix-blend-screen" src="https://lh3.googleusercontent.com/aida/ADBb0ugu0BBxbNIROmEEgAGLDxOELQwY0YhPcEVn4n3WlWae3OCa6cx9p-K0qqWW11_2Dz1p18hEXuwf0sFO6JaX9EMcOlZiIDnfNXY-EebIjzistmcpYo6vbUn_ZTN_86VJZ0h5d1wPmdWY6cH581j1A8KhOQHvDDC7VxIfzA80q37iww07pn-Cw-9yH7oAgiDMDotk2gyWdriSv2wiz0iZLmPJe0Oogjv8rmeWSkiYwpmCRwfMlzEX7wsrhic"/>
+<div class="relative z-10 p-component-gap h-full flex flex-col">
+<div class="material-symbols-outlined text-primary text-4xl mb-4">hub</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-4">Modeling</h3>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="bg-[#18181B]/80 backdrop-blur text-text-muted font-label-caps text-label-caps px-3 py-1 rounded border border-surface-stroke">XGBoost</span>
+<span class="bg-[#18181B]/80 backdrop-blur text-text-muted font-label-caps text-label-caps px-3 py-1 rounded border border-surface-stroke">Transformers</span>
+<span class="bg-[#18181B]/80 backdrop-blur text-text-muted font-label-caps text-label-caps px-3 py-1 rounded border border-surface-stroke">Statistical modeling</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="border border-surface-stroke bg-surface-elevated p-component-gap flex flex-col">
+<div class="material-symbols-outlined text-primary text-4xl mb-4">dns</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-4">Infrastructure</h3>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">FastAPI</span>
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">CI gates</span>
+<span class="bg-[#18181B] text-text-muted font-label-caps text-label-caps px-3 py-1 rounded">Observability</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="border-t border-surface-stroke bg-background dark:bg-background w-full py-stack-tight px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto mt-section-gap">
+<div class="font-label-caps text-label-caps text-on-surface text-text-muted mb-4 md:mb-0">
+            © 2024 ARCHITECT_SYSTEMS. ALL RIGHTS RESERVED. RUNTIME_STABLE.
+        </div>
+<div class="flex gap-6 font-code-sm text-code-sm">
+<a class="text-text-muted hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="#">GITHUB</a>
+<a class="text-text-muted hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="#">LINKEDIN</a>
+<a class="text-text-muted hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="#">DOCS</a>
+</div>
+</footer>
+</body></html>

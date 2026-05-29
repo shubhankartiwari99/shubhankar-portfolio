@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Briefcase, Trophy } from "lucide-react";
 import { useRecruiterMode } from "./Providers";
 
 const reveal = {
@@ -13,15 +12,6 @@ const reveal = {
 
 const milestones = [
   {
-    icon: <GraduationCap size={20} />,
-    title: "B.Tech CSE",
-    subtitle: "SRM Institute of Science & Technology",
-    description: "Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering.",
-    recruiterDescription: ["Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering."],
-    year: "2018-2022",
-  },
-  {
-    icon: <Briefcase size={20} />,
     title: "Software Engineer",
     subtitle: "Bank of America",
     description: "Building and maintaining Java backend systems for corporate banking. I own the full lifecycle — design, CI/CD, deployments, and being on-call when something breaks. Four years of that teaches you things about software that writing code in isolation doesn't.",
@@ -32,9 +22,9 @@ const milestones = [
       "Cross-functional manual regression testing during release cycles — validating end-to-end system behaviour before production promotion",
     ],
     year: "2022-Present",
+    active: true,
   },
   {
-    icon: <Trophy size={20} />,
     title: "Kaggle Expert",
     subtitle: "Top 4.1% Globally",
     description: "Notebooks Expert ranked #2,441 / 59,663 — personal best #707. 34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
@@ -43,114 +33,92 @@ const milestones = [
       "34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression",
     ],
     year: "2022-Present",
+    active: true,
+  },
+  {
+    title: "B.Tech CSE",
+    subtitle: "SRM IST",
+    description: "Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering.",
+    recruiterDescription: ["Graduated with 94.4% GPA in Computer Science. Built foundation in algorithms, data structures, and software engineering."],
+    year: "2018-2022",
+    active: false,
   },
 ];
 
 export default function Journey() {
   const recruiterMode = useRecruiterMode();
+
   return (
-    <section id="about" className="py-20 sm:py-24 lg:py-32 px-5 sm:px-6 relative">
-      <div className="max-w-5xl xl:max-w-6xl mx-auto">
+    <section id="about" className="py-[80px] md:py-[160px] px-5 md:px-8" style={{ borderBottom: "1px solid var(--surface-stroke)" }}>
+      <div className="max-w-[1280px] mx-auto">
         <motion.div {...reveal}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">My Journey</h2>
-          {recruiterMode ? (
-            <ul className="list-disc pl-5 space-y-3 text-sm lg:text-base leading-relaxed" style={{ color: "var(--muted)" }}>
+          <h2 className="font-headline-lg mb-12" style={{ color: "var(--on-surface)", fontSize: "clamp(32px, 4vw, 48px)" }}>
+            My Journey
+          </h2>
+
+          {recruiterMode && (
+            <ul className="list-disc pl-5 space-y-3 font-body-md mb-12" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
               <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
               <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
               <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
-              <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning & Computer Vision</li>
-              <li>Active in applied AI &mdash; researching LLM behavioral reliability</li>
+              <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
+              <li>Active in applied AI — researching LLM behavioral reliability</li>
             </ul>
-          ) : (
-            <p className="text-lg max-w-3xl leading-relaxed" style={{ color: "var(--muted)" }}>
-              I went from curious undergrad to backend engineer at Bank of America. The path
-              wasn't linear — four years of production systems, a Kaggle Expert rank, and now
-              building evaluation infrastructure for LLMs. Each of those things informed the
-              others more than I expected.
-            </p>
           )}
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <motion.div {...reveal} className="lg:col-span-2 space-y-6">
-            {milestones.map((milestone, i) => (
+        {/* Timeline */}
+        <div className="space-y-0">
+          {milestones.map((milestone, i) => (
+            <motion.div
+              key={i}
+              initial={reveal.initial}
+              whileInView={reveal.whileInView}
+              viewport={reveal.viewport}
+              transition={{ ...reveal.transition, delay: i * 0.05 }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start relative pl-6 md:pl-8 ml-2 md:ml-0"
+              style={{
+                borderLeft: "2px solid var(--surface-stroke)",
+                paddingTop: "24px",
+                paddingBottom: "24px",
+              }}
+            >
+              {/* Timeline dot */}
               <div
-                key={i}
-                className="rounded-2xl border p-6 transition-all duration-300 group hover:shadow-lg"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent)";
-                  e.currentTarget.style.boxShadow = `0 0 30px ${getComputedStyle(document.documentElement).getPropertyValue('--accent-glow')}`;
+                className="absolute w-4 h-4 rounded-full -left-[9px] top-[28px]"
+                style={{
+                  background: "var(--bg)",
+                  border: milestone.active ? "2px solid var(--primary)" : "2px solid var(--surface-stroke)",
                 }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="p-3 rounded-lg flex-shrink-0 transition-colors duration-300"
-                    style={{ background: "var(--accent-dim)", color: "var(--accent)" }}
-                  >
-                    {milestone.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between gap-4 mb-2">
-                      <div>
-                        <h3 className="text-lg font-semibold">{milestone.title}</h3>
-                        <p className="text-sm font-medium mt-1" style={{ color: "var(--accent)" }}>
-                          {milestone.subtitle}
-                        </p>
-                      </div>
-                      <span className="font-mono text-xs px-3 py-1 rounded-full flex-shrink-0" style={{ background: "var(--accent-dim)", color: "var(--accent)" }}>
-                        {milestone.year}
-                      </span>
-                    </div>
-                    {recruiterMode ? (
-                      <ul className="list-disc pl-5 space-y-2 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                        {milestone.recruiterDescription.map((d) => <li key={d}>{d}</li>)}
-                      </ul>
-                    ) : (
-                      <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                        {milestone.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
+              />
+
+              {/* Left column: Date + Org */}
+              <div className="md:col-span-3">
+                <h3 className="font-label-caps mb-2" style={{ color: "var(--primary)" }}>
+                  {milestone.year}
+                </h3>
+                <p className="font-body-md" style={{ color: "var(--on-surface-variant)", fontSize: "14px" }}>
+                  {milestone.subtitle}
+                </p>
               </div>
-            ))}
-          </motion.div>
 
-          <motion.div
-            {...reveal}
-            className="rounded-2xl border p-6 h-full"
-            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full" style={{ background: "var(--accent)" }} />
-              <h3 className="font-semibold">Backend Excellence</h3>
-            </div>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              Currently at Bank of America, I focus on building microservices that power critical banking workflows.
-              From API design to deployment validation, I own the full lifecycle.
-            </p>
-          </motion.div>
-
-          <motion.div
-            {...reveal}
-            className="rounded-2xl border p-6 h-full"
-            style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full" style={{ background: "var(--accent)" }} />
-              <h3 className="font-semibold">Competitive ML</h3>
-            </div>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              Outside of work, I sharpen my skills through Kaggle — ranked top 4.1% globally, personal best #707. 
-              Currently researching LLM behavioral reliability, cultural alignment, and building production safeguard 
-              systems that measure deployment-readiness, not just benchmark accuracy.
-            </p>
-          </motion.div>
+              {/* Right column: Title + Description */}
+              <div className="md:col-span-9 space-y-3">
+                <h4 className="font-headline-md" style={{ color: "var(--on-surface)", fontSize: "clamp(20px, 3vw, 32px)" }}>
+                  {milestone.title}
+                </h4>
+                {recruiterMode ? (
+                  <ul className="list-disc pl-5 space-y-2 font-body-md" style={{ color: "var(--on-surface-variant)", fontSize: "14px" }}>
+                    {milestone.recruiterDescription.map((d) => <li key={d}>{d}</li>)}
+                  </ul>
+                ) : (
+                  <p className="font-body-md max-w-3xl" style={{ color: "var(--on-surface-variant)", fontSize: "14px" }}>
+                    {milestone.description}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
