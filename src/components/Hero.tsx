@@ -22,7 +22,7 @@ export default function Hero() {
         >
           {/* Name */}
           <h1
-            className="font-display-xl mb-6"
+            className="font-display-xl mb-4"
             style={{
               color: "var(--on-surface)",
               letterSpacing: "-0.04em",
@@ -35,6 +35,32 @@ export default function Hero() {
             Tiwari
           </h1>
 
+          {/* Professional Identity */}
+          <div className="mb-8 space-y-1">
+            <p
+              className="font-body-md"
+              style={{
+                color: "var(--on-surface-variant)",
+                fontFamily: "var(--font-jetbrains)",
+                fontSize: "clamp(13px, 1.5vw, 15px)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Software Engineer @ Bank of America
+            </p>
+            <p
+              className="font-body-md"
+              style={{
+                color: "var(--primary)",
+                fontFamily: "var(--font-jetbrains)",
+                fontSize: "clamp(13px, 1.5vw, 15px)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Incoming MS in Artificial Intelligence @ Columbia University · Fall 2026
+            </p>
+          </div>
+
           {/* Tagline */}
           <p
             className="font-body-lg max-w-2xl mb-12"
@@ -44,7 +70,7 @@ export default function Hero() {
               paddingLeft: "16px",
             }}
           >
-            Building intelligent ML systems that observe, detect, and adapt in real time.
+            Building AI Reliability, ML Systems, and Enterprise AI Infrastructure.
           </p>
 
           {/* Focus Area Cards */}

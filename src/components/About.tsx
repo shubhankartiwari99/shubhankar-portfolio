@@ -41,6 +41,7 @@ export default function About() {
                 <li>Hands-on CI/CD pipeline ownership, cross-functional regression testing, release validation, and production stability management</li>
                 <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
                 <li>Active in applied AI — researching LLM behavioral reliability and production quality-gating</li>
+                <li>Incoming MS in Artificial Intelligence at Columbia University (Fall 2026) — focusing on ML Systems, AI Reliability, and LLM Evaluation</li>
               </ul>
             ) : (
               <>
@@ -54,6 +55,10 @@ export default function About() {
                   on Kaggle as a Notebooks Expert, and currently researching LLM behavioral reliability:
                   building evaluation infrastructure that measures whether a model is trustworthy enough
                   to deploy, not just whether it can get the right answer once.
+                </p>
+                <p className="font-body-lg" style={{ color: "var(--text-muted)" }}>
+                  Starting Fall 2026, I&apos;ll be pursuing my MS in Artificial Intelligence at Columbia
+                  University — deepening my work in ML Systems, AI Reliability, and LLM Evaluation.
                 </p>
               </>
             )}

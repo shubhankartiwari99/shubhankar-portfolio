@@ -25,7 +25,7 @@ export default function Contact() {
           </h2>
 
           <p className="font-body-md mt-6 max-w-2xl mx-auto" style={{ color: "var(--text-muted)", fontSize: "16px" }}>
-            Open to roles in backend systems, platform engineering, and applied AI.
+            Open to roles in ML systems, AI infrastructure, AI reliability, and platform engineering.
             If something here resonates — I&apos;d like to hear from you.
           </p>
 

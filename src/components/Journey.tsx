@@ -12,6 +12,18 @@ const reveal = {
 
 const milestones = [
   {
+    title: "MS in Artificial Intelligence",
+    subtitle: "Columbia University",
+    description: "Pursuing graduate studies in AI with a focus on ML Systems, AI Reliability, and LLM Evaluation — building on four years of production engineering and applied AI research.",
+    recruiterDescription: [
+      "Incoming MS in Artificial Intelligence at Columbia University (Fall 2026)",
+      "Focus areas: ML Systems, AI Reliability, LLM Evaluation, AI Infrastructure",
+    ],
+    year: "Fall 2026",
+    active: false,
+    upcoming: true,
+  },
+  {
     title: "Software Engineer",
     subtitle: "Bank of America",
     description: "Building and maintaining Java backend systems for corporate banking. I own the full lifecycle — design, CI/CD, deployments, and being on-call when something breaks. Four years of that teaches you things about software that writing code in isolation doesn't.",
@@ -63,6 +75,7 @@ export default function Journey() {
               <li>Hands-on CI/CD pipeline ownership, release validation, and production stability management</li>
               <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
               <li>Active in applied AI — researching LLM behavioral reliability</li>
+              <li>Incoming MS in Artificial Intelligence at Columbia University (Fall 2026)</li>
             </ul>
           )}
         </motion.div>
@@ -87,16 +100,37 @@ export default function Journey() {
               <div
                 className="absolute w-4 h-4 rounded-full -left-[9px] top-[28px]"
                 style={{
-                  background: "var(--bg)",
-                  border: milestone.active ? "2px solid var(--primary)" : "2px solid var(--surface-stroke)",
+                  background: (milestone as { upcoming?: boolean }).upcoming ? "var(--primary)" : "var(--bg)",
+                  border: (milestone as { upcoming?: boolean }).upcoming
+                    ? "2px solid var(--primary)"
+                    : milestone.active
+                      ? "2px solid var(--primary)"
+                      : "2px solid var(--surface-stroke)",
+                  boxShadow: (milestone as { upcoming?: boolean }).upcoming ? "0 0 8px rgba(78, 222, 163, 0.4)" : "none",
                 }}
               />
 
               {/* Left column: Date + Org */}
               <div className="md:col-span-3">
-                <h3 className="font-label-caps mb-2" style={{ color: "var(--primary)" }}>
-                  {milestone.year}
-                </h3>
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="font-label-caps" style={{ color: "var(--primary)" }}>
+                    {milestone.year}
+                  </h3>
+                  {(milestone as { upcoming?: boolean }).upcoming && (
+                    <span
+                      className="font-code-sm px-2 py-0.5 rounded-full"
+                      style={{
+                        fontSize: "10px",
+                        color: "var(--primary)",
+                        background: "rgba(78, 222, 163, 0.1)",
+                        border: "1px solid rgba(78, 222, 163, 0.2)",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      UPCOMING
+                    </span>
+                  )}
+                </div>
                 <p className="font-body-md" style={{ color: "var(--on-surface-variant)", fontSize: "14px" }}>
                   {milestone.subtitle}
                 </p>
