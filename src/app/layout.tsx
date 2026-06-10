@@ -26,9 +26,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Shubhankar Tiwari | Software Engineer · Incoming MS AI @ Columbia",
+  title: "Shubhankar Tiwari | Software Engineer · AI Reliability · ML Systems",
   description:
-    "Software Engineer at Bank of America. Incoming MS in Artificial Intelligence at Columbia University (Fall 2026). Building AI Reliability, ML Systems, and Enterprise AI Infrastructure. Kaggle Notebooks Expert (#2,441).",
+    "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and Enterprise AI Infrastructure. Kaggle Notebooks Expert (#2,441).",
   metadataBase: new URL("https://shubhankar-tiwari.vercel.app"),
   alternates: {
     types: {
@@ -36,18 +36,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Shubhankar Tiwari · Software Engineer · Incoming MS AI @ Columbia",
+    title: "Shubhankar Tiwari · Software Engineer · AI Reliability · ML Systems",
     description:
-      "Software Engineer at Bank of America. Incoming MS in Artificial Intelligence at Columbia University (Fall 2026). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
+      "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
     url: "https://shubhankar-tiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
-    images: [{ url: "https://shubhankar-tiwari.vercel.app/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari — Software Engineer · Incoming MS AI @ Columbia" }],
+    images: [{ url: "https://shubhankar-tiwari.vercel.app/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari — Software Engineer · AI Reliability · ML Systems" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shubhankar Tiwari · Incoming MS AI @ Columbia",
-    description: "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and LLM Evaluation. Kaggle Expert.",
+    title: "Shubhankar Tiwari · Software Engineer · Applied AI",
+    description: "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Expert.",
     images: ["https://shubhankar-tiwari.vercel.app/og_final.png"],
   },
 };

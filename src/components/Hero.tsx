@@ -57,21 +57,9 @@ export default function Hero() {
                 letterSpacing: "0.02em",
               }}
             >
-              Incoming MS in Artificial Intelligence @ Columbia University · Fall 2026
+              Building AI Reliability, ML Systems, and Enterprise AI Infrastructure
             </p>
           </div>
-
-          {/* Tagline */}
-          <p
-            className="font-body-lg max-w-2xl mb-12"
-            style={{
-              color: "var(--on-surface-variant)",
-              borderLeft: "2px solid var(--primary)",
-              paddingLeft: "16px",
-            }}
-          >
-            Building AI Reliability, ML Systems, and Enterprise AI Infrastructure.
-          </p>
 
           {/* Focus Area Cards */}
           <div className="flex flex-col sm:flex-row gap-6">
