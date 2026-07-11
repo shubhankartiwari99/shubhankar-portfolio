@@ -41,7 +41,7 @@ export default function About() {
                 <li>Recognized as Subject Matter Expert (SME) for critical backend services — cross-team escalation point for production incidents and architectural decisions</li>
                 <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
                 <li>Built AI reliability and LLM evaluation systems independently — entropy-aware routing, behavioral regression detection, and model governance pipelines</li>
-                <li>Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026) — focusing on ML Systems, AI Reliability, and LLM Evaluation</li>
+                <li>Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026) — pursuing deeper understanding of how modern AI systems learn, reason, and adapt</li>
               </ul>
             ) : (
               <>
@@ -58,7 +58,8 @@ export default function About() {
                 </p>
                 <p className="font-body-lg" style={{ color: "var(--text-muted)" }}>
                   Starting Fall 2026, I&apos;ll be pursuing my M.S. in Artificial Intelligence at Columbia
-                  University — deepening my work in ML Systems, AI Reliability, and LLM Evaluation.
+                  University — deepening my understanding of how modern AI systems learn, reason, and
+                  adapt, building on hands-on experience developing AI evaluation and reliability systems.
                 </p>
               </>
             )}

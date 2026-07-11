@@ -14,10 +14,10 @@ const milestones = [
   {
     title: "MS in Artificial Intelligence",
     subtitle: "Columbia University",
-    description: "Pursuing graduate studies in AI with a focus on ML Systems, AI Reliability, and LLM Evaluation — building on four years of production engineering and applied AI research.",
+    description: "Pursuing graduate studies in Artificial Intelligence to deepen my understanding of how modern AI systems learn, reason, and adapt — building on four years of enterprise software engineering and hands-on experience developing AI evaluation and reliability systems.",
     recruiterDescription: [
       "Incoming MS in Artificial Intelligence at Columbia University (Fall 2026)",
-      "Focus areas: ML Systems, AI Reliability, LLM Evaluation, AI Infrastructure",
+      "Interests include ML Systems, AI Reliability, LLM Evaluation, and next-generation intelligent systems",
     ],
     year: "Fall 2026",
     active: false,
