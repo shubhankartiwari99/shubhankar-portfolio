@@ -21,14 +21,14 @@ const COMMANDS: Record<string, string | (() => string)> = {
   whoami         Current visitor`,
 
   about: `> Shubhankar Tiwari
-  Software Engineer I A @ Bank of America (2022-Present)
+  Software Engineer @ Bank of America (2022-2026)
   Building production-grade backend systems for enterprise fintech.
   Kaggle Notebooks Expert (Rank #2,441 / 59,663)
   B.Tech CSE, SRM IST, Chennai (94.4% GPA)
   Researching LLM behavioral reliability, guardrails, & cultural alignment.`, 
 
-  experience: `  [1] Software Engineer I A -- Bank of America
-      Apr 2022 - Present | Backend / Platform Engineering
+  experience: `  [1] Software Engineer -- Bank of America
+      Apr 2022 - Jul 2026 | Backend / Platform Engineering
       Java, Spring Boot, REST APIs, OpenShift, CI/CD, SQL
 
   [2] Product Development Trainee -- HighRadius Technologies

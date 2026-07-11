@@ -33,8 +33,8 @@ const milestones = [
       "Lead production incident triage - deployment failures, SSL misconfigurations, database connectivity, service dependency conflicts",
       "Cross-functional manual regression testing during release cycles — validating end-to-end system behaviour before production promotion",
     ],
-    year: "2022-Present",
-    active: true,
+    year: "2022-2026",
+    active: false,
   },
   {
     title: "Kaggle Expert",
