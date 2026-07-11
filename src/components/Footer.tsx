@@ -4,6 +4,7 @@ const links = [
   { href: "https://github.com/shubhankartiwari99", label: "GITHUB" },
   { href: "https://www.linkedin.com/in/shubhankar-tiwari-514040165/", label: "LINKEDIN" },
   { href: "https://www.kaggle.com/shubhankartiwari", label: "KAGGLE" },
+  { href: "mailto:st3907@columbia.edu", label: "COLUMBIA" },
 ];
 
 export default function Footer() {

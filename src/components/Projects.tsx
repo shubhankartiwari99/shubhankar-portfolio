@@ -60,10 +60,9 @@ export default function Projects() {
                   whileInView={reveal.whileInView}
                   viewport={reveal.viewport}
                   transition={reveal.transition}
-                  className="col-span-1 md:col-span-8 flex flex-col overflow-hidden group"
+                  className="col-span-1 md:col-span-8 flex flex-col overflow-hidden group glass-panel rounded-xl hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
                   style={{
                     background: "var(--surface-elevated)",
-                    border: "1px solid var(--surface-stroke)",
                   }}
                   data-testid={`project-card-${i}`}
                 >
@@ -143,10 +142,9 @@ export default function Projects() {
                   whileInView={reveal.whileInView}
                   viewport={reveal.viewport}
                   transition={reveal.transition}
-                  className="col-span-1 md:col-span-4 flex flex-col p-8 hover:border-[rgba(78,222,163,0.5)] transition-colors duration-200"
+                  className="col-span-1 md:col-span-4 flex flex-col p-8 glass-panel rounded-xl hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)] transition-all duration-300 group"
                   style={{
                     background: "var(--surface-elevated)",
-                    border: "1px solid var(--surface-stroke)",
                   }}
                   data-testid={`project-card-${i}`}
                 >
@@ -273,10 +271,9 @@ export default function Projects() {
                   whileInView={reveal.whileInView}
                   viewport={reveal.viewport}
                   transition={reveal.transition}
-                  className="col-span-1 md:col-span-8 flex flex-col md:flex-row overflow-hidden group"
+                  className="col-span-1 md:col-span-8 flex flex-col md:flex-row overflow-hidden group glass-panel rounded-xl hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
                   style={{
                     background: "var(--surface-elevated)",
-                    border: "1px solid var(--surface-stroke)",
                   }}
                   data-testid={`project-card-${i}`}
                 >

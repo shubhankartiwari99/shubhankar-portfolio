@@ -9,9 +9,9 @@ export default function Hero() {
       className="min-h-screen flex flex-col justify-center relative overflow-hidden"
       style={{ borderLeft: "1px solid var(--surface-stroke)", borderRight: "1px solid var(--surface-stroke)", borderBottom: "1px solid var(--surface-stroke)" }}
     >
-      {/* Grid pattern background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-100" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg)] pointer-events-none" />
+      {/* Ambient Mesh Background */}
+      <div className="mesh-bg" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg)] pointer-events-none z-0" />
 
       {/* Content */}
       <div className="relative z-10 max-w-[1280px] mx-auto w-full px-5 md:px-8 py-12 md:py-0">
@@ -46,7 +46,7 @@ export default function Hero() {
                 letterSpacing: "0.02em",
               }}
             >
-              Software Engineer @ Bank of America
+              Software Engineer with 4+ years of experience
             </p>
             <p
               className="font-body-md"
@@ -57,16 +57,15 @@ export default function Hero() {
                 letterSpacing: "0.02em",
               }}
             >
-              Building AI Reliability, ML Systems, and Enterprise AI Infrastructure
+              Incoming M.S. in Artificial Intelligence — Columbia University
             </p>
           </div>
 
           {/* Focus Area Cards */}
           <div className="flex flex-col sm:flex-row gap-6">
             <div
-              className="max-w-sm p-6 transition-colors duration-200"
+              className="max-w-sm p-6 glass-panel rounded-xl transition-all duration-300 hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]"
               style={{
-                border: "1px solid var(--surface-stroke)",
                 background: "var(--surface-elevated)",
               }}
             >
@@ -89,9 +88,8 @@ export default function Hero() {
             </div>
 
             <div
-              className="max-w-sm p-6 transition-colors duration-200"
+              className="max-w-sm p-6 glass-panel rounded-xl transition-all duration-300 hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]"
               style={{
-                border: "1px solid var(--surface-stroke)",
                 background: "var(--surface-elevated)",
               }}
             >

@@ -28,7 +28,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Shubhankar Tiwari | Software Engineer · AI Reliability · ML Systems",
   description:
-    "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and Enterprise AI Infrastructure. Kaggle Notebooks Expert (#2,441).",
+    "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in Artificial Intelligence at Columbia University. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441).",
   metadataBase: new URL("https://shubhankar-tiwari.vercel.app"),
   alternates: {
     types: {
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shubhankar Tiwari · Software Engineer · Applied AI",
-    description: "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Expert.",
+    title: "Shubhankar Tiwari · Software Engineer · AI Reliability · ML Systems",
+    description: "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in AI at Columbia. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
     images: ["https://shubhankar-tiwari.vercel.app/og_final.png"],
   },
 };
@@ -88,7 +88,7 @@ const jsonLd = {
     "Regression Testing", "Production Incident Triage",
   ],
   description:
-    "Software Engineer at Bank of America. Incoming MS in Artificial Intelligence at Columbia University (Fall 2026). Building AI Reliability, ML Systems, and Enterprise AI Infrastructure. Kaggle Notebooks Expert (#2,441 / 59,663).",
+    "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441 / 59,663).",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

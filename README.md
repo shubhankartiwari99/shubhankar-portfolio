@@ -1,8 +1,23 @@
 # Shubhankar Tiwari
 
-Backend Systems Engineer | AI/ML Systems | LLM Evaluation & Reliability
+### Backend Systems Engineer | AI Reliability & ML Systems
 
-I build ML systems across the full lifecycle: **inference → evaluation → governance**
+🎓 Incoming M.S. in Artificial Intelligence at Columbia Engineering
+
+I'm a software engineer with 4+ years of experience building enterprise backend systems and production software. My current interests lie in AI reliability, model evaluation, ML systems, and building production-grade intelligent systems grounded in modern AI research.
+
+---
+
+## 📚 Research Interests
+
+My current interests include:
+
+- AI Reliability
+- ML Systems
+- LLM Evaluation
+- Causal AI
+- Mechanistic Interpretability
+- Robust and Trustworthy AI
 
 ---
 
@@ -16,7 +31,7 @@ I build ML systems across the full lifecycle: **inference → evaluation → gov
 Decoding Loop → Entropy Analysis → Stability Detection → Adaptive Intervention
 ```
 
-**What you built:**
+**What I built:**
 - Token-level entropy tracking during decoding with per-token logit extraction
 - Real-time stability detectors (entropy collapse, repetition loops, token lock-in)
 - Adaptive control policy with mid-generation temperature/regeneration interventions
@@ -40,7 +55,7 @@ Decoding Loop → Entropy Analysis → Stability Detection → Adaptive Interven
 Eval Dataset → Metric Computation (accuracy, hallucination, format) → Delta Analysis → CI Gate Decision
 ```
 
-**What you built:**
+**What I built:**
 - Versioned evaluation datasets with multi-category metrics
 - Accuracy, hallucination detection, and format consistency scoring
 - Policy-based promotion/rejection with configurable thresholds
@@ -64,7 +79,7 @@ Eval Dataset → Metric Computation (accuracy, hallucination, format) → Delta 
 Production Data → Drift Detection (KL Divergence + PSI) → Performance Tracking → Retraining Decision → Shadow Deployment → Promotion
 ```
 
-**What you built:**
+**What I built:**
 - Real-time drift detection via KL divergence and PSI with historical timeline
 - Feature shift explanation (identifies top shifted feature causing drift)
 - Automated retraining triggered by drift with cooldown constraints
@@ -90,18 +105,31 @@ Production Data → Drift Detection (KL Divergence + PSI) → Performance Tracki
 
 ## 🛠 Tech Stack
 
-- Backend: Python, FastAPI
-- ML: Transformers, Qwen 2.5-7B, sentence-transformers
-- Frontend: Next.js, TypeScript
-- Infra: Kaggle T4 GPU, ngrok, Vercel
+**Languages**
+- Java, Python, SQL
+
+**Backend**
+- Spring Boot, FastAPI, REST APIs
+
+**AI/ML**
+- PyTorch, Transformers, Qwen 2.5-7B, sentence-transformers, XGBoost, Scikit-learn
+
+**Infrastructure**
+- OpenShift, Jenkins, Linux, Git, Kaggle T4 GPU, Vercel
+
+**Frontend**
+- Next.js, TypeScript
+
+**Concepts**
+- AI Reliability, LLM Evaluation, Model Governance, Drift Detection, CI/CD
 
 ## 📫 Contact
 
+- Email: [tiwarishubhankar@gmail.com](mailto:tiwarishubhankar@gmail.com) · [st3907@columbia.edu](mailto:st3907@columbia.edu)
 - GitHub: [shubhankartiwari99](https://github.com/shubhankartiwari99)
 - LinkedIn: [Shubhankar Tiwari](https://www.linkedin.com/in/shubhankar-tiwari-514040165/)
 - Kaggle: [shubhankartiwari](https://www.kaggle.com/shubhankartiwari)
 
 ---
 
-[Resume (PDF)](public/Shubhankar_Tiwari_Resume.pdf) | [Portfolio Site](https://shubhankar-tiwari.vercel.app)
-
+[📄 Resume (PDF)](public/Shubhankar_Tiwari_Resume.pdf) | [🌐 Portfolio Site](https://shubhankar-tiwari.vercel.app)

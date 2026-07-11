@@ -26,7 +26,7 @@ export default function Contact() {
 
           <p className="font-body-md mt-6 max-w-2xl mx-auto" style={{ color: "var(--text-muted)", fontSize: "16px" }}>
             Open to roles in ML systems, AI infrastructure, AI reliability, and platform engineering.
-            If something here resonates — I&apos;d like to hear from you.
+            If something here resonates &mdash; I&apos;d like to hear from you.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -60,9 +60,15 @@ export default function Contact() {
             </a>
           </div>
 
-          <p className="font-code-sm mt-10" style={{ color: "var(--text-muted)" }}>
-            tiwarishubhankar@gmail.com
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-10">
+            <a href="mailto:tiwarishubhankar@gmail.com" className="font-code-sm transition-colors duration-200 hover:text-[var(--primary)]" style={{ color: "var(--text-muted)" }}>
+              tiwarishubhankar@gmail.com
+            </a>
+            <span className="font-code-sm" style={{ color: "var(--surface-stroke)" }}>&middot;</span>
+            <a href="mailto:st3907@columbia.edu" className="font-code-sm transition-colors duration-200 hover:text-[var(--primary)]" style={{ color: "var(--text-muted)" }}>
+              st3907@columbia.edu
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

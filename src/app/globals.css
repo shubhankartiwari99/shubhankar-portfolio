@@ -6,19 +6,19 @@
    ═══════════════════════════════════════════════════════ */
 
 :root {
-  /* ─── Core Palette ─── */
-  --bg: #131314;
+  /* ─── Core Palette (Glassmorphism) ─── */
+  --bg: #050508;
   --fg: #e5e2e3;
-  --surface: #131314;
-  --surface-elevated: #121214;
-  --surface-container-lowest: #0e0e0f;
-  --surface-container-low: #1c1b1c;
-  --surface-container: #201f20;
-  --surface-container-high: #2a2a2b;
-  --surface-container-highest: #353436;
-  --surface-stroke: #27272A;
-  --surface-bright: #3a393a;
-  --surface-variant: #353436;
+  --surface: rgba(10, 10, 15, 0.4);
+  --surface-elevated: rgba(255, 255, 255, 0.03);
+  --surface-container-lowest: rgba(0, 0, 0, 0.2);
+  --surface-container-low: rgba(255, 255, 255, 0.02);
+  --surface-container: rgba(255, 255, 255, 0.04);
+  --surface-container-high: rgba(255, 255, 255, 0.08);
+  --surface-container-highest: rgba(255, 255, 255, 0.12);
+  --surface-stroke: rgba(255, 255, 255, 0.1);
+  --surface-bright: rgba(255, 255, 255, 0.15);
+  --surface-variant: rgba(255, 255, 255, 0.05);
 
   /* ─── Primary (Emerald) — System Healthy / Live ─── */
   --primary: #4edea3;
@@ -238,6 +238,28 @@ h1, h2, h3, h4 {
 /* ─── Utility: Glow ─── */
 .glow-accent {
   background: radial-gradient(ellipse 600px 300px at 50% 0%, var(--accent-dim), transparent);
+}
+
+/* ─── Utility: Glassmorphism ─── */
+.glass-panel {
+  background: var(--surface-elevated);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-stroke);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(49, 49, 192, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(78, 222, 163, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(60, 221, 199, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(147, 0, 10, 0.05) 0px, transparent 50%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* ─── Material Symbols ─── */

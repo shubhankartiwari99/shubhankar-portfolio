@@ -25,7 +25,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "llm-generation-control",
-    title: "LLM Control System — Runtime Reliability for Generative Models",
+    title: "AI Reliability Platform for LLM Evaluation",
     shortDescription:
       "Built a full-stack system to monitor and control LLM generation at the token level, with adaptive instability detection and real-time intervention.",
     fullDescription: `Built a full-stack system to monitor and control LLM generation at the token level.

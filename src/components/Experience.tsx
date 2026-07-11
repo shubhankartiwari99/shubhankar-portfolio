@@ -7,9 +7,9 @@ import { useRecruiterMode } from "./Providers";
 
 const experiences = [
   {
-    title: "Software Engineer I A",
+    title: "Software Engineer",
     company: "Bank of America",
-    period: "Apr 2022 - Present",
+    period: "Apr 2022 - Jul 2026",
     type: "Backend / Platform Engineering",
     summary: "Production-grade backend systems powering corporate banking workflows.",
     narrative: [
@@ -20,8 +20,10 @@ const experiences = [
     bullets: [
       "Develop and maintain client-facing fintech microservices using Java, Spring Boot, REST APIs, SQL on OpenShift",
       "Own backend service delivery across design, implementation, CI/CD integration, deployment validation, and production stabilization",
-      "Lead production incident triage - deployment failures, SSL misconfigurations, database connectivity, service dependency conflicts",
-      "Improve release stability through proactive validation, pipeline debugging, load-test support, and root cause analysis",
+      "Recognized as Subject Matter Expert (SME) for critical backend services — first point of contact for cross-team production escalations and architectural decisions",
+      "Delivered 17+ production releases across 13 CashPro services, coordinating cross-functional testing and deployment validation",
+      "Resolved 50+ production issues including deployment failures, SSL misconfigurations, database connectivity, and service dependency conflicts",
+      "Lead production incident triage — root cause analysis, pipeline debugging, load-test support, and release stability improvements",
       "Contribute to OpenShift onboarding and deployment readiness, strengthening infrastructure resilience",
       "Perform cross-functional manual regression testing during release cycles — validating end-to-end system behaviour across service boundaries before production promotion",
     ],
@@ -76,9 +78,8 @@ export default function Experience() {
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
               transition={reveal.transition}
-              className="p-4 sm:p-6 transition-colors duration-200 group hover:border-[var(--primary)]"
+              className="p-4 sm:p-6 glass-panel rounded-xl group hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)] transition-all duration-300"
               style={{
-                border: "1px solid var(--surface-stroke)",
                 background: "var(--surface-elevated)",
               }}
               data-testid={`experience-card-${i}`}

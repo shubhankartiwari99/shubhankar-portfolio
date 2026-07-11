@@ -36,28 +36,28 @@ export default function About() {
           <motion.div {...reveal} className="md:col-span-2 space-y-5">
             {recruiterMode ? (
               <ul className="list-disc pl-5 space-y-3 font-body-md" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
-                <li>4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
-                <li>Building scalable, high-availability backend systems and REST APIs for enterprise fintech platforms</li>
-                <li>Hands-on CI/CD pipeline ownership, cross-functional regression testing, release validation, and production stability management</li>
+                <li>Software Engineer with 4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
+                <li>Delivered 17+ production releases across 13 CashPro services; resolved 50+ production issues in enterprise fintech environments</li>
+                <li>Recognized as Subject Matter Expert (SME) for critical backend services — cross-team escalation point for production incidents and architectural decisions</li>
                 <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
-                <li>Active in applied AI — researching LLM behavioral reliability and production quality-gating</li>
-                <li>Incoming MS in Artificial Intelligence at Columbia University (Fall 2026) — focusing on ML Systems, AI Reliability, and LLM Evaluation</li>
+                <li>Built AI reliability and LLM evaluation systems independently — entropy-aware routing, behavioral regression detection, and model governance pipelines</li>
+                <li>Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026) — focusing on ML Systems, AI Reliability, and LLM Evaluation</li>
               </ul>
             ) : (
               <>
                 <p className="font-body-lg" style={{ color: "var(--text-muted)" }}>
-                  I build backend systems that survive production. My work at Bank of America spans
-                  API design, CI/CD pipelines, containerized deployments, and production incident triage
-                  in enterprise fintech environments.
+                  Software Engineer with 4+ years of experience building enterprise backend systems that survive
+                  production. My work at Bank of America spans API design, CI/CD pipelines, containerized
+                  deployments, and production incident triage across 13 CashPro services.
                 </p>
                 <p className="font-body-lg" style={{ color: "var(--text-muted)" }}>
-                  Outside of work, I&apos;m deep into machine learning and AI systems — ranked in the top 4.1%
-                  on Kaggle as a Notebooks Expert, and currently researching LLM behavioral reliability:
-                  building evaluation infrastructure that measures whether a model is trustworthy enough
-                  to deploy, not just whether it can get the right answer once.
+                  Outside of work, I build AI reliability and ML evaluation systems — ranked in the top 4.1%
+                  on Kaggle as a Notebooks Expert, and independently built production-grade LLM evaluation
+                  infrastructure: entropy-aware generation control, behavioral regression detection, and
+                  model governance pipelines.
                 </p>
                 <p className="font-body-lg" style={{ color: "var(--text-muted)" }}>
-                  Starting Fall 2026, I&apos;ll be pursuing my MS in Artificial Intelligence at Columbia
+                  Starting Fall 2026, I&apos;ll be pursuing my M.S. in Artificial Intelligence at Columbia
                   University — deepening my work in ML Systems, AI Reliability, and LLM Evaluation.
                 </p>
               </>
@@ -69,10 +69,9 @@ export default function About() {
               <div
                 key={s.label}
                 data-testid={`stat-${s.label.replace(/\s+/g, "-").toLowerCase()}`}
-                className="p-4 transition-colors duration-300"
+                className="p-4 glass-panel rounded-xl transition-all duration-300 hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]"
                 style={{
                   background: "var(--surface-elevated)",
-                  border: "1px solid var(--surface-stroke)",
                 }}
               >
                 <div className="font-metric-huge" style={{ color: "var(--primary)", fontSize: "clamp(24px, 3vw, 36px)" }}>
