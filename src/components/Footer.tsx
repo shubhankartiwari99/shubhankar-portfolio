@@ -11,10 +11,9 @@ export default function Footer() {
   return (
     <footer
       data-testid="footer"
-      className="w-full py-4 px-5 md:px-8 flex flex-col md:flex-row justify-between items-center mt-[80px] md:mt-[160px]"
+      className="w-full py-4 px-5 md:px-8 flex flex-col md:flex-row justify-between items-center mt-[80px] md:mt-[160px] rounded-t-2xl border-t border-[rgba(255,255,255,0.08)]"
       style={{
-        borderTop: "1px solid var(--surface-stroke)",
-        background: "var(--bg)",
+        background: "rgba(6, 8, 14, 0.7)",
         maxWidth: "1280px",
         marginLeft: "auto",
         marginRight: "auto",
@@ -32,7 +31,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             data-testid={`footer-${link.label.toLowerCase()}`}
-            className="font-code-sm transition-colors duration-200 hover:text-[var(--primary-fixed)]"
+            className="font-code-sm transition-colors duration-200 hover:text-[var(--primary)]"
             style={{ color: "var(--text-muted)", opacity: 0.8 }}
             title={link.label}
           >

@@ -1,262 +1,252 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Terminal as TermIcon, Play } from "lucide-react";
+import Image from "next/image";
 
-interface Line {
-  type: "input" | "output" | "error" | "system";
-  text: string;
+interface HistoryItem {
+  command: string;
+  output: string | React.ReactNode;
 }
 
-const COMMANDS: Record<string, string | (() => string)> = {
-  help: `Available commands:
-  about          Who is Shubhankar?
-  experience     Work history
-  ls projects/   List projects
-  cat skills     Technical skills as JSON
-  contact        Get in touch
-  resume         Download resume
-  clear          Clear terminal
-  history        Command history
-  whoami         Current visitor`,
-
-  about: `> Shubhankar Tiwari
-  Software Engineer @ Bank of America (2022-2026)
-  Building production-grade backend systems for enterprise fintech.
-  Kaggle Notebooks Expert (Rank #2,441 / 59,663)
-  B.Tech CSE, SRM IST, Chennai (94.4% GPA)
-  Researching LLM behavioral reliability, guardrails, & cultural alignment.`, 
-
-  experience: `  [1] Software Engineer -- Bank of America
-      Apr 2022 - Jul 2026 | Backend / Platform Engineering
-      Java, Spring Boot, REST APIs, OpenShift, CI/CD, SQL
-
-  [2] Product Development Trainee -- HighRadius Technologies
-      Aug 2021 - Mar 2022 | Full-Stack Development
-      Java, JavaScript, Python, Agile`,
-
-  "ls projects/": `  drwxr-xr-x  llm-inference-eval/        Distribution shaping, guardrails, cultural alignment dose-response [Active]
-  drwxr-xr-x  auto-regen-policy/         AI output quality-gating — AND policy + bootstrap calibration [Completed]
-  drwxr-xr-x  indian-desi-llm/           Multilingual LLM training pipeline — pivoted to reliability eval [Completed]
-  drwxr-xr-x  song-recommender/          ML playlist gen via BPM + VADER sentiment [Completed]
-  drwxr-xr-x  kaggle-portfolio/          34 notebooks | #2,441 rank | 10 bronze medals [Active]`,
-
-  "cat skills": `{
-  "backend":  ["Java", "Spring Boot", "Microservices", "REST APIs", "System Design"],
-  "data":     ["Oracle SQL", "TOAD", "Data Modeling", "Query Optimization"],
-  "devops":   ["OpenShift", "Jenkins", "CI/CD", "Containerization"],
-  "ml_ai":    ["Python", "ML", "Deep Learning", "CV", "NLP", "LLMs", "LoRA", "HuggingFace"],
-  "llm_eval": ["Cultural Alignment", "Guardrails", "KL Divergence", "Distribution Shaping", "Pydantic"]
-}`,
-
-  contact: `  Email:    tiwarishubhankar@gmail.com
-  GitHub:   github.com/shubhankartiwari99
-  LinkedIn: linkedin.com/in/shubhankar-tiwari-514040165
-  Kaggle:   kaggle.com/shubhankartiwari
-  Twitter:  @Shubhankar2911`,
-
-  whoami: () => `  visitor@shubhankartiwari.dev — thanks for stopping by!`,
-};
-
-const EASTER_EGGS: Record<string, string> = {
-  "sudo hire shubhankar": `  [sudo] password verified.
-  Generating offer letter... done.
-  Sending onboarding invite... done.
-  Welcome aboard! Starting in 3... 2... 1...`,
-  "rm -rf /": `  Nice try. Production systems don't go down that easily here.`,
-  "exit": `  You can check out any time you like, but you can never leave.`,
-  "ping": `  PONG — 0.42ms (systems are healthy)`,
-  "neofetch": `       _____   Shubhankar Tiwari
-       /     \\  -------------------------
-      | () () | OS:     Production Linux
-       \\_____/  Host:   Bank of America
-       |     |  Kernel: Java 17 + Spring Boot
-      /|     |\\  Shell:  /bin/backend-eng
-     /_|_____|_\\ Uptime: 4+ years
-                Packages: Microservices (many)`,
-};
-
-const WELCOME = `Welcome to shubhankar.sh v1.0.0
-Type 'help' for available commands.
-`;
-
 const reveal = {
-  initial: { opacity: 0, y: 16 } as const,
+  initial: { opacity: 0, y: 20 } as const,
   whileInView: { opacity: 1, y: 0 } as const,
   viewport: { once: true, margin: "-60px" } as const,
-  transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+  transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
 };
 
-export default function Terminal() {
-  const [lines, setLines] = useState<Line[]>([{ type: "system", text: WELCOME }]);
+export default function TerminalComponent() {
   const [input, setInput] = useState("");
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState(-1);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [history, setHistory] = useState<HistoryItem[]>([
+    {
+      command: "welcome",
+      output: (
+        <div className="space-y-1 text-xs font-mono">
+          <p className="text-[var(--primary)] font-bold">
+            SHUBHANKAR TIWARI — INTELLIGENT SYSTEMS TERMINAL v2.5.0
+          </p>
+          <p className="text-[var(--text-muted)]">
+            Type <span className="text-[var(--primary)] font-bold">&apos;help&apos;</span> to see available commands or click quick suggestions below.
+          </p>
+        </div>
+      ),
+    },
+  ]);
+
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
+
+  const handleCommand = (cmdStr: string) => {
+    const cmd = cmdStr.trim().toLowerCase();
+    let out: React.ReactNode = "";
+
+    switch (cmd) {
+      case "help":
+        out = (
+          <div className="space-y-1.5 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p className="text-[var(--primary)] font-bold">AVAILABLE COMMANDS:</p>
+            <p><span className="text-emerald-400 font-semibold">about</span> &bull; Summary of background, Columbia MS AI &amp; systems engineering</p>
+            <p><span className="text-emerald-400 font-semibold">patent</span> &bull; Bank of America patent details (2026)</p>
+            <p><span className="text-emerald-400 font-semibold">metrics</span> &bull; Key operational scale metrics (550K users, 18M searches, 0.975 AUC)</p>
+            <p><span className="text-emerald-400 font-semibold">experience</span> &bull; 4-year Bank of America track (Apprentice → I B → I A / SME)</p>
+            <p><span className="text-emerald-400 font-semibold">awards</span> &bull; BofA Global Recognition Awards (Gold, Silver, Bronze)</p>
+            <p><span className="text-emerald-400 font-semibold">whoami</span> &bull; Print identity</p>
+            <p><span className="text-emerald-400 font-semibold">clear</span> &bull; Clear terminal screen</p>
+          </div>
+        );
+        break;
+
+      case "about":
+        out = (
+          <p className="text-xs font-mono text-[var(--on-surface-variant)] leading-relaxed">
+            Software Engineer with 4+ years building enterprise microservices for Bank of America CashPro platform. Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026). Focused on AI reliability, LLM evaluation, and drift-aware model governance.
+          </p>
+        );
+        break;
+
+      case "columbia":
+        out = (
+          <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p className="text-[var(--secondary)] font-bold">COLUMBIA AI PROGRAM</p>
+            <p>Incoming M.S. in Artificial Intelligence • Fall 2026</p>
+            <p>Focus: ML systems, evaluation, and trustworthy deployment</p>
+          </div>
+        );
+        break;
+
+      case "blog":
+        out = (
+          <p className="text-xs font-mono text-[var(--on-surface-variant)] leading-relaxed">
+            Open the blog section to explore notes on AI systems, reliability engineering, and production ML practice.
+          </p>
+        );
+        break;
+
+      case "patent":
+        out = (
+          <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p className="text-amber-400 font-bold">INVENTOR ON BANK OF AMERICA PATENT (2026)</p>
+            <p>Title: Governed Multi-Modal AI Architecture</p>
+            <p>Field: Canonical Truth Maintenance &amp; Audit-Grade Provenance in Enterprise Financial Systems</p>
+          </div>
+        );
+        break;
+
+      case "metrics":
+        out = (
+          <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p>&bull; CashPro Users: <span className="text-[var(--primary)]">550,000+</span></p>
+            <p>&bull; Searches Served: <span className="text-[var(--secondary)]">18,000,000+</span></p>
+            <p>&bull; Fraud AUC-ROC: <span className="text-amber-400">0.975</span></p>
+            <p>&bull; Kaggle Rank: <span className="text-[var(--tertiary)]">#2,441 / 59,663</span></p>
+          </div>
+        );
+        break;
+
+      case "experience":
+        out = (
+          <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p><span className="text-[var(--primary)]">2024-2026:</span> Software Engineer I A &bull; SME CashPro Search</p>
+            <p><span className="text-[var(--secondary)]">2023-2024:</span> Software Engineer I B &bull; Backend Microservices</p>
+            <p><span className="text-amber-400">2022-2023:</span> Apprentice &bull; CashPro Platform</p>
+          </div>
+        );
+        break;
+
+      case "awards":
+        out = (
+          <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p><span className="text-amber-400">Gold Award:</span> Backend delivery, release ownership &amp; lead</p>
+            <p><span className="text-slate-300">Silver Award:</span> Cloud enablement &amp; OpenShift migration</p>
+            <p><span className="text-amber-600">Bronze Award:</span> Production incident stabilization</p>
+          </div>
+        );
+        break;
+
+      case "whoami":
+        out = (
+          <div className="space-y-3">
+            <div className="relative w-32 h-32 rounded-lg overflow-hidden border border-[rgba(0,255,157,0.3)]">
+              <Image 
+                src="/profile-white.jpg" 
+                alt="Shubhankar Tiwari Identity" 
+                fill 
+                className="object-cover grayscale opacity-90"
+              />
+              <div className="absolute inset-0 bg-[rgba(0,255,157,0.1)] mix-blend-overlay pointer-events-none" />
+            </div>
+            <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
+              <p><span className="text-[var(--primary)] font-bold">IDENTITY:</span> Shubhankar Tiwari</p>
+              <p><span className="text-[var(--secondary)] font-bold">ROLE:</span> AI Systems Engineer</p>
+              <p><span className="text-amber-400 font-bold">STATUS:</span> Online &amp; Building</p>
+            </div>
+          </div>
+        );
+        break;
+
+      case "clear":
+        setHistory([]);
+        return;
+
+      default:
+        out = (
+          <p className="text-xs font-mono text-red-400">
+            Command not recognized: &apos;{cmdStr}&apos;. Type &apos;help&apos; for available commands.
+          </p>
+        );
     }
-  }, [lines]);
 
-  const processCommand = useCallback((cmd: string) => {
-    const trimmed = cmd.trim().toLowerCase();
-    const newLines: Line[] = [{ type: "input", text: cmd }];
+    setHistory((prev) => [...prev, { command: cmdStr, output: out }]);
+  };
 
-    if (!trimmed) return;
-
-    if (trimmed === "clear") {
-      setLines([{ type: "system", text: WELCOME }]);
-      return;
-    }
-
-    if (trimmed === "history") {
-      newLines.push({
-        type: "output",
-        text: commandHistory.length
-          ? commandHistory.map((c, i) => `  ${i + 1}  ${c}`).join("\n")
-          : "  No commands in history.",
-      });
-    } else if (trimmed === "resume") {
-      newLines.push({ type: "output", text: "  Opening resume..." });
-      window.open("/Shubhankar_Tiwari_Resume.pdf", "_blank");
-    } else if (EASTER_EGGS[trimmed]) {
-      newLines.push({ type: "output", text: EASTER_EGGS[trimmed] });
-    } else if (COMMANDS[trimmed]) {
-      const result = COMMANDS[trimmed];
-      newLines.push({
-        type: "output",
-        text: typeof result === "function" ? result() : result,
-      });
-    } else {
-      newLines.push({
-        type: "error",
-        text: `  command not found: ${trimmed}. Type 'help' for available commands.`,
-      });
-    }
-
-    setLines((prev) => [...prev, ...newLines]);
-    setCommandHistory((prev) => [...prev, cmd]);
-    setHistoryIndex(-1);
-  }, [commandHistory]);
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      processCommand(input);
-      setInput("");
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (commandHistory.length > 0) {
-        const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : historyIndex;
-        setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] || "");
-      }
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      if (historyIndex > 0) {
-        const newIndex = historyIndex - 1;
-        setHistoryIndex(newIndex);
-        setInput(commandHistory[commandHistory.length - 1 - newIndex] || "");
-      } else {
-        setHistoryIndex(-1);
-        setInput("");
-      }
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    handleCommand(input);
+    setInput("");
   };
 
   return (
-    <section data-testid="terminal-section" id="terminal" className="py-[80px] md:py-[160px] px-5 md:px-8">
+    <section data-testid="terminal-section" id="terminal" className="py-20 md:py-32 px-5 md:px-8 border-b border-[rgba(255,255,255,0.08)]">
       <div className="max-w-[1280px] mx-auto">
-        <motion.div {...reveal}>
-          <h2 className="font-headline-lg mb-12" style={{ color: "var(--on-surface)", fontSize: "clamp(28px, 4vw, 48px)" }}>
-            Interactive Terminal
+        <motion.div {...reveal} className="mb-8">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="w-8 h-px bg-[var(--primary)]" />
+            <span className="font-label-caps text-[var(--primary)]">Interactive CLI</span>
+          </div>
+          <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-4xl text-[var(--on-surface)]">
+            Systems Telemetry &amp; Terminal
           </h2>
         </motion.div>
 
-        <motion.div
-          {...reveal}
-          className="overflow-hidden"
-          style={{
-            border: "1px solid var(--surface-stroke)",
-            boxShadow: "inset 0 2px 10px rgba(0,0,0,0.3)",
-          }}
-        >
-          {/* Title bar */}
-          <div
-            className="flex items-center gap-2 px-4 py-3"
-            style={{
-              background: "var(--surface-container)",
-              borderBottom: "1px solid var(--surface-stroke)",
-            }}
-          >
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
-              <div className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
-              <div className="w-3 h-3 rounded-full" style={{ background: "var(--primary)" }} />
+        {/* Terminal Window */}
+        <motion.div {...reveal} className="rounded-2xl overflow-hidden glass-panel border-[rgba(0,255,157,0.2)] shadow-[0_0_40px_rgba(0,0,0,0.6)] relative">
+          <div className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(180deg,rgba(255,255,255,0.03)_0px,rgba(255,255,255,0.03)_1px,transparent_1px,transparent_4px)] opacity-20" />
+          {/* Title Bar */}
+          <div className="px-5 py-3 bg-[rgba(6,8,14,0.9)] border-b border-[rgba(255,255,255,0.08)] flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-red-500/80" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <span className="w-3 h-3 rounded-full bg-green-500/80" />
+              <span className="font-mono text-xs text-[var(--text-muted)] ml-2">shubhankar@systems-cli:~</span>
             </div>
-            <div className="flex-1 text-center">
-              <span className="font-code-sm" style={{ color: "var(--text-muted)" }}>
-                shubhankar.sh
-              </span>
-            </div>
+            <TermIcon size={16} className="text-[var(--primary)]" />
           </div>
 
-          {/* Terminal body */}
-          <div
-            ref={scrollRef}
-            data-testid="terminal-output"
-            className="p-4 font-code-sm h-72 sm:h-80 lg:h-84 overflow-y-auto cursor-text"
-            style={{ background: "var(--terminal-header)", color: "var(--on-surface-variant)" }}
-            onClick={() => inputRef.current?.focus()}
-          >
-            {lines.map((line, i) => (
-              <div key={i} className="whitespace-pre-wrap mb-1">
-                {line.type === "input" ? (
-                  <span>
-                    <span style={{ color: "var(--primary)" }}>visitor</span>
-                    <span style={{ color: "var(--text-muted)" }}>@</span>
-                    <span style={{ color: "#f59e0b" }}>portfolio</span>
-                    <span style={{ color: "var(--text-muted)" }}> $ </span>
-                    <span style={{ color: "var(--on-surface)" }}>{line.text}</span>
-                  </span>
-                ) : line.type === "error" ? (
-                  <span style={{ color: "var(--error)" }}>{line.text}</span>
-                ) : line.type === "system" ? (
-                  <span style={{ color: "var(--text-muted)" }}>{line.text}</span>
-                ) : (
-                  <span>{line.text}</span>
-                )}
+          {/* Body Window */}
+          <div className="p-6 bg-[rgba(5,7,12,0.95)] min-h-[320px] max-h-[480px] overflow-y-auto font-mono text-sm space-y-4">
+            {history.map((h, i) => (
+              <div key={i} className="space-y-1.5">
+                <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                  <span className="text-[var(--primary)]">&gt;</span>
+                  <span className="text-white font-bold">{h.command}</span>
+                </div>
+                <div className="pl-4">{h.output}</div>
               </div>
             ))}
+            <div ref={bottomRef} />
+          </div>
 
-            {/* Input line */}
-            <div className="flex items-center">
-              <span style={{ color: "var(--primary)" }}>visitor</span>
-              <span style={{ color: "var(--text-muted)" }}>@</span>
-              <span style={{ color: "#f59e0b" }}>portfolio</span>
-              <span style={{ color: "var(--text-muted)" }}> $ </span>
+          {/* Quick Suggestions & Prompt Bar */}
+          <div className="p-4 bg-[rgba(9,12,21,0.9)] border-t border-[rgba(255,255,255,0.08)] space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-code-sm text-[10px] text-[var(--text-muted)]">QUICK COMMANDS:</span>
+              {["patent", "metrics", "about", "experience", "awards"].map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => handleCommand(c)}
+                  className="font-code-sm text-[11px] px-2.5 py-0.5 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[var(--primary)] hover:border-[var(--primary)] transition-colors cursor-pointer"
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleSubmit} className="flex items-center gap-2">
+              <span className="text-[var(--primary)] font-mono text-sm font-bold">&gt;</span>
               <input
-                ref={inputRef}
-                data-testid="terminal-input"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none font-code-sm caret-amber-400"
-                style={{ color: "var(--on-surface)" }}
-                autoComplete="off"
-                spellCheck={false}
-                aria-label="Terminal input"
+                placeholder="Type command ('help', 'patent', 'metrics')..."
+                className="flex-1 bg-transparent font-mono text-xs sm:text-sm text-white focus:outline-none placeholder:text-[var(--muted-fg)]"
               />
-            </div>
+              <button
+                type="submit"
+                className="p-1.5 rounded bg-[var(--primary)] text-[var(--on-primary)] hover:brightness-110 transition-colors"
+                title="Execute Command"
+              >
+                <Play size={12} />
+              </button>
+            </form>
           </div>
         </motion.div>
-
-        <p className="font-code-sm mt-4 text-center" style={{ color: "var(--text-muted)" }}>
-          Try: help, about, ls projects/, cat skills, neofetch
-        </p>
       </div>
     </section>
   );

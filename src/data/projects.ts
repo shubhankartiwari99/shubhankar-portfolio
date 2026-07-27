@@ -49,15 +49,14 @@ Prevents degeneration loops. Improves generation stability in real time by catch
     status: "Active",
     year: "2026-Present",
     highlights: [
-      "Token-level observability via manual decoding loop with per-token probability and entropy extraction",
+      "Entropy-aware routing, adaptive regeneration policies, and behavioral workflows across 213 prompts spanning 5 behavioral categories",
+      "100% harmful-output catch rate on 43 adversarial prompts across 9 holdout rounds on fine-tuned mT5; extended testing to Qwen 2.5-7B, Llama 3 8B, and Mistral v3",
+      "9-category guardrail classifier with escalation logic — 0% leakage and 0% hallucination across 213 evals",
+      "55+ automated regression tests and CI-gated promotion workflows that blocked 7/7 unsafe model candidates",
+      "Reduced behavioral fragility score 66% (25.0% → 8.5% stress-induced entropy spike under adversarial perturbation)",
       "Three-category stability detector system: entropy_collapse, repetition_loop, low_entropy_lock",
-      "Formal policy controller with explicit intervention rules mapped to instability signals",
-      "Adaptive regeneration and temperature adjustment — mid-generation intervention without restart",
       "Confidence scoring weighted by entropy (50%), instability events (35%), regenerations (15%)",
       "82% instability reduction and +0.07 average confidence improvement on adversarial prompts",
-      "+0.06 to +0.10 confidence uplift in compare mode on typical workloads",
-      "Run history API and JSON trace persistence with full decision audit trail",
-      "MPS/CUDA acceleration with Mistral 7B FP16 (~14GB VRAM required)",
       "Interactive Next.js dashboard for baseline vs adaptive comparison with live metrics"
     ],
     techStack: [
@@ -116,14 +115,14 @@ Prevents revenue loss from misclassification trade-offs. Candidate models are re
     year: "2026-Present",
     highlights: [
       "Complete ML system loop: Frozen Dataset → Failure-mode metrics (AUC degradation, PSI drift) → Δ Analysis → Policy Gate (Business Loss < 0) → CI Promotion",
+      "Maintains 0.975 AUC-ROC baseline with business-loss-aware promotion gates using 10:1 FN/FP cost weighting",
+      "Promotion gates block candidates with unstable thresholds or higher estimated loss — even if accuracy improves (+0.002 AUC)",
       "Real-time drift detection via KL divergence and PSI with persistent drift score timeline tracking distributional evolution over time",
-      "Feature shift explanation surfaces the top shifted feature driving drift — interpretable ML system behavior, not just a number",
+      "Built on 284K transactions dataset with feature shift explanation surfacing top shifted feature driving drift",
       "Retraining cooldown constraint prevents unstable loops under noisy drift signals — demonstrates real-world system constraints",
       "Shadow deployment architecture — every prediction scored by both production and candidate models simultaneously",
-      "Failure-aware retraining pipeline with explicit SUCCESS/FAILED status tracking surfaced to the UI",
       "Versioned model registry with full provenance: trigger reason, drift score, top shifted feature, training timestamp, deployment status",
-      "Live Next.js observability dashboard: drift timeline, confidence distribution histogram, prediction trends, fraud rate, system health, and shadow vs production comparison",
-      "10 API endpoints including /drift, /drift/history, /retrain/status, and /health for full system observability",
+      "Live Next.js observability dashboard: drift timeline, confidence distribution histogram, prediction trends, fraud rate, system health",
     ],
     techStack: [
       { category: "Backend", items: ["FastAPI", "Python", "Uvicorn", "Render"] },
@@ -320,6 +319,99 @@ The portfolio includes exploratory data analysis, model implementations, and edu
       "Teaching others through notebooks solidifies your own understanding",
       "Consistent small contributions beat sporadic large ones for community rank",
       "Production engineering and research ML reinforce each other more than they compete",
+    ],
+  },
+  {
+    slug: "headlines-text-generation",
+    title: "Headlines Text Generation using LSTM",
+    shortDescription:
+      "Predicted and generated new headlines using NLP and LSTM networks.",
+    fullDescription: `Built a text generation model using LSTM (Long Short-Term Memory) networks to predict and generate new headlines from a corpus of news data.
+
+The model learns sequential patterns in headline text and generates plausible new headlines by predicting the next word in a sequence. Demonstrates understanding of sequence modeling and natural language generation.`,
+    tags: ["Python", "NLP", "LSTM", "Deep Learning", "TensorFlow"],
+    featured: false,
+    image: "https://images.unsplash.com/photo-1504711434969-e33886168d6c?auto=format&fit=crop&w=800&q=80",
+    status: "Completed" as const,
+    year: "2021",
+    highlights: [
+      "LSTM-based sequence model for natural language generation",
+      "Trained on news headline corpus for next-word prediction",
+      "Generates plausible new headlines from learned patterns",
+    ],
+    techStack: [
+      { category: "Core", items: ["Python", "TensorFlow", "Keras"] },
+      { category: "NLP", items: ["LSTM", "Tokenization", "Sequence Modeling"] },
+    ],
+  },
+  {
+    slug: "trigger-word-detection",
+    title: "Trigger Word Detection",
+    shortDescription:
+      "Speech recognition system that detects the trigger word 'activate' using NLP and plays a chime sound upon detection.",
+    fullDescription: `Built a trigger word detection system using NLP techniques to identify the spoken word "activate" in an audio stream. Upon detection, the system initiates a chime sound — demonstrating real-time speech recognition pipeline design.
+
+This project explores audio signal processing, feature extraction (spectrograms), and sequence classification for voice-activated interfaces.`,
+    tags: ["Python", "NLP", "Speech Recognition", "Deep Learning"],
+    featured: false,
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=800&q=80",
+    status: "Completed" as const,
+    year: "2021",
+    highlights: [
+      "Detects trigger word 'activate' in audio stream using NLP",
+      "Real-time speech recognition with chime activation on detection",
+      "Audio signal processing and spectrogram-based feature extraction",
+    ],
+    techStack: [
+      { category: "Core", items: ["Python", "TensorFlow", "Keras"] },
+      { category: "Audio", items: ["Spectrogram Analysis", "Audio Processing", "Sequence Classification"] },
+    ],
+  },
+  {
+    slug: "face-recognition-system",
+    title: "Face Recognition System",
+    shortDescription:
+      "Built a face recognition system using OpenCV in Python — detects faces, eyes, smiles, and identifies individuals with confidence scores.",
+    fullDescription: `Built a face recognition system using OpenCV in Python. The system can detect a face and its various parts like eyes and smile. It also identifies the person by name and displays a confidence level in relation to the trained dataset.
+
+Demonstrates computer vision fundamentals including Haar cascade classifiers, face encoding, and real-time video processing.`,
+    tags: ["Python", "OpenCV", "Computer Vision", "Deep Learning"],
+    featured: false,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    status: "Completed" as const,
+    year: "2020",
+    highlights: [
+      "Face detection with component recognition (eyes, smile)",
+      "Person identification with confidence scoring against trained dataset",
+      "Real-time video processing using OpenCV Haar cascade classifiers",
+    ],
+    techStack: [
+      { category: "Core", items: ["Python", "OpenCV"] },
+      { category: "CV", items: ["Haar Cascades", "Face Encoding", "Real-time Video Processing"] },
+    ],
+  },
+  {
+    slug: "estadisticos",
+    title: "Estadísticos — Stock Prediction & Classification",
+    shortDescription:
+      "Predicted Tesla stock prices using ML algorithms with descriptive, prescriptive, and predictive analysis. Also applied classification algorithms to PIMA India Diabetes dataset.",
+    fullDescription: `A university project (4th Semester, SRM University) combining stock market prediction and healthcare classification.
+
+The project predicts stock prices for Tesla using ML algorithms, demonstrating Descriptive, Prescriptive, and Predictive Analysis approaches. It also applies various ML Classification algorithms to the PIMA India Diabetes Classification dataset to identify the best-performing algorithm with highest accuracy.`,
+    tags: ["Python", "ML", "Classification", "Time Series", "Data Science"],
+    featured: false,
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
+    status: "Completed" as const,
+    year: "2020",
+    highlights: [
+      "Tesla stock price prediction using ML algorithms",
+      "Descriptive, Prescriptive, and Predictive Analysis approaches",
+      "PIMA India Diabetes Classification — compared multiple ML classifiers for highest accuracy",
+      "Associated with SRM University (4th Semester project)",
+    ],
+    techStack: [
+      { category: "Core", items: ["Python", "Scikit-learn", "Pandas", "NumPy"] },
+      { category: "Analysis", items: ["Time Series", "Classification", "Statistical Analysis", "Matplotlib"] },
     ],
   },
 

@@ -160,7 +160,7 @@ export default function ProjectContent({ project }: Props) {
                   <h3 className="font-semibold text-sm uppercase tracking-wider" style={{ color: "var(--accent)" }}>Key Insight</h3>
                 </div>
                 <p className="text-sm md:text-base leading-relaxed italic" style={{ color: "var(--fg)" }}>
-                  "{project.keyInsight}"
+                  &ldquo;{project.keyInsight}&rdquo;
                 </p>
               </div>
             )}

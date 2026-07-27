@@ -22,7 +22,7 @@ export default function ProjectsPage() {
 
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Projects</h1>
         <p className="mt-4 text-lg" style={{ color: "var(--muted)" }}>
-          Everything I've built, researched, or shipped.
+          Everything I&apos;ve built, researched, or shipped.
         </p>
       </header>
 

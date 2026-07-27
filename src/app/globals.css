@@ -1,87 +1,68 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════
-   DETERMINISTIC PRECISION — Design Token System
-   Systems Engineering Portfolio · Dark Mode Only
+   CYBERNETIC OBSIDIAN — Design Token System
+   Systems Engineering & AI Reliability Portfolio
    ═══════════════════════════════════════════════════════ */
 
 :root {
-  /* ─── Core Palette (Glassmorphism) ─── */
-  --bg: #050508;
-  --fg: #e5e2e3;
-  --surface: rgba(10, 10, 15, 0.4);
-  --surface-elevated: rgba(255, 255, 255, 0.03);
-  --surface-container-lowest: rgba(0, 0, 0, 0.2);
-  --surface-container-low: rgba(255, 255, 255, 0.02);
-  --surface-container: rgba(255, 255, 255, 0.04);
-  --surface-container-high: rgba(255, 255, 255, 0.08);
-  --surface-container-highest: rgba(255, 255, 255, 0.12);
-  --surface-stroke: rgba(255, 255, 255, 0.1);
-  --surface-bright: rgba(255, 255, 255, 0.15);
-  --surface-variant: rgba(255, 255, 255, 0.05);
+  /* ─── Core Palette ─── */
+  --bg: #06080e;
+  --bg-secondary: #090c15;
+  --fg: #e2e8f0;
+  
+  /* ─── Glassmorphism & Surface Tokens ─── */
+  --surface: rgba(13, 17, 28, 0.6);
+  --surface-elevated: rgba(255, 255, 255, 0.025);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-active: rgba(255, 255, 255, 0.08);
+  --surface-stroke: rgba(255, 255, 255, 0.08);
+  --surface-stroke-hover: rgba(0, 255, 157, 0.3);
+  --surface-stroke-indigo: rgba(99, 102, 241, 0.3);
 
-  /* ─── Primary (Emerald) — System Healthy / Live ─── */
-  --primary: #4edea3;
-  --primary-fixed: #6ffbbe;
-  --primary-container: #10b981;
-  --on-primary: #003824;
-  --on-primary-container: #00422b;
+  /* ─── Primary (Cyber Emerald) — System Healthy / Live ─── */
+  --primary: #00ff9d;
+  --primary-glow: rgba(0, 255, 157, 0.25);
+  --primary-dim: rgba(0, 255, 157, 0.1);
+  --on-primary: #022013;
 
-  /* ─── Secondary (Indigo) — ML Intelligence ─── */
-  --secondary: #c0c1ff;
-  --secondary-container: #3131c0;
-  --on-secondary-container: #b0b2ff;
+  /* ─── Secondary (Electric Indigo) — AI Intelligence ─── */
+  --secondary: #818cf8;
+  --secondary-glow: rgba(99, 102, 241, 0.25);
+  --secondary-dim: rgba(99, 102, 241, 0.12);
 
-  /* ─── Tertiary (Teal) — Data Visualization ─── */
-  --tertiary: #3cddc7;
-  --tertiary-container: #00b7a4;
+  /* ─── Tertiary (Teal/Cyan) — Observability & Metrics ─── */
+  --tertiary: #38bdf8;
+  --tertiary-dim: rgba(56, 189, 248, 0.1);
+
+  /* ─── Amber / Alert (Patent / Warning) ─── */
+  --amber: #f59e0b;
+  --amber-dim: rgba(245, 158, 11, 0.12);
+  --amber-stroke: rgba(245, 158, 11, 0.3);
 
   /* ─── Neutral / Text ─── */
-  --on-surface: #e5e2e3;
-  --on-surface-variant: #bbcabf;
-  --text-muted: #A1A1AA;
-  --muted-fg: #71717a;
-
-  /* ─── Semantic ─── */
-  --error: #ffb4ab;
-  --error-container: #93000a;
-  --on-error: #690005;
-
-  /* ─── Component Tokens ─── */
-  --terminal-header: #18181B;
-  --tag-bg: #18181B;
-  --outline: #86948a;
-  --outline-variant: #3c4a42;
-
-  /* ─── Spacing ─── */
-  --container-max: 1280px;
-  --gutter: 32px;
-  --margin-mobile: 20px;
-  --section-gap: 160px;
-  --section-gap-mobile: 80px;
-  --component-gap: 24px;
-  --stack-tight: 8px;
-  --stack-loose: 48px;
+  --on-surface: #f1f5f9;
+  --on-surface-variant: #cbd5e1;
+  --text-muted: #94a3b8;
+  --muted-fg: #64748b;
 
   /* ─── Typography Fonts ─── */
   --font-syne: var(--font-syne-var), 'Syne', sans-serif;
   --font-jetbrains: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   --font-outfit: var(--font-outfit-var), 'Outfit', sans-serif;
 
-  /* ─── Border Radius ─── */
-  --radius-sm: 0.125rem;
-  --radius-default: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
+  /* ─── Spacing & Layout ─── */
+  --container-max: 1280px;
+  --header-height: 80px;
 
-  /* ─── Legacy compat (for components not yet migrated) ─── */
+  /* ─── Backward-Compatible Aliases ─── */
+  /* Used by blog, project detail, 404, and footer pages */
+  --accent: var(--primary);
+  --accent-dim: var(--primary-dim);
   --border: var(--surface-stroke);
   --muted: var(--text-muted);
-  --accent: var(--primary);
-  --accent-hover: var(--primary-fixed);
-  --accent-dim: rgba(78, 222, 163, 0.1);
-  --accent-glow: rgba(78, 222, 163, 0.25);
+  --primary-fixed: var(--primary);
+  --surface-bright: var(--surface-hover);
 }
 
 @theme inline {
@@ -91,194 +72,244 @@
   --font-mono: var(--font-jetbrains);
 }
 
-/* ─── Base ─── */
+/* ─── Base Reset ─── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
-}
-
-@media (min-width: 640px) {
-  html {
-    scroll-padding-top: 80px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-section[id] {
-  scroll-margin-top: 72px;
-}
-
-@media (min-width: 640px) {
-  section[id] {
-    scroll-margin-top: 80px;
-  }
+  scroll-padding-top: 96px;
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 body {
   background: var(--bg);
   color: var(--on-surface);
   font-family: var(--font-jetbrains);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0, 255, 157, 0.14), transparent 22%),
+    radial-gradient(circle at 80% 18%, rgba(99, 102, 241, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 45%);
+  animation: meshShift 24s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025),
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
 }
 
 /* ─── Typography Classes ─── */
 .font-display-xl {
   font-family: var(--font-syne);
-  font-size: 80px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
   letter-spacing: -0.04em;
 }
 
 .font-headline-lg {
   font-family: var(--font-syne);
-  font-size: 48px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-}
-
-.font-headline-lg-mobile {
-  font-family: var(--font-syne);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
 }
 
 .font-headline-md {
   font-family: var(--font-syne);
-  font-size: 32px;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .font-body-lg {
   font-family: var(--font-jetbrains);
-  font-size: 18px;
-  font-weight: 450;
-  line-height: 1.6;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 .font-body-md {
   font-family: var(--font-jetbrains);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.6;
 }
 
 .font-label-caps {
   font-family: var(--font-outfit);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-}
-
-.font-metric-huge {
-  font-family: var(--font-outfit);
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 1.0;
 }
 
 .font-code-sm {
   font-family: var(--font-jetbrains);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
 }
 
-/* ─── Heading defaults ─── */
 h1, h2, h3, h4 {
   font-family: var(--font-syne);
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background-color: rgba(78, 222, 163, 0.3);
-  color: var(--on-surface);
+  background-color: rgba(0, 255, 157, 0.25);
+  color: #ffffff;
 }
 
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-stroke);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 999px;
 }
-
-/* ─── Utility: Grid Pattern ─── */
-.bg-grid-pattern {
-  background-image: linear-gradient(to right, #27272A 1px, transparent 1px),
-                    linear-gradient(to bottom, #27272A 1px, transparent 1px);
-  background-size: 40px 40px;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
 
-/* ─── Utility: Dot Grid ─── */
-.dot-grid {
-  background-image:
-    linear-gradient(var(--surface-stroke) 1px, transparent 1px),
-    linear-gradient(90deg, var(--surface-stroke) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-/* ─── Utility: Glow ─── */
-.glow-accent {
-  background: radial-gradient(ellipse 600px 300px at 50% 0%, var(--accent-dim), transparent);
-}
-
-/* ─── Utility: Glassmorphism ─── */
+/* ─── Utility Classes ─── */
 .glass-panel {
   background: var(--surface-elevated);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--surface-stroke);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-.mesh-bg {
-  position: absolute;
-  inset: 0;
+.glass-panel-glow {
+  background: rgba(13, 17, 28, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 157, 0.2);
+  box-shadow: 0 0 35px -5px rgba(0, 255, 157, 0.15);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 30px -5px rgba(0, 255, 157, 0.2);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 30px -5px rgba(99, 102, 241, 0.2);
+}
+
+.cyber-grid {
   background-image: 
-    radial-gradient(at 0% 0%, rgba(49, 49, 192, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(78, 222, 163, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(60, 221, 199, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(147, 0, 10, 0.05) 0px, transparent 50%);
-  filter: blur(60px);
-  z-index: 0;
-  pointer-events: none;
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-/* ─── Material Symbols ─── */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+.cyber-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* ─── Responsive Typography ─── */
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #ffffff 0%, #00ff9d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-indigo {
+  background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Pulse animation for live status badge */
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes meshShift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    transform: translate3d(-2%, 2%, 0) scale(1.04);
+    filter: blur(2px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.status-pulse {
+  animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
 @media (max-width: 768px) {
   .font-display-xl {
-    font-size: 48px;
+    font-size: 44px;
   }
   .font-headline-lg {
-    font-size: 32px;
+    font-size: 30px;
   }
   .font-headline-md {
-    font-size: 24px;
+    font-size: 22px;
   }
-  .font-metric-huge {
-    font-size: 32px;
-  }
+}
+
+/* ─── Backward-Compatible Classes ─── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.font-metric-huge {
+  font-family: var(--font-syne);
+  font-weight: 800;
+  line-height: 1.1;
 }
