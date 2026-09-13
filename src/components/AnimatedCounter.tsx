@@ -32,9 +32,9 @@ export default function AnimatedCounter({
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
       
-      // Ease out expo formula
-      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      const currentVal = easeProgress * value;
+      // Smooth cubic ease out
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const currentVal = progress === 1 ? value : easeProgress * value;
 
       setCount(currentVal);
 
@@ -51,10 +51,10 @@ export default function AnimatedCounter({
   const formattedValue =
     decimals > 0
       ? count.toFixed(decimals)
-      : Math.floor(count).toLocaleString();
+      : Math.round(count).toLocaleString();
 
   return (
-    <span ref={ref} className="font-mono inline-inline-block">
+    <span ref={ref} className="font-mono inline-block">
       {prefix}
       {isInView ? formattedValue : "0"}
       {suffix}

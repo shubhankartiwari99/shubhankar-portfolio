@@ -28,7 +28,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Shubhankar Tiwari | Software Engineer · AI Reliability · ML Systems",
   description:
-    "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in Artificial Intelligence at Columbia University. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441).",
+    "Software Engineer with 4+ years of enterprise backend experience. M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441).",
   metadataBase: new URL("https://shubhankar-tiwari.vercel.app"),
   alternates: {
     types: {
@@ -38,16 +38,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shubhankar Tiwari · Software Engineer · AI Reliability · ML Systems",
     description:
-      "Software Engineer at Bank of America. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
+      "Software Engineer with 4+ years enterprise backend experience · M.S. in AI at Columbia University. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
     url: "https://shubhankar-tiwari.vercel.app",
     siteName: "Shubhankar Tiwari",
-    images: [{ url: "https://shubhankar-tiwari.vercel.app/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari — Software Engineer · AI Reliability · ML Systems" }],
+    images: [{ url: "https://shubhankar-tiwari.vercel.app/og_final.png", width: 1200, height: 630, alt: "Shubhankar Tiwari · Software Engineer · AI Reliability · ML Systems" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Shubhankar Tiwari · Software Engineer · AI Reliability · ML Systems",
-    description: "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in AI at Columbia. Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
+    description: "Software Engineer with 4+ years of enterprise backend experience. M.S. in AI at Columbia (Expected Dec 2027). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure.",
     images: ["https://shubhankar-tiwari.vercel.app/og_final.png"],
   },
 };
@@ -64,7 +64,7 @@ const jsonLd = {
   url: "https://shubhankar-tiwari.vercel.app",
   sameAs: [
     "https://github.com/shubhankartiwari99",
-    "https://www.linkedin.com/in/shubhankar-tiwari-514040165/",
+    "https://www.linkedin.com/in/shubhankartiw1/",
     "https://www.kaggle.com/shubhankartiwari",
     "https://twitter.com/Shubhankar2911",
   ],
@@ -76,7 +76,7 @@ const jsonLd = {
     {
       "@type": "EducationalOrganization",
       name: "Columbia University",
-      description: "MS in Artificial Intelligence (incoming Fall 2026)",
+      description: "MS in Artificial Intelligence (Expected Dec 2027)",
     },
   ],
   knowsAbout: [
@@ -88,7 +88,7 @@ const jsonLd = {
     "Regression Testing", "Production Incident Triage",
   ],
   description:
-    "Software Engineer with 4+ years of enterprise backend experience. Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441 / 59,663).",
+    "Software Engineer with 4+ years of enterprise backend experience. M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027). Building AI Reliability, ML Systems, and LLM Evaluation infrastructure. Kaggle Notebooks Expert (#2,441 / 59,663).",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

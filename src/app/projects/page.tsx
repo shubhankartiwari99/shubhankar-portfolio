@@ -126,7 +126,7 @@ export default function ProjectsPage() {
                           onClick={(e) => e.stopPropagation()}
                           className="p-1.5 rounded-md border transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                           style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                          aria-label={`GitHub — ${project.title}`}
+                          aria-label={`GitHub: ${project.title}`}
                         >
                           <Github size={13} />
                         </a>
@@ -139,7 +139,7 @@ export default function ProjectsPage() {
                           onClick={(e) => e.stopPropagation()}
                           className="p-1.5 rounded-md border transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                           style={{ color: "var(--muted)", borderColor: "var(--border)" }}
-                          aria-label={`Live link — ${project.title}`}
+                          aria-label={`Live link: ${project.title}`}
                         >
                           <ExternalLink size={13} />
                         </a>

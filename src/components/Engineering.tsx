@@ -34,9 +34,8 @@ export default function Engineering() {
             </h2>
             <p className="font-body-md mb-6" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
               At Bank of America I work on backend systems that process real financial
-              transactions. My job isn&apos;t just writing code — it&apos;s release validation,
-              production triage, and being accountable when a deployment goes wrong at
-              an inconvenient hour.
+              transactions. My work goes beyond writing code: it means release validation,
+              production triage, and taking ownership when an incident hits at 3 AM.
             </p>
             <p className="font-body-md mb-10" style={{ color: "var(--text-muted)", fontSize: "14px" }}>
               I&apos;ve been doing this for four years. The thing that changes is your relationship

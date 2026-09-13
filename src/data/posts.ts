@@ -18,9 +18,9 @@ export const posts: Post[] = [
       "The goal was a multilingual LLM for Indian conversational patterns. Before I could build it properly, I had to figure out whether the model I was building on top of could be trusted at all.",
     readTime: "7 min read",
     content: `
-The original plan was straightforward: build a multilingual LLM fine-tuned for Indian conversational patterns — Hindi, English, and the code-switched hybrid that most Indians actually speak in.
+The original plan was straightforward: build a multilingual LLM fine-tuned for Indian conversational patterns (Hindi, English, and the code-switched hybrid that most Indians actually speak in).
 
-The gap was real. Most open-source models handle formal Hindi reasonably well. They fall apart on the casual, culturally-grounded conversation that's representative of how 1.4 billion people actually communicate. I built the full pipeline — dataset curation from three complementary sources, tokenisation, LoRA adapter initialisation, fine-tuning on a Kaggle T4 GPU, inference evaluation, deployment packaging. Six notebooks, clean end-to-end.
+The gap was real. Most open-source models handle formal Hindi reasonably well. They fall apart on the casual, culturally-grounded conversation that's representative of how 1.4 billion people actually communicate. I built the full pipeline from scratch: dataset curation from three complementary sources, tokenisation, LoRA adapter initialisation, fine-tuning on a Kaggle T4 GPU, inference evaluation, and deployment packaging. Six notebooks, clean end-to-end.
 
 The problem I ran into wasn't the training pipeline. It was evaluation.
 
@@ -28,9 +28,9 @@ The problem I ran into wasn't the training pipeline. It was evaluation.
 
 While debugging my fine-tuned model's outputs, I kept noticing something that bothered me. Run the same prompt at the same temperature setting and the answer would be subtly different. Sometimes meaningfully different. Run it five times and you'd get five outputs that were individually plausible but semantically inconsistent with each other.
 
-This wasn't a failure that showed up in standard benchmarks. MMLU, ROUGE scores, HumanEval — all of these evaluate accuracy on a single inference pass. They tell you whether a model *can* produce the right answer. They don't tell you whether it *reliably* produces consistent answers.
+This wasn't a failure that showed up in standard benchmarks. Standard evaluations like MMLU, ROUGE scores, and HumanEval all evaluate accuracy on a single inference pass. They tell you whether a model *can* produce the right answer. They don't tell you whether it *reliably* produces consistent answers.
 
-For a multilingual model targeting real conversational deployment — where the same user asks the same kind of question repeatedly and expects stable, predictable responses — that distinction matters enormously. I couldn't in good conscience ship something as a reliable inference layer until I understood this failure mode properly.
+For a multilingual model targeting real conversational deployment, where the same user asks the same kind of question repeatedly and expects stable, predictable responses, that distinction matters enormously. I couldn't in good conscience ship something as a reliable inference layer until I understood this failure mode properly.
 
 So before continuing to fine-tune, I built the evaluation infrastructure first.
 
@@ -38,13 +38,13 @@ So before continuing to fine-tune, I built the evaluation infrastructure first.
 
 That infrastructure grew into the overarching LLM Inference Systems project. What started as simple Monte Carlo sampling evolved into a production-grade safety net: a 9-category guardrail classifier that automatically intercepts self-harm, jailbreaks, and extremism with severity-scaled escalation logic. 
 
-But catching explicit violations wasn't enough; the model's stochastic instability still persisted. So I built an empirical reliability guard. By conducting thorough grid sweeps, we established that temperature dominates output spread while top-p fine-tunes it. Now, when the system detects high-entropy inference (above the 0.25 empirical threshold) that indicates a confused or "hallucinating" generation path, it automatically triggers a grid-sweep-optimized fallback — forcing the model into a highly constrained probability space (T=0.1, top_p=0.5) to reliably recover stability without failing the request.
+But catching explicit violations wasn't enough; the model's stochastic instability still persisted. So I built an empirical reliability guard. By conducting thorough grid sweeps, we established that temperature dominates output spread while top-p fine-tunes it. Now, when the system detects high-entropy inference (above the 0.25 empirical threshold) that indicates an unstable generation path, it automatically triggers an optimized fallback, forcing the model into a constrained probability space (T=0.1, top_p=0.5) to reliably recover stability without failing the request.
 
 ---
 
 To make all this truly deployable, I stopped treating model weights as the only artifact that matters. I implemented strict Pydantic-powered deployment registries that demand absolute provenance. Every release is gated by Go/No-Go evaluation verdicts across 55+ automated regression tests. The registry binds model weights, explicit policy configurations, and "behavioral DNA snapshots" (frozen telemetry traces recording exact entropy patterns) using unbroken SHA-256 fingerprint chains.
 
-The multilingual LLM is still a goal. What changed is the order of operations. Building invariant tests, adversarial safeguard classifiers, and strict snapshotting wasn't a detour — it's the prerequisite for shifting AI from a research curiosity into a production asset. I just had to build the tools to see that clearly.
+The multilingual LLM is still a goal. What changed is the order of operations. Building invariant tests, adversarial safeguard classifiers, and strict snapshotting wasn't a detour; it was the prerequisite for shifting AI from a research curiosity into a production asset. I just had to build the tools to see that clearly.
     `,
   },
   {
@@ -105,7 +105,7 @@ It took me a while to realise that's exactly backwards.
 
 ---
 
-My first major incident at Bank of America was a 3 AM SSL expiry that cascaded across three dependent microservices. The obvious move was to rollback the deployment that triggered the alert. But the deployment didn't cause the expiry — it just exposed it. A rollback would have gotten us back to green on the dashboard while leaving the actual problem in place to surface again, probably at a worse time.
+My first major incident at Bank of America was a 3 AM SSL expiry that cascaded across three dependent microservices. The obvious move was to rollback the deployment that triggered the alert. But the deployment didn't cause the expiry; it just exposed it. A rollback would have gotten us back to green on the dashboard while leaving the actual problem in place to surface again, probably at a worse time.
 
 The thing that actually fixed it was twenty minutes of reading logs before touching anything. Understanding the failure mode first. That twenty minutes felt expensive at 3 AM. It wasn't.
 
@@ -115,13 +115,13 @@ I've noticed most production issues are caught early by the people who've built 
 
 Dashboards tell you something is broken. Logs tell you what broke and usually hint at why. The number of times I've watched someone spend an hour guessing at a problem that was described in plain text in the application log is genuinely high.
 
-The second habit that matters is reproduction before remediation. The instinct is to start patching — resist it. Five minutes spent confirming whether a failure is intermittent or consistent, whether it's affecting all users or a subset, whether it's data-dependent, changes what you do next entirely. A fix applied to the wrong failure mode makes things worse, adds noise, and delays finding the real cause.
+The second habit that matters is reproduction before remediation. The instinct is to start patching immediately, but resisting that instinct pays off. Five minutes spent confirming whether a failure is intermittent or consistent, whether it's affecting all users or a subset, whether it's data-dependent, changes what you do next entirely. A fix applied to the wrong failure mode makes things worse, adds noise, and delays finding the real cause.
 
-The third is just doing root cause analysis and actually writing it down. Not for compliance. Because surface patches compound. The timeout you increase this month is the query scan you'll be debugging six months from now. Writing it down forces the thinking and creates a paper trail that helps the next person — which is often you, eight months later, with no memory of this incident.
+The third is just doing root cause analysis and actually writing it down. Not for compliance. Because surface patches compound. The timeout you increase this month is the query scan you'll be debugging six months from now. Writing it down forces the thinking and creates a paper trail that helps the next person, which is often you, eight months later, with no memory of this incident.
 
 ---
 
-The skills that make someone good at this don't come from building things. They come from being on the receiving end when things break — on-call rotations, post-mortem reviews, watching more experienced engineers work through incidents. The pattern recognition that makes you think "this timeout looks like the thing from March" only builds up through exposure.
+The skills that make someone good at this don't come from building things. They come from being on the receiving end when things break: on-call rotations, post-mortem reviews, and watching more experienced engineers work through incidents. The pattern recognition that makes you think "this timeout looks like the thing from March" only builds up through exposure.
 
 The other thing is staying calm, which sounds obvious but isn't. When the pager goes off and stakeholders are asking for updates every ten minutes, the pressure to do *something* visible is real. The engineers who are genuinely good at production triage are the ones who've learned to treat that pressure as noise. You read the logs. You reproduce the failure. You understand the system. Then you fix it.
 
@@ -133,26 +133,26 @@ The code that tells you what's wrong before the user notices is the best code. W
     title: "Top 4.1% on Kaggle: Lessons That Transferred to Production",
     date: "2025-10-08",
     tags: ["ML", "Kaggle", "Data Science"],
-    excerpt: "I hit Notebooks Expert ranked #2,441 — personal best #707. Here's what 34 notebooks actually taught me, and why almost none of it was about machine learning.",
+    excerpt: "I hit Notebooks Expert ranked #2,441 (personal best #707). Here's what 34 notebooks actually taught me, and why almost none of it was about machine learning.",
     readTime: "5 min read",
     content: `
 I hit Kaggle Notebooks Expert ranked 2,441 out of 59,663, personal best 707. 34 notebooks. I didn't expect any of it to make me a better backend engineer. It did.
 
-Not in the obvious ways. Not "ML skills transfer to AI projects at work" — I'm not doing ML at Bank of America, I'm building Java microservices for corporate banking workflows. The transfer was more fundamental than that, and honestly more useful.
+Not in the obvious ways. Not "ML skills transfer to AI projects at work": I wasn't doing ML at Bank of America, I was building Java microservices for corporate banking workflows. The transfer was more fundamental than that, and honestly more useful.
 
 ---
 
-The thing Kaggle teaches you that most software jobs don't is systematic experimentation under uncertainty. You have a hypothesis, you test it, you record what happened, you update. The discipline of actually writing down your results — even when the notebook is just for you — changes how you think about problems.
+The thing Kaggle teaches you that most software jobs don't is systematic experimentation under uncertainty. You have a hypothesis, you test it, you record what happened, you update. The discipline of actually writing down your results, even when the notebook is just for yourself, changes how you think about problems.
 
 I brought that back to production work. When I'm debugging a failure now, I write down what I think is happening before I change anything. What I expect to see if I'm right. What I'd expect to see if I'm wrong. Then I check. It sounds slow but it's faster than the alternative, which is randomly changing things and hoping.
 
-Kaggle also taught me something uncomfortable about validation. You think your model is working. Your local scores look great. Then the leaderboard humbles you because you were overfitting to your validation set in ways you didn't notice. The lesson isn't specific to ML — it's that the environment you're testing in is never exactly the environment you're deploying to. I think about staging environments differently now because of this. "It worked in staging" is not a guarantee; it's a data point.
+Kaggle also taught me something uncomfortable about validation. You think your model is working. Your local scores look great. Then the leaderboard humbles you because you were overfitting to your validation set in ways you didn't notice. The lesson isn't specific to ML: the environment you're testing in is never exactly the environment you're deploying to. I think about staging environments differently now because of this. "It worked in staging" is not a guarantee; it's a data point.
 
 ---
 
 The ranking I'm most attached to isn't the current one. It's the personal best of 707.
 
-I hit that early, grinding notebooks across regression, classification, NLP, and computer vision before I joined Bank of America in 2022. Then I stopped — not because I lost interest but because production engineering took over. Four years of being on-call, owning incidents, and building systems that can't fail has a way of consuming your attention.
+I hit that early, grinding notebooks across regression, classification, NLP, and computer vision before I joined Bank of America in 2022. Then I stopped, not because I lost interest, but because production engineering took over. Four years of being on-call, owning incidents, and building systems that can't fail has a way of consuming your attention.
 
 Coming back to Kaggle in 2025 alongside the LLM reliability research felt different. More purposeful. The notebooks I'm writing now are trying to answer specific questions about model behavior, not just demonstrate techniques. The work feels more connected to something I'm actually trying to understand.
 
@@ -160,7 +160,7 @@ Coming back to Kaggle in 2025 alongside the LLM reliability research felt differ
 
 The Expert badge is nice. It opens conversations. But the honest version of what I got from Kaggle is: a way of thinking about problems that I didn't have before, applied to a domain completely unrelated to machine learning.
 
-If you're a software engineer considering it — don't start with competitions. Start with the Learn courses, pick a domain you're curious about, write notebooks that explain your thinking out loud. The leaderboard stuff can come later, if at all. The real value is the habit of careful, documented experimentation.
+If you're a software engineer considering it, don't start with competitions. Start with the Learn courses, pick a domain you're curious about, write notebooks that explain your thinking out loud. The leaderboard stuff can come later, if at all. The real value is the habit of careful, documented experimentation.
 
 That habit is useful everywhere.
     `,
@@ -205,7 +205,7 @@ The objective hasn't changed. The engineering challenge has.
     date: "2026-06-25",
     tags: ["AI", "LLM", "ML Systems", "Reliability", "Engineering"],
     excerpt:
-      "I built token-level observability, instability detection, and a closed-loop controller for LLM generation. The control loop reduced instability events — but it didn't improve the composite reliability score. That turned out to be the real lesson.",
+      "I built token-level observability, instability detection, and a closed-loop controller for LLM generation. The control loop reduced instability events, but it didn't improve the composite reliability score. That turned out to be the real lesson.",
     readTime: "8 min read",
     content: `
 Many evaluation workflows assess LLM outputs only after generation is complete. But by the time a traditional framework flags a hallucination, a repetition loop, or another failure mode, the generation has already finished. For production ML systems, post-generation evaluation is valuable for analysis, but it cannot influence the output that has already been delivered to the user.
@@ -218,13 +218,13 @@ That question gradually shifted the project from a benchmarking exercise into a 
 
 ### Iteration 1: Token-Level Observability
 
-I hooked into the inference backend to monitor token-level entropy as each token was generated. This exposed behaviors like entropy collapse — where the model locks into a near-deterministic state — before they became obvious in the final output.
+I hooked into the inference backend to monitor token-level entropy as each token was generated. This exposed behaviors like entropy collapse (where the model locks into a near-deterministic state) before they became obvious in the final output.
 
 One trace made it immediately obvious why this mattered. I prompted the model with: *"Write only blank lines."* The output looked unremarkable, but at step 23 the entropy trace collapsed to 0.145 bits. The model had locked into a near-deterministic state. Without token-level observability, this failure was invisible.
 
 ### Iteration 2: Instability Detection
 
-I built a streaming detection layer to identify emerging failure modes in real time — entropy collapse, repetition loops, and uncertainty drift — rather than waiting until the full sequence was generated.
+I built a streaming detection layer to identify emerging failure modes in real time (entropy collapse, repetition loops, and uncertainty drift) rather than waiting until the full sequence was generated.
 
 The system flagged the step-23 collapse correctly, alongside repetition loops and uncertainty drift on other prompts. Detection worked. But detection alone doesn't fix anything.
 
@@ -236,11 +236,11 @@ Then the result surprised me.
 
 The control loop reduced the number of instability events. But it did not improve the composite reliability score. Across my compare runs, adaptive generation consistently scored slightly lower than plain generation.
 
-The system could see the problem clearly. It just couldn't reliably fix it — at least not with these intervention policies on a small model. Naive interventions can trade one failure mode for another.
+The system could see the problem clearly. It just couldn't reliably fix it, at least not with these intervention policies on a small model. Naive interventions can trade one failure mode for another.
 
 ### Iteration 4: Quantifying What Actually Matters
 
-That surprise led me to question my own assumptions about what controls output stability. My intuition was that top-p would be the stronger lever — it directly constrains the candidate token pool during sampling.
+That surprise led me to question my own assumptions about what controls output stability. My intuition was that top-p would be the stronger lever because it directly constrains the candidate token pool during sampling.
 
 Rather than trusting intuition, I ran a grid sweep:
 - 4 temperature values × 5 top-p values × 20 prompts
@@ -257,7 +257,7 @@ The most stable configuration was Temperature = 0.1, Top-p = 0.5. The least stab
 
 The biggest takeaway wasn't about temperature or top-p. It was about the gap between observability and control.
 
-Knowing a generation is going bad is necessary but not sufficient. Deciding what to do about it is its own hard problem. The system could detect entropy collapse at step 23 with perfect precision. But the intervention strategy — lowering temperature mid-generation — introduced its own distortions.
+Knowing a generation is going bad is necessary but not sufficient. Deciding what to do about it is its own hard problem. The system could detect entropy collapse at step 23 with perfect precision. But the intervention strategy of lowering temperature mid-generation introduced its own distortions.
 
 Building reliable AI systems isn't just about choosing better model parameters. It's about designing architectures that can observe behaviour, evaluate interventions, and honestly measure whether those interventions actually help.
 
@@ -272,7 +272,7 @@ One thing I like about working on AI systems is that the data is usually more in
     date: "2026-06-18",
     tags: ["ML", "MLOps", "Drift Detection", "Fraud Detection", "Systems"],
     excerpt:
-      "I built a drift-aware fraud detection pipeline with automated retraining. Detection worked. Governance worked. But the system couldn't recover — because the recovery process had no new information to learn from.",
+      "I built a drift-aware fraud detection pipeline with automated retraining. Detection worked. Governance worked. But the system couldn't recover because the recovery process had no new information to learn from.",
     readTime: "6 min read",
     content: `
 I built a drift-aware fraud detection pipeline with automated retraining. Going into the project, I assumed that if drift was detected, the retraining pipeline would eventually recover from it.
@@ -283,7 +283,7 @@ What I learned was that detecting drift and recovering from drift are two entire
 
 ### The Setup
 
-The model was an XGBoost classifier trained on the Kaggle credit card fraud dataset — 284,807 transactions, 492 frauds. Baseline AUC-PR was 0.824. Monitoring used KL divergence and Population Stability Index (PSI) on prediction distributions.
+The model was an XGBoost classifier trained on the Kaggle credit card fraud dataset (284,807 transactions, 492 frauds). Baseline AUC-PR was 0.824. Monitoring used KL divergence and Population Stability Index (PSI) on prediction distributions.
 
 The workflow was straightforward: Drift Detected → Retrain → Shadow Deploy → Evaluate → Promote/Reject.
 
@@ -297,7 +297,7 @@ The monitoring layer detected it immediately. Retraining was triggered. A shadow
 
 Result: **no_change**.
 
-The candidate model came back with exactly the same metrics as production — AUC-PR: 0.824, AUC-ROC: 0.975, same precision, same recall, same business loss.
+The candidate model came back with exactly the same metrics as production: AUC-PR 0.824, AUC-ROC 0.975, same precision, same recall, same business loss.
 
 The governance layer correctly refused to promote the candidate model.
 
@@ -327,7 +327,7 @@ One thing I've noticed across multiple AI projects is that detection is often th
 
 In this case, the system knew drift had happened. It just didn't have the information needed to adapt to it.
 
-That gap — between knowing something is wrong and being able to do something about it — is where a lot of the real engineering complexity lives. And it's not a gap you notice until you build the full loop.
+That gap between knowing something is wrong and being able to do something about it is where a lot of the real engineering complexity lives. And it's not a gap you notice until you build the full loop.
     `,
   },
   {
@@ -347,7 +347,7 @@ From the outside, that might look like a clean career pivot. From the inside, it
 
 During my Computer Science degree at SRM IST Chennai, I was first introduced to machine learning through coursework, projects, peer discussions, and exploring research literature. That curiosity stayed with me long after graduation.
 
-But when I joined Bank of America in 2022, machine learning wasn't part of my day-to-day work. I was building Java microservices for corporate banking workflows. Debugging SSL expirations at 3 AM. Learning what it actually means to own a service in production — not just write it, but deploy it, monitor it, and be the person who picks up the phone when it breaks.
+But when I joined Bank of America in 2022, machine learning wasn't part of my day-to-day work. I was building Java microservices for corporate banking workflows. Debugging SSL expirations at 3 AM. Learning what it actually means to own a service in production: not just writing it, but deploying it, monitoring it, and being the person who picks up the phone when it breaks.
 
 Over four years, I grew from an apprentice into the Subject Matter Expert for CashPro Search. I delivered 17+ production releases across 13 services. I resolved 50+ production incidents. I earned Gold, Silver, and Bronze Global Recognition Awards. I was named as an inventor on a patent for a governed multi-modal AI architecture.
 
@@ -357,7 +357,7 @@ That work taught me something about engineering that coursework can't: the diffe
 
 Outside of work, the curiosity about AI kept pulling me back.
 
-I started with Kaggle — publishing notebooks, climbing to Expert rank, eventually reaching a personal best of #707. But over time, my interest shifted from applying ML techniques to understanding how these systems behave.
+I started with Kaggle: publishing notebooks, climbing to Expert rank, eventually reaching a personal best of #707. But over time, my interest shifted from applying ML techniques to understanding how these systems behave.
 
 The more I explored, the more I wanted to move beyond simply using modern AI systems. I wanted to understand how they learn, why they behave the way they do, and how to build them more reliably.
 
@@ -367,7 +367,7 @@ That led to a year of evenings spent building: LLM evaluation infrastructure, mo
 
 When I look back at Bank of America, what I'll remember most isn't a particular release, project, or technology. It's the people. The managers and teammates who trusted me with responsibility early, challenged my thinking, helped me grow through mistakes, and supported me throughout the journey. Every interaction, every challenge, and every lesson helped shape the engineer I am today.
 
-At Columbia, I'm looking forward to combining the engineering discipline I learned in industry with a deeper understanding of modern AI. Not just how to build AI systems, but how to understand them — how they learn, how they reason, and how they can be made more reliable.
+At Columbia, I'm looking forward to combining the engineering discipline I learned in industry with a deeper understanding of modern AI. Not just how to build AI systems, but how to understand them: how they learn, how they reason, and how they can be made more reliable.
 
 The curiosity that started during undergrad, survived four years of production engineering, and grew into hands-on AI projects is now becoming the foundation for graduate research.
 

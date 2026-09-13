@@ -26,7 +26,7 @@ const tenets = [
   {
     num: "03",
     title: "Production Rigor",
-    description: "4 years of enterprise backend engineering at Bank of America — 17+ releases, 13 CashPro services, 550K+ users.",
+    description: "Four years of enterprise engineering at Bank of America across 17+ production releases and 13 CashPro services serving 550K+ users.",
     icon: <Database size={22} className="text-amber-400" />,
   },
   {

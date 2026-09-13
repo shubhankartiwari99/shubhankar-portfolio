@@ -46,12 +46,12 @@ Prevents degeneration loops. Improves generation stability in real time by catch
     link: "https://github.com/shubhankartiwari99/llm-generation-control",
     featured: true,
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
-    status: "Active",
-    year: "2026-Present",
+    status: "Completed",
+    year: "Sep 2025 - Dec 2025",
     highlights: [
       "Entropy-aware routing, adaptive regeneration policies, and behavioral workflows across 213 prompts spanning 5 behavioral categories",
       "100% harmful-output catch rate on 43 adversarial prompts across 9 holdout rounds on fine-tuned mT5; extended testing to Qwen 2.5-7B, Llama 3 8B, and Mistral v3",
-      "9-category guardrail classifier with escalation logic — 0% leakage and 0% hallucination across 213 evals",
+      "9-category guardrail classifier with escalation logic. 0% leakage and 0% hallucination across 213 evals",
       "55+ automated regression tests and CI-gated promotion workflows that blocked 7/7 unsafe model candidates",
       "Reduced behavioral fragility score 66% (25.0% → 8.5% stress-induced entropy spike under adversarial perturbation)",
       "Three-category stability detector system: entropy_collapse, repetition_loop, low_entropy_lock",
@@ -74,11 +74,11 @@ Prevents degeneration loops. Improves generation stability in real time by catch
       "Handling model instability across diverse prompt domains without overfitting to training patterns"
     ],
     learnings: [
-      "Token-level observability enables reliable failure detection — aggregate metrics alone miss early collapse signals",
-      "Control policy specification must be explicit and formal — heuristic rules are more debuggable than learned policies for critical systems",
-      "Confidence metrics are only useful if they accurately predict downstream failure — weighted scoring requires empirical validation",
-      "Mid-generation intervention works but introduces latency trade-offs — cold-start regeneration may be more cost-effective than adaptive adjustment",
-      "Interactive dashboards for compare mode are essential for understanding control system behavior — summary metrics alone don't build trust"
+      "Token-level observability is what makes reliable failure detection possible. Aggregate metrics alone miss early collapse signals",
+      "Control policies need to be explicit and formal. Heuristic rules are more debuggable than learned policies for critical systems",
+      "Confidence metrics only matter if they actually predict downstream failure. Weighted scoring requires empirical validation",
+      "Mid-generation intervention works but adds latency. Sometimes cold-start regeneration is more cost-effective than adaptive adjustment",
+      "Interactive compare-mode dashboards are essential for understanding control system behavior. Summary metrics alone don't build trust"
     ],
     keyInsight: "Detect and correct unstable token generation in real time using entropy-based control.",
     systemCapabilities: [
@@ -90,7 +90,7 @@ Prevents degeneration loops. Improves generation stability in real time by catch
   },
   {
     slug: "drift-aware-fraud-detection",
-    title: "Drift-Aware Fraud Detection — ML Lifecycle & Model Governance",
+    title: "Drift-Aware Fraud Detection: ML Lifecycle & Model Governance",
     shortDescription:
       "Built an end-to-end ML system that detects data drift, evaluates model degradation, and governs retraining decisions.",
     fullDescription: `Built an end-to-end ML system that detects data drift, evaluates model degradation, and governs retraining decisions.
@@ -111,16 +111,16 @@ Prevents revenue loss from misclassification trade-offs. Candidate models are re
     link: "https://credit-transaction-anomaly-detectio.vercel.app",
     featured: true,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBkYXRhJTIwZGFzaGJvYXJkJTIwZGFya3xlbnwwfHx8fDE3MDk2NTYwMDB8MA&ixlib=rb-4.1.0&q=85",
-    status: "Active",
-    year: "2026-Present",
+    status: "Completed",
+    year: "Feb 2026 - Jul 2026",
     highlights: [
       "Complete ML system loop: Frozen Dataset → Failure-mode metrics (AUC degradation, PSI drift) → Δ Analysis → Policy Gate (Business Loss < 0) → CI Promotion",
       "Maintains 0.975 AUC-ROC baseline with business-loss-aware promotion gates using 10:1 FN/FP cost weighting",
-      "Promotion gates block candidates with unstable thresholds or higher estimated loss — even if accuracy improves (+0.002 AUC)",
+      "Promotion gates block candidates with unstable thresholds or higher estimated loss, even if accuracy improves (+0.002 AUC)",
       "Real-time drift detection via KL divergence and PSI with persistent drift score timeline tracking distributional evolution over time",
       "Built on 284K transactions dataset with feature shift explanation surfacing top shifted feature driving drift",
-      "Retraining cooldown constraint prevents unstable loops under noisy drift signals — demonstrates real-world system constraints",
-      "Shadow deployment architecture — every prediction scored by both production and candidate models simultaneously",
+      "Retraining cooldown constraint prevents unstable loops under noisy drift signals. This demonstrates real-world system constraints",
+      "Shadow deployment architecture: every prediction scored by both production and candidate models simultaneously",
       "Versioned model registry with full provenance: trigger reason, drift score, top shifted feature, training timestamp, deployment status",
       "Live Next.js observability dashboard: drift timeline, confidence distribution histogram, prediction trends, fraud rate, system health",
     ],
@@ -131,15 +131,15 @@ Prevents revenue loss from misclassification trade-offs. Candidate models are re
       { category: "Frontend", items: ["Next.js", "Recharts", "Tailwind CSS", "Vercel"] },
     ],
     challenges: [
-      "Extreme class imbalance (0.17% fraud) — required careful evaluation metrics (AUC-PR over accuracy) and SMOTE-based rebalancing",
-      "Designing a shadow deployment loop that doesn't double latency — both models score every request but shadow results are non-blocking",
-      "Drift threshold calibration — PSI > 0.2 and KL > 0.1 trigger retraining without causing false alarms on normal distribution shift",
-      "Cooldown constraint design — preventing retraining instability under noisy drift without masking real distributional change",
+      "Extreme class imbalance (0.17% fraud) required careful evaluation metrics (AUC-PR over accuracy) and SMOTE-based rebalancing",
+      "Designing a shadow deployment loop that doesn't double latency. Both models score every request, but shadow results are non-blocking",
+      "Drift threshold calibration: PSI > 0.2 and KL > 0.1 trigger retraining without causing false alarms on normal distribution shift",
+      "Cooldown constraint design: how to prevent retraining instability under noisy drift without masking real distributional change",
     ],
     learnings: [
-      "The model is the easy part — drift detection, cooldown constraints, failure handling, and registry governance are where production ML gets hard",
-      "Feature shift explanation transforms a number into an actionable insight — interpretable drift is far more valuable than raw metrics",
-      "Cooldown mechanisms are essential in any automated trigger system — without them, noisy signals cause runaway retraining loops",
+      "The model is the easy part. Drift detection, cooldown constraints, failure handling, and registry governance are where production ML gets hard",
+      "Feature shift explanation turns a number into something actionable. Interpretable drift is far more valuable than raw metrics",
+      "Cooldown mechanisms are a must in any automated trigger system. Without them, noisy signals cause runaway retraining loops",
       "Explicit promotion gates (shadow → production) prevent silent model degradation that auto-promotion would miss",
     ],
     keyInsight: "Link distributional drift to model degradation and automatically recover performance via retraining.",
@@ -154,12 +154,12 @@ Prevents revenue loss from misclassification trade-offs. Candidate models are re
     slug: "ai-quality-assurance-financial-services",
     title: "Conservative Auto-Regeneration Policy for AI-Generated Financial Narratives",
     shortDescription:
-      "Production validation system for AI-generated outputs in financial services — threshold optimisation, conservative AND escalation policy, priority-scored human review queue, and audit-grade provenance.",
-    fullDescription: `Generative AI in financial services isn't a research problem — it's a compliance and reliability problem. The question isn't whether a model can produce a good output. The question is whether you can prove it, consistently, to an auditor.
+      "Production validation system for AI-generated outputs in financial services: threshold optimisation, conservative AND escalation policy, priority-scored human review queue, and audit-grade provenance.",
+    fullDescription: `Generative AI in financial services isn't a research problem. It's a compliance and reliability problem. The question isn't whether a model can produce a good output. The question is whether you can prove it, consistently, to an auditor.
 
-This project implements a closed-loop validation pipeline for AI-generated narratives in a financial services context. The system evaluates each generated output against two independent validation signals — embedding similarity and ROUGE-L — and applies a conservative AND policy: auto-regeneration is only triggered when both metrics fall below their calibrated thresholds simultaneously. Single-metric failure routes to human review rather than auto-regen, erring on the side of caution.
+This project implements a closed-loop validation pipeline for AI-generated narratives in a financial services context. The system evaluates each generated output against two independent validation signals (embedding similarity and ROUGE-L) and applies a conservative AND policy: auto-regeneration is only triggered when both metrics fall below their calibrated thresholds simultaneously. Single-metric failure routes to human review rather than auto-regen, erring on the side of caution.
 
-Thresholds are not hand-tuned. They are computed via a bootstrap percentile sweep across a labeled validation set, optimising for precision-recall trade-offs appropriate to a regulated environment. Every artifact — thresholds, policy decisions, enriched validation data — is written with provenance metadata (timestamp, config snapshot, pipeline stage) so the full decision trail is reconstructable.
+Thresholds are not hand-tuned. They are computed via a bootstrap percentile sweep across a labeled validation set, optimising for precision-recall trade-offs appropriate to a regulated environment. Every artifact (thresholds, policy decisions, enriched validation data) is written with provenance metadata (timestamp, config snapshot, pipeline stage) so the full decision trail is reconstructable.
 
 The human review queue is not a flat list. Cases are ranked by a priority score derived from both metric deficits, so reviewers work the highest-risk outputs first. PII sanitization is applied before any data leaves the pipeline for external storage.
 
@@ -172,9 +172,9 @@ Prevents silent model degradation by guaranteeing failing narratives are caught 
     status: "Completed",
     year: "2025",
     highlights: [
-      "Conservative AND policy: auto-regen only when both embedding similarity AND ROUGE-L fall below threshold — single-metric failure routes to human review",
+      "Conservative AND policy: auto-regen only when both embedding similarity AND ROUGE-L fall below threshold. Single-metric failure routes to human review",
       "Threshold calibration via bootstrap percentile sweep across labeled validation set",
-      "Priority-scored human review queue ranked by combined metric deficit — highest-risk cases surface first",
+      "Priority-scored human review queue ranked by combined metric deficit. Highest-risk cases surface first",
       "Audit-grade provenance: every artifact written with timestamp, config snapshot, and pipeline stage metadata",
       "PII sanitization applied before public artifact export",
       "Full pipeline: Extracted Text → Failure-mode metrics (ROUGE drift, format violations, consistency) → Δ Analysis → Conservative AND Policy Gate → Priority-Scored Human Review",
@@ -191,16 +191,16 @@ Prevents silent model degradation by guaranteeing failing narratives are caught 
       "Provenance tracking that is lightweight enough not to slow the pipeline but complete enough to satisfy audit requirements",
     ],
     learnings: [
-      "Conservative AND policy outperforms OR policy for regulated contexts — false positives (unnecessary human review) are far cheaper than false negatives (bad output reaching downstream)",
+      "Conservative AND policy outperforms OR policy for regulated contexts. False positives (unnecessary human review) are far cheaper than false negatives (bad output reaching downstream)",
       "Bootstrap percentile thresholds are more robust than point estimates when labeled data is limited",
-      "Priority-scored queues change reviewer behaviour — flat queues get triaged manually and inconsistently",
+      "Priority-scored queues change reviewer behaviour. Flat queues get triaged manually and inconsistently",
     ],
   },  {
     slug: "indian-multilingual-llm",
-    title: "Indian Desi Multilingual LLM — Training Pipeline",
+    title: "Indian Desi Multilingual LLM: Training Pipeline",
     shortDescription:
       "End-to-end multilingual LLM training pipeline targeting Hindi/English code-switching. Dataset curation, LoRA fine-tuning, inference evaluation, and deployment packaging across 6 Kaggle notebooks.",
-    fullDescription: `Built a complete training pipeline for an Indian multilingual LLM — from raw data curation through LoRA fine-tuning to inference evaluation and deployment packaging.
+    fullDescription: `Built a complete training pipeline for an Indian multilingual LLM, from raw data curation through LoRA fine-tuning to inference evaluation and deployment packaging.
 
 The goal was to address a real gap: most open-source LLMs handle formal Hindi reasonably well but break down on the casual, code-switched Hindi-English that represents how most Indians actually communicate. The project focuses on building the infrastructure that makes multilingual AI reliable and safe for production.
 
@@ -213,7 +213,7 @@ Recognised mid-project that Sarvam AI had advanced significantly in the same spa
     status: "Completed",
     year: "2025",
     highlights: [
-      "Canonical dataset curated from 3 complementary sources — chatbot dataset for tone, large-scale conversation corpus for diversity, sentence-pair dataset for structural grounding",
+      "Canonical dataset curated from 3 complementary sources: chatbot dataset for tone, large-scale conversation corpus for diversity, sentence-pair dataset for structural grounding",
       "Unified schema normalising all sources into a clean, consistent format",
       "LoRA adapter initialisation on a multilingual encoder-decoder base model",
       "6-notebook pipeline: tokenisation → model setup → LoRA init → fine-tuning → inference eval → deployment packaging",
@@ -227,14 +227,14 @@ Recognised mid-project that Sarvam AI had advanced significantly in the same spa
       { category: "Infrastructure", items: ["Kaggle T4 GPU", "Docker", "GitHub Actions"] },
     ],
     challenges: [
-      "Code-switching detection — Indian speakers mix languages mid-sentence unpredictably",
-      "Script diversity — Hindi written in Devanagari vs Romanised Hinglish are treated as different inputs",
-      "Evaluation subjectivity — BLEU scores don't capture cultural nuance or conversational naturalness",
+      "Code-switching detection: Indian speakers mix languages mid-sentence unpredictably",
+      "Script diversity: Hindi written in Devanagari vs Romanised Hinglish are treated as different inputs",
+      "Evaluation subjectivity: BLEU scores don't capture cultural nuance or conversational naturalness",
       "Recognising when to pivot: continued investment in the model itself was low-differentiation",
     ],
     learnings: [
       "Building safety layers before scaling inference is the right order of operations",
-      "Pivoting is a research decision, not a failure — finding the more interesting problem matters",
+      "Pivoting is a research decision, not a failure. Finding the more interesting problem matters",
       "Cultural context matters more than raw accuracy metrics for conversational AI",
       "Dataset quality and schema consistency have more leverage than model architecture choices at this scale",
     ],
@@ -244,7 +244,7 @@ Recognised mid-project that Sarvam AI had advanced significantly in the same spa
     title: "Song Recommender System",
     shortDescription:
       "ML-based workout song recommender using BPM and VADER sentiment analysis. Co-authored research with K-Means clustering on Billboard Top 100 to match songs to exercise intensity.",
-    fullDescription: `A machine learning-based music recommendation system that generates adaptive playlists based on physiological signals and song sentiment — built as a co-authored research project with Tanish Maheshwari.
+    fullDescription: `A machine learning-based music recommendation system that generates adaptive playlists based on physiological signals and song sentiment, built as a co-authored research project with Tanish Maheshwari.
 
 The core insight: BPM alone isn't enough to match a song to an exercise state. Sentiment analysis on lyrics (using VADER) reveals a neutrality parameter that shows the highest positive covariance with BPM, and combining both gives a more accurate picture of a song's intensity profile than tempo alone.
 
@@ -258,7 +258,7 @@ Billboard Top 100 lyrics were extracted via the Genius API, sentiment scores com
       "Co-authored research project with Tanish Maheshwari (Presidency University)",
       "Lyrics extracted from Billboard Top 100 via Genius API and lyrics-extractor library",
       "VADER sentiment analysis (rule-based NLP) to score song polarity across positive, negative, neutral, compound dimensions",
-      "Neutrality identified as the feature with highest positive covariance with BPM — used as primary clustering feature",
+      "Neutrality identified as the feature with highest positive covariance with BPM, used as primary clustering feature",
       "K-Means clustering optimised to K=4 clusters via WCSS elbow method: warm-up, intensity, aggressive-1, aggressive-2",
       "Live BPM input via smartwatch mapped to cluster range for real-time song selection",
     ],
@@ -269,23 +269,23 @@ Billboard Top 100 lyrics were extracted via the Genius API, sentiment scores com
     ],
     challenges: [
       "Noisy heart rate data from consumer wearables affecting cluster boundary accuracy",
-      "Subjectivity of workout intensity — same BPM feels different across fitness levels",
+      "Subjectivity of workout intensity: same BPM feels different across fitness levels",
       "Cold start problem: new users have no preference history to anchor recommendations",
     ],
     learnings: [
       "Combining physiological signals with content features produces more robust clusters than either alone",
       "VADER's neutrality parameter is a stronger covariate with tempo than positive or negative polarity",
-      "Elbow method optimisation is critical — initialising K=5 without validation produced noisier clusters",
+      "Elbow method optimisation is critical: initialising K=5 without validation produced noisier clusters",
     ],
   },
   {
     slug: "kaggle-portfolio",
     title: "Kaggle Portfolio",
     shortDescription:
-      "Notebooks Expert rank #2,441 / 59,663 — personal best #707. 34 notebooks, 11 datasets, 3 models, 1 competition entry. 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
+      "Notebooks Expert rank #2,441 / 59,663 (personal best #707). 34 notebooks, 11 datasets, 3 models, 1 competition entry. 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
     fullDescription: `My Kaggle journey spanning machine learning, deep learning, NLP, and computer vision. Achieved Notebooks Expert status through consistent contributions and community engagement.
 
-Early in my career I pushed notebooks consistently across domains — regression, classification, NLP, CV — and reached a personal best rank of #707. After joining Bank of America in 2022 I shifted focus to production engineering. Returning to active Kaggle work in 2025 alongside the Indian multilingual LLM research, current rank is #2,441 out of 59,663.
+Early in my career I pushed notebooks consistently across domains (regression, classification, NLP, CV) and reached a personal best rank of #707. After joining Bank of America in 2022 I shifted focus to production engineering. Returning to active Kaggle work in 2025 alongside the Indian multilingual LLM research, current rank is #2,441 out of 59,663.
 
 The portfolio includes exploratory data analysis, model implementations, and educational notebooks across the full ML stack. The LLM reliability benchmark research is the most recent published work.`,
     tags: ["Data Science", "ML", "Deep Learning", "NLP", "CV"],
@@ -295,7 +295,7 @@ The portfolio includes exploratory data analysis, model implementations, and edu
     status: "Active",
     year: "2020-Present",
     highlights: [
-      "Notebooks Expert — current rank #2,441 / 59,663 | personal best #707",
+      "Notebooks Expert: current rank #2,441 / 59,663 | personal best #707",
       "34 published notebooks with 10 bronze medals",
       "11 datasets contributed to the community",
       "1 competition entry",
@@ -331,7 +331,7 @@ The portfolio includes exploratory data analysis, model implementations, and edu
 The model learns sequential patterns in headline text and generates plausible new headlines by predicting the next word in a sequence. Demonstrates understanding of sequence modeling and natural language generation.`,
     tags: ["Python", "NLP", "LSTM", "Deep Learning", "TensorFlow"],
     featured: false,
-    image: "https://images.unsplash.com/photo-1504711434969-e33886168d6c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80",
     status: "Completed" as const,
     year: "2021",
     highlights: [
@@ -349,7 +349,7 @@ The model learns sequential patterns in headline text and generates plausible ne
     title: "Trigger Word Detection",
     shortDescription:
       "Speech recognition system that detects the trigger word 'activate' using NLP and plays a chime sound upon detection.",
-    fullDescription: `Built a trigger word detection system using NLP techniques to identify the spoken word "activate" in an audio stream. Upon detection, the system initiates a chime sound — demonstrating real-time speech recognition pipeline design.
+    fullDescription: `Built a trigger word detection system using NLP techniques to identify the spoken word "activate" in an audio stream. Upon detection, the system initiates a chime sound, demonstrating real-time speech recognition pipeline design.
 
 This project explores audio signal processing, feature extraction (spectrograms), and sequence classification for voice-activated interfaces.`,
     tags: ["Python", "NLP", "Speech Recognition", "Deep Learning"],
@@ -371,7 +371,7 @@ This project explores audio signal processing, feature extraction (spectrograms)
     slug: "face-recognition-system",
     title: "Face Recognition System",
     shortDescription:
-      "Built a face recognition system using OpenCV in Python — detects faces, eyes, smiles, and identifies individuals with confidence scores.",
+      "Built a face recognition system using OpenCV in Python to detect faces, eyes, and smiles, identifying individuals with confidence scores.",
     fullDescription: `Built a face recognition system using OpenCV in Python. The system can detect a face and its various parts like eyes and smile. It also identifies the person by name and displays a confidence level in relation to the trained dataset.
 
 Demonstrates computer vision fundamentals including Haar cascade classifiers, face encoding, and real-time video processing.`,
@@ -392,7 +392,7 @@ Demonstrates computer vision fundamentals including Haar cascade classifiers, fa
   },
   {
     slug: "estadisticos",
-    title: "Estadísticos — Stock Prediction & Classification",
+    title: "Estadísticos: Stock Prediction & Classification",
     shortDescription:
       "Predicted Tesla stock prices using ML algorithms with descriptive, prescriptive, and predictive analysis. Also applied classification algorithms to PIMA India Diabetes dataset.",
     fullDescription: `A university project (4th Semester, SRM University) combining stock market prediction and healthcare classification.
@@ -406,7 +406,7 @@ The project predicts stock prices for Tesla using ML algorithms, demonstrating D
     highlights: [
       "Tesla stock price prediction using ML algorithms",
       "Descriptive, Prescriptive, and Predictive Analysis approaches",
-      "PIMA India Diabetes Classification — compared multiple ML classifiers for highest accuracy",
+      "PIMA India Diabetes Classification: compared multiple ML classifiers for highest accuracy",
       "Associated with SRM University (4th Semester project)",
     ],
     techStack: [

@@ -30,7 +30,7 @@ const technologies = [
 
 const credentials = [
   { icon: <Award size={18} className="text-[var(--primary)]" />, title: "Kaggle Notebooks Expert", detail: "Rank 2,441 / 59,663 · Personal Best #707 · 10 Bronze Medals" },
-  { icon: <GraduationCap size={18} className="text-[var(--secondary)]" />, title: "B.Tech CSE — SRM IST", detail: "94.4% GPA · First Class with Distinction · 2018–2022" },
+  { icon: <GraduationCap size={18} className="text-[var(--secondary)]" />, title: "M.S. AI · Columbia University", detail: "Expected Dec 2027 · Finance & Operations Concentration" },
   { icon: <Award size={18} className="text-amber-400" />, title: "ML & Deep Learning Certified", detail: "Kaggle & Deep Learning Specialization · 2025" },
   { icon: <GraduationCap size={18} className="text-[var(--tertiary)]" />, title: "IELTS Certification", detail: "Band 8 / 9 · Dec 2025" },
 ];
@@ -90,7 +90,7 @@ export default function Skills() {
                 </div>
                 <div>
                   <h3 className="font-headline-md text-lg text-[var(--on-surface)]">{activeGroup.title}</h3>
-                  <p className="font-code-sm text-xs text-[var(--text-muted)]">Focused capability layer</p>
+                  <p className="font-code-sm text-xs text-[var(--text-muted)]">Core skills in this area</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -111,7 +111,7 @@ export default function Skills() {
                 <span className="font-label-caps text-xs">Systems Readiness</span>
               </div>
               <p className="font-body-md text-sm text-[var(--on-surface-variant)] leading-relaxed">
-                The current focus blends high-leverage ML research with production-grade delivery, from evaluation surfaces to deployment governance.
+                Right now I&apos;m focused on the overlap between ML research and production engineering: building evaluation tools, deployment governance, and reliability infrastructure.
               </p>
             </div>
           </div>

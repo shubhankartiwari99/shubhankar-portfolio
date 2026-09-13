@@ -25,7 +25,7 @@ export default function TerminalComponent() {
       output: (
         <div className="space-y-1 text-xs font-mono">
           <p className="text-[var(--primary)] font-bold">
-            SHUBHANKAR TIWARI — INTELLIGENT SYSTEMS TERMINAL v2.5.0
+            SHUBHANKAR TIWARI // INTELLIGENT SYSTEMS TERMINAL v2.5.0
           </p>
           <p className="text-[var(--text-muted)]">
             Type <span className="text-[var(--primary)] font-bold">&apos;help&apos;</span> to see available commands or click quick suggestions below.
@@ -51,6 +51,7 @@ export default function TerminalComponent() {
           <div className="space-y-1.5 text-xs font-mono text-[var(--on-surface-variant)]">
             <p className="text-[var(--primary)] font-bold">AVAILABLE COMMANDS:</p>
             <p><span className="text-emerald-400 font-semibold">about</span> &bull; Summary of background, Columbia MS AI &amp; systems engineering</p>
+            <p><span className="text-emerald-400 font-semibold">resume</span> &bull; Open official PDF resume (Shubhankar_Tiwari_Resume.pdf)</p>
             <p><span className="text-emerald-400 font-semibold">patent</span> &bull; Bank of America patent details (2026)</p>
             <p><span className="text-emerald-400 font-semibold">metrics</span> &bull; Key operational scale metrics (550K users, 18M searches, 0.975 AUC)</p>
             <p><span className="text-emerald-400 font-semibold">experience</span> &bull; 4-year Bank of America track (Apprentice → I B → I A / SME)</p>
@@ -64,8 +65,29 @@ export default function TerminalComponent() {
       case "about":
         out = (
           <p className="text-xs font-mono text-[var(--on-surface-variant)] leading-relaxed">
-            Software Engineer with 4+ years building enterprise microservices for Bank of America CashPro platform. Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026). Focused on AI reliability, LLM evaluation, and drift-aware model governance.
+            Software Engineer with 4+ years building enterprise microservices for Bank of America CashPro platform. M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027). Focused on AI reliability, LLM evaluation, and drift-aware model governance.
           </p>
+        );
+        break;
+
+      case "resume":
+      case "cv":
+        out = (
+          <div className="space-y-2 text-xs font-mono text-[var(--on-surface-variant)]">
+            <p className="text-[var(--primary)] font-bold">OFFICIAL RESUME (PDF):</p>
+            <p>Shubhankar Tiwari · M.S. in Artificial Intelligence @ Columbia University</p>
+            <p>Former Software Engineer @ Bank of America (4+ Years SWE &amp; SME)</p>
+            <div className="pt-1.5">
+              <a
+                href="/Shubhankar_Tiwari_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[rgba(0,255,157,0.12)] border border-[rgba(0,255,157,0.3)] text-[var(--primary)] hover:bg-[rgba(0,255,157,0.2)] font-bold transition-all"
+              >
+                📄 Open Shubhankar_Tiwari_Resume.pdf ↗
+              </a>
+            </div>
+          </div>
         );
         break;
 
@@ -73,7 +95,8 @@ export default function TerminalComponent() {
         out = (
           <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
             <p className="text-[var(--secondary)] font-bold">COLUMBIA AI PROGRAM</p>
-            <p>Incoming M.S. in Artificial Intelligence • Fall 2026</p>
+            <p>M.S. in Artificial Intelligence • Aug 2026 – Dec 2027</p>
+            <p>Concentration: Finance &amp; Operations</p>
             <p>Focus: ML systems, evaluation, and trustworthy deployment</p>
           </div>
         );
@@ -211,17 +234,16 @@ export default function TerminalComponent() {
             ))}
             <div ref={bottomRef} />
           </div>
-
           {/* Quick Suggestions & Prompt Bar */}
           <div className="p-4 bg-[rgba(9,12,21,0.9)] border-t border-[rgba(255,255,255,0.08)] space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-code-sm text-[10px] text-[var(--text-muted)]">QUICK COMMANDS:</span>
-              {["patent", "metrics", "about", "experience", "awards"].map((c) => (
+              {["resume", "patent", "metrics", "about", "columbia", "experience", "awards", "clear"].map((c) => (
                 <button
                   key={c}
                   type="button"
                   onClick={() => handleCommand(c)}
-                  className="font-code-sm text-[11px] px-2.5 py-0.5 rounded bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[var(--primary)] hover:border-[var(--primary)] transition-colors cursor-pointer"
+                  className="font-code-sm text-[11px] px-2.5 py-0.5 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[var(--primary)] hover:border-[var(--primary)] hover:bg-[rgba(0,255,157,0.08)] transition-all cursor-pointer"
                 >
                   {c}
                 </button>

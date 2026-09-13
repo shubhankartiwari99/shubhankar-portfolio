@@ -7,13 +7,14 @@ import { useRecruiterMode } from "./Providers";
 const milestones = [
   {
     title: "MS in Artificial Intelligence",
-    subtitle: "Columbia University · New York, NY",
-    description: "Pursuing graduate studies in Artificial Intelligence to deepen my understanding of how modern AI systems learn, reason, and adapt — building on four years of enterprise software engineering and hands-on experience developing AI evaluation and reliability systems.",
+    subtitle: "Columbia University · New York, NY · Concentration: Finance & Operations",
+    description: "Graduate student in Artificial Intelligence, focusing on ML systems and AI reliability. Building on four years of enterprise software engineering and hands-on work with LLM evaluation frameworks.",
     recruiterDescription: [
-      "Incoming MS in Artificial Intelligence at Columbia University (Fall 2026)",
+      "M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027)",
+      "Concentration: Finance and Operations",
       "Interests include ML Systems, AI Reliability, LLM Evaluation, and next-generation intelligent systems",
     ],
-    year: "Fall 2026",
+    year: "Aug 2026 – Dec 2027",
     active: true,
     columbia: true,
   },
@@ -22,9 +23,9 @@ const milestones = [
     subtitle: "Bank of America",
     description: "Promoted to Subject Matter Expert for CashPro Search, serving 550,000+ corporate users. Owned deployments, CI/CD, and release validation across 17+ cycles. Named inventor on a Bank of America patent (2026) for governed multi-modal AI architecture.",
     recruiterDescription: [
-      "Subject Matter Expert (SME) for CashPro Search — 550,000+ corporate users, 40,000 companies, 18M+ searches",
+      "Subject Matter Expert (SME) for CashPro Search (550,000+ corporate users, 40,000 companies, 18M+ searches)",
       "Owned OpenShift deployments, CI/CD, release validation, and production stabilization across 17+ release cycles",
-      "Inventor on Bank of America patent (2026) — governed multi-modal AI architecture for financial intelligence systems",
+      "Inventor on Bank of America patent application (2026) for multi-modal AI architecture in financial intelligence systems",
       "Contributed to modernization (JDK 17, Spring 6, cloud enablement) across 13 CashPro services",
     ],
     year: "2024 - 2026",
@@ -35,7 +36,7 @@ const milestones = [
     subtitle: "Bank of America",
     description: "Increasing ownership of backend services through feature development, production support, and service reliability. Diagnosed and resolved 20+ production incidents spanning application and infrastructure layers.",
     recruiterDescription: [
-      "Increasing ownership of backend services — feature development, production support, service reliability",
+      "Increasing ownership of backend services across feature development, production support, and service reliability",
       "Diagnosed and resolved 20+ production incidents spanning application and infrastructure layers",
     ],
     year: "2023 - 2024",
@@ -55,7 +56,7 @@ const milestones = [
   {
     title: "Kaggle Notebooks Expert",
     subtitle: "Top 4.1% Globally",
-    description: "Notebooks Expert ranked #2,441 / 59,663 — personal best #707. 34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
+    description: "Notebooks Expert ranked #2,441 / 59,663 (personal best #707). 34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression.",
     recruiterDescription: [
       "Kaggle Notebooks Expert ranked #2,441 / 59,663 globally",
       "34 notebooks and 10 bronze medals across ML, DL, NLP, Computer Vision, and regression",
@@ -83,58 +84,90 @@ const reveal = {
 export default function Journey() {
   const recruiterMode = useRecruiterMode();
 
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
-    <section data-testid="journey-section" id="journey" className="py-20 md:py-32 px-5 md:px-8 border-b border-[rgba(255,255,255,0.08)]">
+    <section data-testid="journey-section" id="journey" className="py-20 md:py-32 px-5 md:px-8 border-b border-[rgba(255,255,255,0.08)] relative">
       <div className="max-w-[1280px] mx-auto">
         <motion.div {...reveal} className="mb-12">
           <div className="flex items-center gap-3 mb-2">
             <span className="w-8 h-px bg-[var(--primary)]" />
             <span className="font-label-caps text-[var(--primary)]">Chronology</span>
           </div>
-          <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-4xl text-[var(--on-surface)]">
-            Engineering &amp; Academic Timeline
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <h2 className="font-headline-lg text-2xl sm:text-3xl md:text-4xl text-[var(--on-surface)]">
+                Engineering &amp; Academic Timeline
+              </h2>
+              <p className="font-body-md text-[var(--text-muted)] max-w-2xl mt-2 text-sm sm:text-base">
+                From undergraduate computer science foundations to enterprise banking systems, Kaggle global rank, and AI graduate research at Columbia University.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] self-start md:self-auto">
+              <span className="w-2 h-2 rounded-full bg-[var(--secondary)] animate-pulse" />
+              <span className="font-code-sm text-xs text-[var(--text-muted)]">2018 &rarr; 2027 Evolution</span>
+            </div>
+          </div>
         </motion.div>
 
         {/* Timeline Node List */}
-        <div className="relative border-l border-[rgba(255,255,255,0.1)] ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10">
+        <div className="relative ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-10">
+          {/* Radiant vertical gradient rail */}
+          <div className="absolute left-0 top-3 bottom-3 w-0.5 bg-gradient-to-b from-[var(--secondary)] via-[var(--primary)] to-[rgba(255,255,255,0.1)] opacity-70" />
+          <div className="absolute left-0 top-3 bottom-3 w-1 bg-gradient-to-b from-[var(--secondary)] via-[var(--primary)] to-transparent opacity-20 blur-sm pointer-events-none" />
+
           {milestones.map((m, idx) => (
             <motion.div
               key={m.title}
               initial={reveal.initial}
               whileInView={reveal.whileInView}
               viewport={reveal.viewport}
-              transition={{ ...reveal.transition, delay: idx * 0.08 }}
+              transition={{ ...reveal.transition, delay: idx * 0.07 }}
               className="relative group"
             >
               {/* Timeline Node Circle Dot */}
               <div
-                className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full border-2 transition-all duration-300 ${
+                className={`absolute -left-[31px] sm:-left-[47px] top-2 w-4 h-4 rounded-full border-2 transition-all duration-300 z-10 ${
                   m.columbia
-                    ? "bg-[var(--secondary)] border-white shadow-[0_0_15px_rgba(99,102,241,0.6)] scale-125"
+                    ? "bg-[var(--secondary)] border-white shadow-[0_0_18px_rgba(99,102,241,0.8)] scale-125"
                     : m.active
-                    ? "bg-[var(--primary)] border-[var(--primary)] shadow-[0_0_12px_rgba(0,255,157,0.5)]"
-                    : "bg-[#090c15] border-[rgba(255,255,255,0.3)] group-hover:border-[var(--primary)]"
+                    ? "bg-[var(--primary)] border-[var(--primary)] shadow-[0_0_12px_rgba(0,255,157,0.6)]"
+                    : "bg-[#090c15] border-[rgba(255,255,255,0.3)] group-hover:border-[var(--primary)] group-hover:scale-110"
                 }`}
-              />
+              >
+                {m.columbia && (
+                  <span className="absolute -inset-1 rounded-full bg-[var(--secondary)] animate-ping opacity-30 pointer-events-none" />
+                )}
+              </div>
 
               {/* Card Container */}
               <div
-                className={`p-6 rounded-2xl glass-panel transition-all duration-300 ${
+                onMouseMove={handleCardMouseMove}
+                className={`p-6 sm:p-7 rounded-2xl glass-panel spotlight-card transition-all duration-300 ${
                   m.columbia
-                    ? "border-[rgba(99,102,241,0.4)] bg-[rgba(99,102,241,0.08)] shadow-[0_0_30px_rgba(99,102,241,0.15)]"
-                    : "hover:border-[rgba(0,255,157,0.3)]"
+                    ? "border-[rgba(99,102,241,0.4)] bg-[rgba(99,102,241,0.08)] shadow-[0_0_35px_rgba(99,102,241,0.15)] hover:border-[rgba(99,102,241,0.6)]"
+                    : "border-[rgba(255,255,255,0.08)] hover:border-[rgba(0,255,157,0.3)] bg-[rgba(10,13,22,0.6)]"
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
                     {m.columbia && <Sparkles size={16} className="text-[var(--secondary)]" />}
-                    <h3 className="font-headline-md text-base sm:text-lg font-semibold text-[var(--on-surface)]">
+                    <h3 className="font-headline-md text-base sm:text-lg font-semibold text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors">
                       {m.title}
                     </h3>
                   </div>
 
-                  <span className="font-code-sm text-xs px-3 py-1 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] text-[var(--primary)]">
+                  <span className={`font-code-sm text-xs px-3 py-1 rounded-full border tracking-wide ${
+                    m.columbia
+                      ? "bg-[rgba(99,102,241,0.15)] border-[rgba(99,102,241,0.4)] text-[var(--secondary)] font-semibold"
+                      : "bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.1)] text-[var(--primary)]"
+                  }`}>
                     {m.year}
                   </span>
                 </div>
@@ -146,7 +179,7 @@ export default function Journey() {
                 {recruiterMode ? (
                   <ul className="list-disc pl-5 space-y-1.5 font-body-md text-xs sm:text-sm text-[var(--on-surface-variant)]">
                     {m.recruiterDescription.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item} className="leading-relaxed">{item}</li>
                     ))}
                   </ul>
                 ) : (

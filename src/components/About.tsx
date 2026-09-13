@@ -51,26 +51,26 @@ export default function About() {
                 <ul className="list-disc pl-5 space-y-3 font-body-md text-xs sm:text-sm text-[var(--on-surface-variant)] leading-relaxed">
                   <li>Software Engineer with 4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                   <li>Delivered 17+ production releases across 13 CashPro services; resolved 50+ production issues in enterprise fintech environments</li>
-                  <li>Recognized as Subject Matter Expert (SME) for critical backend services — cross-team escalation point for production incidents and architectural decisions</li>
-                  <li>Inventor on a Bank of America patent (2026) — governed multi-modal AI architecture for financial intelligence systems</li>
+                  <li>Recognized as Subject Matter Expert (SME) for critical backend services, serving as the cross-team escalation point for production incidents and architecture decisions</li>
+                  <li>Inventor on a Bank of America patent (2026) for a governed multi-modal AI architecture targeting financial fraud</li>
                   <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
-                  <li>Built AI reliability and LLM evaluation systems independently — entropy-aware routing, behavioral regression detection, and model governance pipelines</li>
-                  <li>Incoming M.S. in Artificial Intelligence at Columbia University (Fall 2026)</li>
+                  <li>Built AI reliability and LLM evaluation systems independently: entropy-aware routing, behavioral regression detection, and model governance pipelines</li>
+                  <li>M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027, Concentration in Finance &amp; Operations)</li>
                 </ul>
               </div>
             ) : (
               <div className="p-6 sm:p-8 rounded-2xl glass-panel border-[rgba(255,255,255,0.08)] h-full flex flex-col justify-center space-y-4 font-body-lg text-xs sm:text-sm md:text-base text-[var(--on-surface-variant)] leading-relaxed">
                 <p>
-                  I&apos;ve always enjoyed understanding how complex systems work. Whether I&apos;m working on enterprise software or machine learning, I&apos;m most interested in how these systems behave, why they fail, and how they can be made more reliable.
+                  I&apos;ve always been drawn to understanding how complex systems actually work. Whether it&apos;s enterprise software or machine learning, I care most about how things behave under pressure, why they break, and how to make them more reliable.
                 </p>
                 <p>
-                  At Bank of America, I spent four years building, modernising, and maintaining backend services for a large-scale enterprise platform. That experience taught me the engineering trade-offs involved in designing software that evolves while remaining robust.
+                  I spent four years at Bank of America building and maintaining backend services for CashPro, their enterprise digital banking platform. That taught me a lot about the trade-offs in designing software that has to keep evolving without falling over. I picked up multiple Global Recognition Awards along the way and got involved in AI initiatives within the org.
                 </p>
                 <p>
-                  I apply that same systems mindset to AI. Over the past year, I&apos;ve been exploring AI by building systems for LLM evaluation, model governance, and reliability engineering. Those experiences have strengthened my interest in understanding how intelligent systems learn, reason, and behave — not just how they can be evaluated.
+                  I bring that same systems thinking to AI. Over the past year, I&apos;ve been building LLM evaluation tools, reliability frameworks, and model governance pipelines, while getting deeper into Python, PyTorch, and Transformers.
                 </p>
                 <p>
-                  I&apos;m pursuing an M.S. in Artificial Intelligence at Columbia University to deepen that understanding through structured study and research.
+                  Now I&apos;m at Columbia doing an M.S. in Artificial Intelligence (Finance &amp; Operations concentration) to go deeper on the research side.
                 </p>
               </div>
             )}

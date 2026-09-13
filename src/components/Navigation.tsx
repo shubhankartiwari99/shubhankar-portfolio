@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { PenLine, Menu, X, Check, ShieldAlert } from "lucide-react";
+import { PenLine, Menu, X, Check, ShieldAlert, FileText } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
@@ -89,7 +89,7 @@ export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
         </Link>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden lg:flex items-center gap-1 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] px-3 py-1.5 rounded-full backdrop-blur-md">
+        <nav className="hidden lg:flex items-center gap-1 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] px-2.5 py-1.5 rounded-full backdrop-blur-md relative">
           {isHome ? (
             sections.map((sec) => {
               const isActive = activeSection === sec.id;
@@ -97,13 +97,19 @@ export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className={`font-label-caps px-3.5 py-1.5 rounded-full text-xs transition-all duration-200 relative ${
+                  className={`font-label-caps px-3.5 py-1.5 rounded-full text-xs transition-colors duration-200 relative ${
                     isActive
-                      ? "text-[var(--primary)] bg-[rgba(0,255,157,0.1)] font-semibold"
-                      : "text-[var(--text-muted)] hover:text-[var(--on-surface)] hover:bg-[rgba(255,255,255,0.05)]"
+                      ? "text-[var(--primary)] font-semibold"
+                      : "text-[var(--text-muted)] hover:text-[var(--on-surface)]"
                   }`}
                 >
-                  <span className={`absolute -top-1 right-1 h-1.5 w-1.5 rounded-full transition-all ${isActive ? "bg-[var(--primary)] shadow-[0_0_8px_rgba(0,255,157,0.7)]" : "bg-transparent"}`} />
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 rounded-full bg-[rgba(0,255,157,0.12)] border border-[rgba(0,255,157,0.25)] shadow-[0_0_12px_rgba(0,255,157,0.15)] -z-10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                   {sec.label}
                 </a>
               );
@@ -119,7 +125,7 @@ export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
 
           <Link
             href="/blog"
-            className="font-label-caps px-3.5 py-1.5 rounded-full text-xs text-[var(--secondary)] hover:bg-[rgba(99,102,241,0.12)] flex items-center gap-1.5"
+            className="font-label-caps px-3.5 py-1.5 rounded-full text-xs text-[var(--secondary)] hover:bg-[rgba(99,102,241,0.12)] flex items-center gap-1.5 rounded-full transition-colors"
           >
             <PenLine size={13} />
             BLOG
@@ -128,6 +134,18 @@ export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
 
         {/* Header Right Actions */}
         <div className="hidden sm:flex items-center gap-3">
+          {/* Resume PDF Link */}
+          <a
+            href="/Shubhankar_Tiwari_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-code-sm text-xs px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.1)] text-[var(--text-muted)] hover:text-[var(--primary)] hover:border-[rgba(0,255,157,0.3)] bg-[rgba(255,255,255,0.02)] transition-all duration-200 flex items-center gap-1.5 cursor-pointer"
+            title="Open Official Resume PDF"
+          >
+            <FileText size={13} className="text-[var(--secondary)]" />
+            <span>RESUME</span>
+          </a>
+
           {/* Recruiter Toggle Switch */}
           <button
             type="button"
@@ -206,6 +224,17 @@ export default function Navigation({ recruiterMode, setRecruiterMode }: Props) {
             </div>
 
             <div className="pt-4 border-t border-[rgba(255,255,255,0.1)] flex flex-col space-y-3">
+              <a
+                href="/Shubhankar_Tiwari_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="font-code-sm text-xs py-2 px-4 rounded-lg border border-[rgba(255,255,255,0.15)] text-[var(--on-surface)] flex items-center justify-between hover:border-[var(--primary)]"
+              >
+                <span className="flex items-center gap-2"><FileText size={14} className="text-[var(--secondary)]" /> Official Resume</span>
+                <span className="text-[var(--primary)] text-[10px]">PDF ↗</span>
+              </a>
+
               <button
                 type="button"
                 onClick={() => {

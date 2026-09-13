@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, Send, Github, Linkedin, GraduationCap, Sparkles } from "lucide-react";
+import { Copy, Check, Send, Github, Linkedin, GraduationCap, Sparkles, FileText } from "lucide-react";
 
 const reveal = {
   initial: { opacity: 0, y: 20 } as const,
@@ -55,8 +55,9 @@ export default function Contact() {
 
           <div className="flex flex-wrap items-center justify-center gap-3 mt-10">
             {[
+              { href: "/Shubhankar_Tiwari_Resume.pdf", label: "Resume (PDF)", icon: <FileText size={14} className="text-[var(--secondary)]" /> },
               { href: "https://github.com/shubhankartiwari99", label: "GitHub", icon: <Github size={14} /> },
-              { href: "https://www.linkedin.com/in/shubhankar-tiwari-514040165/", label: "LinkedIn", icon: <Linkedin size={14} /> },
+              { href: "https://www.linkedin.com/in/shubhankartiw1/", label: "LinkedIn", icon: <Linkedin size={14} /> },
               { href: "https://www.kaggle.com/shubhankartiwari", label: "Kaggle", icon: <Sparkles size={14} /> },
               { href: "mailto:st3907@columbia.edu", label: "Columbia", icon: <GraduationCap size={14} /> },
             ].map((link) => (
