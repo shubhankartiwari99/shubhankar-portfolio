@@ -39,7 +39,7 @@ export default function Hero() {
 
             <span className="font-code-sm inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[rgba(245,158,11,0.08)] border border-[rgba(245,158,11,0.25)] text-amber-400 text-xs">
               <Award size={13} />
-              Patent Inventor (2026)
+              Patent Pending (2026)
             </span>
           </div>
 

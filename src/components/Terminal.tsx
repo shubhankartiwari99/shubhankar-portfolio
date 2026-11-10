@@ -52,7 +52,7 @@ export default function TerminalComponent() {
             <p className="text-[var(--primary)] font-bold">AVAILABLE COMMANDS:</p>
             <p><span className="text-emerald-400 font-semibold">about</span> &bull; Summary of background, Columbia MS AI &amp; systems engineering</p>
             <p><span className="text-emerald-400 font-semibold">resume</span> &bull; Open official PDF resume (Shubhankar_Tiwari_Resume.pdf)</p>
-            <p><span className="text-emerald-400 font-semibold">patent</span> &bull; Bank of America patent details (2026)</p>
+            <p><span className="text-emerald-400 font-semibold">patent</span> &bull; Bank of America patent application status (2026)</p>
             <p><span className="text-emerald-400 font-semibold">metrics</span> &bull; Key operational scale metrics (550K users, 18M searches, 0.975 AUC)</p>
             <p><span className="text-emerald-400 font-semibold">experience</span> &bull; 4-year Bank of America track (Apprentice → I B → I A / SME)</p>
             <p><span className="text-emerald-400 font-semibold">awards</span> &bull; BofA Global Recognition Awards (Gold, Silver, Bronze)</p>
@@ -113,9 +113,9 @@ export default function TerminalComponent() {
       case "patent":
         out = (
           <div className="space-y-1 text-xs font-mono text-[var(--on-surface-variant)]">
-            <p className="text-amber-400 font-bold">INVENTOR ON BANK OF AMERICA PATENT (2026)</p>
-            <p>Title: Governed Multi-Modal AI Architecture</p>
-            <p>Field: Canonical Truth Maintenance &amp; Audit-Grade Provenance in Enterprise Financial Systems</p>
+            <p className="text-amber-400 font-bold">NAMED INVENTOR &middot; PENDING BANK OF AMERICA PATENT APPLICATION (2026)</p>
+            <p>Status: Application in progress</p>
+            <p>Area: AI for financial services</p>
           </div>
         );
         break;

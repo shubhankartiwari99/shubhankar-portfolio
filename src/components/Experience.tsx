@@ -16,14 +16,14 @@ const experiences = [
       "Served as Subject Matter Expert (SME) for CashPro Search, the primary search platform across Bank of America's digital banking ecosystem. It serves 550,000+ corporate users across 40,000 companies with 18 million+ searches since launch.",
       "Owned OpenShift deployments, CI/CD configuration, release validation, and production stabilization across 17+ release cycles. First point of contact for cross-team production escalations and architectural decisions.",
       "Contributed to modernization initiatives including JDK 17, Spring 6, containerization, and cloud enablement across 13 CashPro services, improving team standing in vulnerability, security, and modernization metrics via Checkmarx and SonarQube scans. Orchestrated AI adoption initiatives for 50+ CashPro colleagues.",
-      "Inventor on a Bank of America patent under filing (2026) for a governed multi-modal AI architecture for financial fraud. Led 10+ team discussions to refine the idea, architecture, and presentation.",
+      "Named inventor on a pending Bank of America patent application (2026) in AI for financial services. Led 10+ team discussions to refine the idea, architecture, and presentation.",
     ],
     bullets: [
       "Served as Subject Matter Expert (SME) for CashPro Search, serving 550,000+ corporate users across 40,000 companies with 18M+ searches since launch",
       "Owned OpenShift deployments, CI/CD configuration, release validation, and production stabilization across 17+ release cycles",
       "Contributed to modernization across 13 CashPro services (JDK 17, Spring 6, containerization, cloud enablement). Orchestrated AI adoption initiatives for 50+ CashPro colleagues",
       "Diagnosed and resolved 50+ production issues involving SSL certificates, database connectivity, Drools dependencies, deployment failures, and privacy-related defects. Received 3+ awards",
-      "Inventor on a Bank of America patent (2026) for a governed multi-modal AI architecture for financial fraud. Led 10+ team discussions to refine the idea, architecture, and presentation",
+      "Named inventor on a pending Bank of America patent application (2026) in AI for financial services. Led 10+ team discussions to refine the idea, architecture, and presentation",
     ],
     tags: ["Java", "Spring Boot", "REST APIs", "OpenShift", "CI/CD", "SQL", "Checkmarx", "SonarQube"],
     patent: true,
@@ -172,7 +172,7 @@ export default function Experience() {
                     </span>
                     {exp.patent && (
                       <span className="font-code-sm inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-amber-400 bg-[rgba(245,158,11,0.12)] border border-[rgba(245,158,11,0.35)] shadow-[0_0_12px_rgba(245,158,11,0.2)] tracking-wider">
-                        <Shield size={11} className="text-amber-400" /> PATENT INVENTOR (2026)
+                        <Shield size={11} className="text-amber-400" /> PATENT PENDING (2026)
                       </span>
                     )}
                   </div>

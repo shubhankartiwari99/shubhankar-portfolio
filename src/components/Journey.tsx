@@ -21,11 +21,11 @@ const milestones = [
   {
     title: "Software Engineer I A · SME",
     subtitle: "Bank of America",
-    description: "Promoted to Subject Matter Expert for CashPro Search, serving 550,000+ corporate users. Owned deployments, CI/CD, and release validation across 17+ cycles. Named inventor on a Bank of America patent (2026) for governed multi-modal AI architecture.",
+    description: "Promoted to Subject Matter Expert for CashPro Search, serving 550,000+ corporate users. Owned deployments, CI/CD, and release validation across 17+ cycles. Named inventor on a pending Bank of America patent application (2026).",
     recruiterDescription: [
       "Subject Matter Expert (SME) for CashPro Search (550,000+ corporate users, 40,000 companies, 18M+ searches)",
       "Owned OpenShift deployments, CI/CD, release validation, and production stabilization across 17+ release cycles",
-      "Inventor on Bank of America patent application (2026) for multi-modal AI architecture in financial intelligence systems",
+      "Named inventor on a pending Bank of America patent application (2026) in AI for financial services",
       "Contributed to modernization (JDK 17, Spring 6, cloud enablement) across 13 CashPro services",
     ],
     year: "2024 - 2026",
