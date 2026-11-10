@@ -349,7 +349,7 @@ During my Computer Science degree at SRM IST Chennai, I was first introduced to 
 
 But when I joined Bank of America in 2022, machine learning wasn't part of my day-to-day work. I was building Java microservices for corporate banking workflows. Debugging SSL expirations at 3 AM. Learning what it actually means to own a service in production: not just writing it, but deploying it, monitoring it, and being the person who picks up the phone when it breaks.
 
-Over four years, I grew from an apprentice into the Subject Matter Expert for CashPro Search. I delivered 17+ production releases across 13 services. I resolved 50+ production incidents. I earned Gold, Silver, and Bronze Global Recognition Awards. I was named as an inventor on a patent for a governed multi-modal AI architecture.
+Over four years, I grew from an apprentice into the Subject Matter Expert for CashPro Search. I delivered 17+ production releases across 13 services. I resolved 50+ production incidents. I earned Gold, Silver, and Bronze Global Recognition Awards. I was named as an inventor on a pending patent application in AI for financial services.
 
 That work taught me something about engineering that coursework can't: the difference between software that works and software that keeps working. Correctness under uncertainty. Systems that degrade gracefully instead of failing silently. The discipline of testing not just whether something is right, but whether it stays right.
 

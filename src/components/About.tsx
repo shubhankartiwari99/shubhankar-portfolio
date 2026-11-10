@@ -52,7 +52,7 @@ export default function About() {
                   <li>Software Engineer with 4+ years of experience in Java, Spring Boot, Microservices, and cloud-native deployments on OpenShift</li>
                   <li>Delivered 17+ production releases across 13 CashPro services; resolved 50+ production issues in enterprise fintech environments</li>
                   <li>Recognized as Subject Matter Expert (SME) for critical backend services, serving as the cross-team escalation point for production incidents and architecture decisions</li>
-                  <li>Inventor on a Bank of America patent (2026) for a governed multi-modal AI architecture targeting financial fraud</li>
+                  <li>Named inventor on a pending Bank of America patent application (2026) in AI for financial services</li>
                   <li>Kaggle Notebooks Expert (Rank #2,441 / 59,663) with certifications in ML, Deep Learning &amp; Computer Vision</li>
                   <li>Built AI reliability and LLM evaluation systems independently: entropy-aware routing, behavioral regression detection, and model governance pipelines</li>
                   <li>M.S. in Artificial Intelligence at Columbia University (Expected Dec 2027, Concentration in Finance &amp; Operations)</li>
